@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="d1bbf441-824a-450e-afae-2ddec0e0f35e">
+  <descriptionCdata>d1bbf441-824a-450e-afae-2ddec0e0f35e.76d1a63d-0b69-48b1-b217-e6f322ca8712.prompt=Number of seconds to sleep\:
+d1bbf441-824a-450e-afae-2ddec0e0f35e.description=&lt;pre&gt;\nThis operation waits for the number of seconds specified in the "seconds" input.\n\nInputs\:\n    seconds - The number of seconds to wait.\n\nResults\:\n    resultString \u2013 This is the primary output. It contains the "completed sleep" message if the operation completed successfully and an error message otherwise. \n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>d1bbf441-824a-450e-afae-2ddec0e0f35e.description</annotation>
+  <name>Sleep</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="76d1a63d-0b69-48b1-b217-e6f322ca8712">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>seconds</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d1bbf441-824a-450e-afae-2ddec0e0f35e.76d1a63d-0b69-48b1-b217-e6f322ca8712.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="485218b1-9016-429f-b647-2a03fa56f129">
+    <annotation/>
+    <name>Operation Sleep (d1bbf441-824a-450e-afae-2ddec0e0f35e)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="a3a02e6a-ce85-4c1c-917c-c329c4b298fe">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="efd788af-1073-4782-b0c9-035856c8bad7">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="d4561898-dd99-42f2-ab3c-dd4876de0976">
+            <annotation/>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="29aa0da3-988f-45c1-bcd9-b5b088ea28bc">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="b278f979-b50a-4b27-9869-5600b11a391e">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="582994ce-3273-43c1-92b4-2b06526462b5">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ac93feef-95d5-4a10-a067-e127d8741851">
+    <annotation/>
+    <name>result</name>
+    <fieldName>resultString</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c8c31c12-b63a-42d0-8b1f-749c54241dfe">
+    <baseIcon>hourglass.png</baseIcon>
+    <basePath>Utilities</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Sleep</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

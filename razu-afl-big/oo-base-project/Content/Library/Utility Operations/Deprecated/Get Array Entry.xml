@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="f14e6ff1-d83c-44c5-a00d-53ec7b689105">
+  <descriptionCdata>f14e6ff1-d83c-44c5-a00d-53ec7b689105.description=&lt;pre&gt;\nGet the value of an elemnt in a JSON array. If the value of the element is a simple type, i.e. a string or a number, it will be \nreturned as-is. If it is a complex JSON object, i.e. '{"one"\:1}' it will be returned in JSON format. \n\nWhen specifying the index to an array element in javascript it is possible to use the standard notation, where the 1st \nelement from the left is index 0, and the right-most element is (n-1), in an array with n elements. However, \nit is also possible to specify elements starting from the right side of the array using negative numbers, in which case\nthe right-most element is referred to by index -1 and the left-most element is at position (-1 * n), again for an array with n elements.\n\n\nThe description of the enclosing folder describes the JSON format with examples,\nand the JSON format is described completely at http\://www.json.org.\n\n\nInputs\:\n    array - String representation of a JSON array. Arrays in JSON are comma seperated lists of objects, enclosed in square brackets ( [ ] ).\nExamples\: [1,2,3] or ["one","two","three"] or [{"one"\:1, "two"\:2}, 3, "four"]\n\n    index -The index of the element to retrieve from the array. \n               See the notes above for more information on using negative numbers to specify array elements.\nValid values\: Integer between (-1*n) and (n-1) for an array with n elements.\nDefault value\: undefined (insert the new element at the end of the array)\n\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation failed. See the message in returnResult for details\n\n\nResults\:\n    returnResult - The new JSON array with the inserted element.\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>f14e6ff1-d83c-44c5-a00d-53ec7b689105.description</annotation>
+  <name>Get Array Entry</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="6ce8adb4-9779-4e9c-8f8c-153a08974318">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8f8b00f2-262b-4a39-95e8-599d67155900">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>index</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="68c46b77-c5fc-4747-abae-fcd69d2c74ff">
+    <annotation/>
+    <name>Operation Get Array Entry (f14e6ff1-d83c-44c5-a00d-53ec7b689105)</name>
+    <script>// One-liner to define JSON parser and stringifier.  Minified version of http://www.json.org/json2.js
+if(!this.JSON){this.JSON={};}(function(){function f(n){return n&lt;10?'0'+n:n;} if(typeof Date.prototype.toJSON!=='function'){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+'-'+ f(this.getUTCMonth()+1)+'-'+f(this.getUTCDate())+'T'+f(this.getUTCHours())+':'+f(this.getUTCMinutes())+':'+f(this.getUTCSeconds())+'Z':null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};} var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?'"'+string.replace(escapable,function(a){var c=meta[a];return typeof c==='string'?c:'\\u'+('0000'+a.charCodeAt(0).toString(16)).slice(-4);})+'"':'"'+string+'"';} function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&amp;&amp;typeof value==='object'&amp;&amp;typeof value.toJSON==='function'){value=value.toJSON(key);}if(typeof rep==='function'){value=rep.call(holder,key,value);} switch(typeof value){case'string':return quote(value);case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}gap+=indent;partial=[];if(Object.prototype.toString.apply(value)==='[object Array]'){length=value.length;for(i=0;i&lt;length;i+=1){partial[i]=str(i,value)||'null';} v=partial.length===0?'[]':gap?'[\n'+gap+partial.join(',\n'+gap)+'\n'+mind+']':'['+partial.join(',')+']';gap=mind;return v;}if(rep&amp;&amp;typeof rep==='object'){length=rep.length;for(i=0;i&lt;length;i+=1){k=rep[i];if(typeof k==='string'){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}} v=partial.length===0?'{}':gap?'{\n'+gap+partial.join(',\n'+gap)+'\n'+ mind+'}':'{'+partial.join(',')+'}';gap=mind;return v;}} if(typeof JSON.stringify!=='function'){JSON.stringify=function(value,replacer,space){var i;gap='';indent='';if(typeof space==='number'){for(i=0;i&lt;space;i+=1){indent+=' ';}}else if(typeof space==='string'){indent=space;} rep=replacer;if(replacer&amp;&amp;typeof replacer!=='function'&amp;&amp;(typeof replacer!=='object'||typeof replacer.length!=='number')){throw new Error('JSON.stringify');} return str('',{'':value});};} if(typeof JSON.parse!=='function'){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&amp;&amp;typeof value==='object'){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}} return reviver.call(holder,key,value);} text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return'\\u'+ ('0000'+a.charCodeAt(0).toString(16)).slice(-4);});} if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof reviver==='function'?walk({'':j},''):j;} throw new SyntaxError('JSON.parse');};}}());
+
+// default response
+scriptletResponse = "failure";
+scriptletResult = "input value is not a valid JavaScript array";
+
+try {
+
+    // Interpret array as a javascript array
+    jsArray = JSON.parse(array);
+    
+    if (isArray(jsArray)) {
+
+        // validate that index is within bounds
+        if ( (index &gt;= jsArray.length)  || (index &lt; (jsArray.length * -1)) ) {
+            scriptletResult = "index is out of range";
+        } else {
+            
+            if (index &lt; 0){
+                index = new Number(index);
+                length = new Number(jsArray.length);
+                
+                index = length + index;
+            }
+            
+            var item = jsArray[index];
+
+            if (typeof(item) == "object")
+                scriptletResult = JSON.stringify(item);
+            else
+                scriptletResult = item;
+
+            scriptletResponse = "success";
+        }
+    }
+} catch (e){ 
+    if (! (e instanceof SyntaxError))
+        scriptletResult = ""+e;
+}
+
+// General function to test whether object is an array
+function isArray(obj) {
+    if (obj.constructor.toString().indexOf("Array") == -1)
+        return false;
+    else
+        return true;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="2235ca83-cb64-4b46-9c1a-044bcbc510f0">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="216a6fc6-ea1d-4427-a0b6-df4693402a49">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6694a065-2647-4961-bd83-c0fb8242fec8">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4b4bd393-679f-4b8a-a6c1-8ee38ceb5cd9">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="6d371266-f672-4e45-9790-db2e9564642b">
+        <baseIcon>get.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="38d35ad5-15e2-4f68-9c84-0f8bb0a60702">
+  <descriptionCdata>38d35ad5-15e2-4f68-9c84-0f8bb0a60702.description=Checks to see if the specified file can be written to.\nDepending on the Operating System, the operation will either check all file\npermissions, or will check to see if the file is marked as readonly.\n\nInput Parameters\:\n    source - file to check. \n\nResponses\:\n    success - if the file is writeable,\n    failure - if the file does not exist or cannot be written.\n\nNotes\: \n1. Please check File System-&gt;Cross Platform properties for more information regarding the use of network share paths with this operation.
+</descriptionCdata>
+  <annotation>38d35ad5-15e2-4f68-9c84-0f8bb0a60702.description</annotation>
+  <name>FS Writeable</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="8d589c82-4c71-4e43-bec3-7e7448e36b99">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="2f0fbdff-0e91-4db6-8653-5168a889ed38">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="9f8e4bba-a8b6-4da0-a6fa-2ce123be01a2">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9fa3e38b-0f89-48e8-806f-aa96d992a13e">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d418ffef-7d2c-40de-b998-40e4b6463f98">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-fs-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.filesystem.FSWriteable</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

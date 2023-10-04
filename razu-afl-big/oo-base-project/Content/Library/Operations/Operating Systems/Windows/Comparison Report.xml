@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="cb9134bc-3de1-4f85-add5-219bf4636e9d">
+  <descriptionCdata>cb9134bc-3de1-4f85-add5-219bf4636e9d.description=&lt;pre&gt; Creates a report information about the comparison results. Don't touch this unless you know what you're doing.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>cb9134bc-3de1-4f85-add5-219bf4636e9d.description</annotation>
+  <name>Comparison Report</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="4ce6f146-f819-49b1-ac24-d4000a4eee8c">
+    <annotation/>
+    <name>Operation Comparison Report (cb9134bc-3de1-4f85-add5-219bf4636e9d)</name>
+    <script>var osReport = scriptletContext.get("osReport");
+var iisReport = scriptletContext.get("iisReport");
+var appPoolReport = scriptletContext.get("appPoolReport");
+var swReport = scriptletContext.get("swReport");
+
+var osErrReport = scriptletContext.get("osErrReport");
+var iisErrReport = scriptletContext.get("iisErrReport");
+var appPoolErrReport = scriptletContext.get("appPoolErrReport");
+var swErrReport = scriptletContext.get("swErrReport");
+
+
+var regReport = scriptletContext.get("regReport");
+var crtReport = scriptletContext.get("crtReport");
+var host1 = scriptletContext.get("host1");
+var host2 = scriptletContext.get("host2");
+var crlf = "\r\n";
+
+if(crtReport == null){
+    crtReport = "";
+    }
+
+var rez = "Comparison report between " + host1 + " - " + host2 + ":" + crlf;
+if(osReport != null){
+    rez += "Compare Operating System info:" + crlf + osReport+crlf + crlf;
+    }else{
+    rez += "Compare Operating System info:" + crlf + "Failure"+ crlf  + osErrReport +crlf + crlf;
+    }
+if(iisReport != null){
+    iisReport = (iisReport.search("false")==-1)?"Success"+ crlf +iisReport:"Failure" + crlf + iisReport;
+    rez += "Compare IIS versions:" + crlf + iisReport+crlf + crlf;
+    }else{
+    rez += "Compare IIS versions:" + crlf + "Failure"+ crlf + iisErrReport+crlf + crlf;
+    }
+    
+if(appPoolReport != null){
+    rez += "Compare Application Pool settings:" + crlf + appPoolReport+crlf + crlf;
+    }else{
+    rez += "Compare Application Pool settings:" + crlf + "Failure"+ crlf + appPoolErrReport +crlf + crlf;
+    }
+if(swReport != null){
+    rez += "Compare Installed SW:" + crlf + swReport+crlf + crlf;
+    }else{
+    rez += "Compare Installed SW:" + crlf + "Failure"+ crlf + swErrReport +crlf + crlf;
+    }
+if(regReport != null){
+    regReport = (regReport.search("false")==-1 
+                &amp;&amp;regReport.search("An error occured")==-1)?
+        "Success"+ crlf +regReport:"Failure" + crlf + regReport;
+    rez += "Compare Registry values:" + crlf + regReport+crlf + crlf;
+    }
+
+scriptletResult = crtReport + rez + crlf;
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="45df5fa2-146a-474f-a458-09b37c123af9">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="4c5b90ab-963d-4f19-93ab-4d10162269b9">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6b5424f4-dcf7-4ade-8393-c6f0ff3c3a6a">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="96158b63-27b4-4786-8990-c4cdba93ef84">
+    <baseIcon>scriptlet.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

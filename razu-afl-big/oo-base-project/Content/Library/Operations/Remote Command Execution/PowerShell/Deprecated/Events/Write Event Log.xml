@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="eecd2568-e265-4d59-97b6-7704562496d4">
+  <descriptionCdata>eecd2568-e265-4d59-97b6-7704562496d4.0a37e875-89fb-4772-a376-9551efec9a97.prompt=Source\:
+eecd2568-e265-4d59-97b6-7704562496d4.421500fa-8381-43d2-9a28-01cbd16560e4.prompt=Message\:
+eecd2568-e265-4d59-97b6-7704562496d4.c7a01167-fd96-4f66-a73f-84376555e9d4.prompt=Type\:
+eecd2568-e265-4d59-97b6-7704562496d4.description=&lt;pre&gt;Writes an event log.\n\nInputs\:\nsource   - The application/service who generated the event\ntype     - Type of the log (Application, System etc.)\nmessage  - Log message\n\nResponses\:\nsuccess - Operation completed successfully\nfailure - Something went wrong\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception - if something went wrong, the error message\n\nRequires\:\nPowerShell 1.0&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>eecd2568-e265-4d59-97b6-7704562496d4.description</annotation>
+  <name>Write Event Log</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c7a01167-fd96-4f66-a73f-84376555e9d4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>type</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>eecd2568-e265-4d59-97b6-7704562496d4.c7a01167-fd96-4f66-a73f-84376555e9d4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0a37e875-89fb-4772-a376-9551efec9a97">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>eecd2568-e265-4d59-97b6-7704562496d4.0a37e875-89fb-4772-a376-9551efec9a97.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="421500fa-8381-43d2-9a28-01cbd16560e4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>message</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>eecd2568-e265-4d59-97b6-7704562496d4.421500fa-8381-43d2-9a28-01cbd16560e4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a9e061b5-de73-4852-b6c3-17b78e094519">
+    <annotation/>
+    <name>Operation:Write Event Log (eecd2568-e265-4d59-97b6-7704562496d4)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="3f5ace50-dcdd-4f2f-8210-31bcfd5c5699">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="1ef35a7e-8fb3-4615-803a-17c19a67d218">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="93435e5d-f8f6-494a-b22c-d53ef93ff3de">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="17c284a6-301f-4f0d-a5ae-d8845e4b314d">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="79546c3f-c847-4ce4-beb4-01647427f2a5">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="641e423b-501f-4b34-be6b-db0459d98913">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="fda662ee-b6b6-4c2c-8f8b-cdb3a4a21f96">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="72b30819-126a-4996-b23b-66b4c602e477">
+    <baseIcon>windows_event_log.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="c5ccccc8-1d0a-4e2d-b989-7036ebd09a01">
+        <baseIcon>send.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>00c93d54-a689-4cd2-88b1-96ea47220f3a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

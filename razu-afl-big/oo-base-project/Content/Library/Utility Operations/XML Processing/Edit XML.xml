@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="cb35b17f-3f88-42ab-a319-fb10616bb1fe">
+  <descriptionCdata>cb35b17f-3f88-42ab-a319-fb10616bb1fe.description=Edits an XML document.\n\nInputs\:\n    xml - The XML (in the form of a String).\n    filePath - Absolute or remote path of the XML file.\n    action - The edit action to take place.\nValid values\: delete, insert, append, subnode, move, rename, update.\n    xpath1 - The XPath Query that is wanted to be run. The changes take place at the resulting elements.\n    xpath2 - The XPath Query that is wanted to be run. For the move action the results of xpath1 are moved to the results of xpath2.\n    value - The new value.\nExamples\: &lt;newNode&gt;newNodeValue&lt;/newNode&gt; , &lt;newNode newAttribute\="newAttributeValue"&gt;newNodeValue&lt;/newNode&gt;, new value.\t\n    type - Defines on what should the changes take effect \: the element, the value of the element or the attributes of the element.\nValid values\: elem, text, attr\n    name - The name of the attribute in case the selected type is 'attr' .\n    parsingFeatures - The list of XML parsing features separated by new line (CRLF). The feature name - value must be separated by empty space. Setting specific features this field could be used to avoid XML security issues like "XML Entity Expansion injection" and "XML External Entity injection". To avoid aforementioned security issues we strongly recommend to set this input to the following values\: \nhttp\://apache.org/xml/features/disallow-doctype-decl true\nhttp\://xml.org/sax/features/external-general-entities false\nhttp\://xml.org/sax/features/external-parameter-entities false\nWhen the "http\://apache.org/xml/features/disallow-doctype-decl" feature is set to "true" the parser will throw a FATAL ERROR if the incoming document contains a DOCTYPE declaration.  \nWhen the "http\://xml.org/sax/features/external-general-entities" feature is set to "false" the parser will not include external general entities. \nWhen the "http\://xml.org/sax/features/external-parameter-entities" feature is set to "false" the parser will not include external parameter entities or the external DTD subset. \nIf any of the validations fails, the operation will fail with an error message describing the problem. \nDefault value\:\nhttp\://apache.org/xml/features/disallow-doctype-decl true\nhttp\://xml.org/sax/features/external-general-entities false\nhttp\://xml.org/sax/features/external-parameter-entities false\n\nResults\:\n    returnResult - This is the primary output. The edited XML.\n    returnCode - 0 for success; -1 for failure.\n    exception - The exception message in case one occured.\n\t\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n\nNotes\: \n1. For the delete action the following inputs are required\: xml or filePath, xpath1, type and in case type is 'attr' then name is also required (representing the attributes name). Delete action modifies the XML only for type 'elem' or attr'.\n2. For the insert action the following inputs are required\: xml or filePath, xpath1, value, type and in case type is 'attr' then name is also required (representing the attributes name). For type 'elem' insert adds the node before the resulting nodes of the XPath. For type 'text' insert adds the text before the text value of resulting nodes of the XPath.  \n3. For the append action the following inputs are required\: xml or filePath, xpath1, value, type and in case type is 'attr' then name is also required (representing the attributes name). For type 'elem' append adds the node after the resulting nodes of the XPath. For type 'text' append adds the text after the text value of resulting nodes of the XPath.\n4. For insert and append attributes the order is the default alphabetical.   \n5. For the subnode action the following inputs are required\: xml or filePath, xpath1 and value.\n6. For the move action the following inputs are required\: xml or filePath, xpath1 and xpath2. Move  action  modifies the XML only for type 'elem'.\n7. For the rename action the following inputs are required\: xml or filePath, xpath1, value, type and in case type is 'attr' then name is also required (representing the attributes name). Rename action  modifies the XML only for type 'elem' or attr'.\n8. For the update action the following inputs are required\: xml or filePath, xpath1, value, type and in case type is 'attr' then name is also required (representing the attributes name).\n9. The World Wide Web Consortium (W3C) organization provides the XPath specification (http\://www.w3.org).\n10. XML using default namespace is also supported by this operation.\n11. An element from the default namespace can be retrieved using a location path.\n\nExamples\:\n1. The following is a valid xpath example for working with a XML that uses default namespace. This example searches all "td" elements from the default namespace\:\n    xml\: &lt;table xmlns\="http\://www.w3.org/TR/html4/"&gt;\n                &lt;tr&gt;\n                    &lt;td&gt;Apples&lt;/td&gt;\n                    &lt;td&gt;Bananas&lt;/td&gt;\n                 &lt;/tr&gt;\n            &lt;/table&gt;\n    xpath1\: //*[namespace-uri()\="http\://www.w3.org/TR/html4/" and name()\="td"]\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>cb35b17f-3f88-42ab-a319-fb10616bb1fe.description</annotation>
+  <name>Edit XML</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="5dee512c-00f6-4c2b-bede-307ab34552a6">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xml</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4c303d99-90a2-49c5-b730-9e9ff9128d73">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>filePath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9a1e9cd1-599d-4fd8-8773-77062baa74d9">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>action</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b5fb1043-09b8-494a-b966-e466177e574e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xpath1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ae7dd435-5e06-493c-9010-2ac41a54b923">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xpath2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4bad75d8-165e-42a3-9c08-814053ea3088">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bc218b76-09f7-4199-95c5-10c30647dc9d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>type</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c8be040d-cdfb-410a-8cce-8e0b64b7a0e9">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>name</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="7fa052e1-5205-4410-9462-0a8c0b4f4458">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>parsingFeatures</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>http://apache.org/xml/features/disallow-doctype-decl true
+http://xml.org/sax/features/external-general-entities false
+http://xml.org/sax/features/external-parameter-entities false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="7f1713e9-aabd-47b9-b667-f88c3d7c0d11">
+    <annotation/>
+    <name>Operation Edit XML (cb35b17f-3f88-42ab-a319-fb10616bb1fe)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="35145e9c-d139-4274-a3e8-f36e6c5a6aa0">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="8bd1be40-ba09-44e7-8a6e-985fdfbb6b60">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e2e37ecc-e42e-4cbc-b6a2-99ecd60a9f7c">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="52cbd112-390f-453d-b4a7-4a61ce3a7bc2">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="1876ac24-4781-4274-8835-74970fd02ce8">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0970c0cc-c20c-4c22-a046-8f1c40b40abe">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6f2cbc48-4a42-48c9-9027-c07f611b7371">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="f50ef568-9c63-4a98-b417-b0b7ff0f3c10">
+    <baseIcon>document_xml.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Edit XML</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

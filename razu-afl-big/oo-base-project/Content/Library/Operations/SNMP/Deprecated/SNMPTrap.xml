@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4b594ae8-55d4-4892-9810-f15a2c3db661">
+  <descriptionCdata>4b594ae8-55d4-4892-9810-f15a2c3db661.description=&lt;pre&gt;Sends an SNMP Trap to an NMS \n \n Inputs\:\n routerIP - ip address of Router\n port - (Optional)port to which Router is listening default will be 162\n oid \= trap Object description ID for which you want to send Trap ex\: 1.3.6.1.6.3.1.1.5.1\ncommunity - The SNMP community to set the trap up in.\n\nResponses\:\nsuccess - the operation completed successfully.\nfailure - an unknown error occurred.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>4b594ae8-55d4-4892-9810-f15a2c3db661.description</annotation>
+  <name>SNMPTrap</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="026cdcbb-fe92-42e1-ada1-7a070770b7f3">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>routerIP</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="538f0981-6cf7-4f36-be7a-7b817327ef5c">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f1514ab8-c1fd-4f92-af21-251b4d64d889">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>oid</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6e554908-8ce5-49c3-9a0c-837a005101ce">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>community</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="7da7d0e8-1a39-4c0c-8e27-ac8ef0c495a5">
+    <annotation/>
+    <name>Operation:SNMPTrap (a677e683-6ac8-4e6a-ba6e-8ee68cb5032d)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="8c024d9f-7892-4c62-a863-4c63750c6a10">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3e6368d5-1ab4-4096-84fd-0178068a76fc">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c5de4988-e8df-4986-9730-9cf3d1ffdc58">
+    <baseIcon>modem_earth.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="4673ee06-ad36-4f11-a8b6-b3f5fd732d68">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1f6db767-69e5-409f-b7a1-1abab079a581</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

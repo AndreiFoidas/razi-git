@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="1443d169-2972-47bc-ac99-19e4f311fb9d">
+  <descriptionCdata>1443d169-2972-47bc-ac99-19e4f311fb9d.description=&lt;pre&gt;Uses WMI for pausing all the available print jobs for a given host. \n\nInputs\:\nhost - The host to connect to WMI on.\nusername - Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword - Password of the user.\n\nResponses\:\nsuccess - All the jobs were paused successfully.\nfailure - Something went wrong.&lt;/pre&gt; 
+</descriptionCdata>
+  <annotation>1443d169-2972-47bc-ac99-19e4f311fb9d.description</annotation>
+  <name>Pause All Print Jobs</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="11344ada-c216-497a-9148-030826373686">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="18915ddd-ec79-4de1-a85d-2734229390df">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f1a20b92-0c4e-4cfe-bd11-7f66f9af3710">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="1ed2225b-ac83-44eb-9bec-cbe3d98686c5">
+    <annotation/>
+    <name>Operation:Pause All Print Jobs (1443d169-2972-47bc-ac99-19e4f311fb9d)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="51113028-2388-469c-8a85-7347fead9e52">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="d613da1b-7846-4569-844e-5abfd974f40b">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="547e6a79-8502-4379-aba4-be333157caea">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="cf6ea586-54a0-4060-a94c-bd6dcf29c1b0">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="c7371d43-e54c-4cbb-8ccd-846b856407be">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="cf6f0297-d67a-4b1b-9ec1-30cedd40c2f9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="768b795f-5d7e-475e-acdf-f69978261957">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="a3d20f1e-0492-4d38-acef-5d1df959d56f">
+    <baseIcon>printer.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e105b9fc-cc29-44d3-a1f9-42ea92805493">
+        <baseIcon>offline.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Windows.WMIPauseAllPrintJobs</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

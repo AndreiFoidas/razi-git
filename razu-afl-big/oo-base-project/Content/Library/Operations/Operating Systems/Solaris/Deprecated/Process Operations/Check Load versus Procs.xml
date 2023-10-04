@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c3a81bbe-2dfb-4962-a6cd-ae1f02ad68c0">
+  <descriptionCdata>c3a81bbe-2dfb-4962-a6cd-ae1f02ad68c0.description=\nChecks to see whether the computer appears to be having processor related issues.\ninputs\:\nProcs - The number of processors in the computer.\noneMinute - percent usage on each processor averaged over 1 minute.\nfiveMinutes - percent usage on each processor averaged over 5 minutes.\nfifteenMinutes - percent usage on each processor averaged over 15 minutes.\n\nReturns\: A human Readable message describing the processor load.\n\nResponses\:\nsuccess - This is always the response.\n      
+</descriptionCdata>
+  <annotation>c3a81bbe-2dfb-4962-a6cd-ae1f02ad68c0.description</annotation>
+  <name>Check Load versus Procs</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="79f30413-44a7-44d3-8681-6540b7fbf0c2">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Procs</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>unassigned</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="163b3e31-b1da-4605-a221-c84ee1c78c65">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>oneMinute</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>unassigned</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="0e831509-6a81-436d-a7f6-2e4ad1e31f0e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>fiveMinutes</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>unassigned</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="bffd1286-3670-4cd3-bac1-1d6d1de3238c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>fifteenMinutes</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>unassigned</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="9ebbafd3-29a0-43d2-94a2-59aa4ab463f9">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter/>
+      <value>${Procs}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="fa6abad5-0358-4381-a879-21aa78b490b1">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter/>
+      <value>${oneMinute}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="88753b40-cbc9-48fe-9fb1-d68b0cf4428b">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter/>
+      <value>${fiveMinutes}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="108a73bc-e0ea-47b6-bf0f-3d4e94475f35">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter/>
+      <value>${fifteenMinutes}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="45a7cc3b-82d3-47ba-9c8d-784dea8ede10">
+    <annotation/>
+    <name>Operation:Check Load versus Procs (c3a81bbe-2dfb-4962-a6cd-ae1f02ad68c0)</name>
+    <script>// is the load average near the number of procs?
+oneMin = parseInt(oneMinute);
+numProcs = parseInt(Procs);
+threshold = numProcs * .8;
+if (oneMin &gt; threshold) {
+   // has it been high for a while?
+   fiveMin = parseInt(fiveMinutes);
+   if (fiveMin &gt; threshold) {
+      scriptletResult = "System is heavily loaded";
+   }
+   else {
+      scriptletResult = "System appears to have a CPU spkike";
+   }
+}
+else {
+   scriptletResult = "System is not heavily loaded";
+}
+scriptletContext.putGlobal("ic_loadString",scriptletResult);
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="76b6dc85-149a-485b-b6af-4766f0f0f14d">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="76f23634-beae-4ee7-8afb-82e29674e031">
+    <annotation/>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="76277555-5566-4a53-afc0-be859c46ff41">
+    <baseIcon>cpu.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="fed39a81-2691-4f08-aa47-d79e90119b16">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

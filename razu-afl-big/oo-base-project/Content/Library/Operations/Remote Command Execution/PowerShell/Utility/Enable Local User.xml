@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="ed77b48f-94db-43b1-96be-ef142867410f">
+  <descriptionCdata>ed77b48f-94db-43b1-96be-ef142867410f.description=&lt;pre&gt;Enables a user account in the local Windows computer.\n\nInputs\:\nlocalUser\t - The name of the local user account that should be activated\n\nResponses\:\nsuccess\t - Operation completed successfully\nfailure\t - Something went wrong\n&lt;/pre&gt;
+ed77b48f-94db-43b1-96be-ef142867410f.f24b9b4e-dadf-45df-aace-e566e33cec98.prompt=Username to Enable\:
+</descriptionCdata>
+  <annotation>ed77b48f-94db-43b1-96be-ef142867410f.description</annotation>
+  <name>Enable Local User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f24b9b4e-dadf-45df-aace-e566e33cec98">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>localUser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ed77b48f-94db-43b1-96be-ef142867410f.f24b9b4e-dadf-45df-aace-e566e33cec98.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="c3009d38-b6f8-487d-96f4-e5722a98fbc5">
+    <annotation/>
+    <name>Operation:Enable Local User (ed77b48f-94db-43b1-96be-ef142867410f)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="25f18a78-0076-4473-9c52-3b0aa103f24e">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c4f1484b-035e-40c4-9923-0d788790afca">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d10bb8d1-f803-4d70-af9f-ce4f5a0b6978">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="15e2440e-fa4e-4f83-9eb6-c7f8ea5e99c5">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="10ea1b9b-7432-4936-b700-2c8d1612f9ae">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="66421c77-01a0-4866-94c7-61d192bc3bf8">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="85947869-7cbc-47d2-af32-1641569d1839">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4ea14af9-b065-4802-9f88-80296371a2e8">
+    <baseIcon>user2.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d0a676ad-7d5e-48d9-a8c9-2a92e927580b">
+        <baseIcon>enable.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.EnableLocalUser</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

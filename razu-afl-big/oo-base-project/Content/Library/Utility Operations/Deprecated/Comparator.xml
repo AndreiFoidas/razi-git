@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="06dd9494-9e22-4024-b08b-0fad75fa260f">
+  <descriptionCdata>06dd9494-9e22-4024-b08b-0fad75fa260f.description=compares a value to a specified threshold.\n\nDeprecated in favor of 'Evaluate Expression'\n\nInputs\:\nvalue - the value to check\nthreshold - the threshold to check against (in the same units as value).\n\nResponses\:\ngreater than - If value is &gt; threshold.\nless than - If value &lt; threshold.\nequal - If value is \=\= threshold.\n
+</descriptionCdata>
+  <annotation>06dd9494-9e22-4024-b08b-0fad75fa260f.description</annotation>
+  <name>Comparator</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="9acdef22-0bf0-4a02-94a9-666b18fcf30a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>VALUE</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="c5febba3-db28-423b-bf58-9dae492d6dd1">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>threshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>threshold</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="9fb71d8e-2fbc-4cee-9ccd-d6467c2ad01e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter/>
+      <value>${value}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="db2e9cb3-e909-4559-8272-a77a66bbf347">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter/>
+      <value>${threshold}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="62ad2a4c-8904-4680-bff2-feca3282b62e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter/>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="b1d4f67d-bf84-4e49-b399-d8e604ab6757">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter/>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="7f2deecb-4470-45d5-9584-13e0143f2a4c">
+    <annotation/>
+    <name>Operation:Comparator (7429e115-11a0-40d3-b87c-b95c434963a1)</name>
+    <script>try{
+valued = java.lang.Double.parseDouble(value);
+threshold = java.lang.Double.parseDouble(threshold);
+value=valued;
+}
+catch (e){;}
+if (value &gt; threshold)
+	scriptletResponse = "greater than"; 
+else if (threshold &gt; value)
+	scriptletResponse = "less than"; 
+else
+	scriptletResponse = "equal"; 
+	</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="c96575ae-5ab7-43ce-a2d7-1d391b5a3865">
+      <annotation/>
+      <name>greater than</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="0e7b8318-a073-4820-a088-64b8015ddb57">
+      <annotation/>
+      <name>less than</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="c63d1c98-c484-432e-8148-97991ced9e27">
+      <annotation/>
+      <name>equal</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="121aa3e5-18ec-4f0e-b649-1433452e53a3">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

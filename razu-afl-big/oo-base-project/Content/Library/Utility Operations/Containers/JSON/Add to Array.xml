@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="86df4cdb-49ac-4002-8ebe-98ae1ace7c7b">
+  <descriptionCdata>86df4cdb-49ac-4002-8ebe-98ae1ace7c7b.description=Adds an element an array. The resulting array, with the element added, will be returned in the Result output. The given element will be added\nas a string, which is what most flow variables contain.  By default, the element will be appended to the end of the array, but an index value can be set to\nindicate a different position.\n\nNote that the original array input is not modified; the Result output will contain the array with the new element added.  In order to modify the original\narray, the Result output can be assigned to the same flow variable that was used to populate the array input.\n\nWhen specifying the index to an array element it is possible to use the standard notation, where the 1st \nelement from the left is index 0, and the right-most element is n, in an array with n elements. However, \nit is also possible to specify elements starting from the right side of the array using negative numbers, in which case\nthe right-most element is referred to by index -1 and the left-most element is at position (-1 * n), again for an array with n elements.\n      \nThe description of the enclosing folder describes the JSON format with examples, and the JSON format is described completely at http\://www.json.org.\n\nInputs\:\n    array-  The JavaScript array that will be added to.  The operation will return a failure if the array is not a JavaScript array; a normal OO list is NOT a\n               JavaScript array.  As noted above, this array will not be modified in place, but rather the Result output will contain the array with the new value.\n    element- The element to add into the array.   The element will be interpreted as a string and added into the array.  \n                    That means that even if the value appears to be another valid JavaScript  object or array, it will be added as a simple string.  In order to add\n                    these other types of JavaScript objects to an array, use the "Add Object to Array" operation.\n    index- The index in the array in which the value will be inserted. If an index is not specified, then the element will be appended to the end of the array. \n              See the notes above for more information about specifying indexes.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation failed. See the message in returnResult for details\n\nResults\:\n    returnResult - String representation of the new JSON array with the new element added.\n\nExamples\:\n   Adding element "pear" to [ "apple, "banana" ] will result in \n      [ "apple, "banana", "pear" ] .\n\n   Adding element "pear" at index 0 to [ "apple, "banana" ] will result in\n      [ "pear", "apple, "banana" ] .\n      \n   Adding element "1" to [ ] will result in [ "1" ].\n\n   Adding element "[1,2]" at index 1 to [ "apple, "banana" ] will result in\n      [ "apple, "[1,2]", "banana" ].
+</descriptionCdata>
+  <annotation>86df4cdb-49ac-4002-8ebe-98ae1ace7c7b.description</annotation>
+  <name>Add to Array</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4713d7ac-6b60-4abd-97fc-3116658d5d53">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6fd77515-52d2-45fc-9b4a-b40993ef5497">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>element</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="bef146c6-3d90-45bc-8985-4fd3593c25a7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>index</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="46ee08b1-0601-4f39-b79f-b7cfe731a7d3">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="316fdbfe-a648-40da-abe0-44fb134b6eb0">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="1d731ce0-c59a-494f-a73d-95d348fad6d6">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ee07c78a-825e-453f-8b35-0039315d98c6">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="899b27d2-3fe4-4d76-92fb-43f46f7f5a23">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="5d05da0c-bd9c-4455-8f71-30816634c84d">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b1a9f31a-c61c-4eaf-a1be-71e0e83edc28">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="d6c6cdd6-cf6d-484a-9fc5-a9568d61076a">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Add to Array</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

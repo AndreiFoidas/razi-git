@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="f589ceef-46b1-4fd6-add3-6ff11aa2dcec">
+  <descriptionCdata>f589ceef-46b1-4fd6-add3-6ff11aa2dcec.description=Processes a list.\n\nInput parameters\:\n\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\n$tabledata\: initialized with the table data\n$rowsep\:    the row separator for the table data, e.g. '\n' or '\n'\n$colsep\:    the column separator for the table data, e.g. ',' or '\t'\n$order\:     specifies whether the table is to be sorted in ascending or descending\n            order; either "asc" (ascending) or "desc" (descending)\n$col\:       specifies the 0-based column number (int) according to\n            which the table is to be sorted\n$type\:      specifies the type of the sort column; either "alpha" or "int" \n            or "float" or "nosort" (table is not sorted, but can be filtered)\n$threshold\: specifies a filter value for table rows; semantic depends on $order\:\n            "asc"\:  all rows with columns smaller than $threshold\n            "desc"\: all rows with columns greater than $threshold\n$minrow\:    &gt;\= 0; specifies the first row of the sorted table that is in the result\n            table\n$maxrow\:    specifies the last row of the sorted table that is in the result tab\n$esctable\:  whether to convert escaped characters in the table (true/false) (i.e. convert \\t to an actual tab)\n\nResponses\:\nsuccess - the list was processed.
+</descriptionCdata>
+  <annotation>f589ceef-46b1-4fd6-add3-6ff11aa2dcec.description</annotation>
+  <name>List Processor</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="57828ad1-00a4-4153-b18b-3de9b7c45489">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>tabledata</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="13058716-3807-4d9c-9c9e-fe3108108ff8">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowsep</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7417e939-3d5c-4f53-8a8d-f60c70a27173">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>colsep</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="78569688-f79d-4caf-8219-24c6a8f26470">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>order</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0b427ab5-8627-464b-bc82-4578f8206803">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>col</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e1f2524f-8597-40b5-9964-699c21d64b81">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>type</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="86d93257-9223-4e93-97e3-1c8e7dac817a">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>minrow</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b2da7688-0e20-4c55-808c-f85b64871629">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>maxrow</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e15c115f-21c0-4a33-a3b0-7072d07cf025">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>esctable</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="30d1cbfe-727b-49f4-9aad-37f0e7e517bd">
+    <annotation/>
+    <name>Operation:List Processor (f589ceef-46b1-4fd6-add3-6ff11aa2dcec)</name>
+    <script>//# deal with escaped chars
+if (colsep == "\\t") {
+  colsep = "\t";
+}
+if (colsep == "\\w") {
+  colsep = " ";
+}
+if (rowsep == "\\n") {
+  rowsep = "\n";
+}
+if (rowsep == "\\r") {
+  rowsep = "\r";
+}
+if (esctable == "true") {
+  tabledata = tabledata.replace("\\\r", "\r");
+  tabledata = tabledata.replace("\\\n", "\n");
+  tabledata = tabledata.replace("\\\t", "\t");
+}
+
+//# globals
+h = new java.util.HashMap(); //# use hash because sparse arrays have problems
+table = tabledata.split(rowsep);
+var cells = new Array();
+
+for(i = 0; i &lt; table.length; i++)
+{
+    cell = table[i].split(colsep);
+    cells.push(cell);
+}
+
+cells.sort();
+
+var k = 0;
+
+for(i = 0; i &lt; cells.length; i++){
+    positions = h.get(cells[i]);
+    if(!positions){
+        positions = new Array();
+        positions[0]=k;
+    }
+    else{
+        positions.push(k);
+    }
+    h.put(cells[i],positions);
+    k++;
+}
+
+var k = 0;
+var newtable = new Array();
+
+for(i = 0; i &lt; table.length; i++){
+    cell = table[i].split(colsep);
+    positions = h.get(cells[i]);
+    k = positions.pop();
+    newtable[k] = cells[i];
+}
+
+var newTableString = "";
+
+if((maxrow&lt;0) || (maxrow &gt; newtable.length)){
+    maxrow = newtable.length;
+}
+
+var threshold = scriptletContext.get("threshold");
+
+for (i = minrow; i &lt; maxrow; i++) {
+ /* 
+  #
+  # check if we've passed the threshold
+  #
+ */
+  if (threshold != null) {
+    if (order == "asc") {
+      //# alpha thresh
+      if (type == "alpha") {
+        if (newtable[i] &gt; threshold) {
+          break;
+        }
+      }
+      //# numeric thresh
+      else if((type == "int") || (type == "float")) {
+        if (newtable[i] &gt; threshold) {
+          break;
+        }
+      }
+    }
+    if (order == "desc") {
+      //# alpha thresh
+      if (type == "alpha") {
+        if (newtable[i] &lt; threshold) {
+          break;
+        }
+      }
+      //# numeric thresh
+      else if((type == "int") || (type == "float")) {
+        if (newtable[i] &gt; threshold) {
+          break;
+        }
+      }
+    }
+  }
+/*
+  #
+  # assemble the line in requested order: "asc" | "desc"
+  #
+ */
+  if (i == minrow) {
+    newTableString = newtable[i];
+  }
+  else {
+    if (order == "asc") {
+      newTableString = newTableString + rowsep + newtable[i];
+    }
+    if (order == "desc") {
+      newTableString = newtable[i] + rowsep + newTableString;
+    }
+  }
+}
+//# STORE RESULTS
+scriptletResult = newTableString;
+scriptletResponse = "success";</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="231b007e-0052-42db-8628-e55b4335cfcf">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e066a4c7-acb6-4e54-9fb9-7173d519982d">
+    <annotation/>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0e326694-8b5f-47e2-ad93-d21a207d930d">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="42059154-198c-43d6-bb4c-0a0f7df84d61">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="dc6c2b59-7d9d-444e-a64e-01b0acfb969c">
+  <descriptionCdata>dc6c2b59-7d9d-444e-a64e-01b0acfb969c.04dc87e1-cda1-45f7-869d-0a33cc98b244.prompt=Input XML\:
+dc6c2b59-7d9d-444e-a64e-01b0acfb969c.d60b1f7d-e668-45d4-b52e-5eab66ca5ae8.prompt=Input format\:
+dc6c2b59-7d9d-444e-a64e-01b0acfb969c.description=&lt;pre&gt;\nConverts the XML from WMIQuery to another format.  \n\nNOTE\: currently text and csv\n\nInput Parameters\:\nxml - the xml to transform\nformat - (text, csv) the format to transform the xml too\n\nResponses\:\nsuccess - xml formatted properly\nfailure - unable to format xml\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>dc6c2b59-7d9d-444e-a64e-01b0acfb969c.description</annotation>
+  <name>WMI Query Results Transformer</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="04dc87e1-cda1-45f7-869d-0a33cc98b244">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xml</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc6c2b59-7d9d-444e-a64e-01b0acfb969c.04dc87e1-cda1-45f7-869d-0a33cc98b244.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d60b1f7d-e668-45d4-b52e-5eab66ca5ae8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>format</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc6c2b59-7d9d-444e-a64e-01b0acfb969c.d60b1f7d-e668-45d4-b52e-5eab66ca5ae8.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>0ecd4f29-bc49-48b4-8733-9cf89fa475b9</refId>
+        <refName>WMI Query Format</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="ba5a1f44-bef6-4449-bf50-d0a5601718c8">
+    <annotation/>
+    <name>Operation:WMI Query Results Transformer (dc6c2b59-7d9d-444e-a64e-01b0acfb969c)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="ebd29d4d-2292-46e2-b46f-2bab9620341e">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="933cdb70-b924-44cb-84f9-5fd379ea4331">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="cba67238-390a-48ac-96c6-92d8f01088f4">
+    <baseIcon>windows_server.png</baseIcon>
+    <basePath>Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="f872f028-9f5a-4103-bdfa-348fe808dc34">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Utilities/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Windows.WMIQueryFormat</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

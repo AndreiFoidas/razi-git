@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c3e5302e-029f-41a5-b848-3a133fb794b3">
+  <descriptionCdata>c3e5302e-029f-41a5-b848-3a133fb794b3.8e2a6cbb-dba1-4182-8b9f-831de5641250.prompt=Enter port\:
+c3e5302e-029f-41a5-b848-3a133fb794b3.description=\n&lt;pre&gt;\nGenerates a CSV of properties from an LDP object.\n\nInput Parameters\:\nHost - The host to terminate a process on.\nUser - username for host.\nPassword - password for username.\nDN - The LDAP object to query.\nuseADAuth - add this input and set to false if using a non AD LDAP server. If false, uses ServerBind instead of secure NTLM based bind.\nPort - specify the port in case it is not the default one, or it is not specified in the host path\n\nResponses\:\nfailure\t\t\t- the operation failed.\nsuccess\t\t\t- The operation succeeded.\n\nReturns\:\nA CSV of the properties.\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>c3e5302e-029f-41a5-b848-3a133fb794b3.description</annotation>
+  <name>Get LDAP Properties</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c2aa3751-0868-4f94-9e0c-8c1eba4a58bc">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bbe2862d-477b-479e-b1a2-7870f9c7b7b8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="48a17ed5-e496-4d3f-9298-91fe4a3311b5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>User</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6b701e6b-df1f-4159-9922-20c58d1a680b">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8e2a6cbb-dba1-4182-8b9f-831de5641250">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c3e5302e-029f-41a5-b848-3a133fb794b3.8e2a6cbb-dba1-4182-8b9f-831de5641250.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="d8efaa6e-37ea-4407-bc67-b6da7c739178">
+    <annotation/>
+    <name>Operation:Get LDAP Properties (c3e5302e-029f-41a5-b848-3a133fb794b3)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="63c66f31-ae82-46da-8a8f-d5d8d4994226">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c696d5b5-b3f2-417f-905b-f60312797207">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0bf1feb9-2bdb-4a66-aa9f-6b821071ed78">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="be76996c-148b-4374-a9e7-6e0dc949813c">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="ddf1f649-d81a-4fc1-8272-61b49284b1ed">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0430fc6a-dadd-49b6-a068-357d9e661c9f">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="8e2d667b-e356-4f55-81bf-a089cd0bb44c">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="21cc709f-f525-4b7e-a333-2c13207ee33c">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d22b2d23-1cc3-424e-93b3-6ffb94858c1e">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>5da01a09-de4f-4fe2-b5bf-b89749db2e16</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

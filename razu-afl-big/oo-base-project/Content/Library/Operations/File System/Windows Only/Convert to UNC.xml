@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="a35d4010-e96d-47e4-8ad7-75cd8d719d48">
+  <descriptionCdata>a35d4010-e96d-47e4-8ad7-75cd8d719d48.05d474e5-a3c0-4fd2-9530-a2e5e187f346.description=Converts a path and host into a unc path with scriptlet.
+a35d4010-e96d-47e4-8ad7-75cd8d719d48.description=&lt;pre&gt;\nConverts a path and host into a unc path.\n\nInputs\:\n    host - The host you want to access the path on.\nExamples\: fe80\:\:2cac\:efaf\:1c0c\:21cc, 127.0.0.01, myvm.mydomain.com.\n    path - The path to access on host. \nExample\: c\:\\temp.\n\nResults\:\n    uncPath - The unc path to the specified path on the given host, its existence is not checked. IPv6 literals will be converted to windows literal format.\nExample\: \\\\fe80--2cac-efaf-1c0c-21cc.ipv6-literal.net\\c$\\temp, \\\\127.0.0.1\\c$\\temp.\n\nResponses\:\n    success - UNC path assembled successfully.\n    failure - Something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>a35d4010-e96d-47e4-8ad7-75cd8d719d48.description</annotation>
+  <name>Convert to UNC</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4cdd8b77-bc7f-44fb-bb44-b2dc7fcc8da4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>path</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="80a93c06-f30d-48b0-b4f3-bbc65fd68837">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="22bb3136-8a60-4045-8e72-139b6c81d4cc">
+    <annotation/>
+    <name>Operation Convert to UNC (a35d4010-e96d-47e4-8ad7-75cd8d719d48)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="f335ae79-9f5d-4b39-a9d2-36c45c5520fa">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="88af0ef8-83f0-43a5-9ff0-10fa77ab00d1">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="9a36acd1-45be-47c2-8a03-3a64c343a829">
+      <annotation/>
+      <name>uncPath</name>
+      <fieldName>uncPath</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="ae5b02db-ce19-4b45-9c0f-8fb8ab064165">
+    <annotation/>
+    <name>uncPath</name>
+    <fieldName>uncPath</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="5b1a79a9-c46a-4abc-9e13-3cd3ff7c7049">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="05d474e5-a3c0-4fd2-9530-a2e5e187f346">
+      <annotation>a35d4010-e96d-47e4-8ad7-75cd8d719d48.05d474e5-a3c0-4fd2-9530-a2e5e187f346.description</annotation>
+      <name>Create UNC path</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <iconSpec id="36f39b59-0e8f-46b0-9334-1e9002c10033">
+        <baseIcon>display_report.png</baseIcon>
+        <basePath>Utilities/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="797f0d7f-bad1-4c78-a456-bf6641910962">
+        <annotation/>
+        <name>Step Create UNC path in Flow Convert to UNC (05d474e5-a3c0-4fd2-9530-a2e5e187f346)</name>
+        <script>function getDotNetIPV6Literal(ipv6Host) {
+	dotNetHost = replaceAll(":", "-", ipv6Host);
+	
+	// ipv6 scoped addresses
+	if (dotNetHost.indexOf("%") != -1) {
+		dotNetHost = dotNetHost.replace("%", "s");
+	}
+	dotNetHost += ".ipv6-literal.net";
+	return dotNetHost;
+}
+
+function isIPV6Literal(host) {
+	if (host == null || host.length == 0 || host.indexOf(":") == -1) {
+	   return "false";
+	}
+	if (host.indexOf(":") == host.lastIndexOf(":")) {
+	   return "false";
+	}
+	return "true";
+} 
+
+function getPathInUNCFormat(path) {
+	return path.replace(":","$");
+}
+
+function replaceAll(find, replace, str) {
+  while( str.indexOf(find) &gt; -1)
+      {
+        str = str.replace(find, replace);
+      }
+      return str;
+}
+
+function getUNCPath(aHost, aPath) {
+	var host;
+	if(isIPV6Literal(aHost).equals("true")) {
+		host = getDotNetIPV6Literal(aHost);
+	}
+	else {
+		host = aHost;
+	}	
+	var path = getPathInUNCFormat(aPath);
+	return "\\\\" + host + "\\" + path; 
+}
+
+try {
+	//validate inputs
+	if ("undefined" == typeof host) {
+	        myHost = "";
+	    }
+	if ("undefined" == typeof path) {
+	    	        path = "";
+	    	    }	
+	//read inputs
+	myHost = host;
+	myPath = path;
+	var result = getUNCPath(myHost, myPath);
+	scriptletResult = result;
+	scriptletResponse = "success"; 
+	scriptletRawResult['returnCode'] = "0";
+	scriptletContext.putGlobal('returnCode', '0');
+	} catch (e) {
+	   scriptletResponse = "failure";
+	   scriptletRawResult['returnCode'] = "1";
+	   scriptletContext.putGlobal('returnCode', '1');
+	   scriptletResult = "" + e;
+	   scriptletContext.put("FailureMessage", "" + e);
+}</script>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <staticBinding id="ed47eeae-6c67-4a28-a5b5-ef508f7d03e0">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>path</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="91c368f7-3235-481d-a54e-3e584eeaa461">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="67645c6c-3d3d-4723-b7a9-e75b969f8ecb">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>bc606aa5-efa2-47a3-a786-a8847b6dfd74</refId>
+          </destination>
+          <source>
+            <refId>05d474e5-a3c0-4fd2-9530-a2e5e187f346</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>34.0</y>
+            </point>
+            <point>
+              <x>220.0</x>
+              <y>186.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="bcf9e38c-9d06-48f6-8370-c5aa780103bc">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>1033079a-bb34-4ee0-b4c8-859492287d15</refId>
+          </destination>
+          <source>
+            <refId>05d474e5-a3c0-4fd2-9530-a2e5e187f346</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>99.0</y>
+            </point>
+            <point>
+              <x>315.0</x>
+              <y>103.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>e46b91b4-6637-4b3d-883a-e86436d9eb3a</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="1033079a-bb34-4ee0-b4c8-859492287d15">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>131.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <resultBinding id="a1bee501-1885-4907-8e8d-d14c8810c1f7">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>uncPath</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+        </resultBinding>
+      </bindings>
+      <transitions>
+        <transition id="dd4085b2-c486-4c2f-b0ae-a6c2de04f5e1">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>1033079a-bb34-4ee0-b4c8-859492287d15</refId>
+          </destination>
+          <source>
+            <refId>1033079a-bb34-4ee0-b4c8-859492287d15</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments>
+        <flowVariableAssignment id="a3964ccd-39ee-4495-a4b9-26138b07323c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>uncPath</contextKey>
+          <expression id="c72fee79-788d-4888-a4d0-977e9dfaad5f">
+            <annotation/>
+            <name>Input: uncPath</name>
+            <fieldName>uncPath</fieldName>
+            <sourceType>INPUT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+    </returnStep>
+    <returnStep id="bc606aa5-efa2-47a3-a786-a8847b6dfd74">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>119.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="f6ba7517-2c62-42b2-ad1e-41ce641ce0bb">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>bc606aa5-efa2-47a3-a786-a8847b6dfd74</refId>
+          </destination>
+          <source>
+            <refId>bc606aa5-efa2-47a3-a786-a8847b6dfd74</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>05d474e5-a3c0-4fd2-9530-a2e5e187f346</startSteps>
+</flow>

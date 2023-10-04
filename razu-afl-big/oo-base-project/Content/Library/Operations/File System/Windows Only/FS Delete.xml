@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="fb4b658f-eb24-4307-a1f4-34711c3ce673">
+  <descriptionCdata>fb4b658f-eb24-4307-a1f4-34711c3ce673.5c4a6e36-b929-4f91-a4cc-5336d7ac28d4.prompt=FileName\:
+fb4b658f-eb24-4307-a1f4-34711c3ce673.cb40b69d-5eb9-47f6-8483-ce5188fb779f.prompt=Alternate Credentials - UserName\:
+fb4b658f-eb24-4307-a1f4-34711c3ce673.description=&lt;pre&gt;Deletes the file or directory specified.\n\nInput Parameters\:\nsource - full path to file/directory to be removed (can be a UNC path)\nuser - Username to use for thread impersonation on the RAS host while deleting.\npassword - Password for the user.\n\nResponses\:\nsuccess - The specified path was successfuly removed.\nfailure - Unable to remove file/directory.\n&lt;/pre&gt;
+fb4b658f-eb24-4307-a1f4-34711c3ce673.edab42fb-8476-4c3e-bf6f-4a76e7d4eb56.prompt=Alternate Credentials - Password\:
+</descriptionCdata>
+  <annotation>fb4b658f-eb24-4307-a1f4-34711c3ce673.description</annotation>
+  <name>FS Delete</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="5c4a6e36-b929-4f91-a4cc-5336d7ac28d4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fb4b658f-eb24-4307-a1f4-34711c3ce673.5c4a6e36-b929-4f91-a4cc-5336d7ac28d4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cb40b69d-5eb9-47f6-8483-ce5188fb779f">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fb4b658f-eb24-4307-a1f4-34711c3ce673.cb40b69d-5eb9-47f6-8483-ce5188fb779f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="edab42fb-8476-4c3e-bf6f-4a76e7d4eb56">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fb4b658f-eb24-4307-a1f4-34711c3ce673.edab42fb-8476-4c3e-bf6f-4a76e7d4eb56.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="c02470ae-9de3-4cae-b0b3-5dc4e1d245c9">
+    <annotation/>
+    <name>Operation:FS Delete (fb4b658f-eb24-4307-a1f4-34711c3ce673)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="dd316ea8-bc8a-4f5f-ab5e-bb79019e7fda">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="d9b02301-7e0e-41f2-948d-0047dad08b00">
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="a1e3f2f1-5013-415d-aa85-c7abafda6cb0">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="269386ad-41b0-43e7-afa0-3d35b01d58d4">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="00521236-2ef4-4e3b-879d-fbcbfa089166">
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="34c354c2-d81e-4e1b-9d5a-d2ca44310b14">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="3e4b1616-30d4-4c47-a6ff-ce28eba894a5">
+    <annotation/>
+    <name/>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0f055b27-b39b-4dd1-b7d3-3da1ad230a2a">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="1a4e981a-9445-41a8-8c84-69490008ec69">
+        <baseIcon>delete.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_FileSystem.FSDelete</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

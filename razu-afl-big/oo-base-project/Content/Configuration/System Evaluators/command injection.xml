@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptletEvaluator id="1ab71378-77a1-48ca-bb23-28c17c3df53d">
+  <descriptionCdata><![CDATA[1ab71378-77a1-48ca-bb23-28c17c3df53d.description=This evaluator checks if a given input contains a character that can be used for commands injection.\nRemoving this evaluator from its corresponding input which allows user provided data, makes the flow execution vulnerable to the command injection attack, that is allowing a malicious user to execute potentially dangerous commands on the host operating system.
+]]></descriptionCdata>
+  <annotation>1ab71378-77a1-48ca-bb23-28c17c3df53d.description</annotation>
+  <name>command injection</name>
+  <scriptlet id="b14d17dd-7a17-4783-88d5-97f72a36fb16">
+    <annotation></annotation>
+    <name>EvaluatorScriptlet</name>
+    <script>if(scriptletInput.length &gt; 0) {
+	var re=/^[?!@./#%^*()_=~+{}\w\s]*$/;
+	if(re.test(scriptletInput)) {
+	  matchRanges.setMatches(true);
+    }
+}
+
+matchRanges.addRange(0,scriptletInput.length);</script>
+    <type>RHINO</type>
+  </scriptlet>
+</scriptletEvaluator>

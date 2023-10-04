@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="d853ab0b-9ecb-4d21-870b-6de470d5cc2f">
+  <descriptionCdata>d853ab0b-9ecb-4d21-870b-6de470d5cc2f.description=Remove an element from a JSON array. All elements from the right of the element which are removed will be shifted one position to the left. \n\nInputs\:\n    array - String representation of a JSON array. Arrays in JSON are comma separated lists of objects, enclosed in square brackets ( [ ] ). A normal OO list is NOT a JSON array.\nExamples\: [{"one"\:1, "two"\:2}, 3, "four"]\n    index - The index of the element to remove from the array. The array index starts from 0 (the first item in the array). If the value is negative then it will remove the item starting from right to left (-1 is the index of the last item in the array).\nValid values\: -n, -n+1, ..., -1, 0, 1, ..., n-1 (for an array with n elements)\n\nResults\:\n    returnResult - This is the primary output and contains the new JSON array with the requested element removed. If the operation failed, this field will contain an error message.\n    exception - The exception message if the operation goes to failure.\n    Result - This output field contains the value from the "returnResult" field. \n\nResponses\:\n    success - The operation completed successfully, as stated in the description.\n    failure - There was some error in iterating through the list and the "returnResult" output will contain information about the error. This will occur if the input array is not a valid JavaScript array. You may wish to use a tool such as http\://www.jsonlint.com/ to help diagnose problems with JavaScript Object Notation.
+</descriptionCdata>
+  <annotation>d853ab0b-9ecb-4d21-870b-6de470d5cc2f.description</annotation>
+  <name>Remove Array Entry</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d181d220-fecd-4ef4-9211-acdfde3c56d8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="639aa368-91b5-4357-9645-354dca8e5fe7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>index</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="5c0692ee-672f-4dc3-8069-17029f069354">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="afa2906b-ef6a-41aa-8294-630a597dbe3f">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="26695ddd-3af7-4d36-b67d-d3efba530f59">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="cc31efa2-5cc6-4eaf-aa27-0b9ccdc81ea9">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="7f13524a-dbb5-43af-a104-2ac330cb4132">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="e3b79ae8-c8d6-4bbf-aea6-2e55df33eebc">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c2146bb6-2c66-42c2-a2cf-69004c90d78a">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="94711ed7-6425-413a-84d4-8b6836a5ba58">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Remove Array Entry</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

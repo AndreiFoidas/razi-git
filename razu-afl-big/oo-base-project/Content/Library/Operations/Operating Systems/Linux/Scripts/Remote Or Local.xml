@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="642cb1a8-231d-4cff-9c53-ddbd99221f5b">
+  <descriptionCdata>642cb1a8-231d-4cff-9c53-ddbd99221f5b.b2408770-a8ea-41a2-934f-1574d8b0a1fe.prompt=Copy script file from Remote Or Local host
+642cb1a8-231d-4cff-9c53-ddbd99221f5b.description=&lt;pre&gt;Prompt users to select script file host, either remote or local machine\n\nInputs\: \n decisionValue- remote or local choice\n remote - the message text for the remote choice\n local - the message text for the local choice\n\nResponses\:\n remote \u2013 user chooses remote machine  \n local -  user chooses local machine\n\nResult\:\n User selected option either Remote or local machine \n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>642cb1a8-231d-4cff-9c53-ddbd99221f5b.description</annotation>
+  <name>Remote Or Local</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b2408770-a8ea-41a2-934f-1574d8b0a1fe">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>decisionValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>642cb1a8-231d-4cff-9c53-ddbd99221f5b.b2408770-a8ea-41a2-934f-1574d8b0a1fe.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>e94aa364-b27b-441e-9617-c44fe7d42a7f</refId>
+        <refName>Remote Or Local</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a14c2d5b-3b54-49b7-b100-a3d46e12c443">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>remote</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>remote</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="6345c9f4-7178-4036-a49f-2444d117b607">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>local</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>local</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="6577f270-12ea-46de-ba54-a0af7e5ce2a5">
+    <annotation/>
+    <name>Operation Remote Or Local (642cb1a8-231d-4cff-9c53-ddbd99221f5b)</name>
+    <script>scriptletResponse = "local";
+
+answerString = decisionValue;
+
+if (answerString.equalsIgnoreCase(remote))
+{
+  scriptletResponse = "remote";
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="29fc97d3-7f8a-4d06-8436-d2171d4b369a">
+      <annotation/>
+      <name>remote</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="b55004ce-fd20-49ec-a225-4993bd229c07">
+      <annotation/>
+      <name>local</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ac1165e4-9852-418a-9faf-1da449e98d06">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6872c706-1e6b-41d3-9e08-0e331ab82075">
+    <baseIcon>window_dialog.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

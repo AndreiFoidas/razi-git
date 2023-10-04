@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="a67eb24e-a478-46ca-8e75-a01682e9c0be">
+  <descriptionCdata>a67eb24e-a478-46ca-8e75-a01682e9c0be.14c82341-75cf-488e-98cd-36f5810364c2.prompt=Username\:
+a67eb24e-a478-46ca-8e75-a01682e9c0be.22db9902-6641-45d9-9398-bb96fe02cdbd.prompt=Service name\:
+a67eb24e-a478-46ca-8e75-a01682e9c0be.672fc793-1078-46b7-9408-002e2064fdf3.prompt=Host\:
+a67eb24e-a478-46ca-8e75-a01682e9c0be.d4129129-70ab-424b-9b39-e163284c5e13.prompt=Password\:
+a67eb24e-a478-46ca-8e75-a01682e9c0be.description=&lt;pre&gt;\nReturns a list of Windows services that the given service depends on.\n\nInputs\:\nhost \t- Hostname or IP address of the target computer.\nusername \t- Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword \t- Password of the user.\nserviceName - Name of the service.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nA list of services that the given service depends on.\n\nExtra Results\:\nexception \t- The error message if something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>a67eb24e-a478-46ca-8e75-a01682e9c0be.description</annotation>
+  <name>Get Service Dependencies</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="672fc793-1078-46b7-9408-002e2064fdf3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a67eb24e-a478-46ca-8e75-a01682e9c0be.672fc793-1078-46b7-9408-002e2064fdf3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="14c82341-75cf-488e-98cd-36f5810364c2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a67eb24e-a478-46ca-8e75-a01682e9c0be.14c82341-75cf-488e-98cd-36f5810364c2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d4129129-70ab-424b-9b39-e163284c5e13">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a67eb24e-a478-46ca-8e75-a01682e9c0be.d4129129-70ab-424b-9b39-e163284c5e13.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="22db9902-6641-45d9-9398-bb96fe02cdbd">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>serviceName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a67eb24e-a478-46ca-8e75-a01682e9c0be.22db9902-6641-45d9-9398-bb96fe02cdbd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="0d728c9b-dd33-439d-a0f9-f37648f57696">
+    <annotation/>
+    <name>Operation:Get Service Dependencies (a67eb24e-a478-46ca-8e75-a01682e9c0be)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="4e44c298-fda3-44be-a680-b5d3cf5562b0">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="da95081c-027c-4d6c-9de2-7e2e67fdac17">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="fd6fe3e9-a1a7-442b-b222-0a5ecb93e8c0">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="a574e507-00d7-4dd7-8863-27280676777b">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="433e63b2-cbd8-47d9-909c-ee5e19601918">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="12a451f3-8f77-4c78-acc1-6da0f8f7d9ea">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="997b21b2-4c10-4c93-9ce0-bab57dc29df2">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e1aa8772-497b-4a31-84b5-6aac22005c50">
+    <baseIcon>windows_service.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e7de59cd-7e5b-41b1-ab6a-70d2d252a56d">
+        <baseIcon>receive.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.GetServiceDependenties</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

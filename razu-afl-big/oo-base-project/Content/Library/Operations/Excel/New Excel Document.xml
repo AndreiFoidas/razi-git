@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="9d21ca68-7d03-4fb3-9478-03956532bf6f">
+  <descriptionCdata>9d21ca68-7d03-4fb3-9478-03956532bf6f.9ec347d6-c06b-4e60-b614-0fb2bd586499.prompt=Worksheet Names\:
+9d21ca68-7d03-4fb3-9478-03956532bf6f.aa67241e-5664-4c9c-8a39-7ae07fa04eb7.prompt=Delimiter for sheet names\:
+9d21ca68-7d03-4fb3-9478-03956532bf6f.acfe605f-c181-4def-a25d-64f5e25586b0.prompt=Excel File Name\:
+9d21ca68-7d03-4fb3-9478-03956532bf6f.description=&lt;pre&gt;\nCreates a blank Excel spreadsheet document. The format of the document (XLS or XLSX) depends on the extension used by the file.\n\nInputs\:\n    excelFileName - The absolute path to the new Excel document.\nExamples\: c\:\\temp\\test.xls\n    worksheetNames - A delimited list of names that will be created as worksheets in the document. \nDefault value\: Sheet1,Sheet2,Sheet3.\n    delimiter - The character used to delimit worksheet names.\nDefault value\: comma (,)\n\nResult\:\n    returnResult - This is the primary output. Returns a success or failure message.\n\nResponses\:\n    success - A new Excel document is created successfully.\n    failure - Failed to create a new Excel document.\n\nNotes\:\nXLSM format is not supported.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>9d21ca68-7d03-4fb3-9478-03956532bf6f.description</annotation>
+  <name>New Excel Document</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="acfe605f-c181-4def-a25d-64f5e25586b0">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>excelFileName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9d21ca68-7d03-4fb3-9478-03956532bf6f.acfe605f-c181-4def-a25d-64f5e25586b0.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9ec347d6-c06b-4e60-b614-0fb2bd586499">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>worksheetNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9d21ca68-7d03-4fb3-9478-03956532bf6f.9ec347d6-c06b-4e60-b614-0fb2bd586499.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aa67241e-5664-4c9c-8a39-7ae07fa04eb7">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9d21ca68-7d03-4fb3-9478-03956532bf6f.aa67241e-5664-4c9c-8a39-7ae07fa04eb7.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="096a2385-a3a5-4f23-b3a0-397bc77c9c60">
+    <annotation/>
+    <name>Operation:New Excel Document (9d21ca68-7d03-4fb3-9478-03956532bf6f)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7e147797-c4c1-4d1c-aca1-1318b50ea977">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="c6d56e9c-b07f-4fd5-a26a-370a709f14bf">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ba80fa89-2d16-4af2-bd7c-4e7c70fdaf3d">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="731ac554-1a48-483f-b3be-e6b5c64b75f7">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="10534fc8-8368-4760-87aa-5ac090805d52">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="b10175e0-f73a-4743-98e1-b36e4f7ac2cb">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="9b286a0a-8ca4-410b-8f81-33238f556782">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="97d33711-6cee-4714-8694-698f1f3c6b0d">
+    <baseIcon>sql_query.png</baseIcon>
+    <basePath>/Databases/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-excel-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.excel.ops.NewExcelDocument</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

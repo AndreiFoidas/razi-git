@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="f07ca9a7-2d5c-4e28-b39a-5276665dd418">
+  <descriptionCdata>f07ca9a7-2d5c-4e28-b39a-5276665dd418.23e8b89a-abe7-405a-be3b-30167c92c2b4.prompt=Group Description\:
+f07ca9a7-2d5c-4e28-b39a-5276665dd418.a1e5695e-773c-413f-aed5-5e9c48180d15.prompt=Group Name\:
+f07ca9a7-2d5c-4e28-b39a-5276665dd418.description=&lt;pre&gt;\nCreates a user group in the local Windows machine.\n\nInputs\:\ngroupName \t\t- Name of the new group.\ngroupDescription \t- Description for the new group.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>f07ca9a7-2d5c-4e28-b39a-5276665dd418.description</annotation>
+  <name>Create Local Group</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a1e5695e-773c-413f-aed5-5e9c48180d15">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>groupName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f07ca9a7-2d5c-4e28-b39a-5276665dd418.a1e5695e-773c-413f-aed5-5e9c48180d15.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="23e8b89a-abe7-405a-be3b-30167c92c2b4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>groupDescription</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f07ca9a7-2d5c-4e28-b39a-5276665dd418.23e8b89a-abe7-405a-be3b-30167c92c2b4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="b4590086-c6f6-4ff2-8d5e-7cdf8c95cfd0">
+    <annotation/>
+    <name>Operation:Create Local Group (f07ca9a7-2d5c-4e28-b39a-5276665dd418)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d3e868b4-8cea-43fc-ba8b-d92f492740b5">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="834c59cd-40bd-4089-b5d8-ee0a96487f1e">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e1df8b13-223b-43d1-a96c-c7dadc063b48">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="cf7fdabe-379d-4c7e-883a-908dc56e3abd">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="1c0b27a8-dc29-400e-95c6-ee32e3a06e0d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="f6ab69d8-da16-4dfb-87a0-02f177729ebd">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f9457235-171f-4dc1-922a-deeebf8282a6">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="940c7dc5-51a6-435b-9139-f99a50cb8472">
+    <baseIcon>group.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="2811cf8d-fcab-440c-b62d-318224191c94">
+        <baseIcon>add.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.CreateLocalGroup</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="792f614c-97ac-42ad-afff-852f5c7a3995">
+  <descriptionCdata>792f614c-97ac-42ad-afff-852f5c7a3995.4008cbe4-bcc1-45ec-b5a4-fe0b0c78db39.prompt=Host\:
+792f614c-97ac-42ad-afff-852f5c7a3995.a43de383-490f-40a4-8f8e-a91bb0214510.prompt=Password\:
+792f614c-97ac-42ad-afff-852f5c7a3995.b40d790c-a7aa-4496-aec4-f0342dede9ca.prompt=Username\:
+792f614c-97ac-42ad-afff-852f5c7a3995.description=&lt;pre&gt;\nReturns the number of Windows services installed on the host computer.\n\nInputs\:\nhost\t - Hostname or IP address of the target computer.\nusername\t - Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword\t - Password of the user.\n\nResponses\:\nsuccess\t - Operation completed successfully.\nfailure\t - Something went wrong.\n\nResult\:\nNumber of services.\n\nExtra Results\:\nreturnCode \t- Operation return code.\nexception \t- If something went wrong, the error message.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>792f614c-97ac-42ad-afff-852f5c7a3995.description</annotation>
+  <name>Number of Services</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4008cbe4-bcc1-45ec-b5a4-fe0b0c78db39">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>792f614c-97ac-42ad-afff-852f5c7a3995.4008cbe4-bcc1-45ec-b5a4-fe0b0c78db39.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b40d790c-a7aa-4496-aec4-f0342dede9ca">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>792f614c-97ac-42ad-afff-852f5c7a3995.b40d790c-a7aa-4496-aec4-f0342dede9ca.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a43de383-490f-40a4-8f8e-a91bb0214510">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>792f614c-97ac-42ad-afff-852f5c7a3995.a43de383-490f-40a4-8f8e-a91bb0214510.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="c8774e99-a069-4b6e-9f48-8e7b3d8ac54a">
+    <annotation/>
+    <name>Operation:Number of Services (792f614c-97ac-42ad-afff-852f5c7a3995)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="a594f4f4-0529-439d-b15c-14c91a8ed192">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="daf47939-6550-462a-8457-6859b6bf089d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="8ca2fa1b-36fd-4024-8e93-cbb306da8d48">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="f52e43d2-a767-4eca-8922-2ef3a02afab4">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="9234a00e-cd86-4905-8762-aab7809ebf82">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c0ed199c-19f5-42d6-a385-7b152ac1aa18">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="352cf77f-3b9c-4b14-b9ca-4a40b98e9840">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="d08e04d5-7034-4c57-8524-2d6d8013b76a">
+    <baseIcon>windows_service.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="a4f6cc24-c944-4a9c-a713-ae4d3fc5ff3f">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.NumberOfServices</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="b68189c5-f83f-4846-a993-83b7cedaf0d2">
+  <descriptionCdata>b68189c5-f83f-4846-a993-83b7cedaf0d2.description=&lt;pre&gt;This operation gets the number of active users logged in to a windows host, and their account names.\n\nInputs\:\nhost - the host to get the users on\ndelimiter - A delimiter to put between users that are active.\n\nreturns\:\nThe number of users currently logged on to host (includes the account used to check this number).\n\nextra results\:\nusers - The usernames of all users logged into host.\nterminalUsers - The usernames of all users logged into the host via terminal services.\ninactiveUsers - The usernames of all users logged into the host but not currently connected.\nlocalUsers - The usernames of all users logged into host locally.\n\nResponses\:\nsuccess - The operation succeeded.\nfailure - an error occurred.\n\nNOTE\: This operation runs the windows command qwinsta on the Central machine. Thus, this operation requires a Windows Central.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>b68189c5-f83f-4846-a993-83b7cedaf0d2.description</annotation>
+  <name>Get Active Users</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="141a574e-3fad-4786-b1d8-5cd1aaa5ba6b">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6383075b-cc40-4d07-bf5f-b262c91392a0">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="1b1c0c3f-749e-4158-b2ed-5163d7c2c2af">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Environment</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3eac1453-32c7-4f86-bf3b-e8db683d87f6">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Command</inputSymbol>
+      <listDelimiter/>
+      <value>qwinsta</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="9dfd5faa-cf5a-4e15-a695-00fbf71224d6">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Working_Dir</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8cc2dac4-b18a-4eb2-8e51-fb462a2d4ee9">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Argument</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="4f2d8c61-74c5-4a31-895e-001ef2518725">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Arguments</inputSymbol>
+      <listDelimiter/>
+      <value>/server:${host}</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="77dc8c28-81cd-48f6-a990-aa878dc1d4eb">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Path</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="2d6beef9-2da9-45f4-b065-22815d7de502">
+    <annotation/>
+    <name>Operation:Get Active Users (b68189c5-f83f-4846-a993-83b7cedaf0d2)</name>
+    <script>// get the command output data
+data = scriptletRawResult['Output String'];
+
+// get the return code
+code = parseInt(scriptletRawResult['Code']);
+var localUsers = "";
+var terminalUsers = "";
+var inactiveUsers = "";
+
+// verify the command worked
+if (code == 0 &amp;&amp; data.toLowerCase().indexOf("no session exists for " + host.toLowerCase())) {
+	data = data.split("\r\n");
+	for (count = 1; count &lt; data.length;count++)
+		processLine(data[count]);
+	var users = ""+localUsers;
+	if (users != "" &amp;&amp; terminalUsers != "")
+		users += delimiter;
+	users += terminalUsers
+	if (users != "" &amp;&amp; inactiveUsers != "")
+		users += delimiter;
+	users += inactiveUsers;
+	st = new java.util.StringTokenizer(users, delimiter);
+	var total = ""+st.countTokens();
+	scriptletResult = total;
+	scriptletContext.put("users",users);
+	scriptletContext.put("terminalUsers",terminalUsers);
+	scriptletContext.put("inactiveUsers",inactiveUsers);
+	scriptletContext.put("localUsers",localUsers);
+	scriptletResponse = "success";
+}
+else
+{
+	scriptletResponse = "failure";
+}
+
+function processLine(line){
+	var matchdata = line.match(/^(\s|&gt;)([\w#\-]*)\s+(\w*)\s+(\d+)\s+(\w+)\s+(\w+).+/);
+	if (matchdata != null) {
+		var session_name = matchdata[2];
+		var username = matchdata[3];
+		var state = matchdata[5];
+		if (state.toLowerCase() =="listen" || state.toLowerCase() == "conn")
+			return;//remove terminal service and consoles that are not in use.
+		if (session_name.toLowerCase().substr(0,7) == "console" &amp;&amp; username != ""){
+			if (localUsers != "")
+				localUsers += delimiter;
+			localUsers += username;
+		}
+		else if (session_name.toLowerCase().substr(0,7) == "rdp-tcp" &amp;&amp; username != ""){
+			if (terminalUsers != "")
+				terminalUsers += delimiter;
+			terminalUsers += username;
+		}
+		else if (state.toLowerCase().substr(0,4) == "disc" &amp;&amp; username != ""){
+			if (inactiveUsers != "")
+				inactiveUsers += delimiter;
+			inactiveUsers += username;
+		}
+	}
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="46a24979-fe39-4530-b37c-319d2ea94cf8">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="bd329c61-764a-43f3-92fe-b734256574ac">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c933b16b-60b1-426f-b2f6-40edc6f1f42c">
+    <annotation/>
+    <name>Code</name>
+    <fieldName>Output String</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0ad72361-3c10-4d78-be27-1233d1109eab">
+    <baseIcon>user.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="2cde4c69-2eba-4b21-98f1-f27066b0e65e">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>77f849f5-ea91-437e-b8d2-c1f70038b181</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

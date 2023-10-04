@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="b4c1369e-6e01-47f8-b580-e401ee546514">
+  <descriptionCdata>b4c1369e-6e01-47f8-b580-e401ee546514.3fe71341-34bb-47c6-8515-e0c967409ebf.description=Takes a reference to XML (in the form of a String) and the specified XPath Query is run against the XML and the result returned. The World Wide Web Consortium (W3C) organization provides the XPath specification (http\://www.w3.org).\n\n&lt;pre&gt;\nInputs\:\nxml               \t- The XML (in the form of a String)\nxpathQuery \t- The XpathQuery that is wanted to be run.\ndelimiter\t- The delimiter used to separate values in the returnResult list. The default is a comma.\n\nResult Value\:\nreturnResult - The result of the operation. If multiple XPaths are defined then this will add the delimiter between each value. There is no final delimiter.\n&lt;/pre&gt;
+b4c1369e-6e01-47f8-b580-e401ee546514.81cd21f4-8d30-4e3c-a8c1-03532ebf5175.prompt=Enter a value for xpathQuery
+b4c1369e-6e01-47f8-b580-e401ee546514.ae81e307-980e-426e-87d3-34435542f1cf.prompt=Enter a value for xml
+b4c1369e-6e01-47f8-b580-e401ee546514.description=&lt;pre&gt;Takes a reference to XML (in the form of a String) and the specified XPath Query is run against the XML and the result returned. The World Wide Web Consortium (W3C) organization provides the XPath specification (http\://www.w3.org).\n\nInputs\:\nxml - The XML (in the form of a String)\n\nxpathQuery - The XPath Query that is wanted to be run. See Examples in Notes section below used for this Sample.\n\ndelimiter - The delimiter used to separate values in the returnResult list. The default is a comma.\n\nResults\:\nreturnResult - The result of the operation. If multiple XPaths are defined then this will add a comma between each value. There is no final comma.\n\nResponses\:\nsuccess - The XML query was returned successfully.\n\nfailure- Something went wrong.\n\nNotes\:\nExamples\:\nAt the time of authoring this flow the XML document used in these examples is as follows\:\n  &lt;?xml version\="1.0" encoding\="UTF-8"?&gt;\n  &lt;employees&gt;\n    &lt;employee id\="1"&gt;\n      &lt;name&gt;Mickey Mouse&lt;/name&gt;\n      &lt;jobDescription&gt;Chief&lt;/jobDescription&gt;\n      &lt;salary&gt;$100&lt;/salary&gt;\n      &lt;managerId/&gt;\n    &lt;/employee&gt;\n    &lt;employee id\="2"&gt;\n      &lt;name&gt;Donald Duck&lt;/name&gt;\n      &lt;jobDescription&gt;Lead Coder&lt;/jobDescription&gt;\n      &lt;salary&gt;$50&lt;/salary&gt;\n      &lt;managerId&gt;1&lt;/managerId&gt;\n    &lt;/employee&gt;\n    &lt;employee id\="3"&gt;\n      &lt;name&gt;Goofy&lt;/name&gt;\n      &lt;jobDescription&gt;tester&lt;/jobDescription&gt;\n      &lt;salary&gt;$50&lt;/salary&gt;\n      &lt;managerId&gt;1&lt;/managerId&gt;\n    &lt;/employee&gt;\n    &lt;employee id\="4"&gt;\n      &lt;name&gt;Pluto&lt;/name&gt;\n      &lt;jobDescription&gt;Coder - grade 1&lt;/jobDescription&gt;\n      &lt;salary&gt;$25&lt;/salary&gt;\n      &lt;managerId&gt;2&lt;/managerId&gt;\n    &lt;/employee&gt;\n  &lt;/employees&gt;\n\nGiven the XML document above, and the xpathQuery input below is set to return the attributes of employee's with ID of 3.\n/employees/employee[@id\="3"]/*[name()\="name" or name()\="jobDescription" or name()\="salary" or name()\="managerId"]/text()\n\nThe returnResults given the XML string and xpathQuery above is as follow\:\nGoofy,tester,$50,1\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>b4c1369e-6e01-47f8-b580-e401ee546514.description</annotation>
+  <name>Sample XPath Query</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="7679daa5-2f2f-489c-b931-85d74c79cb85">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xml</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;employees&gt;
+  &lt;employee id="1"&gt;
+    &lt;name&gt;Mickey Mouse&lt;/name&gt;
+    &lt;jobDescription&gt;Chief&lt;/jobDescription&gt;
+    &lt;salary&gt;$100&lt;/salary&gt;
+    &lt;managerId/&gt;
+  &lt;/employee&gt;
+  &lt;employee id="2"&gt;
+    &lt;name&gt;Donald Duck&lt;/name&gt;
+    &lt;jobDescription&gt;Lead Coder&lt;/jobDescription&gt;
+    &lt;salary&gt;$50&lt;/salary&gt;
+    &lt;managerId&gt;1&lt;/managerId&gt;
+  &lt;/employee&gt;
+  &lt;employee id="3"&gt;
+    &lt;name&gt;Goofy&lt;/name&gt;
+    &lt;jobDescription&gt;tester&lt;/jobDescription&gt;
+    &lt;salary&gt;$50&lt;/salary&gt;
+    &lt;managerId&gt;1&lt;/managerId&gt;
+  &lt;/employee&gt;
+  &lt;employee id="4"&gt;
+    &lt;name&gt;Pluto&lt;/name&gt;
+    &lt;jobDescription&gt;Coder - grade 1&lt;/jobDescription&gt;
+    &lt;salary&gt;$25&lt;/salary&gt;
+    &lt;managerId&gt;2&lt;/managerId&gt;
+  &lt;/employee&gt;
+&lt;/employees&gt;</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2bb39dcf-0bfb-4968-8686-bf83a1f88667">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xpathQuery</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>/employees/employee[@id="3"]/*[name()="name" or name()="jobDescription" or name()="salary" or name()="managerId"]/text()</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="483ad08d-ec27-4825-a1eb-e5642ea5cbce">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="aaa9c1ee-c943-4c91-af5f-5de16df3a54a">
+    <annotation/>
+    <name>Operation:Sample XPath Query (b4c1369e-6e01-47f8-b580-e401ee546514)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="5eedb506-01b2-4474-a8c6-7d9268a075a3">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="4d4c5115-3da8-466f-8c3d-ddadbd67137a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="689368e2-7fda-4e4d-8055-3a78e6d577f9">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4d7266a1-2984-4576-aa46-b9364959d601">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="3fe71341-34bb-47c6-8515-e0c967409ebf">
+      <annotation>b4c1369e-6e01-47f8-b580-e401ee546514.3fe71341-34bb-47c6-8515-e0c967409ebf.description</annotation>
+      <name>XPath Query</name>
+      <bounds>
+        <x>14.0</x>
+        <y>16.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="ae81e307-980e-426e-87d3-34435542f1cf">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>xml</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>b4c1369e-6e01-47f8-b580-e401ee546514.ae81e307-980e-426e-87d3-34435542f1cf.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="81cd21f4-8d30-4e3c-a8c1-03532ebf5175">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>xpathQuery</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>b4c1369e-6e01-47f8-b580-e401ee546514.81cd21f4-8d30-4e3c-a8c1-03532ebf5175.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="a56886f5-db57-45f2-97dc-e2fd85a53cbd">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>delimiter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt/>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="fd660bfa-5067-43cc-92e6-3ec25f736d1a">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2197e186-969a-4b9c-ad1f-d88bbfc9c457</refId>
+          </destination>
+          <source>
+            <refId>3fe71341-34bb-47c6-8515-e0c967409ebf</refId>
+          </source>
+          <positions>
+            <point>
+              <x>75.0</x>
+              <y>50.0</y>
+            </point>
+            <point>
+              <x>204.0</x>
+              <y>44.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>512.3818846816845</x>
+            <y>0.46071139548370316</y>
+          </labelPosition>
+        </transition>
+        <transition id="c179b6df-ccfd-4bec-9ffc-1d2a459f2d3d">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>485375b1-0726-46a4-b337-e6df5783afd1</refId>
+          </destination>
+          <source>
+            <refId>3fe71341-34bb-47c6-8515-e0c967409ebf</refId>
+          </source>
+          <positions>
+            <point>
+              <x>75.0</x>
+              <y>50.0</y>
+            </point>
+            <point>
+              <x>64.0</x>
+              <y>177.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>477.62211978180545</x>
+            <y>-0.5400030250184631</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>96d3702b-0a2c-437d-b389-c93e6b0d99d6</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="485375b1-0726-46a4-b337-e6df5783afd1">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>14.0</x>
+        <y>143.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="31625484-e025-4d40-9727-2a458f7bcbd6">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>485375b1-0726-46a4-b337-e6df5783afd1</refId>
+          </destination>
+          <source>
+            <refId>485375b1-0726-46a4-b337-e6df5783afd1</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="2197e186-969a-4b9c-ad1f-d88bbfc9c457">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>154.0</x>
+        <y>16.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="7bf1bc11-d5a9-4642-b204-1c754c2d73b2">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2197e186-969a-4b9c-ad1f-d88bbfc9c457</refId>
+          </destination>
+          <source>
+            <refId>2197e186-969a-4b9c-ad1f-d88bbfc9c457</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>3fe71341-34bb-47c6-8515-e0c967409ebf</startSteps>
+</flow>

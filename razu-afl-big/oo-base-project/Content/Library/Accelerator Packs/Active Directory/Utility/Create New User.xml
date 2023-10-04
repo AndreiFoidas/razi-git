@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc">
+  <descriptionCdata>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.0fd70f5c-c700-45c6-8af7-21dcd131d0d0.prompt=User Password\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.144e4bf5-e4d5-4aac-b257-5175d3dc87e0.prompt=AD password
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.186e3c4a-dfb2-4858-84f8-d70b4e2e02b3.description=&lt;pre&gt;\nCreates a new user in Active Directory.\n\nInput Parameters\:\n    host - Domain controller\n    OU - the Organizational Unit or Commnon Name to add the user to (for example, CN\=Users)\n    userFullName - full name of user (for example, Bob Smith)\n    userPassword - password for user\n    sAMAccountName - login account name (for example, bsmith)\n    altuser - user to connect to AD as\n    altpass - password to connect to AD as\n\nResponses\:\n    success - The operation completed as stated in the description\n    failure - The operation completed unsuccessfully\n\nExtra Results\:\n    userDN - Distinguished name of the newly created user\n&lt;/pre&gt;
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.1e84abac-7812-4072-9c8c-478844ab03f0.prompt=User sAMAccountName\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.2365be35-68da-48d8-b15e-61d24b009982.prompt=Domain\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.29dad6af-1de2-4f77-a7ef-3dcafede9acf.description=&lt;pre&gt;\nAdds a user to a group in Active Directory.\n\nInput Parameters\:\n    host - Domain controller\n    groupDN - Distinguished name of the group\n    userDN - Distinguished name of the user to add\n    altuser - User to use to connect to AD\n    altpass - Password to use to connect to AD\n\nResponses\:\n    success - The operation completed as stated in the description\n    failure - The operation completed unsuccessfully\n&lt;/pre&gt;
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.29dbf8d6-320e-4266-bf3d-08a963c596aa.description=&lt;pre&gt;\nFinds the primary domain controller for a domain via DNS lookup.\n\nInputs\:\n    domain - The name of the domain to find the domain controller for\n    dnsServer - The DNS server to query\n\nResponses\:\n    success - The operation completed as stated in the description\n    failure - The operation completed unsuccessfully\n\nReturns\:\nThe fully qualified host name of the PDC.\n&lt;/pre&gt;
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.349f8c96-61e3-42c1-9046-e8212d64dfc6.prompt=DNS Server\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.4f2ca38a-dba8-464e-ac5d-6419c62ac896.prompt=Enter a value for dnsServer
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.565be031-267f-4fd1-b592-6edd4e1e1a74.prompt=User Password
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.66fa97e8-99ca-42ec-b613-96078362b433.prompt=Host
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.69264cf2-3650-4228-b709-cabee5e40346.prompt=AD userName
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.83369716-8f7a-4f4e-aa00-0b089d91eb6d.prompt=User Full Name\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.86a355f3-9e46-45f8-912c-9f5e4b6748b0.prompt=GroupDN\n(CN\=groupName,CN\=Users,DC\=domain,DC\=com)
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.97cac4e2-caeb-4ceb-bd48-13e447c7526c.prompt=Organizational unit /Distinguished Name (ex\: CN\=Users)\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.a1d7adf6-ece0-40c3-8a06-348a8003a12a.prompt=User Full Name
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.aef2f119-c5d6-4166-9004-6a57392ca1c5.prompt=Enter a value for domain
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.b6232661-00a1-40e9-a457-5559c89059e6.prompt=GroupDN (ex\: CN\=groupName,CN\=Users,DC\=domain,DC\=com)\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.baf7fba1-7371-465e-9e2d-570910e41c05.prompt=Alternate Credentials - Password\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.d42051a3-17fc-427f-b069-a4eb24cca838.prompt=Host
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.description=&lt;pre&gt;\nFinds the primary domain controller for a domain via DNS lookup, creates a new user in Active Directory and adds the user to a group.\n\nInputs\:\n    altuser - Username to use when authenticating to the primary domain controller\n    altpass - Password for altuser\n    domain - Name of the domain to find the domain controller for (for example, domain.com)   \n    dnsServer - DNS server to query (for example, dnsServer.domain.com)\n    OU - The Organization Unit or Common Name to add the user to (for example, CN\=Users)\n    userFullName - Full name of user (for example, Bob Smith)\n    userPassword - Password for user. The value assigned to this input should respect the password restrictions imposed by AD.\n    sAMAccountName - Login account name (for example, bsmith)\n    groupDN - Distinguished name of the group to add the newly created user to (for example, CN\=groupName,CN\=Users,DC\=domain,DC\=com)\n\nResponses\:\n    success - The operation completed as stated in the description\n    failure - The operation completed unsuccessfully\n\nResults\:\n    userDN - The distinguished name of the newly created user\n&lt;/pre&gt;\n\n
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.df34264b-b964-484e-b1f4-0cfdfaddbb55.prompt=sAMAccountName
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.e22cd273-c68d-40c7-9c45-23ade536584e.prompt=Alternate Credentials - UserName\:
+ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.ff9f0421-7f46-4692-a1cf-d16f38501f57.prompt=Organizational unit /Distinguished Name (ex\: CN\=Users)
+</descriptionCdata>
+  <annotation>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.description</annotation>
+  <name>Create New User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="e22cd273-c68d-40c7-9c45-23ade536584e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altuser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.e22cd273-c68d-40c7-9c45-23ade536584e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="baf7fba1-7371-465e-9e2d-570910e41c05">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>altpass</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.baf7fba1-7371-465e-9e2d-570910e41c05.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2365be35-68da-48d8-b15e-61d24b009982">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>domain</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.2365be35-68da-48d8-b15e-61d24b009982.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="349f8c96-61e3-42c1-9046-e8212d64dfc6">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.349f8c96-61e3-42c1-9046-e8212d64dfc6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="97cac4e2-caeb-4ceb-bd48-13e447c7526c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.97cac4e2-caeb-4ceb-bd48-13e447c7526c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="83369716-8f7a-4f4e-aa00-0b089d91eb6d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userFullName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.83369716-8f7a-4f4e-aa00-0b089d91eb6d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0fd70f5c-c700-45c6-8af7-21dcd131d0d0">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.0fd70f5c-c700-45c6-8af7-21dcd131d0d0.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1e84abac-7812-4072-9c8c-478844ab03f0">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sAMAccountName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.1e84abac-7812-4072-9c8c-478844ab03f0.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b6232661-00a1-40e9-a457-5559c89059e6">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>groupDN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.b6232661-00a1-40e9-a457-5559c89059e6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="d8a7ea16-21a5-4e2f-8a3b-c14ddd921320">
+    <annotation/>
+    <name>Operation:Create New User (ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="fac96399-8ac4-4e40-823e-cc1f37437026">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="0bbbc87c-6db1-4ca5-8d99-8bf71221bc7a">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f6261003-99d4-4499-8d88-9f69f87792ab">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="abc3acfb-c342-4fd6-8f25-49823353f548">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="29dbf8d6-320e-4266-bf3d-08a963c596aa">
+      <annotation>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.29dbf8d6-320e-4266-bf3d-08a963c596aa.description</annotation>
+      <name>Query for PDC Emulator</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="aef2f119-c5d6-4166-9004-6a57392ca1c5">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>domain</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.aef2f119-c5d6-4166-9004-6a57392ca1c5.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="4f2ca38a-dba8-464e-ac5d-6419c62ac896">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>dnsServer</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.4f2ca38a-dba8-464e-ac5d-6419c62ac896.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="06221790-3e65-4541-bc26-3299432c0fa7">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a9631244-5a04-40e6-81dd-731bb311859e</refId>
+          </destination>
+          <source>
+            <refId>29dbf8d6-320e-4266-bf3d-08a963c596aa</refId>
+          </source>
+          <positions>
+            <point>
+              <x>248.76106194690266</x>
+              <y>85.0</y>
+            </point>
+            <point>
+              <x>134.7422680412371</x>
+              <y>235.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>518.8656326049095</x>
+            <y>0.3661620591519282</y>
+          </labelPosition>
+        </transition>
+        <transition id="fa0d11f7-11c2-4762-92a0-37a7bd340b26">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>186e3c4a-dfb2-4858-84f8-d70b4e2e02b3</refId>
+          </destination>
+          <source>
+            <refId>29dbf8d6-320e-4266-bf3d-08a963c596aa</refId>
+          </source>
+          <positions>
+            <point>
+              <x>270.0</x>
+              <y>85.0</y>
+            </point>
+            <point>
+              <x>270.0</x>
+              <y>165.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>490.01643105653187</x>
+            <y>-1.2165047250694299</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>9a372e30-c358-4c9b-9f95-34057eab0b5f</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="dd17d124-f7c5-4814-bc2f-dbc945082057">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>host</contextKey>
+          <expression id="ec0ed0a2-2673-429a-a56f-649bee7194a4">
+            <annotation/>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="29dad6af-1de2-4f77-a7ef-3dcafede9acf">
+      <annotation>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.29dad6af-1de2-4f77-a7ef-3dcafede9acf.description</annotation>
+      <name>ADAddUserToGroup</name>
+      <bounds>
+        <x>162.0</x>
+        <y>166.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="86a355f3-9e46-45f8-912c-9f5e4b6748b0">
+          <annotation/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>groupDN</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.86a355f3-9e46-45f8-912c-9f5e4b6748b0.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="0887f3ce-d093-424a-af1f-e3b168971706">
+          <annotation/>
+          <fromContextKey>userDN</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>userDN</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="66fa97e8-99ca-42ec-b613-96078362b433">
+          <annotation/>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.66fa97e8-99ca-42ec-b613-96078362b433.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="11272f88-77cc-4bbc-a369-bf79622dd348">
+          <annotation/>
+          <fromContextKey>altuser</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>altuser</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5ea8fb41-fcd0-4475-b620-ced701736144">
+          <annotation/>
+          <fromContextKey>altpass</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>false</isPersisted>
+          <inputSymbol>altpass</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="03641544-4e94-4b43-b5a0-14940ed7f6f1">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a9631244-5a04-40e6-81dd-731bb311859e</refId>
+          </destination>
+          <source>
+            <refId>29dad6af-1de2-4f77-a7ef-3dcafede9acf</refId>
+          </source>
+          <positions>
+            <point>
+              <x>241.0</x>
+              <y>307.625</y>
+            </point>
+            <point>
+              <x>141.0</x>
+              <y>276.375</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>529.4185252064814</x>
+            <y>0.9612623064665944</y>
+          </labelPosition>
+        </transition>
+        <transition id="bc91e0f0-5a6b-4c94-a318-aec8e7ca4ab4">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b36e6b3f-105e-4be3-9d36-49782c1b1438</refId>
+          </destination>
+          <source>
+            <refId>29dad6af-1de2-4f77-a7ef-3dcafede9acf</refId>
+          </source>
+          <positions>
+            <point>
+              <x>301.0</x>
+              <y>319.29411764705884</y>
+            </point>
+            <point>
+              <x>270.0</x>
+              <y>470.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>465.9252396008107</x>
+            <y>-1.4190104421237628</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="b49246b3-f28c-445a-8d10-42c49b2a6a82">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="b0e1f992-56ca-4ad2-b78c-10c994c6a6db">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>group created</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="0d4c89db-59a5-4405-be76-7d9ae0228104">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <opRef>
+        <refId>6ae74457-0430-4b6b-9272-9a23be1d1d7b</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="a9631244-5a04-40e6-81dd-731bb311859e">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>166.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="c891cfe6-b3b0-47e2-85be-32fe1ea066ee">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a9631244-5a04-40e6-81dd-731bb311859e</refId>
+          </destination>
+          <source>
+            <refId>a9631244-5a04-40e6-81dd-731bb311859e</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="8cd6743d-c4f4-432e-adc0-1a1f49138b54">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="426757af-5a0d-4eec-9ab7-bf34d1d2ee00">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Failure</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="3f3959b2-e350-4ccb-9fa0-30fb1d852777">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="b36e6b3f-105e-4be3-9d36-49782c1b1438">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>325.0</x>
+        <y>167.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="13ac9ac3-6265-4702-b381-887c31d37326">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b36e6b3f-105e-4be3-9d36-49782c1b1438</refId>
+          </destination>
+          <source>
+            <refId>b36e6b3f-105e-4be3-9d36-49782c1b1438</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="591b4247-00b5-4a4a-9847-5440bcc64579">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="93995e30-6273-4ac2-ba0e-02f3e2bde225">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>User removed from group</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="8e526923-0ef8-4e0f-a3dc-c621e0c12d1f">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="186e3c4a-dfb2-4858-84f8-d70b4e2e02b3">
+      <annotation>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.186e3c4a-dfb2-4858-84f8-d70b4e2e02b3.description</annotation>
+      <name>ADCreateUser</name>
+      <bounds>
+        <x>162.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="d42051a3-17fc-427f-b069-a4eb24cca838">
+          <annotation/>
+          <toContextKey>host</toContextKey>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.d42051a3-17fc-427f-b069-a4eb24cca838.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="69264cf2-3650-4228-b709-cabee5e40346">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>altuser</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.69264cf2-3650-4228-b709-cabee5e40346.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="144e4bf5-e4d5-4aac-b257-5175d3dc87e0">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>false</isPersisted>
+          <inputSymbol>altpass</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.144e4bf5-e4d5-4aac-b257-5175d3dc87e0.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="ff9f0421-7f46-4692-a1cf-d16f38501f57">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>OU</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.ff9f0421-7f46-4692-a1cf-d16f38501f57.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="a1d7adf6-ece0-40c3-8a06-348a8003a12a">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>userFullName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.a1d7adf6-ece0-40c3-8a06-348a8003a12a.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="565be031-267f-4fd1-b592-6edd4e1e1a74">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>false</isPersisted>
+          <inputSymbol>userPassword</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.565be031-267f-4fd1-b592-6edd4e1e1a74.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="df34264b-b964-484e-b1f4-0cfdfaddbb55">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>sAMAccountName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ca0ebf5c-ddbd-4af9-a531-29b6f6a713bc.df34264b-b964-484e-b1f4-0cfdfaddbb55.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="7e0a4ec3-9edb-4ad7-922d-fe06853cc32b">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a9631244-5a04-40e6-81dd-731bb311859e</refId>
+          </destination>
+          <source>
+            <refId>186e3c4a-dfb2-4858-84f8-d70b4e2e02b3</refId>
+          </source>
+          <positions>
+            <point>
+              <x>241.0</x>
+              <y>199.51020408163265</y>
+            </point>
+            <point>
+              <x>110.0</x>
+              <y>280.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>515.6442905809448</x>
+            <y>-3.263389357790985</y>
+          </labelPosition>
+        </transition>
+        <transition id="ce606520-a36a-4028-808b-95367f3cc190">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>29dad6af-1de2-4f77-a7ef-3dcafede9acf</refId>
+          </destination>
+          <source>
+            <refId>186e3c4a-dfb2-4858-84f8-d70b4e2e02b3</refId>
+          </source>
+          <positions>
+            <point>
+              <x>301.0</x>
+              <y>199.2941176470588</y>
+            </point>
+            <point>
+              <x>270.0</x>
+              <y>330.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>537.7342597729677</x>
+            <y>0.3565982222269363</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="1a811149-3038-4c18-9f20-d3f0e633c9b7">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="ba80367f-d053-4765-85fa-06027dc7a2af">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Introduction</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="9cd63823-a5d1-4720-9b2b-d7e7219e51fd">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <opRef>
+        <refId>0b7086df-fca5-4841-83f6-934e8d3106f5</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="da98b4a0-81c2-4fe7-9761-c39cfb370a71">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>userDN</contextKey>
+          <expression id="3b88f525-f43e-43c4-adf1-78a15223e74c">
+            <annotation/>
+            <name>Result Field: userDN</name>
+            <fieldName>userDN</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+  </steps>
+  <startSteps>29dbf8d6-320e-4266-bf3d-08a963c596aa</startSteps>
+</flow>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4820e9b5-fa3d-4a13-880a-072cf3674108">
+  <descriptionCdata>4820e9b5-fa3d-4a13-880a-072cf3674108.description=&lt;pre&gt;Shuts down the local Windows computer.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>4820e9b5-fa3d-4a13-880a-072cf3674108.description</annotation>
+  <name>Shutdown Computer</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="bfc1e615-f4ed-40f7-b9f5-9d4efeb86cf2">
+    <annotation/>
+    <name>Operation:Shutdown Computer (4820e9b5-fa3d-4a13-880a-072cf3674108)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="c50923ac-3a36-45bc-8fac-3345f89c3c3d">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2460114c-515b-45e2-8e2b-b39af535a760">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="326ad773-5bec-4878-9bd0-c43217527560">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="9d85f085-8b71-4bb8-a1fa-a4db817ae01e">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="5dc089d8-7124-498a-ae53-8368c13a4c9a">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="da26f633-7150-49e4-ba98-1e80fd61a9df">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="edc575c3-ab2f-4c4f-a5cc-86595184e22d">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0cf23d84-88f6-4f69-bb76-b7a16aa2c857">
+    <baseIcon>workstation1.png</baseIcon>
+    <basePath>/Clients/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="dcaba429-a8aa-44fb-929d-bcc494d01e82">
+        <baseIcon>shutdown.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>02205d2a-8146-4edb-a9bf-a17d8c8a20d8</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

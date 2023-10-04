@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c62eeb58-f329-4ae3-b336-54bdc5c9f3d6">
+  <descriptionCdata>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.80d9d05c-1327-4406-bdd0-c9ace5fafc40.prompt=Number to count to.
+c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.9d8e360e-85dd-4000-9f71-3cf5d71f17c8.prompt=Number to start counting at
+c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.description=Counts from one number to another number.\n\n&lt;pre&gt;\nInputs\:\nfrom - The number to start counting at.\nto - The number to count to.\nincrementBy - The number to increment by while counting. If unspecified this is 1. If you wanted to count 2,4,6,8 this would be 2.\nreset - If true, then the counter will restart counting from the beginning.\n\nNOTE\: These values must be between -9223372036854775808 and 9223372036854775807\n\nReturns\:\nThe number that was just counted.\n\nNote\: the primary result is resultString, Result can also be used. result (All lower case) should not be used as it is the response code.\n\nResponses\:\nhas more - Not yet done counting.\nno more - Done counting. This will only be returned once, then counting restarts.\nfailure - Something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.description</annotation>
+  <name>Counter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9d8e360e-85dd-4000-9f71-3cf5d71f17c8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>from</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.9d8e360e-85dd-4000-9f71-3cf5d71f17c8.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="80d9d05c-1327-4406-bdd0-c9ace5fafc40">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>to</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6.80d9d05c-1327-4406-bdd0-c9ace5fafc40.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="afc825d9-7d71-4b93-80cd-71a1a888fe08">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>incrementBy</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="9318c39d-8977-4112-b385-e85e3da80d8b">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>reset</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="9838f3b4-bbf4-4ab6-bbd6-08a6280e0dfe">
+    <annotation/>
+    <name>Operation:Counter (c62eeb58-f329-4ae3-b336-54bdc5c9f3d6)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="e29e4c20-8ded-4759-95a9-40cb44f699cc">
+      <annotation/>
+      <name>has more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="c3266795-1b46-4b2d-b96d-2f85a0278301">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="08d85520-f52c-4cc4-9149-b95acd8afad3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>has more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="5363d2c9-4848-41b3-8f83-39bd1d89fdf1">
+      <annotation/>
+      <name>no more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="f18cffae-ac79-498e-a723-2161f610d41d">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="4ef47502-8602-4f46-9c49-7f87d56a5623">
+            <annotation/>
+            <name>Config Item</name>
+            <text>no more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ab5e1110-ae0a-4e34-96d9-9f2595da4c84">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="0d793b2f-506d-4ad1-b991-c87cf19051bb">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="7845cc59-17f0-4a55-b4d8-094447b12164">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a668e97c-5d37-430d-84fa-82a25fabe628">
+    <annotation/>
+    <name>result</name>
+    <fieldName>resultString</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="5da7676a-8748-4e6b-96e9-991f9e6fd213">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="50c3c207-aa93-40fd-a611-8649ea8a2b6f">
+        <baseIcon>iterate.png</baseIcon>
+        <basePath>Annotations</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Counter</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

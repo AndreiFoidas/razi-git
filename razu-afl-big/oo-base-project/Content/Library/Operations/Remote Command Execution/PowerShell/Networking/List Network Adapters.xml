@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="f19ffc6f-46ca-4943-a88d-136d1f416a71">
+  <descriptionCdata>f19ffc6f-46ca-4943-a88d-136d1f416a71.36b0dbc2-6f34-4175-98fa-1919a89b9592.prompt=Password\:
+f19ffc6f-46ca-4943-a88d-136d1f416a71.436c906a-36ad-4784-8b87-7c6d448ddced.prompt=Host\:
+f19ffc6f-46ca-4943-a88d-136d1f416a71.6a93caf7-f3fa-4614-8979-716221930c3c.prompt=Username\:
+f19ffc6f-46ca-4943-a88d-136d1f416a71.description=&lt;pre&gt;\nLists the network adapters of the target computer.\n\nInputs\:\nhost\t- Hostname or IP address of the target computer.\nusername \t- Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword \t- Password of the user.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nThe raw result of the operation.\n\nExtra Results\:\nreturnCode \t- The return code of the operation.\nexception \t- The error message if something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>f19ffc6f-46ca-4943-a88d-136d1f416a71.description</annotation>
+  <name>List Network Adapters</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="436c906a-36ad-4784-8b87-7c6d448ddced">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f19ffc6f-46ca-4943-a88d-136d1f416a71.436c906a-36ad-4784-8b87-7c6d448ddced.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6a93caf7-f3fa-4614-8979-716221930c3c">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f19ffc6f-46ca-4943-a88d-136d1f416a71.6a93caf7-f3fa-4614-8979-716221930c3c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="36b0dbc2-6f34-4175-98fa-1919a89b9592">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f19ffc6f-46ca-4943-a88d-136d1f416a71.36b0dbc2-6f34-4175-98fa-1919a89b9592.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="74ad7e1e-5a4d-44c3-aa73-351265bea7c0">
+    <annotation/>
+    <name>Operation:List Network Adapters (f19ffc6f-46ca-4943-a88d-136d1f416a71)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="39fcfd11-0e8c-4c27-8e67-43af5f40160b">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="cf381d9b-51d8-443a-838b-0afacb7cb654">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="4ce498cf-2820-4d69-a9ca-c566de690aa3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="08ad92c7-8c05-4352-8957-6dac549e7605">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="6ee881fa-deca-4496-917d-b7848ef3bf51">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="4e27828a-f821-4f9d-b171-6ae803a03ec8">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="caf9a178-76d0-4370-89aa-1cb366067178">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6811b85e-3027-469e-9709-d8ca6646d08f">
+    <baseIcon>network_port.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="77c63f23-cc09-4049-bf97-95d8f960d0a5">
+        <baseIcon>read2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.ListAdapters</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

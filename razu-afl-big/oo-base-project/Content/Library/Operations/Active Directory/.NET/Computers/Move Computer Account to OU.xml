@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="dc576f0b-1361-4181-a0b6-37468366d3b4">
+  <descriptionCdata>dc576f0b-1361-4181-a0b6-37468366d3b4.14609c2b-9c86-4ccf-a10d-6fd7bd42ee98.prompt=Enter password\:
+dc576f0b-1361-4181-a0b6-37468366d3b4.1993691e-9917-4c40-86e2-b923161686fe.prompt=Enter new OU Distinguished Name (DN)\:
+dc576f0b-1361-4181-a0b6-37468366d3b4.2511b5d0-4873-4fe2-bf90-545fb69d3638.prompt=Enter username\:
+dc576f0b-1361-4181-a0b6-37468366d3b4.37a888c2-a6cf-4c7f-b4c8-c0eb919c0621.prompt=Enter host\:
+dc576f0b-1361-4181-a0b6-37468366d3b4.cb6c3d68-051d-4ea4-989a-f0ba5b590da3.prompt=Enter computer Distinguished Name (DN)\:
+dc576f0b-1361-4181-a0b6-37468366d3b4.description=&lt;pre&gt;Moves a computer account in a new OU in active directory.\n\nInputs\:\nhost - The domain controller to connect to.\ncomputerDN - The distinguished name of the computer account we want to move.\nnewOUDN - the Organizational Unit that the computer account will be moved to.\nusername - the windows username to connect to active directory as.\npassword - password for username.\n\nReturns\:\nThe new distinguished name (DN) of the computer account, after it was moved to the new OU.\n\nResponses\:\nsuccess - Moving the computer account to a new OU was successful.\nfailure - Moving computer account to new OU failed.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>dc576f0b-1361-4181-a0b6-37468366d3b4.description</annotation>
+  <name>Move Computer Account to OU</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="37a888c2-a6cf-4c7f-b4c8-c0eb919c0621">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc576f0b-1361-4181-a0b6-37468366d3b4.37a888c2-a6cf-4c7f-b4c8-c0eb919c0621.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cb6c3d68-051d-4ea4-989a-f0ba5b590da3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>computerDN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc576f0b-1361-4181-a0b6-37468366d3b4.cb6c3d68-051d-4ea4-989a-f0ba5b590da3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1993691e-9917-4c40-86e2-b923161686fe">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newOUDN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc576f0b-1361-4181-a0b6-37468366d3b4.1993691e-9917-4c40-86e2-b923161686fe.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2511b5d0-4873-4fe2-bf90-545fb69d3638">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc576f0b-1361-4181-a0b6-37468366d3b4.2511b5d0-4873-4fe2-bf90-545fb69d3638.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="14609c2b-9c86-4ccf-a10d-6fd7bd42ee98">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>dc576f0b-1361-4181-a0b6-37468366d3b4.14609c2b-9c86-4ccf-a10d-6fd7bd42ee98.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="fd625b4e-ad45-40bb-9425-802006866221">
+    <annotation/>
+    <name>Operation:Move Computer Account to OU (dc576f0b-1361-4181-a0b6-37468366d3b4)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="1fb453fc-6d7a-42af-a400-33f2efba8734">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="23878d52-a626-426f-aafa-23438d9c6399">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="24cd486b-a0f0-4ae8-9599-5bd9b1f14613">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="4fa73927-aaf9-49d7-8176-00a6fc468eff">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4842c53c-722f-418c-9df2-907a465aabb9">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7012d472-431a-4d0b-80ad-4713b4c726fb">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="4eafa793-a3a7-4c7d-b16e-a283cc9a2b94">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="2c0aa267-7ecf-47af-a062-d73039293fbd">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="06f3be2a-b029-4f8d-b7ea-840e80b4d40c">
+        <baseIcon>cut.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADMoveComputerAccountToOU</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="615d10f8-0e87-4c0f-82fe-260c99d66f1e">
+  <descriptionCdata>615d10f8-0e87-4c0f-82fe-260c99d66f1e.38a06410-1308-42cc-a08a-5a93ac34d285.prompt=Enter a starting directory
+615d10f8-0e87-4c0f-82fe-260c99d66f1e.description=&lt;pre&gt;\nGets a list of files and folders in a directory.\n\nInput Parameters\:\nSource - The directory to check.\ndelimiter - A delimiter to put between files and folders in the directory.\nuser - Username to use for thread impersonation on the RAS host when reading.\npassword - Password for the user.\n\nReturns\:\nThe children of the path.\n\nExtra Results\:\ncount - The number of children.\n\nResponses\:\nfailure - The operation failed. The path probably could not be found, or was a file.\nsuccess - The operation succeeded.\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>615d10f8-0e87-4c0f-82fe-260c99d66f1e.description</annotation>
+  <name>FS Get Children</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1a43411c-dbf4-4d91-ab65-f272926ca0f9">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a4dee3cd-a2c1-4939-ab5b-ee4f5eb840f2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="38a06410-1308-42cc-a08a-5a93ac34d285">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>615d10f8-0e87-4c0f-82fe-260c99d66f1e.38a06410-1308-42cc-a08a-5a93ac34d285.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="2effcb21-91d0-453f-a2a1-d2fbd958bac6">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="b013b3a8-87fe-448d-8479-c0bbe1560af7">
+    <annotation/>
+    <name>Operation:FS Get Children (615d10f8-0e87-4c0f-82fe-260c99d66f1e)</name>
+    <script>if (scriptletRawResult['count'] != null)
+	scriptletContext.put("count", scriptletRawResult['count']);
+scriptletResult = scriptletRawResult['returnResult'];</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="62a246aa-d729-44a7-bd06-99e8b99f34f9">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="2f5341c3-7590-43f9-8d5a-0cc6eaf651d6">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="259ec0fc-7beb-4d62-a2a1-336a4c220399">
+    <annotation/>
+    <name>exception</name>
+    <fieldName>exception</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="dd128e97-c5f2-4580-9b2f-fbe0b1255ecd">
+    <baseIcon>folder.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3611bcae-0603-4ee1-9afc-7afc05688902">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>8afc4bc4-34af-4e44-881f-3563f0cb7580</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

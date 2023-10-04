@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="b67e71b3-5d36-48bd-9ba6-d8f159c7da4d">
+  <descriptionCdata>b67e71b3-5d36-48bd-9ba6-d8f159c7da4d.description=&lt;pre&gt;\nGets a value (or list of values in the same field/column) from a csv formatted wmi query.\n      \ninputs\:\n    CSV_Formatted_WMI - The WMI output.\n    value_name - The value to read. Reads first value if null.\n\nResponses\:\n    success - value read.\n    failure - Value could not be found.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>b67e71b3-5d36-48bd-9ba6-d8f159c7da4d.description</annotation>
+  <name>WMI CSV Value Getter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ef680b69-0ba1-49cd-99b7-c13d8d1fa6d2">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>CSV_Formatted_WMI</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="798f6f62-f4cf-4b2e-8b56-adae275624be">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value_name</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="2c15b45d-7abb-49a9-bee4-cbd07394ed2a">
+    <annotation/>
+    <name>Operation WMI CSV Value Getter (b67e71b3-5d36-48bd-9ba6-d8f159c7da4d)</name>
+    <script>scriptletResponse = "success";
+scriptletResult = "";
+try{
+for (k=0;k&lt;CSV_Formatted_WMI.length;k++)
+    if ((CSV_Formatted_WMI.charAt(k)=="\n")&amp;&amp;(CSV_Formatted_WMI.charAt(k+1)!=" "))
+        CSV_Formatted_WMI=CSV_Formatted_WMI.substring(0,k)+'^'+CSV_Formatted_WMI.substring(k+1, CSV_Formatted_WMI.length)
+rows = new java.util.StringTokenizer(CSV_Formatted_WMI, "^");
+
+row = rows.nextToken();
+st = new java.util.StringTokenizer(row, ",");
+var label = "";
+if (st==null || rows == null || !rows.hasMoreTokens()) {
+  scriptletResponse = "failure";
+}
+else {
+	var tokens = st.countTokens();
+	var element = "";
+	if(typeof(value_name) == 'undefined' || value_name == "") {
+        element = st.nextToken();
+        i=1;
+    }
+    else {
+	for (i=0;element.toLowerCase() != value_name.toLowerCase();i++)
+		element = st.nextToken();
+	}
+ 	//var row = st.nextToken();
+	var val = "";
+	var run = false;
+	var firstIndex = -1;
+	while (rows.hasMoreTokens()){
+	 	row = trim(rows.nextToken());
+		while (isAllWhitespace(row) &amp;&amp; rows.hasMoreTokens)
+			row = trim(rows.nextToken());
+		if (isAllWhitespace(row))
+			break;
+		st = new java.util.StringTokenizer(row, ",\"");
+		var curr = "";
+		
+		for (j=0;j&lt;i &amp;&amp; st.hasMoreTokens();j++) {
+		     if ( (row.indexOf("\"") == -1) || (row.indexOf(",") &gt; -1 &amp;&amp; row.indexOf(",") &lt; row.indexOf("\"")) ){
+		         firstIndex = row.indexOf(",");
+		         curr = replaceAll(st.nextToken(","),"\"\"","\"");
+		         row = row.substring(firstIndex + 1);
+		     }
+		     else{
+		         firstIndex = row.indexOf("\"");
+		         curr = replaceAll(st.nextToken("\""),"\"\"","\"");
+		         row = row.substring(firstIndex + 1);
+		         row = row.substring(row.indexOf("\"")+2);
+		     }
+		     st = new java.util.StringTokenizer(row, ",\"");
+		}
+		if (j &lt; i)
+			curr = "     ";	
+		if (!run)
+			val += curr;
+		else
+			val += ","+curr;
+		run = true;
+	}
+	scriptletResult = ""+val;
+    }
+}
+catch (e){
+  scriptletResponse = "failure";
+	scriptletResult = ""+e.toString();
+}
+
+
+function trim(value){
+var s = ""+value;
+s.replace(/^\s*|\s*$/g, "")
+/*try{
+while (s.length &gt; 0 &amp;&amp; isWhitespace(s.substring(0,1)))
+	s = s.substring(1, s.length);
+while (s.length &gt; 0 &amp;&amp; isWhitespace(s.substring(s.length-1,s.length)))
+	s = s.substring(0, s.length-1);
+}
+catch (e){
+return s;
+}*/
+return s;
+}
+
+function replaceAll(string, oldString, newString){
+var returnedString = "";
+while (string.indexOf(oldString) &gt; -1){
+    returnedString += string.substring(0,string.indexOf(oldString)) + newString;
+    string = string.substring(string.indexOf(oldString)+oldString.length);
+}
+returnedString += string;
+return returnedString;
+}
+
+function isAllWhitespace(v){
+if (v == "" || v == null)
+	return true;
+/*for (count = 0; count &lt; v.length(); count++)
+	if (!isWhitespace(v))
+		return false;*/
+return false;
+}
+
+
+function isWhitespace(value){
+	if (value == "\s" ||
+		value =="\n" ||
+		value == "\r"||
+		value == "\t"||
+		value == "\f"||
+		value == "\v"||
+		value == "\0"||
+		value == "\b"||
+		value == " "||
+		value == "\a"||
+		value == "\e"||
+		value == "\u2029"||
+		value == "\u00A0"||
+		value == "\u2028"||
+		value == "\u2020"||
+		value == "\cZ"||
+		value == "\cz"||
+		value == "\x20"||
+		value == "")
+		//java.lang.Character.isISOControl(value.charAt(0)))
+		return true;
+	else
+		return false;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="a74e3fd8-58ca-4ac1-b109-ac62e9f0aa00">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="376b8c19-40c6-4e44-b1c4-235f68f90ef9">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="0729f346-b4ae-4abb-a2c2-780c9db201c9">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c96cfff8-92d5-4c98-ae82-5b1ecdcbd4c8">
+    <baseIcon>wrench.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="763a7976-ad0e-4e81-a2a8-316e5339859e">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="62c76a75-69ef-43e5-880e-30f53500176b">
+  <descriptionCdata>62c76a75-69ef-43e5-880e-30f53500176b.description=The OPTIONS method represents a request for information about the communication options available on the request/response chain identified by the Request-URI.
+</descriptionCdata>
+  <annotation>62c76a75-69ef-43e5-880e-30f53500176b.description</annotation>
+  <name>OPTIONS</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f93a3344-0552-4d5b-beb3-1b760406d0e2">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>requestUrl</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="62f1819c-5d2d-45b6-9f09-7b8a150e8f26">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Body</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="716af756-46e4-434c-a5a7-974a187ed70e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Url</inputSymbol>
+      <listDelimiter/>
+      <value>${requestUrl}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="7d4ab473-6c69-4658-80da-5f065d6c47bd">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Method</inputSymbol>
+      <listDelimiter/>
+      <value>OPTIONS</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="23813f11-14de-4c79-8262-6709a2f965fa">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Protocol</inputSymbol>
+      <listDelimiter/>
+      <value>HTTP/1.1</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="4e91a1e9-2ff8-490c-86a9-083dbd988ed7">
+    <annotation/>
+    <name>Operation:OPTIONS (62c76a75-69ef-43e5-880e-30f53500176b)</name>
+    <script>scriptletResponse = "FAILED_TO_CONNECT";
+scriptletResult = scriptletRawResult['headers'];
+code = parseInt(scriptletRawResult['code']);
+if ((code &gt; 99) &amp;&amp; (code &lt; 200)) {
+  scriptletResponse = "INFORMATIONAL";
+}
+else if ((code &gt; 199) &amp;&amp; (code &lt; 300)) {
+  scriptletResponse = "SUCCESS";
+}
+else if ((code &gt; 299) &amp;&amp; (code &lt; 400)) {
+  scriptletResponse = "REDIRECTION";
+}
+else if ((code &gt; 399) &amp;&amp; (code &lt; 500)) {
+  scriptletResponse = "CLIENT_ERROR";
+}
+else if ((code &gt; 499) &amp;&amp; (code &lt; 600)) {
+  scriptletResponse = "SERVER_ERROR";
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7c40e831-b24c-4d31-b869-1c5f9fdf6cef">
+      <annotation/>
+      <name>INFORMATIONAL</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="2bb76fe9-db6e-4038-9641-f7a08b4fc229">
+      <annotation/>
+      <name>SUCCESS</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ff58cc50-e0c5-48da-acb0-f5fe25270f34">
+      <annotation/>
+      <name>REDIRECTION</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="54cf8899-c044-4589-964b-747d5e7f2c45">
+      <annotation/>
+      <name>CLIENT_ERROR</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="013c3461-9b19-402d-aad1-d109e4f35598">
+      <annotation/>
+      <name>SERVER_ERROR</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="a8bff5eb-7157-4e4f-ac86-b0b37fec970d">
+      <annotation/>
+      <name>FAILED_TO_CONNECT</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c6ab0f35-b69f-4e28-9e03-9653e6610057">
+    <annotation/>
+    <name>code</name>
+    <fieldName>code</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="cf690359-e8c5-4e73-bad9-a5b7e1c6d368">
+    <baseIcon>http.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>2a3e3d5e-84b2-4868-9ffc-580d0b6d10ce</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

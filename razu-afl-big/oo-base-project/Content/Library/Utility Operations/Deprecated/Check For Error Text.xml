@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="24b38225-bdfb-4357-8441-5e641e4e82aa">
+  <descriptionCdata>24b38225-bdfb-4357-8441-5e641e4e82aa.description=Checks to see if the 'runningResults' context variable is null.\n\nDeprecated in favor of 'check null'\n\nResponses\:\nfailure - the context key is not null.\nsuccess - the context key is null.
+</descriptionCdata>
+  <annotation>24b38225-bdfb-4357-8441-5e641e4e82aa.description</annotation>
+  <name>Check For Error Text</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="4e76b917-b1e3-4940-87ad-55929546b647">
+    <annotation/>
+    <name>Operation:Check For Error Text (850a69f8-1c77-40f0-95ca-d0d5a4ac4e85)</name>
+    <script>
+
+errorText = scriptletContext.get("runningResults");
+scriptletResults = errorText;
+
+if (errorText != null) {
+  scriptletResponse = "failure"; //"Error Text Found"
+} else {
+  scriptletResponse = "success" ; //"Error Text Not Found"
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="01d99399-1ea5-493f-a704-aad05d718b17">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="e535c858-2a6f-47cc-9ae8-365034f3a32c">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d1ec0a6f-4138-4682-a2f9-6774e7cada54">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="51c37a9f-89fe-48e5-9a7f-69427d1b77e5">
+    <baseIcon>branch_element.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="923626f9-87cc-4075-b607-13deee6b992b">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

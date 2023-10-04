@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4148da3f-f856-4716-8763-b164c8e1525a">
+  <descriptionCdata>4148da3f-f856-4716-8763-b164c8e1525a.075cb3c5-67e1-4c91-a6b8-2c3301a6e60b.prompt=Action
+4148da3f-f856-4716-8763-b164c8e1525a.description=&lt;pre&gt;Shows options to delete or Archive the listed files\n\nInputs\: \n Action- choice for delete or archive listed files \n\nResponses\:\n delete - when users chooses to delete the files\n Archive - when users chooses to archive files and delete them\n\nResult\:\n User choice of action, either delete or Archive\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>4148da3f-f856-4716-8763-b164c8e1525a.description</annotation>
+  <name>Delete or Archive</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="075cb3c5-67e1-4c91-a6b8-2c3301a6e60b">
+      <annotation/>
+      <toContextKey>action</toContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Action</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4148da3f-f856-4716-8763-b164c8e1525a.075cb3c5-67e1-4c91-a6b8-2c3301a6e60b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>85d3aef3-860c-4563-82ee-2623f92060d6</refId>
+        <refName>LinuxLogRotatorOption</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="cccafc77-4e7c-4161-b3a9-2da0b70aecf9">
+    <annotation/>
+    <name>Operation Delete or Archive (4148da3f-f856-4716-8763-b164c8e1525a)</name>
+    <script>scriptletContext.put("ArchiveName", scriptletRawResult['Action']);
+if (typeof Action != 'undefined' &amp;&amp; null != Action &amp;&amp; Action.length &gt; 0) {
+	if(Action == "Delete"){
+		scriptletResponse = "delete";
+	}
+	else if (Action == "Archive"){
+		scriptletResponse = "Archive";
+	}
+	scriptletResult = Action;
+} else {
+	scriptletResult = "";
+} </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="21a79e09-b2db-4d11-9f35-ab1141a3548a">
+      <annotation/>
+      <name>delete</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ac8a41df-4294-4b7d-baba-ffbde2529044">
+      <annotation/>
+      <name>Archive</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="59d6c9f2-452a-47e8-aa24-e148093b2209">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="77a91c28-9506-4ebd-b9e6-b3bbb6896fc4">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

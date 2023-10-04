@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="450994fb-0e9b-4721-b6fe-b1bfe57dca5a">
+  <descriptionCdata>450994fb-0e9b-4721-b6fe-b1bfe57dca5a.9a50ab31-7b17-411c-8808-5041211b1910.prompt=Log Level\:
+450994fb-0e9b-4721-b6fe-b1bfe57dca5a.description=&lt;pre&gt;Sets the WMI logging level in the local Windows computer. \n\nValid WMI logging levels are-\t\t\n0\t- No Logging.\n1\t- Log only errors.\n2\t- Verbose Logging.\n\nInputs\:\nlogLevel \t- The WMI logging level that should be set.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t-  Invalid logging level, or something went wrong.\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>450994fb-0e9b-4721-b6fe-b1bfe57dca5a.description</annotation>
+  <name>Set WMI Log Level</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9a50ab31-7b17-411c-8808-5041211b1910">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>logLevel</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>450994fb-0e9b-4721-b6fe-b1bfe57dca5a.9a50ab31-7b17-411c-8808-5041211b1910.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="77e3b85c-224a-4d29-83bc-ae3ac483b3a7">
+    <annotation/>
+    <name>Operation:Set WMI Log Level (450994fb-0e9b-4721-b6fe-b1bfe57dca5a)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="4563c55a-b1e3-4921-a7b5-746b877cacaa">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="0e9d0b50-d0e0-4274-b15d-c66fec84cdf0">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="b62f71bb-f07e-44ca-8453-dfc7aed2e345">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="7e0cee3a-02c9-439d-be9d-c6ed7f64aa01">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="e2e15a94-f8c6-47e7-af15-70885f5dc63d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="a6eeabdd-a591-4f10-bc1e-52c7ba9f5e0d">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="db405b2c-2ec4-46c4-aa56-6ec14e0e71ec">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6b595704-c03c-4bb3-b44b-8526a6d0dc9a">
+    <baseIcon>windows_event_log.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="ba306bbf-78f0-4f52-86d8-cf8e3f82603e">
+        <baseIcon>send.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.SetWmiLogLevel</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="72dbc6a5-0e88-46ea-964b-422fa92e38e7">
+  <descriptionCdata>72dbc6a5-0e88-46ea-964b-422fa92e38e7.157a9273-ec55-4d2f-ab32-5009d97e5e10.prompt=Username\:
+72dbc6a5-0e88-46ea-964b-422fa92e38e7.2509cb7c-675d-4b5c-b87a-3a01591c1715.prompt=Logical Disk Name\:
+72dbc6a5-0e88-46ea-964b-422fa92e38e7.71f24a49-cfa8-4889-ab3a-ce659952c44c.prompt=Host\:
+72dbc6a5-0e88-46ea-964b-422fa92e38e7.73355109-221a-4d86-8008-8eefd80defbd.prompt=Password\:
+72dbc6a5-0e88-46ea-964b-422fa92e38e7.description=&lt;pre&gt;\nA brief report on logical disk performance counters in the target Windows computer.\n\nInputs\:\nhost \t\t- Hostname or IP address of the target computer.\nusername \t\t- Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword \t\t- Password of the user.\nlogicalDiskName \t- Name of the partition (C\:, D\: etc.)\n\nResponses\:\nsuccess \t\t- Operation completed successfully.\nfailure \t\t- Something went wrong.\n\nResult\:\nLogical disk performance report.\n\nExtra Results\:\nreturnCode \t\t- The operation return code.\nexception \t\t- If something went wrong, the error message.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>72dbc6a5-0e88-46ea-964b-422fa92e38e7.description</annotation>
+  <name>Report Logical Disk Performance</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="71f24a49-cfa8-4889-ab3a-ce659952c44c">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>72dbc6a5-0e88-46ea-964b-422fa92e38e7.71f24a49-cfa8-4889-ab3a-ce659952c44c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="157a9273-ec55-4d2f-ab32-5009d97e5e10">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>72dbc6a5-0e88-46ea-964b-422fa92e38e7.157a9273-ec55-4d2f-ab32-5009d97e5e10.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="73355109-221a-4d86-8008-8eefd80defbd">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>72dbc6a5-0e88-46ea-964b-422fa92e38e7.73355109-221a-4d86-8008-8eefd80defbd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2509cb7c-675d-4b5c-b87a-3a01591c1715">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>logicalDiskName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>72dbc6a5-0e88-46ea-964b-422fa92e38e7.2509cb7c-675d-4b5c-b87a-3a01591c1715.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="6f9dab82-89a1-4ec2-be5b-572a83584608">
+    <annotation/>
+    <name>Operation:Report Logical Disk Performance (72dbc6a5-0e88-46ea-964b-422fa92e38e7)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="c827bdd8-5e57-49c8-866f-557ff6ff1e83">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="e98aa47e-2647-4c48-870d-c4076d557dbb">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7c4e90e9-e4d1-44a3-80c4-238f980dcd96">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6711e6fe-88bb-4c62-9faf-20d200b0de84">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="f725d543-1314-49e8-abcb-e2a8288252dd">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3238d32f-0a8a-45df-82b1-8a5942ce1d31">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d70621e7-35de-4fa0-8545-16202c5b36e6">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="049850e3-4454-4fb0-a341-7316e5aa5194">
+    <baseIcon>harddisk.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d5c139a6-24af-4656-9e8c-a920305a4c06">
+        <baseIcon>read2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.ReportLogicalDiskPerformance</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

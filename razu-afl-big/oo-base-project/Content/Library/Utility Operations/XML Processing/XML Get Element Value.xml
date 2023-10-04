@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4c4735d1-04dc-41e0-a188-56f59ecfd506">
+  <descriptionCdata>4c4735d1-04dc-41e0-a188-56f59ecfd506.description=&lt;pre&gt;\nRetrieves the value from a given XML Element. Child nodes are not considered as values.\n \nInputs\:\n    xml - The xml (in the form of a String).\n    parsingFeatures - The list of XML parsing features separated by new line (CRLF). The feature name - value must be separated by empty space. Setting specific features this field could be used to avoid XML security issues like "XML Entity Expansion injection" and "XML External Entity injection". To avoid aforementioned security issues we strongly recommend to set this input to the following values\: \nhttp\://apache.org/xml/features/disallow-doctype-decl true \nhttp\://xml.org/sax/features/external-general-entities false \nhttp\://xml.org/sax/features/external-parameter-entities false \nWhen the "http\://apache.org/xml/features/disallow-doctype-decl" feature is set to "true" the parser will throw a FATAL ERROR if the incoming document contains a DOCTYPE declaration.  \nWhen the "http\://xml.org/sax/features/external-general-entities" feature is set to "false" the parser will not include external general entities. \nWhen the "http\://xml.org/sax/features/external-parameter-entities" feature is set to "false" the parser will not include external parameter entities or the external DTD subset. \nIf any of the validations fails, the operation will fail with an error message describing the problem. \nDefault value\:\nhttp\://apache.org/xml/features/disallow-doctype-decl true\nhttp\://xml.org/sax/features/external-general-entities false\nhttp\://xml.org/sax/features/external-parameter-entities false\n\nResponses\:\nsuccess \t- The value retrieved successfully.\nfailure \t- The operation failed.\n \nReturns\:\nreturnResult\t- The value of the given XML element.\n \nNotes\:\n1. The following is a valid input for this operation-\n&lt;title lang\="en"&gt;Everyday Italian&lt;/title&gt;\n \nwhile the following is not a valid input and will not return any result-\n&lt;book category\="COOKING"&gt;\n    &lt;title lang\="en"&gt;Everyday Italian&lt;/title&gt;\n    &lt;author&gt;Giada De Laurentiis&lt;/author&gt;\n    &lt;year&gt;2005&lt;/year&gt;\n    &lt;price&gt;30.00&lt;/price&gt;\n&lt;/book&gt;\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>4c4735d1-04dc-41e0-a188-56f59ecfd506.description</annotation>
+  <name>XML Get Element Value</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1129352a-3414-4466-a221-f6bd8c5631f8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xml</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="53c3fbcc-261b-4479-b312-e7e6796f48e1">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>parsingFeatures</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>http://apache.org/xml/features/disallow-doctype-decl true
+http://xml.org/sax/features/external-general-entities false
+http://xml.org/sax/features/external-parameter-entities false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="3e7e68d0-737c-449a-8cd3-3f35d0950623">
+    <annotation/>
+    <name>Operation XML Get Element Value (4c4735d1-04dc-41e0-a188-56f59ecfd506)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="8a46ea27-06e1-4cce-ab09-af285b1740e6">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="1ce5f5b7-56e3-49c3-8c41-7232b33409b8">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="c22e1044-c873-4620-9140-5a2ea6e5b97e">
+            <annotation/>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ecc02bf7-d751-40c6-8678-556ae00c187a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="a3c50812-2eb0-4f2f-bd0d-f75b1d8f2a13">
+          <annotation/>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="f0fa7d2d-3632-43c5-8ec4-34c0da1c6cc1">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e5259991-3cd6-4c19-880c-33acc6e21e87">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0e040130-decd-4d91-aa92-0367c1c837d2">
+    <baseIcon>document_xml.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="66fa3e8c-ec84-4821-a84b-c0ab83292f82">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>XML Get Element Value</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

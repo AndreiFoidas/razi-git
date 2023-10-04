@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="ec66c65f-7828-4ba2-a98d-5d0e1941f211">
+  <descriptionCdata>ec66c65f-7828-4ba2-a98d-5d0e1941f211.196d11e7-0e6e-45de-b468-3a9b5e55a6a4.prompt=Enter username\:
+ec66c65f-7828-4ba2-a98d-5d0e1941f211.42184ca7-6451-4576-9635-7c132aa855ba.prompt=Enter computer Common Name(CN)\:
+ec66c65f-7828-4ba2-a98d-5d0e1941f211.7bf0d44f-f971-47c1-9def-a681d3871e03.prompt=Enter password\:
+ec66c65f-7828-4ba2-a98d-5d0e1941f211.d26e30b4-c2c0-4f5b-9ef0-4b4198b5a2a1.prompt=Enter host\:
+ec66c65f-7828-4ba2-a98d-5d0e1941f211.description=&lt;pre&gt;Gets the name of the OU a computer account is in, in Active Directory.\n\nInputs\:\nhost - The domain controller to connect to.\nusername - the windows username to connect to active directory as.\npassword - password for username.\ncomputerCN - The name of the computer account.\n\nReturns\:\nThe name of the OU where the computer account is located.\n\nResponses\:\nsuccess - The name of the OU the computer is in was retrieved successfully.\nfailure - Determining computer's OU failed.\n\nExtra Results\:\nouDN - OU's distinguished name\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>ec66c65f-7828-4ba2-a98d-5d0e1941f211.description</annotation>
+  <name>Get Computer Account OU</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d26e30b4-c2c0-4f5b-9ef0-4b4198b5a2a1">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ec66c65f-7828-4ba2-a98d-5d0e1941f211.d26e30b4-c2c0-4f5b-9ef0-4b4198b5a2a1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="42184ca7-6451-4576-9635-7c132aa855ba">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>computerCN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ec66c65f-7828-4ba2-a98d-5d0e1941f211.42184ca7-6451-4576-9635-7c132aa855ba.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="196d11e7-0e6e-45de-b468-3a9b5e55a6a4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ec66c65f-7828-4ba2-a98d-5d0e1941f211.196d11e7-0e6e-45de-b468-3a9b5e55a6a4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7bf0d44f-f971-47c1-9def-a681d3871e03">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ec66c65f-7828-4ba2-a98d-5d0e1941f211.7bf0d44f-f971-47c1-9def-a681d3871e03.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="60d523ea-e5a2-48c6-b573-b23f3cdd7598">
+    <annotation/>
+    <name>Operation:Get Computer Account OU (ec66c65f-7828-4ba2-a98d-5d0e1941f211)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="3131d84c-9ad4-4001-83a6-4bf3649e5a4a">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2b8fc13f-c20a-480c-a236-0029e1619f16">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e84a3b38-651f-45c5-847d-e5b097f3fde3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="74ff1224-18f0-4a23-9ba6-913167cce976">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="88cdf457-fc6b-4908-a52c-12616ebc7d7b">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="322577da-c516-42d6-b595-ac766c8fd16d">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="bcf74b93-e60e-4956-8327-4c1f6ba85cde">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e9328066-76d3-4fad-a119-d060a49d6e3d">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="7b86af84-eb49-49e4-9bc4-6a1b7918bbab">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADGetComputerAccountOU</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

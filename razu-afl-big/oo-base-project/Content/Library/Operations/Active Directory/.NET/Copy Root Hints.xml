@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="d099a1ac-779c-4924-9bda-125f8b8e91b7">
+  <descriptionCdata>d099a1ac-779c-4924-9bda-125f8b8e91b7.2f68467c-a45f-4ebf-92c0-ddc006eab294.prompt=Alternate Credentials - UserName\:
+d099a1ac-779c-4924-9bda-125f8b8e91b7.a1bf09f4-5a19-4b70-8bed-c6a4b45ddbc9.prompt=Alternate Credentials - Password\:
+d099a1ac-779c-4924-9bda-125f8b8e91b7.b13859ea-872c-4432-a170-d1057343cd35.prompt=HostName\:
+d099a1ac-779c-4924-9bda-125f8b8e91b7.c3f510c9-da87-4479-a4aa-8a86a47f9fa4.description=&lt;pre&gt;Copies a file or directory.\n\nInput Parameters\:\nsource - The file or directory to copy.\ndestination - the location to copy the file or directory to.\nremoveSource - Specifies whether the source should be removed if the copy operation is successful (true, false).\nuser - Username to use for thread impersonation on the RAS host during this operation.\npassword - The password for the user.\noverwrite - If false the operation will fail if Destination exists.\n\nResponses\:\nsuccess - Was able to copy file/directory.\nfailure - Unable to copy file/directory.\n\nNote\:\nThis copy operation is modeled after the Windows command-line copy operation.  So given a sample directory structure\:\n--DirectoryA\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n\n--DirectoryB\n   |--File3\n   |--File4\n\nIf your Source is "DirectoryA" and your Destination is "DirectoryB" your end result will be\:\n--DirectoryA\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n\n--DirectoryB\n   |--File3\n   |--File4\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n&lt;/pre&gt;
+d099a1ac-779c-4924-9bda-125f8b8e91b7.description=&lt;pre&gt;\nMakes a backup copy of the active directory root hints.\n\nInputs\:\nhost - the domain controller to make the copy on.\naltuser - The user to authenticate to host as.\naltpass - the password for altuser.\n\nResponses\:\nsuccess - The root hints were copied successfully.\nfailure - The copy failed.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>d099a1ac-779c-4924-9bda-125f8b8e91b7.description</annotation>
+  <name>Copy Root Hints</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b13859ea-872c-4432-a170-d1057343cd35">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d099a1ac-779c-4924-9bda-125f8b8e91b7.b13859ea-872c-4432-a170-d1057343cd35.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2f68467c-a45f-4ebf-92c0-ddc006eab294">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altuser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d099a1ac-779c-4924-9bda-125f8b8e91b7.2f68467c-a45f-4ebf-92c0-ddc006eab294.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a1bf09f4-5a19-4b70-8bed-c6a4b45ddbc9">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altpass</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d099a1ac-779c-4924-9bda-125f8b8e91b7.a1bf09f4-5a19-4b70-8bed-c6a4b45ddbc9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="2ec673bc-2924-42b0-b14a-884c0d7a8932">
+    <annotation/>
+    <name>Operation:Copy Root Hints (d099a1ac-779c-4924-9bda-125f8b8e91b7)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="80647092-3ebc-4d53-bee9-4b5f5e2c40a3">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="0b1f3976-97d9-4dbc-8ba5-db321fa3f0c1">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>Value</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6f71cb20-b6b3-4e26-b2da-3befb57bf3da">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="2c93f2f4-ecd8-4e32-b700-284b049aacd4">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="c3f510c9-da87-4479-a4aa-8a86a47f9fa4">
+      <annotation>d099a1ac-779c-4924-9bda-125f8b8e91b7.c3f510c9-da87-4479-a4aa-8a86a47f9fa4.description</annotation>
+      <name>FSCopy</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>true</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <resultContextKey>runResult</resultContextKey>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="456f3d8c-3d57-4071-a5e9-49202898cd51">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>removeSource</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="fd30d7ed-72e5-45aa-a2fe-308949e2c643">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>{OBFUSCATED}77rUKW6G6Qs/XGjQHgAO9Q==</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="aca14c99-ffe3-4c42-bc8b-45ec7e2a270b">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>user</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>${altuser}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="3b7a291e-9ad6-4899-b26a-a673791cfc8d">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>destination</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>\\${host}\ADMIN$\system32\dns\</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5db94dd9-23b6-4310-900a-d8b49a2f1291">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>\\${host}\ADMIN$\system32\dns\samples\cache.dns</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0a58e91e-afa7-4ec4-a113-eb28e521ac77">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>overwrite</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>true</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="d4846fbd-55c6-427a-aa2c-2cd0ae8f1c33">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>878b5392-e131-416e-9330-699680df6253</refId>
+          </destination>
+          <source>
+            <refId>c3f510c9-da87-4479-a4aa-8a86a47f9fa4</refId>
+          </source>
+          <positions>
+            <point>
+              <x>171.0</x>
+              <y>38.38202247191011</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>238.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>462.36323851203514</x>
+            <y>14.388178955457386</y>
+          </labelPosition>
+        </transition>
+        <transition id="580f0068-4bd2-4df4-816b-a3551783e874">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>632c4e5b-bb81-4b37-a718-f67c79bb995d</refId>
+          </destination>
+          <source>
+            <refId>c3f510c9-da87-4479-a4aa-8a86a47f9fa4</refId>
+          </source>
+          <positions>
+            <point>
+              <x>231.0</x>
+              <y>38.28571428571429</y>
+            </point>
+            <point>
+              <x>300.0</x>
+              <y>238.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>478.51805333602255</x>
+            <y>-21.518118561171995</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>65218cfb-ddac-4473-89cf-b118977bd9b0</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="802dc455-4bc3-4763-8285-7b3d57672048">
+          <annotation>Automatically created during conversion</annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>runResult</contextKey>
+          <expression id="2a2ca3a2-06ce-41c4-859c-5f583f5a6b44">
+            <annotation>Automatically created during conversion</annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="632c4e5b-bb81-4b37-a718-f67c79bb995d">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>130.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="ef7cb7bb-fc0b-4555-a463-599fc976a442">
+        <annotation/>
+        <name>Step:Resolved : success Flow:Copy Root Hints (632c4e5b-bb81-4b37-a718-f67c79bb995d)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="79ca5581-db04-443b-b08b-dd67f753cadb">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>632c4e5b-bb81-4b37-a718-f67c79bb995d</refId>
+          </destination>
+          <source>
+            <refId>632c4e5b-bb81-4b37-a718-f67c79bb995d</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="878b5392-e131-416e-9330-699680df6253">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="d17c7bab-16fc-4fc7-bc44-85879a113ebe">
+        <annotation/>
+        <name>Step:Error : failure Flow:Copy Root Hints (878b5392-e131-416e-9330-699680df6253)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="8ef70f3b-7c13-4f2d-a7ab-2ee5ce644b00">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>878b5392-e131-416e-9330-699680df6253</refId>
+          </destination>
+          <source>
+            <refId>878b5392-e131-416e-9330-699680df6253</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>c3f510c9-da87-4479-a4aa-8a86a47f9fa4</startSteps>
+</flow>

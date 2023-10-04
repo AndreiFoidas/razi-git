@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="7d2a8737-bbf4-432e-85ff-087dd9542462">
+  <descriptionCdata>7d2a8737-bbf4-432e-85ff-087dd9542462.365c73ec-adb1-43d6-b5e1-37542d1958aa.prompt=Enter host\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.397ad302-4a8e-4fd0-a502-53005a3fc9f4.prompt=Enter keyStore\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.4de77c61-558b-422b-b5d2-5830ecf1fab5.prompt=Enter keyStorePassword\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.5ea1244a-1ad0-4e32-a5cb-c5da3110bdb4.prompt=Enter trustKeystore\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.719e8667-e3cb-4066-94bf-3bd074eaf1c1.prompt=Enter useSSL\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.7a4ac7b6-ac33-4b00-a666-44d7822a7e7c.prompt=Enter username\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.8ec7fd61-05d9-4cf6-a37b-556be9e257ab.prompt=Enter computer Distinguished Name(DN)\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.de87aa29-6ac3-4975-bea5-90d70fbe719e.prompt=Enter trustPassword\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.description=&lt;pre&gt;Resets a computer account in Active Directory, by resetting the password to an initial password.\n\nInputs\:\n    host - the domain controller to connect to\n    computerDN - the distinguished name of the computer account we want to reset\n    username - the windows username to connect to Active Directory as\n    password - password for username\n    useSSL - If true, the operation uses the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol to establish a connection to the remote computer. By default, the operation tries to establish a secure connection over TLSv1.2. Default port for SSL/TLS is 636.\nDefault value\: false\n    trustAllRoots - Specifies whether to enable weak security over SSL. A SSL certificate is trusted even if no trusted certification authority issued it.\nValid values\: true, false\nDefault value\: true\n    keyStore - The location of the KeyStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    keyStorePassword - The password associated with the KeyStore file.\n    trustKeystore - The location of the TrustStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    trustPassword - The password associated with the TrustStore file.\n\nResponses\:\n  success - Computer account reseted successfully\n  failure - Failed to reset computer account\n\nNotes\:\n1.  If the useSSL input value is set to true then this operation will connect to the Active Directory server using the ldaps protocol on port 636. Installing a valid certificate on a domain controller permits the LDAP service to listen for, and automatically accept, SSL connections for both LDAP and global catalog traffic. If a valid ssl certificate is not installed on the domain controller, the operation will fail with something like "javax.naming.CommunicationException\: simple bind failed\: [Root exception is javax.net.ssl.SSLHandshakeException\: Remote host closed connection during handshake".\n2.  It is recommended that this operation be used with the useSSL input set to true. This is due to the fact this operation interacts with the user's password through LDAP and there is a constraint in Microsoft Active Directory namely that manipulating a user's password through LDAP can be done given certain restrictions and one of those restrictions is that the communication between the client and the server should be done over Secure Socket Layer (SSL) connection. (More details can be found at the following link http\://support.microsoft.com/kb/269190/en-us ) \n3.  If the operation is used with useSSL set to false it will fail with the message "LDAP\: error code 53 - 0000001F\: SvcErr\: DSID-031A12D2, problem 5003 (WILL_NOT_PERFORM), data 0" which usually indicates that the LDAP server cannot process the request because of server-defined restrictions.\n&lt;/pre&gt;
+7d2a8737-bbf4-432e-85ff-087dd9542462.df94fd71-a13f-403b-a548-a85af080f952.prompt=Enter trustAllRoots\:
+7d2a8737-bbf4-432e-85ff-087dd9542462.e39022cb-6e73-4812-a63a-60dcf2d51279.prompt=Enter password\:
+</descriptionCdata>
+  <annotation>7d2a8737-bbf4-432e-85ff-087dd9542462.description</annotation>
+  <name>Reset Computer Account</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="365c73ec-adb1-43d6-b5e1-37542d1958aa">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.365c73ec-adb1-43d6-b5e1-37542d1958aa.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8ec7fd61-05d9-4cf6-a37b-556be9e257ab">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>computerDN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.8ec7fd61-05d9-4cf6-a37b-556be9e257ab.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7a4ac7b6-ac33-4b00-a666-44d7822a7e7c">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.7a4ac7b6-ac33-4b00-a666-44d7822a7e7c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e39022cb-6e73-4812-a63a-60dcf2d51279">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.e39022cb-6e73-4812-a63a-60dcf2d51279.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="719e8667-e3cb-4066-94bf-3bd074eaf1c1">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>useSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.719e8667-e3cb-4066-94bf-3bd074eaf1c1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="df94fd71-a13f-403b-a548-a85af080f952">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.df94fd71-a13f-403b-a548-a85af080f952.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>362bc113-e130-45d5-be90-832d5de87730</refId>
+        <refName>Boolean</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="397ad302-4a8e-4fd0-a502-53005a3fc9f4">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.397ad302-4a8e-4fd0-a502-53005a3fc9f4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4de77c61-558b-422b-b5d2-5830ecf1fab5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.4de77c61-558b-422b-b5d2-5830ecf1fab5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5ea1244a-1ad0-4e32-a5cb-c5da3110bdb4">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.5ea1244a-1ad0-4e32-a5cb-c5da3110bdb4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="de87aa29-6ac3-4975-bea5-90d70fbe719e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7d2a8737-bbf4-432e-85ff-087dd9542462.de87aa29-6ac3-4975-bea5-90d70fbe719e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="245f7c36-7beb-42d8-a11f-2d9935e51105">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="444513fd-6130-46df-88b7-59cf72d458b6">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="8fac92f4-e6d8-4236-a9ab-fa28cd2e6bbe">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="e88d8447-293b-4008-a312-94eb3f2ccd2a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="fb8900fb-9cec-41c9-8102-367de67a12fb">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e8ef0423-a03c-4b47-89a2-576894d64c22">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="dd6e5f13-3ebb-4695-a251-f38fa94e4147">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4affedd8-c4d8-4e0a-9d6d-dbf969b31261">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e4c4954b-4cba-4dc6-9d45-23ade3721126">
+        <baseIcon>refresh.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ldap.ADResetComputerAccount</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

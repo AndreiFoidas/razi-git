@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="a61b0c66-c87e-4234-8988-efd745c5e66e">
+  <descriptionCdata>a61b0c66-c87e-4234-8988-efd745c5e66e.3a951c70-fe97-476b-8843-f91ae677af5c.prompt=Filter String\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.523fae42-f9a3-472b-a238-e3e7ed8f1549.prompt=Distinguished Name\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.583197f6-b0e6-4f3a-b128-17c0acf22dfa.prompt=Enter value for port\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.5ccb4cd2-00d4-43df-a8e8-b25578aac72a.prompt=Property Name\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.6e642691-d300-4fd9-aabb-de1c64e4f215.prompt=Alternate Credentials - Password\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.cfacf6fa-9817-469d-be59-8df57eb35573.prompt=Alternate Credentials - UserName\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.d0b943a6-4c0c-4e5b-9f09-32c5c8dd9b29.prompt=HostName\:
+a61b0c66-c87e-4234-8988-efd745c5e66e.description=&lt;pre&gt;Searches for specific properties in LDAP. Returns a list of the values of the given properties for the first object that passes the filter (given in the corresponding input). The rest of the property values (for the other objects) are stored in a collection that is accessible via the LDAP Search Next Result operation.\n\nInput Parameters\:\nhost - name or IP address of LDAP server to query. Can also be used in the form " host\:port"\nDN - base DN for search\nfilter - search filter (see Note section)\npropertyName - name of the property to return (ex. distinguishedName)\nusername - name of user to connect to LDAP as\npassword - password of user\nport - specify the port in case it is not the default one, or it is not specified in the host path\nuseADAuth - add this input and set to false if using a non AD LDAP server. If false, uses ServerBind instead of secure NTLM based bind.\n\nResponses\:\nobject(s) retrieved - was able to retrieve objects and property values from LDAP. First value returned as returnResult result\nno objects found - no objects were found\nfailure - an invalid or duplicate property name was provided or an error occured. See returnResult for more information\n\nNote\:\nThe filter input can be a simple filter, or a composed one. The filter can be composed by the rules described in "RFC2254 - The String Representation of LDAP Search Filters" which can be found at http\://www.faqs.org/rfcs/rfc2254.html.  \n\nExample of valid filters\:\nmember\=CN\=User1,CN\=Users,DC\=mydomain,DC\=local\n(|(numsubordinates\=1)(entryid\=15))\n(&amp;(mobile\=*)(name\=abcd))\n(&amp;(objectClass\=Person)(|(sn\=Jensen)(cn\=Babs J*)))\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>a61b0c66-c87e-4234-8988-efd745c5e66e.description</annotation>
+  <name>LDAP Search (1)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d0b943a6-4c0c-4e5b-9f09-32c5c8dd9b29">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.d0b943a6-4c0c-4e5b-9f09-32c5c8dd9b29.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="523fae42-f9a3-472b-a238-e3e7ed8f1549">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dn</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.523fae42-f9a3-472b-a238-e3e7ed8f1549.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3a951c70-fe97-476b-8843-f91ae677af5c">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>filter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.3a951c70-fe97-476b-8843-f91ae677af5c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5ccb4cd2-00d4-43df-a8e8-b25578aac72a">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>propertyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.5ccb4cd2-00d4-43df-a8e8-b25578aac72a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cfacf6fa-9817-469d-be59-8df57eb35573">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.cfacf6fa-9817-469d-be59-8df57eb35573.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6e642691-d300-4fd9-aabb-de1c64e4f215">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.6e642691-d300-4fd9-aabb-de1c64e4f215.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="583197f6-b0e6-4f3a-b128-17c0acf22dfa">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a61b0c66-c87e-4234-8988-efd745c5e66e.583197f6-b0e6-4f3a-b128-17c0acf22dfa.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a6f91018-63c0-4ef5-b419-ca07d14357d0">
+    <annotation/>
+    <name>Operation:LDAP Search (1) (a61b0c66-c87e-4234-8988-efd745c5e66e)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="712b0085-a583-450d-bb4b-ea796de6435a">
+      <annotation/>
+      <name>object(s) retrieved</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="63e0cb03-e18c-488b-a024-dc3cb3128456">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="df178509-1b70-4d1b-9389-e344cf589839">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8d4dbdf8-ed6c-40a8-abb8-26c7900287e1">
+      <annotation/>
+      <name>no objects found</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="f997c614-d044-41b4-9207-61992f586fa7">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="aba902f2-ed7d-4baf-9566-5ff3829a6838">
+            <annotation/>
+            <name>Config Item</name>
+            <text>30</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="4031813c-c085-442b-9e86-d561a568c089">
+      <annotation/>
+      <name>failed</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="47cd37bb-82a2-4fe1-9ec7-77c27d4eeca5">
+          <annotation/>
+          <name>returnResult</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="f579de0e-e99f-4092-b89f-68f852994c0b">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d6f3ece1-1178-4da4-8c51-b17df9792076">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="22ca3643-a6c3-4db5-b1d5-940ada3000e9">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d2e885c4-0f8c-4f20-8562-d1c3b9188e1f">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>4ccce852-5adf-4aed-ba43-57f3d9f579e5</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="3dad590b-8bf6-45b5-9a54-ea22b9056761">
+  <descriptionCdata>3dad590b-8bf6-45b5-9a54-ea22b9056761.description=Converts a JSON array or a JSON object to a XML document.\n\nInputs\:\n    json - The JSON array or object (in the form of a String).\n    prettyPrint - The flag for formatting the resulted XML. If it is true the result will contain tabs and newline chars.\nDefault value\: true\nValid values\: true, false\n    showXmlDeclaration - The flag for showing the xml declaration (&lt;?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?&gt;). If this is true then rootTagName can't be empty. \nDefault value\: false\nValid values\: true, false\n    rootTagName - The XML tag name. If this input is empty you will get a list of XML elements.\n    defaultJsonArrayItemName - Default XML tag name for items in a JSON array if there isn't a pair (array name, array item name) defined in jsonArraysNames and jsonArraysItemNames.\nDefault value\: item\n    jsonArraysNames - The list of array names separated by delimiter.\nExamples\: f\:properties\n    jsonArraysItemNames - The corresponding list of array item names separated by delimiter.\nExamples\: f\:property\n    namespacesPrefixes - The list of tag prefixes separated by delimiter.\nExamples\: f,ui\n    namespacesUris - The corresponding list of namespaces uris separated by delimiter.\nExamples\: http\://java.sun.com/jsf/core,urn\:x-hp\:2012\:software\:eve\:uibinding\n    delimiter - The list separator.\nDefault value\: ,\n\nResults\:\n    returnResult - This is the primary output. The resulted XML document or XML elements.\n    returnCode - 0 for success; -1 for failure.\n\t\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n\nExamples\:\n1. json\={ "name"\:"John", "age"\:100, "retired"\:true, "otherInfo"\:null } and the other values with their default values you wil get\n&lt;root&gt;\n  &lt;name&gt;John&lt;/name&gt;\n  &lt;age&gt;100&lt;/age&gt;\n  &lt;retired&gt;true&lt;/retired&gt;  \n&lt;/root&gt;\nNull values are not converted to XML elements.\n\n2. json\=[{"key"\:"year", "value"\:2013}, {"key"\:"month", "value"\:"11"}] and the other values with their default values you wil get\n&lt;item&gt;\n  &lt;key&gt;year&lt;/key&gt;\n  &lt;value&gt;2013&lt;/value&gt;\n&lt;/item&gt;\n&lt;item&gt;\n  &lt;key&gt;month&lt;/key&gt;\n  &lt;value&gt;11&lt;/value&gt;\n&lt;/item&gt;\n3. A complex example that uses all the inputs\:\nprettyPrint\=true\nshowXmlDeclaration\=true\nrootTagName\=myroot\ndefaultJsonArrayItemName\=myitem, \njsonArraysNames\=f\:properties\njsonArraysItemNames\=f\:property \nnamespacesPrefixes\=f,ui\nnamespacesUris\=http\://java.sun.com/jsf/core,urn\:x-hp\:2012\:software\:eve\:uibinding\ndelimiter\=,\njson\=\n{\n  "@id"\:"Page1",\n  "ui\:position"\: {\n    "x"\:1,\n    "y"\:2\n  },\n  "f\:properties"\: [\n    {\n      "key1"\:"value1"\n    },\n    {\n      "key2"\:"value2"\n    }\n  ],\n  "details"\: [\n    {\n      "type"\:"size",\n      "height"\:10,\n      "width"\:10\n    },\n    {\n      "type"\:"color",\n      "name"\:"blue"\n    }\n  ]\n}\n\nThe the result will be\:\n&lt;?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?&gt;\n&lt;myroot xmlns\:f\="http\://java.sun.com/jsf/core" xmlns\:ui\="urn\:x-hp\:2012\:software\:eve\:uibinding" id\="Page1"&gt;\n  &lt;ui\:position&gt;\n    &lt;x&gt;1&lt;/x&gt;\n    &lt;y&gt;2&lt;/y&gt;\n  &lt;/ui\:position&gt;\n  &lt;f\:properties&gt;\n    &lt;f\:property&gt;\n      &lt;key1&gt;value1&lt;/key1&gt;\n    &lt;/f\:property&gt;\n    &lt;f\:property&gt;\n      &lt;key2&gt;value2&lt;/key2&gt;\n    &lt;/f\:property&gt;\n  &lt;/f\:properties&gt;\n  &lt;details&gt;\n    &lt;myitem&gt;\n      &lt;type&gt;size&lt;/type&gt;\n      &lt;height&gt;10&lt;/height&gt;\n      &lt;width&gt;10&lt;/width&gt;\n    &lt;/myitem&gt;\n    &lt;myitem&gt;\n      &lt;type&gt;color&lt;/type&gt;\n      &lt;name&gt;blue&lt;/name&gt;\n    &lt;/myitem&gt;\n  &lt;/details&gt;\n&lt;/myroot&gt;\n
+</descriptionCdata>
+  <annotation>3dad590b-8bf6-45b5-9a54-ea22b9056761.description</annotation>
+  <name>Convert JSON to XML</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="106c0e40-5196-4782-a2dc-efa9b042e4db">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>json</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1a1f30d5-4b7f-4d6b-bcf3-cdf4002e7be1">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>prettyPrint</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7fa2e370-9fff-4ad4-9901-25f12cc75126">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>showXmlDeclaration</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="10eb747f-56be-4467-bcca-4d60497ac6b5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rootTagName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="34fa199d-db1c-4d10-bef3-89ab7abf9aa7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>defaultJsonArrayItemName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="21040029-da35-4f57-b12f-13f1018d1379">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>namespacesPrefixes</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="707e47dc-950e-4c23-a960-d5939794ec26">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>namespacesUris</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="afa72292-026a-4f46-b57b-003a9fb74ca8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>jsonArraysNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1ec2cda1-ef31-469a-a0e6-22b1c98602f3">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>jsonArraysItemNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="24810f7c-65f9-4302-a305-32281acbc5e0">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="5df084ce-cb0d-45c5-802e-daafd9ca5ff6">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="8e4545ab-7cb7-4445-8c31-060a0fbb5f6c">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0bf5aed4-56a8-44b7-893c-3a2e99daedc8">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="56777e67-b9c7-4e6c-9151-d439a9b1414d">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="7299f803-289b-4538-b6fb-fab9dd64d536">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0e443f90-12f1-47a7-9dd0-de7a181b4867">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d45b767d-2499-47aa-bef7-f5562102076b">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6aac1687-fba7-40ca-82f5-b4645ee7f8ca">
+    <baseIcon>text_msg.png</baseIcon>
+    <basePath>/E-mail/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Convert JSON to XML</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

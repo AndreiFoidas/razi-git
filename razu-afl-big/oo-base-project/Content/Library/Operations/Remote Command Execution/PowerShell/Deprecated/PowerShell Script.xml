@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="65b81f1a-ae06-4687-921e-322011d5e55e">
+  <descriptionCdata>65b81f1a-ae06-4687-921e-322011d5e55e.description=&lt;pre&gt;\nRuns an Microsoft PowerShell Script\n\nInputs\:\nscript - PowerShell script to run\n\nResponses\:\nsuccess - ran command\nfailure - failed to run command\n\nPowerShell is available at\: http\://www.microsoft.com/windowsserver2003/technologies/management/powershell/download.mspx\n&lt;/pre&gt;
+65b81f1a-ae06-4687-921e-322011d5e55e.df815fd7-3967-45d4-b05f-b081526a40f2.prompt=Script\:
+</descriptionCdata>
+  <annotation>65b81f1a-ae06-4687-921e-322011d5e55e.description</annotation>
+  <name>PowerShell Script</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="df815fd7-3967-45d4-b05f-b081526a40f2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>script</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>65b81f1a-ae06-4687-921e-322011d5e55e.df815fd7-3967-45d4-b05f-b081526a40f2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="bf8e59b3-3377-43f7-9b20-ce82055ab2a0">
+    <annotation/>
+    <name>Operation:PowerShell Script (65b81f1a-ae06-4687-921e-322011d5e55e)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="0b628803-a41f-4720-9dbc-ef4d092276ac">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="d4d3fd54-7a02-403c-a75a-19e43420f717">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="dd9b4194-43e0-4a26-9645-c49f5fa2c540">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="607f9152-efe2-486a-8e2d-01f2a2206de1">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="48815f86-d84f-4d45-87f2-4195b5dbd720">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3278c29f-8617-403c-acbf-fc43c5a1b7e5">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="8c7663f2-3fc3-42e3-9d48-60b18fdfc809">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9982c695-0edb-4b98-91f1-9706aea74fa1">
+    <baseIcon>PowerShell.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>fcfc3e3c-dea7-4641-8cde-72c757742bd0</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

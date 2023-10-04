@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4552e495-4595-4916-b58b-ce521bdb1e9a">
+  <descriptionCdata>4552e495-4595-4916-b58b-ce521bdb1e9a.1365a26f-6b27-4ed5-bdae-6d95264d09bf.prompt=Worksheet Name\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.204c3acc-fc5d-488e-85d2-c23356d9cda3.prompt=Row data\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.8124b32d-e878-4c06-aab6-bb7585238a4d.prompt=Delimiter for rows\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.963feb92-8d6a-42d2-a760-68f1448e96ab.prompt=Row Index list\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.c0cc6baa-3920-4051-bab4-98b588b88dc8.prompt=Column Index list\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.c8f2ba87-762b-4c31-9ab0-82a30912c499.prompt=Overwrite data rows\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.cd43236c-8b56-4af4-9f2c-515777b19928.prompt=Excel File Name\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.description=&lt;pre&gt;\nAdds rows of data to an Excel document. This operation can be used to add/insert/update data to worksheets and documents. \nXLS, XLSX and XLSM formats are supported. \n\nInputs\:\n    excelFileName - The absolute path to the new Excel document.\nExamples\: c\:\\temp\\test.xls\n    worksheetName - The worksheet to which the data should be added.\nDefault value\: Sheet1 \n    headerData - A delimited list of column names. If left blank, the document will not have a header for the data.\n    rowData - A delimited list of data.\n    columnDelimiter - A delimiter used to separate columns of rowData and headerData.\nDefault value\: comma (,)\n    rowsDelimiter - A delimiter used to separate rows of rowData.\nDefault value\: pipe (|)\n    rowIndex - A list of row indexes.\nExamples\: 1\:3, 10, 15\:20,25\nDefault value\: append from the last row of the Excel worksheet.\n    columnIndex - A list of column indexes.\nExamples\: 1\:3, 10, 15\:20,25\nDefault value\: from index 0 in the Excel worksheet.\n    overwriteData - true if existing data should be overwritten.\nDefault value\: false\n\n\nResult\:\n    returnResult - This is the primary output. Returns the number of rows that were added.\n\nResponses\:\n    success - One or more rows of data were added successfully.\n    failure - Failed to add rows of data to the Excel document.\n\n\nNotes\:\n1. All the index inputs are 0 based.\n2. If rowIndex input is not empty the row count must be equal to the row count of rowData.\n3. If columnIndex input is not empty the column count must be equal to the column count of rowData\n4. If columnIndex input is not empty it's used for every row that is added.\n5. If the rowData contains a numeric value, the cell modified is set to numeric type.\n6. There's a limitation that if the rowData is a date or time value, the operation treats it as a string value.\n7. If there's any change in the worksheet, all values of formula type cells are updated.\n8. If there's any merged region existed in the worksheet, only the top left cell can be modified.\n\nExamples\:\n1. To add a header and a single row of data to an Excel document using comma as the column delimiter, input should be given as follows-\nheaderData - columnName1,columnName2,columnName3\nrowData - value1,value2,value3\ncolumnDelimiter - ,\n\n2. To add a header and multiple rows of data to an Excel document using comma (,) as the column delimiter and pipe (|) as the row delimiter, input should be given as follows-\nheaderData \t- columnName1,columnName2,columnName3\nrowData - value11,value12,value13|value21,value22,value23|value31,value32,value33\ncolumnDelimiter - ,\nrowDelimiter\t- |\n\n3. To add multiple rows of data on multiple columns to an Excel document using comma (,) as the column delimiter and pipe (|) as the row delimiter, input should be given as follows-\nrowData - value11,value12,value13|value21,value22,value23|value31,value32,value33\ncolumnDelimiter - ,\nrowDelimiter\t- |\nrowIndex - 1,3,4\ncolumnIndex - 3\:5\n&lt;/pre&gt;
+4552e495-4595-4916-b58b-ce521bdb1e9a.ec3fd378-6913-4257-9688-52c88ed873cb.prompt=Delimiter for columns\:
+4552e495-4595-4916-b58b-ce521bdb1e9a.ec9899be-2c24-4f6b-8769-2831fe180a5b.prompt=Column names\:
+</descriptionCdata>
+  <annotation>4552e495-4595-4916-b58b-ce521bdb1e9a.description</annotation>
+  <name>Add Excel Data</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="cd43236c-8b56-4af4-9f2c-515777b19928">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>excelFileName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.cd43236c-8b56-4af4-9f2c-515777b19928.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1365a26f-6b27-4ed5-bdae-6d95264d09bf">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>worksheetName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.1365a26f-6b27-4ed5-bdae-6d95264d09bf.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ec9899be-2c24-4f6b-8769-2831fe180a5b">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>headerData</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.ec9899be-2c24-4f6b-8769-2831fe180a5b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="204c3acc-fc5d-488e-85d2-c23356d9cda3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowData</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.204c3acc-fc5d-488e-85d2-c23356d9cda3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ec3fd378-6913-4257-9688-52c88ed873cb">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.ec3fd378-6913-4257-9688-52c88ed873cb.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8124b32d-e878-4c06-aab6-bb7585238a4d">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowsDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.8124b32d-e878-4c06-aab6-bb7585238a4d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="963feb92-8d6a-42d2-a760-68f1448e96ab">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowIndex</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.963feb92-8d6a-42d2-a760-68f1448e96ab.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c0cc6baa-3920-4051-bab4-98b588b88dc8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnIndex</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.c0cc6baa-3920-4051-bab4-98b588b88dc8.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c8f2ba87-762b-4c31-9ab0-82a30912c499">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>overwriteData</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4552e495-4595-4916-b58b-ce521bdb1e9a.c8f2ba87-762b-4c31-9ab0-82a30912c499.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="49e3de57-6e44-4272-b9b3-6ce2f6b67f00">
+    <annotation/>
+    <name>Operation Add Excel Data (4552e495-4595-4916-b58b-ce521bdb1e9a)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="8203d407-5111-4b5e-88be-284121d6c900">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="47a659ed-f4f4-4809-be81-31e18f1d821f">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="8a7a99b3-6096-4208-893b-592dcb7760e2">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="a4c52bdb-3671-4b0b-9b4b-62fcf06758b9">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="11a493c1-7f8d-4571-88fc-8557a3c148f0">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d19939f0-d7c2-4a4d-be33-ba72815af230">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ae76f0ac-62d0-4193-bc8f-1cb39e2a59b4">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="67575f4b-2f11-44e7-8d10-a65770fb5f14">
+    <baseIcon>sql_query.png</baseIcon>
+    <basePath>/Databases/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d2dc8ee9-d361-4d24-aa14-84a2bb979111">
+        <baseIcon>add.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-excel-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.excel.ops.AddExcelData</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

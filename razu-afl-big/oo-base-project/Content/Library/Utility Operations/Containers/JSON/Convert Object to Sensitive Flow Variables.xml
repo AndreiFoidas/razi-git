@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="749bd176-fe90-4e03-992a-d793429192d1">
+  <descriptionCdata>749bd176-fe90-4e03-992a-d793429192d1.2f960c81-6055-4094-be81-557da5ab8c4e.prompt=Value\:
+749bd176-fe90-4e03-992a-d793429192d1.34050e4c-ca08-466e-922b-38f421a26432.description=This operation iterates through a string that contains an array in the JavaScript Object Notation format (JSON).  Each time this operation is called, it places the value of the current array element into the "returnResult" output and advances the iterator to the next array element.\n\nThe JSON format is used to encode arrays and other values using JavaScript notation.  For arrays, this means that the values need to be enclosed by square brackets, and each element in the array can be a string (enclosed by quotes), a number, true, false, null, or nested array or object.  Commas are always used as delimiters between array elements, and they can also appear within string elements. \n\nThe benefits of JavaScript arrays are that delimiters are fixed and cannot be confused with data, and that complex nesting of arrays and objects are supported.  The description of the enclosing folder, /Library/Utility Operations/Container/JSON has more examples, and the JSON format is described completely at http\://www.json.org.\n\nInputs\:\n    array - The JavaScript array that will be iterated through. A normal OO list is NOT a JavaScript array.\nExamples\:\n    For example, the following is a simple JSON array\:\n        [ "cat", "dog", "horse" ]\n    The equivalent OO list (that is not a JavaScript array) is\:\n        cat,dog,horse\n\n Results\:\n    returnResult - This is the primary output and contains the current array element or an exception message if something went wrong.  When incorporating this operation into a flow, you should assign a meaningful result value from this field.\n\nResponses\:\n   has more - The iterator has not yet reached the end of the array. The "returnResult" output will be populated with the value of the current element in the array, and the iterator will advance to the next element in the array.\n   no more - The iterator has reached the end of the array, and there is no more data to return.  The iterator will become undefined after this call, which basically will reset it so that if called again, this operation will begin another iteration at the beginning of the array.\n   failure - There was some error in iterating through the list, and the "returnResult" output will contain information about the error. This will occur if the input array is not a valid JavaScript array. You may wish to use a tool such as http\://www.jsonlint.com/ to help diagnose problems with JavaScript Object Notation.\n\nNotes\:\n1. Modifying the contents of the array during iteration is not supported unless the iteration has finished.\n2. The operation supports iterating through nested arrays.
+749bd176-fe90-4e03-992a-d793429192d1.8192ad63-f403-4ede-9e5e-f1e170164c81.description=&lt;pre&gt;\nThis operation adds a flow variable to the global context. The variable is available in the current flow and its child flows.\n\nInputs\:\n    keyName - The name of the flow variable to add.\n    myValue - The value to assign to the flow variable.\n\nResults\:\n    returnResult - This is the primary output. It contains the value of "myValue" input field.\n\nResponses\:\n    success - The operation completed as stated in the description.\n\nNote\:\n   If a flow variable with the same name already exists, its value will be overwritten.\n&lt;/pre&gt;
+749bd176-fe90-4e03-992a-d793429192d1.9f3c0349-240f-4c16-8415-ac11d042aab8.description=Accepts an object in the JavaScript Object Notation format (JSON) and returns a value for the specified key.\n\nThe JSON format encodes objects as a set of unordered key/value pairs, which is similar to a structure or map in other programming languages. \n For example\:\n   { "city" \: "Palo Alto", \n     "state" \: "CA" }\nis an object with two elements one with the name "city" having the value "Palo Alto", and the other being the name "state" with the value "CA". \nThis operation would return "Palo Alto" if user enters "city" as a key.\n\nIf the input object contains JSON array, array index can be used in the key input. For example, \n{ "location"\: [\n      {"city"\: "Roseville", "country"\: "United States"},\n      {"city"\: "Cluj", "country"\: "Romania"},\n      {"city"\: "Yehud", "country"\: "Israel"}]    \n}\nThe operation would return "Roseville" if user enters "location[0].city" as a key.\n\nJavaScript objects are useful for representing structured data, and are especially when used within an array.  For example, an operation that retrieves\na set of incidents from an external system may return the entire list in one array of incident objects.  The description of the enclosing folder,\n/Library/Utility Operations/Container/JSON has more examples, and the JSON format is described completely at http\://www.json.org.\n\nInputs\:\n     object - The JavaScript object. The operation will return a failure if it is not a JavaScript object.\n     key - The key in the object to get the value of.\n\nResponses\:\n    success -  The value was successfully returned for the specified key. \n    failure -  There was some error in processing the object, most likely because the object is not in valid JSON or the specified key does not exist in the object.  \n                  You may wish to use a tool such as http\://www.jsonlint.com/ to help diagnose problems with JavaScript Object Notation.\n\nResults\:\n    returnResult - The primary output will be the value for the specified key in the object.\n\nNote\:\n    If the value in JSON object is in scientific notation, the returned output will be converted to an equivalent decimal number. Ex, 2.9e+1 will be converted to 29.
+749bd176-fe90-4e03-992a-d793429192d1.description=Accepts an object in the JavaScript Object Notation format (JSON) marked as sensitive and creates and populates a sensitive flow variable for each member in the object.\n\nThe JSON format encodes objects as a set of unordered key/value pairs, which is similar to a structure or map in other programming languages.\n  For example,\n   { "city" \: "Palo Alto", \n     "state" \: "CA" }\nis an object with two elements one with the name "city" having the value "Palo Alto", and the other being the name "state" with the value "CA".\nThis operation would create the flow variables city and state with the values "Palo Alto" and "CA".\n\nA optional prefix string can be specified that will be prepended to each flow variable that is created.  For example, if the prefix is set to "my.", then\nthen the above object would result in the variables my.city (with value "Palo Alto") and my.state (with value "CA").  This can be useful if flow variables\nalready exist with the given names to avoid overwriting their values.\n\nInputs\:\n    object - The JavaScript object that will be converted into flow variables.  The operation will return a failure if the it is not a JavaScript object.\n    prefix - The prefix to prepend to each flow variable name that will be created. This is useful for creating unique variable names.\n\nResponses\:\n    success -  The flow variables were successfully created from the object.\n    failure - There was some error in processing the object, most likely because the object is not in valid JSON.  You may wish to use a\n                  tool such as http\://www.jsonlint.com/ to help diagnose problems with JavaScript Object Notation.\n\nResults\:\n   returnResult - A message specifying the success of the operation in case the operation succeeds, or the error message in case the operation fails.\n
+749bd176-fe90-4e03-992a-d793429192d1.e4825f80-a58f-447e-a0e9-33de18719fbd.description=Accepts an object in the JavaScript Object Notation format (JSON) and returns the keys of the object as a JSON array.\nA JSON object is an unordered set of key/value pairs, therefore the order of the keys returned is arbitrary.\n\nThe JSON format encodes objects as a set of unordered key/value pairs, which is similar to a structure or map in other programming languages. \nFor example,\n   { "city" \: "Palo Alto", \n     "state" \: "CA" }\nis an object with two elements one with the name "city" having the value "Palo Alto", and the other being the name "state" with the value "CA".  \nThis operation would return keys "city", "state".\n\nJavaScript objects are useful for representing structured data, and are especially when used within an array.  For example, an operation that retrieves\na set of incidents from an external system may return the entire list in onearray of incident objects.  The description of the enclosing folder,\n/Library/Utility Operations/Container/JSON has more examples, and the JSON format is described completely at http\://www.json.org.\n\nInputs\:\n   object -  The JavaScript object. The operation will return a failure if it is not a JavaScript object.\n\nResponses\:\n   success -  The keys of the object were successfully returned, in arbitrary order.\n   failure -  There was some error in processing the object, most likely because the object is not in valid JavaScript Object Notation. \n                  You may wish to use a tool such as http\://www.jsonlint.com/ to help diagnose problems with JavaScript Object Notation.\n\nResults\:\n     returnResult - The primary output will be the keys of the object, in arbitrary order.
+</descriptionCdata>
+  <annotation>749bd176-fe90-4e03-992a-d793429192d1.description</annotation>
+  <name>Convert Object to Sensitive Flow Variables</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="e70d26be-afcc-4658-84f8-5a9f21b9400f">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>object</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aaca843c-16af-4cea-b91a-0220f463147f">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>prefix</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="2fd97130-08a7-4b3a-810a-9df1fc852799">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ec87d719-8fff-4bca-b48d-ac4cdc2c87ca">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="6a4a55d8-f6cc-4e7c-9bf4-4b06f19386b5">
+      <annotation/>
+      <name>exception</name>
+      <fieldName>exception</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="9cb2b97c-50b2-482e-a305-387cfc83d401">
+      <annotation/>
+      <name>returnResult</name>
+      <fieldName>returnResult</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="20f57679-b6d6-424f-9cdb-3d9e3f0e712a">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="26b19293-5c91-4ce1-bc7a-73d50670a42d">
+    <baseIcon>text_code_java.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="e4825f80-a58f-447e-a0e9-33de18719fbd">
+      <annotation>749bd176-fe90-4e03-992a-d793429192d1.e4825f80-a58f-447e-a0e9-33de18719fbd.description</annotation>
+      <name>Get Object Keys</name>
+      <bounds>
+        <x>30.0</x>
+        <y>30.0</y>
+      </bounds>
+      <layer>4</layer>
+      <hideInbound>false</hideInbound>
+      <iconSpec id="c1507f29-6e7d-47c8-99c9-2b219b2b6c94">
+        <baseIcon>text_msg.png</baseIcon>
+        <basePath>/E-mail/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <encryptRawResult>true</encryptRawResult>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="48f4e6cc-6f2c-4a3c-b3dc-99dfbd2e57c9">
+          <annotation>String representation of a JSON object. Objects in JSON are a collection of name value pairs separated by a colon and surrounded with curly brackets {}. The name must be a string value and the value can be a single string or any valid JSON object or array. Examples: {"one":1, "two":2}, {"one":{"a":"a","B":"B"}, "two":"two", "three":[1,2,3.4]}</annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>object</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt/>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="26b85a5b-e396-4027-bc33-32e294d80579">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>34050e4c-ca08-466e-922b-38f421a26432</refId>
+          </destination>
+          <source>
+            <refId>e4825f80-a58f-447e-a0e9-33de18719fbd</refId>
+          </source>
+          <positions>
+            <point>
+              <x>1019.0</x>
+              <y>236.0</y>
+            </point>
+            <point>
+              <x>1199.0</x>
+              <y>236.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="d82a5b0e-b95d-41c1-90b5-9cb04a7920b6">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d68b1b4c-6bf9-41f0-b776-ee1348165742</refId>
+          </destination>
+          <source>
+            <refId>e4825f80-a58f-447e-a0e9-33de18719fbd</refId>
+          </source>
+          <positions>
+            <point>
+              <x>80.0</x>
+              <y>64.0</y>
+            </point>
+            <point>
+              <x>80.0</x>
+              <y>274.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>e7805628-5540-4dc9-bef1-f2f2c0c589f4</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="50abff7e-fd32-4be0-ae34-fbc2b8afbe8d">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>exception</contextKey>
+          <expression id="e4fcd9b9-69cc-4fcd-9b72-ff55d31db923">
+            <annotation/>
+            <name>Result Field: exception</name>
+            <fieldName>exception</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <replaceAllFilter id="f232b6fe-ec4a-46a9-966d-5524d1b45efb">
+                <annotation/>
+                <name>Replace</name>
+                <ignoreCase>false</ignoreCase>
+                <searchString>${object}</searchString>
+                <replaceString>**** </replaceString>
+                <replaceType>ALL</replaceType>
+              </replaceAllFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="8f083e33-23ff-43cd-9418-7c02c83f3f11">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>keys</contextKey>
+          <expression id="41617607-6a49-4c1e-9f8e-4bf826f39b07">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+          <encrypted>true</encrypted>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="fabe842f-b9f6-45d7-8251-cf9ab1d9dc0d">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>450.0</x>
+        <y>30.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="388444b7-2294-4903-bfb2-a63f1e4a7fcb">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>returnResult</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Object successfully split</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="3a909aa1-5c1a-4604-a954-9e45dd7a6a51">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>fabe842f-b9f6-45d7-8251-cf9ab1d9dc0d</refId>
+          </destination>
+          <source>
+            <refId>fabe842f-b9f6-45d7-8251-cf9ab1d9dc0d</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments>
+        <flowVariableAssignment id="acac8658-a545-44d2-9d96-8c7345ff4fd9">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>returnResult</contextKey>
+          <expression id="7c6d2abb-ca3c-4f18-b0a9-626004c9bdfb">
+            <annotation/>
+            <name>Input: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>INPUT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+    </returnStep>
+    <step id="8192ad63-f403-4ede-9e5e-f1e170164c81">
+      <annotation>749bd176-fe90-4e03-992a-d793429192d1.8192ad63-f403-4ede-9e5e-f1e170164c81.description</annotation>
+      <name>Set Global Flow Variable</name>
+      <bounds>
+        <x>450.0</x>
+        <y>240.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <iconSpec id="1c915e61-c228-482f-9020-b4ce9a8f338c">
+        <baseIcon>jar.png</baseIcon>
+        <basePath>Others/</basePath>
+        <readOnly>false</readOnly>
+        <layers>
+          <iconSpec id="673bc91c-462a-4ed8-83b5-ff1dda03b210">
+            <baseIcon>edit.png</baseIcon>
+            <basePath>Annotations/</basePath>
+            <readOnly>false</readOnly>
+            <layers/>
+          </iconSpec>
+        </layers>
+      </iconSpec>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <encryptRawResult>true</encryptRawResult>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="ca3d13c1-3948-4013-aba6-69bf32cdb881">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>keyName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>${prefix}${crtKey}</value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="2f960c81-6055-4094-be81-557da5ab8c4e">
+          <annotation/>
+          <fromContextKey>crtValue</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>myValue</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>749bd176-fe90-4e03-992a-d793429192d1.2f960c81-6055-4094-be81-557da5ab8c4e.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="e4bc6926-09f4-48ec-b9ff-23b73dc29f90">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>34050e4c-ca08-466e-922b-38f421a26432</refId>
+          </destination>
+          <source>
+            <refId>8192ad63-f403-4ede-9e5e-f1e170164c81</refId>
+          </source>
+          <positions>
+            <point>
+              <x>522.5</x>
+              <y>336.6386554621849</y>
+            </point>
+            <point>
+              <x>290.0</x>
+              <y>140.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>4db41624-575a-4712-bef0-76e51bd2fd7e</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="34050e4c-ca08-466e-922b-38f421a26432">
+      <annotation>749bd176-fe90-4e03-992a-d793429192d1.34050e4c-ca08-466e-922b-38f421a26432.description</annotation>
+      <name>Array Iterator</name>
+      <bounds>
+        <x>240.0</x>
+        <y>30.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <iconSpec id="fccf1e32-c2d2-4b5a-980b-a5c556f8dfdc">
+        <baseIcon>flow.png</baseIcon>
+        <basePath>/Basic/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <encryptRawResult>true</encryptRawResult>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="a5378db2-8bd4-41e9-8c8b-8887bb00a706">
+          <annotation/>
+          <fromContextKey>keys</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>array</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt/>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="0e89691f-87f0-4e4d-bff4-500d8db3dfe9">
+          <annotation/>
+          <name>has more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>has more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>9f3c0349-240f-4c16-8415-ac11d042aab8</refId>
+          </destination>
+          <source>
+            <refId>34050e4c-ca08-466e-922b-38f421a26432</refId>
+          </source>
+          <positions>
+            <point>
+              <x>1254.5</x>
+              <y>404.3076923076923</y>
+            </point>
+            <point>
+              <x>1379.0</x>
+              <y>493.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="8ccedb2a-cb65-4835-9e8c-fcef6015a293">
+          <annotation/>
+          <name>no more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>no more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>fabe842f-b9f6-45d7-8251-cf9ab1d9dc0d</refId>
+          </destination>
+          <source>
+            <refId>34050e4c-ca08-466e-922b-38f421a26432</refId>
+          </source>
+          <positions>
+            <point>
+              <x>296.0</x>
+              <y>125.65028901734104</y>
+            </point>
+            <point>
+              <x>980.0</x>
+              <y>140.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="27cb0f8b-92d7-4ba1-83ec-b6e7ccd75f6d">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d68b1b4c-6bf9-41f0-b776-ee1348165742</refId>
+          </destination>
+          <source>
+            <refId>34050e4c-ca08-466e-922b-38f421a26432</refId>
+          </source>
+          <positions>
+            <point>
+              <x>290.0</x>
+              <y>64.0</y>
+            </point>
+            <point>
+              <x>80.0</x>
+              <y>274.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>50efc8cb-f1e7-4123-984c-979039f22f2c</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="355e7786-416a-4c02-b754-924d3f0a8d8c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>exception</contextKey>
+          <expression id="3d6ca59c-218a-4dd7-886e-3e189b0a83f3">
+            <annotation/>
+            <name>Result Field: exception</name>
+            <fieldName>exception</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <replaceAllFilter id="94480621-c79d-47a3-bab5-becaf6ed9b50">
+                <annotation/>
+                <name>Replace</name>
+                <ignoreCase>false</ignoreCase>
+                <searchString>${object}</searchString>
+                <replaceString>**** </replaceString>
+                <replaceType>ALL</replaceType>
+              </replaceAllFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="31d65923-e55d-4e2d-9941-d30e5b5fbf88">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>crtKey</contextKey>
+          <expression id="b3266ea4-b571-43af-a193-697fd450602d">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="9f3c0349-240f-4c16-8415-ac11d042aab8">
+      <annotation>749bd176-fe90-4e03-992a-d793429192d1.9f3c0349-240f-4c16-8415-ac11d042aab8.description</annotation>
+      <name>Get Value from Object</name>
+      <bounds>
+        <x>240.0</x>
+        <y>240.0</y>
+      </bounds>
+      <layer>3</layer>
+      <hideInbound>false</hideInbound>
+      <iconSpec id="1b769f1a-880d-428d-8ab1-10a635982f36">
+        <baseIcon>text_msg.png</baseIcon>
+        <basePath>/E-mail/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <encryptRawResult>true</encryptRawResult>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="c90b39b5-2c9d-4ab0-bb1b-f84c0c5412a4">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>object</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt/>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="b914ab04-d9f8-44c8-ab72-b5347b42c075">
+          <annotation/>
+          <fromContextKey>crtKey</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>key</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt/>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="411b47f0-2bdc-4168-8c3e-9c7b79da00fd">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>8192ad63-f403-4ede-9e5e-f1e170164c81</refId>
+          </destination>
+          <source>
+            <refId>9f3c0349-240f-4c16-8415-ac11d042aab8</refId>
+          </source>
+          <positions>
+            <point>
+              <x>1379.0</x>
+              <y>476.0</y>
+            </point>
+            <point>
+              <x>1575.0</x>
+              <y>370.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="4d0e6103-963e-47c2-b675-9a91de759d2b">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d68b1b4c-6bf9-41f0-b776-ee1348165742</refId>
+          </destination>
+          <source>
+            <refId>9f3c0349-240f-4c16-8415-ac11d042aab8</refId>
+          </source>
+          <positions>
+            <point>
+              <x>290.0</x>
+              <y>274.0</y>
+            </point>
+            <point>
+              <x>80.0</x>
+              <y>274.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>3ea75782-b329-4e31-8a69-2f0cef3d9ee9</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="435142a8-d474-4dca-a745-49c6f4ab82a5">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>exception</contextKey>
+          <expression id="7df1624f-2be8-42a5-9807-239a9ffdb5aa">
+            <annotation/>
+            <name>Result Field: exception</name>
+            <fieldName>exception</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <replaceAllFilter id="ce37f876-edd9-496a-acc6-1295ca928e02">
+                <annotation/>
+                <name>Replace</name>
+                <ignoreCase>false</ignoreCase>
+                <searchString>${object}</searchString>
+                <replaceString>**** </replaceString>
+                <replaceType>ALL</replaceType>
+              </replaceAllFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="ceb3c3a6-7ef2-4d18-9790-bcc115f58756">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>crtValue</contextKey>
+          <expression id="2d86e7a5-6f58-4641-803c-24f03264425f">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+          <encrypted>true</encrypted>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="d68b1b4c-6bf9-41f0-b776-ee1348165742">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>30.0</x>
+        <y>240.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>true</recordRawOutput>
+      <recordPrimaryOutput>true</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="c6c0eb99-46ba-489a-8293-0bb997e45d23">
+          <annotation/>
+          <fromContextKey>exception</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>returnResult</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Error</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="00e2e7e6-04e0-4075-94b7-f4294d4cc437">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>exception</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="ea4eca7c-7a66-411c-b9ba-3cc722515b1d">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d68b1b4c-6bf9-41f0-b776-ee1348165742</refId>
+          </destination>
+          <source>
+            <refId>d68b1b4c-6bf9-41f0-b776-ee1348165742</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments>
+        <flowVariableAssignment id="68bd4bcd-6687-4453-b0c3-6de8b6d85aba">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>returnResult</contextKey>
+          <expression id="515fc74b-be2f-44c7-b48c-275da7ef9bda">
+            <annotation/>
+            <name>Input: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>INPUT</sourceType>
+            <filters>
+              <selectLineFilter id="55962ad3-3131-4a7b-950f-06708ec73c85">
+                <annotation/>
+                <name>Select Line</name>
+                <text>0</text>
+                <type>LINE_NUMBER_(STARTING_FROM_0)</type>
+                <autoSelectLineEnding>true</autoSelectLineEnding>
+                <windowsLineEnding>false</windowsLineEnding>
+                <unixLineEnding>false</unixLineEnding>
+              </selectLineFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="626def7c-bcd2-4e06-8e0e-950a26acfcde">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>exception</contextKey>
+          <expression id="80ec857b-9c76-490d-a429-21209975484c">
+            <annotation/>
+            <name>Input: exception</name>
+            <fieldName>exception</fieldName>
+            <sourceType>INPUT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+    </returnStep>
+  </steps>
+  <startSteps>e4825f80-a58f-447e-a0e9-33de18719fbd</startSteps>
+</flow>

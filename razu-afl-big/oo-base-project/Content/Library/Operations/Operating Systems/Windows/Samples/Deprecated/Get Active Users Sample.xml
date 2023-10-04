@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="69a43d5a-5197-4717-ad15-523aabf390e4">
+  <descriptionCdata>69a43d5a-5197-4717-ad15-523aabf390e4.19150db3-f84d-40db-be7d-0763180a77da.transition.description=There are ${count} users logged into host. They are ${users}.
+69a43d5a-5197-4717-ad15-523aabf390e4.46626b27-8562-421b-a889-a34fc3e31129.description=&lt;pre&gt;This operation gets the number of active users logged in to a windows host, and their account names.\n\nInputs\:\nhost - the host to get the users on\ndelimiter - A delimiter to put between users that are active.\n\nreturns\:\nThe number of users currently logged on to host (includes the account used to check this number).\n\nextra results\:\nusers - The usernames of all users logged into host.\nterminalUsers - The usernames of all users logged into the host via terminal services.\ninactiveUsers - The usernames of all users logged into the host but not currently connected.\nlocalUsers - The usernames of all users logged into host locally.\n\nResponses\:\nsuccess - The operation succeeded.\nfailure - an error occurred.\n\nNOTE\: This operation runs the windows command qwinsta on the Central machine. Thus, this operation requires a Windows Central.\n&lt;/pre&gt;
+69a43d5a-5197-4717-ad15-523aabf390e4.c0640d1a-6663-4d7c-835c-4944fecf59fc.description=Here are results you can use in your flows\:\n\nReturn value\:\nThis is the number of users currently logged into ${host}.\nIts current value is\: ${count}.\n\nContext Values\:\nusers\:\nThis is the usernames of all users currently logged into ${host}.\nIts current value is ${users}.
+69a43d5a-5197-4717-ad15-523aabf390e4.c0640d1a-6663-4d7c-835c-4944fecf59fc.prompt=Here are results you can use in your flows\:\n\nReturn value\:\nThis is the number of users currently logged into ${host}.\nIts current value is\: ${count}.\n\nContext Values\:\nusers\:\nThis is the usernames of all users currently logged into ${host}.\nIts current value is ${users}.\n\nterminalUsers\:\nThis is the usernames of all users currently logged remotely into ${host}.\nIts current value is ${terminalUsers}.\n\ninactiveUsers\:\nThis is the usernames of all inactive users that were logged remotely into ${host}.\nIts current value is ${inactiveUsers}.\n\nlocalUsers\:\nThis is the usernames of all local users currently logged into ${host}.\nIts current value is ${localUsers}.
+69a43d5a-5197-4717-ad15-523aabf390e4.cab6b382-87a8-4963-b386-3d9b1ba094ee.description=An unknown error occurred.
+69a43d5a-5197-4717-ad15-523aabf390e4.cab6b382-87a8-4963-b386-3d9b1ba094ee.prompt=An unknown error occurred.
+69a43d5a-5197-4717-ad15-523aabf390e4.description=&lt;pre&gt;Demonstrates how to use the Get Active Users operation which gets the number of active users logged in to a windows host, and their account names.\n\nInputs\:\nhost - the host to get the users on\ndelimiter - A delimiter to put between users that are active.\n\nreturns\:\nThe number of users currently logged on to host (includes the account used to check this number).\n\nextra results\:\nusers - The usernames of all users logged into host.\nterminalUsers - The usernames of all users logged into the host via terminal services.\ninactiveUsers - The usernames of all users logged into the host but not currently connected.\nlocalUsers - The usernames of all users logged into host locally.\n\nResponses\:\nsuccess - The operation succeeded.\nfailure - an error occurred.\n\nNOTE\: This operation runs the windows command qwinsta on the Central machine. Thus, this operation requires a Windows Central.\n&lt;/pre&gt;
+69a43d5a-5197-4717-ad15-523aabf390e4.e237eb4f-ee0b-4bb5-a1d8-c067dc55ac63.prompt=Enter a value for host
+69a43d5a-5197-4717-ad15-523aabf390e4.fe3d0e4d-ecb4-4261-bf32-d76a2822f81f.transition.description=An unknown error occurred.
+</descriptionCdata>
+  <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.description</annotation>
+  <name>Get Active Users Sample</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="cc6e49e6-e29d-489d-a78b-c04c5aff2171">
+    <annotation/>
+    <name>Operation:Get Active Users Sample (69a43d5a-5197-4717-ad15-523aabf390e4)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="a11b3135-0c34-4099-9f66-8bcfd67b4430">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="9fd742c7-d983-42f6-b6ce-b41373b65694">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>Value</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="546d0e75-f978-475e-91fe-38788a840ce4">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="46626b27-8562-421b-a889-a34fc3e31129">
+      <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.46626b27-8562-421b-a889-a34fc3e31129.description</annotation>
+      <name>Get Active Users</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>0</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>true</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <resultContextKey>count</resultContextKey>
+      <userPrompt/>
+      <scriptlet id="146c129b-223f-4951-a2bb-d2174e6793f8">
+        <annotation/>
+        <name>Step:Get Active Users Flow:Get Active Users Sample (46626b27-8562-421b-a889-a34fc3e31129)</name>
+        <script>users = scriptletContext.get("users");
+terminalUsers = scriptletContext.get("terminalUsers");
+inactiveUsers = scriptletContext.get("inactiveUsers");
+localUsers = scriptletContext.get("localUsers");
+
+if ((users == null)||(users.length() == 0))
+  	users = "empty";
+
+if ((terminalUsers == null)||(terminalUsers.length() == 0))
+  	terminalUsers = "empty";
+
+if ((inactiveUsers == null)||(inactiveUsers.length() == 0))
+  	inactiveUsers = "empty";
+
+if ((localUsers == null)||(localUsers.length() == 0))
+  	localUsers = "empty";
+
+scriptletContext.put("users",users);
+scriptletContext.put("terminalUsers",terminalUsers);
+scriptletContext.put("inactiveUsers",inactiveUsers);
+scriptletContext.put("localUsers",localUsers);</script>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="e237eb4f-ee0b-4bb5-a1d8-c067dc55ac63">
+          <annotation/>
+          <toContextKey>host</toContextKey>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>69a43d5a-5197-4717-ad15-523aabf390e4.e237eb4f-ee0b-4bb5-a1d8-c067dc55ac63.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="e72a010e-1d64-4639-8e99-c80b1558b6ec">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>delimiter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>,</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0417e8e3-ce42-46cb-8841-faa82965c11b">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Environment</inputSymbol>
+          <listDelimiter/>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="a7095ea6-0f0f-4c6c-9315-809f7c76bb6d">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Command</inputSymbol>
+          <listDelimiter/>
+          <value>qwinsta</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="bf7e0554-e0e0-4f2f-b9d6-eb33b4c61099">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Path</inputSymbol>
+          <listDelimiter/>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="7dc87311-a562-48c3-bd59-283ea4dafbaf">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Arguments</inputSymbol>
+          <listDelimiter/>
+          <value>/server:${host}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="842b59c3-a68c-49df-9a04-650cb050e43f">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Argument</inputSymbol>
+          <listDelimiter/>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="64b9bb6c-97ab-40c3-909a-de3e316ccccf">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey/>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Working_Dir</inputSymbol>
+          <listDelimiter/>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="fe3d0e4d-ecb4-4261-bf32-d76a2822f81f">
+          <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.fe3d0e4d-ecb4-4261-bf32-d76a2822f81f.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>cab6b382-87a8-4963-b386-3d9b1ba094ee</refId>
+          </destination>
+          <source>
+            <refId>46626b27-8562-421b-a889-a34fc3e31129</refId>
+          </source>
+          <positions>
+            <point>
+              <x>233.87189710353573</x>
+              <y>122.630062620547</y>
+            </point>
+            <point>
+              <x>94.69999999999999</x>
+              <y>349.7</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>491.7712097504549</x>
+            <y>21.617567238548435</y>
+          </labelPosition>
+        </transition>
+        <transition id="19150db3-f84d-40db-be7d-0763180a77da">
+          <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.19150db3-f84d-40db-be7d-0763180a77da.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>c0640d1a-6663-4d7c-835c-4944fecf59fc</refId>
+          </destination>
+          <source>
+            <refId>46626b27-8562-421b-a889-a34fc3e31129</refId>
+          </source>
+          <positions>
+            <point>
+              <x>309.974005716985</x>
+              <y>81.6120647005479</y>
+            </point>
+            <point>
+              <x>522.0</x>
+              <y>88.45161290322581</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>366.31058699678005</x>
+            <y>-11.123246433780531</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>b68189c5-f83f-4846-a993-83b7cedaf0d2</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="ca58e7a0-eade-4f08-a0d5-e11a1b342a1b">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>Code</contextKey>
+          <expression id="da8facb4-de7e-43f0-86e9-ef7f20a01932">
+            <annotation/>
+            <name>Result Field: Code</name>
+            <fieldName>Code</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="233f050f-98db-43d4-ab10-27652f146148">
+          <annotation>Automatically created during conversion</annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>count</contextKey>
+          <expression id="ff82777f-6022-4ff5-9ade-dac02be5c39a">
+            <annotation>Automatically created during conversion</annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="cab6b382-87a8-4963-b386-3d9b1ba094ee">
+      <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.cab6b382-87a8-4963-b386-3d9b1ba094ee.description</annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>69a43d5a-5197-4717-ad15-523aabf390e4.cab6b382-87a8-4963-b386-3d9b1ba094ee.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="89840bd6-d7e1-4559-b4df-d0ab585490c3">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>cab6b382-87a8-4963-b386-3d9b1ba094ee</refId>
+          </destination>
+          <source>
+            <refId>cab6b382-87a8-4963-b386-3d9b1ba094ee</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="d3ff6f89-30d1-4ef4-bdcb-e9663d448766">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="e4a6c870-f502-4829-89c6-4cfd9fea6c69">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>An unknown error occurred.</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="2955e4be-8268-4cf0-937a-d0d1953da157">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="c0640d1a-6663-4d7c-835c-4944fecf59fc">
+      <annotation>69a43d5a-5197-4717-ad15-523aabf390e4.c0640d1a-6663-4d7c-835c-4944fecf59fc.description</annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>150.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>3</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>69a43d5a-5197-4717-ad15-523aabf390e4.c0640d1a-6663-4d7c-835c-4944fecf59fc.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="b69b4c89-32dc-42e0-bb6f-5970b5fe48d7">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>c0640d1a-6663-4d7c-835c-4944fecf59fc</refId>
+          </destination>
+          <source>
+            <refId>c0640d1a-6663-4d7c-835c-4944fecf59fc</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="9c0c78be-a3e8-4d66-a4b5-4441432d7783">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="560e98c6-b21b-4179-b272-f2621bccec17">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>operation successful.</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="dcd3a040-799c-43e7-a8cc-ddbd0fe9a708">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>46626b27-8562-421b-a889-a34fc3e31129</startSteps>
+</flow>

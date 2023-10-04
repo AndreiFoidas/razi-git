@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="26c8a67b-a70b-42e9-b65c-9cd13f94f8f9">
+  <descriptionCdata>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.4d48eb7c-7b8e-4fdf-a0d2-652f95108824.prompt=UserName\:
+26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.719894a3-1011-4b19-87a3-0d753ff31e90.prompt=HostName\:
+26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.866889f2-959a-4542-b700-e886ccaca123.prompt=Password\:
+26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.95d542ff-c659-4296-a46c-1e95e9d3f2d9.prompt=Port Number\:
+26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.description=&lt;pre&gt;This operation runs multiple SSH commands by creating a ssh shell and checking output against regular expressions.\n\nInputs\:\n    host - Hostname or IP address.\n    port - The port number for running the command. It overrides the port given inside the host input in a syntax like host\:port if used.\n    command - The commands to execute. This should be made up of "send &lt;command&gt;" and "expect &lt;regular expression&gt;" statements separated by newlines. Check the notes section for example.\n    username - Username to connect as.\n    password - Password of user. If using a private key file this will be used as the passphrase for the file.\n    privateKeyFile - The absolute path to the private key to be used during ssh authentication.\n    timeout - (optional) time in milliseconds to wait for the command to complete.\nDefault value\: 90000.\n    newlineCharacters - The character sequence to send as the enter key being pressed after each 'send' statement as the send expect script is processed in the command input.\nValid values\: '\\r\\n', '\\n', '\\r', or a comma delimited list of ASCII escape sequences.\nDefault value\: '\\n'\n    characterDelay - The delay in milliseconds between sending characters of the SSH commands. \nDefault value\: 0.\n    characterSet - The characterSet name for input stream encoding from the target machine.\nValid values\: UTF-8, EUC-JP, Shift_JIS.\nDefault value\: UTF-8.\n    sessionId - Identifier of a shared SSH shell session created by SSH Shell Logon. Instead of creating a new SSH shell session this one will be used if specified.\n\nResults\:\n    returnResult - This is the primary output. It contains the STDOUT of the command, if the operation completed successfully, or an error message otherwise. \n    visualized - The output of the command in XML format.\n    STDOUT - The STDOUT of the command.\n\nResponses\:\n    success - The command was executed successfully.\n    failure - The connection could not be established or the commands are invalid for this operation (not for target machine's shell).\n\nNotes\:\n\nThe operation should always be used as a set like  [SSH Shell Logon] -&gt; [SSH Shell] -&gt; [SSH Shell Logoff] \n\n1. The following commands are supported\:\n1.1. Send a Shell command.\n    send &lt;command&gt;\nExamples\: send ls\n1.2. Send a char given by ASCII code.\n    sendChar &lt;ASCII_code&gt;\nExamples\: sendChar 32\n1.3. Match the entire previous command output against the regex.\n    expect &lt;regex&gt;\nExamples\: expect (.*?)Desktop(.*)\n1.4. The entire previous command output ends with the given text.\n    expectEndsWith &lt;text&gt;\n1.5. Match the last line from the previous command output against the regex.\n    expectLastLine &lt;regex&gt;\n1.6. Fail on the success of the expect command\: expect, expectEndsWith or expectLastLine.\n    errorOn &lt;expect_command&gt;\n1.7. If the expect command is successful then the operation will always execute the send command.\n    always &lt;send_command&gt;\n    on &lt;expect_command&gt;\nExamples\: always sendChar 121\n                on expect (.*?)Press y to continue(.*)\n1.8. Use a different timeout for this send command\: send, sendChar.\n    wait &lt;miliseconds&gt; &lt;send_command&gt;\n1.9. Use a different timeout for this expect command\: expect, expectEndsWith or expectLastLine.\n    wait &lt;miliseconds&gt; &lt;expect_command&gt;\n2. In order to use private keys with different encryption types (ex.\: aes256-cbc) needs to be updated the &lt;OO_Home&gt;/java/lib/security/local_policy.jar JAR file with one that accept all security policies (ex.\: http\://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html). After update you must restart the Studio or Central service.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.description</annotation>
+  <name>SSH Shell</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="719894a3-1011-4b19-87a3-0d753ff31e90">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.719894a3-1011-4b19-87a3-0d753ff31e90.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="95d542ff-c659-4296-a46c-1e95e9d3f2d9">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.95d542ff-c659-4296-a46c-1e95e9d3f2d9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="acc17354-978e-4d3d-83ef-c854d86d1ac9">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>command</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>expect (.*\s*)*?</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="4d48eb7c-7b8e-4fdf-a0d2-652f95108824">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.4d48eb7c-7b8e-4fdf-a0d2-652f95108824.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="866889f2-959a-4542-b700-e886ccaca123">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>26c8a67b-a70b-42e9-b65c-9cd13f94f8f9.866889f2-959a-4542-b700-e886ccaca123.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="69e741e5-f865-46ef-8724-7834edd57e32">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>privateKeyFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4ac76ffb-2add-4603-82a1-393de0469a0e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="1f0abd4a-383f-47ec-a744-a7719b1dade4">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newlineCharacters</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f20790e2-6b95-421e-8638-fb4752593850">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterDelay</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="8635aa8b-2fdc-4255-91f4-b91746f37fef">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2a77cb20-9de7-46a7-aa4b-8437f7749f3a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sessionId</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="d0486b5f-7188-4b1b-9c76-7a9d4daed0a4">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="a1b8426e-4821-41ed-aa1e-785190831c3a">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="13357b5a-1861-4230-86d5-dacc204c4efb">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="526c6896-be18-4d1f-a32e-adc17a41e145">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="0e7a81c4-f0c7-400c-a428-ab5b37b2ab22">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="90ab5e57-7a78-4dcf-bb28-f03a10d6ebe4">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d9fdc8b1-b2ec-4836-853a-ff7a9f488e20">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="dccbd52b-c80a-4b2c-ad53-50f8aeedb388">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="fcd15db8-d0ea-4e8c-81d6-7c60fc53cafb">
+        <baseIcon>remote.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ssh.SSHShell</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

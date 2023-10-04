@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptletEvaluator id="497a6252-5132-4bdb-8085-2e955ab31173">
+  <descriptionCdata><![CDATA[497a6252-5132-4bdb-8085-2e955ab31173.description=Validator for absolute and canonical path.\nDoes not allow characters $, &, ', ", |, <, > and ; due to security concerns.\nAllows specifying patterns for paths like /home/b*b/etc.
+]]></descriptionCdata>
+  <annotation>497a6252-5132-4bdb-8085-2e955ab31173.description</annotation>
+  <name>absolute path pattern</name>
+  <scriptlet id="0b872d26-274f-4c2e-8922-1ee71da04e08">
+    <annotation></annotation>
+    <name>EvaluatorScriptlet</name>
+    <script>try {
+	if (/^[^;&amp;?|\&apos;\&quot;$&lt;&gt;]+$/.test(scriptletInput)){
+		var separators = [&quot;/&quot;,&quot;\\\\&quot;];
+		var elements = scriptletInput.split(new RegExp(separators.join(&apos;|&apos;), &apos;g&apos;));
+		matchRanges.setMatches(validElements(elements) &amp;&amp; hasValidStart(scriptletInput));
+	} 
+} catch (err) {
+    matchRanges.setMatches(false);
+}
+
+function hasValidStart(text){
+	return /^([a-zA-Z]:(\/|\\)|(\/|\\\\)).*/.test(text);
+}
+
+function validElements(elements){
+	for(i = 0; i &lt; elements.length; i++){
+		if (elements[i] !== &quot;&quot; &amp;&amp; !isValidPattern(elements[i])){
+			return false;
+		}
+	}
+	return true;
+}
+
+function isValidPattern(pattern){
+	if(pattern === &quot;.&quot; || pattern === &quot;..&quot;)
+		return false;
+	try {
+		new RegExp(pattern);
+		return true;
+	} catch(e) {
+		return false;
+	}
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+</scriptletEvaluator>

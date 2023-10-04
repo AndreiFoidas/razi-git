@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="53f0bf03-0e47-42c8-8df0-334d8c1c59cd">
+  <descriptionCdata>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.156d2060-69ab-4a0e-a9c9-254f7039f6ad.callout=Understanding data movement. How each of the flow's steps gets the data it needs to do its work is crucial to understanding how to harness the flow's techniques for your own purposes. Data can be assigned from user input when the flow runs, from step results, or from flow variables. \nData movement in this How Do I flow is detailed on the Description tab of the flow's Properties sheet and of each step's Inspector. To open the flow's Properties sheet, click the Properties tab at the lower-left of the flow canvas. To open a step's Inspector, double-click the step.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.1937131f-4a6a-4df5-902c-3233bf829e09.transition.description=The list has more values. The flow transitions to the "FS Exists" step.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.1dd9dd7f-7d61-4d35-8f8d-bfd9c36fbdb0.callout=The "How do I\: Iterate through a list" flow shows how to use the "List Iterator" operation to iterate through a list of items, carrying out a series of actions on each item. In this case, the flow determines whether each item in the list is an existing folder and displays a message to that effect.  \nYou can use list iteration for many purposes, such as installing software upgrades on multiple clients and performing routine maintenance tasks on multiple IT components. In creating a flow like this one, you can also use system accounts to make it easier to supply credentials.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.22cb1863-8f07-49c7-bf92-07d4b71ce389.callout=STEP 2. The "FS Exists" step gets the current list item from the "List Iterator" stept and checks to see if the list item currently being processed is an existing folder. If the folder exists, it is made available as a flow variable which the display steps use for their operation.\n
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.398f544e-9e77-487a-bbbe-06233383be56.callout=STEP 3a. The "Display Missing" step displays a message that the directory is missing.  It  transitions to the "List Iterator" step, which makes the next item in the list available for processing.\n
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.4a0bdf22-a888-41b7-8013-2d01d2be4fd2.description=This step provides a message to the user. This step is actually a subflow. To learn about the steps contained in the subflow, right-click the step, click "Open Subflow," and then study the subflow's diagram and properties page, and the Inspectors of the subflow's steps. On the subflow's Properties sheet, you can see the flow inputs on which the step's inputs are based.\n\nStep Inputs\:\n"message" -  The message to send to the user. In this flow, the "message" input gets its value from a constant value.\n\nStep Responses\:\n"success" - The step was able to display the message. The flow transitions back to the List Iterator\n
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.885c8170-b648-45df-8208-e4d3b115d007.description=This step provides a message to the user. This step is actually a subflow. To learn about the steps contained in the subflow, right-click the step, click "Open Subflow," and then study the subflow's diagram and properties page, and the Inspectors of the subflow's steps. On the subflow's Properties sheet, you can see the flow inputs on which the step's inputs are based.\n\nStep Inputs\:\n"message" -  The message to send to the user. In this flow, the "message" input gets its value from a constant value.\n\nStep Responses\:\n"success" - The step was able to display the message. The flow transitions back to the List Iterator\n
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.8ed9a11a-1869-4216-8b59-38abeb75342f.description=The "FS Exists" step checks to see whether the current folder in the list from the "List Iterator" step exists. \n\nStep Inputs\:\n"source" - The full path of the folder to be checked. In this flow, the "source" input gets its value from the result of the previous step (the "List Iterator" step's current list item).\n\nStep Responses\:\n"success" - The step was able to find the folder. The flow transitions to the "Display Exists" step.\n"failure" - The step was not able to find the folder. The flow transitions to the "Display Missing" step.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.94b466e6-8570-4ca3-ab80-718f275cd5b6.transition.description=The "List Iterator" step failed to read the list. The flow transitions to the "Error\:failure" step and ends unsuccessfully.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.a0c0eb8a-1c7d-4008-936c-444599463ed3.callout=STEP 3b. The "Display Exists" step displays a message that the directory exists.  It transitions to the "List Iterator" step, which makes the next item in the list available for processing.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.bdf12f41-5f1a-45d7-9522-5d482dead44f.description=The "List Iterator" step selects each item in its input list one at a time and makes the list item available for the next step's inputs. \n\nStep Inputs\:\n"list" - The list of values to iterate through. In this flow, the "list" input gets its value from the user by means of a user prompt. \n"separator" - A delimiter that separates the elements in the list. The default is a comma (,). In this flow, the "delimiter" input gets its value from the constant \u201C,\u201D.\n\nStep Results\:\nAs long as the step's response is "has more" (see below) the currently returned element in the list is the step's result and is by default assigned to the default flow variable "Result". The" FS Exists" step needs the current list item to determine whether the list item refers to an existing folder. The "FS Exists" step's "source" input gets its value from the "List Iterator" step's default flow variable "Result", so you don't have to explicitly do anything to make the current list element available to the "FS Exists" step.\n\nStep Responses\:\n"has more" - Another value in the "List Iterator" list has been returned. The flow transitions to the "FS Exists" step.\n"has no more" - The iterator has gone completely through the list. The flow transitions to the "Resolved \: success" step.\n"failure" - The step failed to process the list. Failure to process a list can occur if the list has no items in it (note that a list does not have to have a legitimate list item in it - any sequence of characters can count as one or more list items, and the "List Iterator" successfully populates its result with the item). The norm for "failure" responses is that they transition to an "Error\:failure" return step. However, there is a large class of uses of the "List Iterator" that favor routing the step's "failure" response to the same destination as its "no more" response. For instance, suppose the list whose items the "List Iterator" extracts is itself the product of another operation, such as a subflow that creates a list of servers that have had a certain software upgrade. There could easily be no servers that have had the upgrade installed. In that case, should the step fail and send the flow to the "Error\:failure" return step, or should the flow continue as it does when the "List Iterator" has no more list items to extract? The answer depends on which IT task or tasks you want the flow to complete.
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.c820f636-1a98-4ec6-b792-875b6ec8df6f.prompt=This step processes each item in a list of folders&lt;br&gt;\nEnter a list of folders, separated by commas, for the flow to \ndetermine whether they exist.&lt;br&gt;\nExamples\:\n&lt;ul&gt;\n&lt;li&gt;for Windows, C\:\\dir1,C\:\\dir2,C\:\\dir3\n&lt;li&gt;for Linux, /tmp/dir1,/tmp/dir2,/tmp/dir3\n&lt;/ul&gt;
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.d34ea7a2-7e9e-4e32-a4a0-6cab454e63ed.callout=STEP 1. The "List Interator" step prompts you to enter a list of three folders, then processes each item in the list of folders one at a time. In each iteration, the step makes the current list item available as a step result, which the "FS Exists" step uses for its operation. When the "List Iterator" step has processed all of the items in the list, the "no more" response transitions to the "Resolved\:success" step.\n
+53f0bf03-0e47-42c8-8df0-334d8c1c59cd.description=The "How do I\: Iterate through a list" flow demonstrates how to use the" List Iterator" step. In this case, \nthe flow determines whether the folders in the "List Iterator" list exist. \n\n&lt;pre&gt;\nThis flow was created using the following default OO operations\:\n-  "List Iterator" from the Library/Utility Operations/Looping folder.\n-  "FS Exists" from the Library/Operations/FileSystem/Cross Platform folder\n-  "Display Message" from the Library/Utility Operations folder.\n\nThe flow contains the following steps\:\n\n1. The "List Iterator" step selects each item in the input list one at a time and makes it available for the \nnext step\u2019s input.  \n     Input\: "list"\n     Gets value from\: user prompt\n    \n     Input\: "separator"\n     Gets value from\: constant-  \u201C,\u201D\n \n2. The "FS Exists" step checks each folder in the list to see if it exists.\n     Input\: "source"\n     Gets value from\: result of previous step\n     Places result in\: flow variable "source"\n\n3a.  The "Display Missing" step displays a message to the user.\n     Input\: "message"\n     Gets value from\: constant "The directory ${source} does not exist."\n\n3b.  The "Display Exists" step displays a message to the user.\n     Input\: "message"\n     Gets value from\: constant "The directory ${source} exists."\n \n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.description</annotation>
+  <name>How do I- Iterate through a list</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="da484533-5169-4efa-84c3-21cbf28b29f7">
+    <annotation/>
+    <name>Operation:How do I: Iterate through a list (53f0bf03-0e47-42c8-8df0-334d8c1c59cd)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="91c9b253-f37f-4576-8416-89c305026b3a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="d6e3099b-7f3c-40c7-8cdc-385bfed7b1c7">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d7a0f3d6-f7a4-486b-8858-3689d906a5d4">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="004411a2-84c9-4985-b563-80b769d657fd">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="22cb1863-8f07-49c7-bf92-07d4b71ce389">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.22cb1863-8f07-49c7-bf92-07d4b71ce389.callout</text>
+      <bounds>
+        <x>496.0</x>
+        <y>413.0</y>
+        <width>234.0</width>
+        <height>111.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>8ed9a11a-1869-4216-8b59-38abeb75342f</refId>
+      </step>
+    </callout>
+    <callout id="a0c0eb8a-1c7d-4008-936c-444599463ed3">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.a0c0eb8a-1c7d-4008-936c-444599463ed3.callout</text>
+      <bounds>
+        <x>529.0</x>
+        <y>596.0</y>
+        <width>245.0</width>
+        <height>75.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>885c8170-b648-45df-8208-e4d3b115d007</refId>
+      </step>
+    </callout>
+    <callout id="156d2060-69ab-4a0e-a9c9-254f7039f6ad">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.156d2060-69ab-4a0e-a9c9-254f7039f6ad.callout</text>
+      <bounds>
+        <x>3.0</x>
+        <y>3.0</y>
+        <width>823.0</width>
+        <height>69.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="d34ea7a2-7e9e-4e32-a4a0-6cab454e63ed">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.d34ea7a2-7e9e-4e32-a4a0-6cab454e63ed.callout</text>
+      <bounds>
+        <x>8.0</x>
+        <y>179.0</y>
+        <width>219.0</width>
+        <height>155.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+      </step>
+    </callout>
+    <callout id="398f544e-9e77-487a-bbbe-06233383be56">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.398f544e-9e77-487a-bbbe-06233383be56.callout</text>
+      <bounds>
+        <x>534.0</x>
+        <y>202.0</y>
+        <width>231.0</width>
+        <height>79.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>4a0bdf22-a888-41b7-8013-2d01d2be4fd2</refId>
+      </step>
+    </callout>
+    <callout id="1dd9dd7f-7d61-4d35-8f8d-bfd9c36fbdb0">
+      <text>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.1dd9dd7f-7d61-4d35-8f8d-bfd9c36fbdb0.callout</text>
+      <bounds>
+        <x>5.0</x>
+        <y>76.0</y>
+        <width>820.0</width>
+        <height>69.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="bdf12f41-5f1a-45d7-9522-5d482dead44f">
+      <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.bdf12f41-5f1a-45d7-9522-5d482dead44f.description</annotation>
+      <name>List Iterator</name>
+      <bounds>
+        <x>184.0</x>
+        <y>423.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="c820f636-1a98-4ec6-b792-875b6ec8df6f">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>true</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>list</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.c820f636-1a98-4ec6-b792-875b6ec8df6f.prompt</prompt>
+          <isMultiSelect>true</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="dab95697-4bae-4482-9d31-8006056a4ac9">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>separator</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>,</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="1937131f-4a6a-4df5-902c-3233bf829e09">
+          <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.1937131f-4a6a-4df5-902c-3233bf829e09.transition.description</annotation>
+          <name>has more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>has more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>8ed9a11a-1869-4216-8b59-38abeb75342f</refId>
+          </destination>
+          <source>
+            <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>252.0</x>
+              <y>421.1489361702128</y>
+            </point>
+            <point>
+              <x>382.0</x>
+              <y>443.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>547.7638129570895</x>
+            <y>-20.09228088629104</y>
+          </labelPosition>
+        </transition>
+        <transition id="94b466e6-8570-4ca3-ab80-718f275cd5b6">
+          <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.94b466e6-8570-4ca3-ab80-718f275cd5b6.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>785acdbe-3d1b-4a7a-8466-baee6edbe525</refId>
+          </destination>
+          <source>
+            <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>448.0</x>
+              <y>353.0</y>
+            </point>
+            <point>
+              <x>543.0</x>
+              <y>483.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>428.4304752656609</x>
+            <y>14.163652265209324</y>
+          </labelPosition>
+        </transition>
+        <transition id="484d06c6-7a9d-4cb6-b3f5-d60fc2ffb9b7">
+          <annotation/>
+          <name>no more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>no more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>7f4a96b6-3204-4c71-b854-0861aca55663</refId>
+          </destination>
+          <source>
+            <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>282.0</x>
+              <y>228.0</y>
+            </point>
+            <point>
+              <x>165.0</x>
+              <y>491.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>cd75ca75-e64e-4b1e-9fe9-8dbc76f03865</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="785acdbe-3d1b-4a7a-8466-baee6edbe525">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>186.0</x>
+        <y>575.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="55f379c9-a98a-4c5c-ad7e-206265be7ea9">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>785acdbe-3d1b-4a7a-8466-baee6edbe525</refId>
+          </destination>
+          <source>
+            <refId>785acdbe-3d1b-4a7a-8466-baee6edbe525</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="885c8170-b648-45df-8208-e4d3b115d007">
+      <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.885c8170-b648-45df-8208-e4d3b115d007.description</annotation>
+      <name>Display Exists</name>
+      <bounds>
+        <x>369.0</x>
+        <y>575.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="34db9d20-2712-4940-a7f7-67c958d0cd97">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>message</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The directory ${source} exists.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="67971b27-4ab3-468e-8240-71438a0b1ace">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>title</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Status Message</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="b0e52629-a51a-4af2-b03d-357dc6eeec19">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+          </destination>
+          <source>
+            <refId>885c8170-b648-45df-8208-e4d3b115d007</refId>
+          </source>
+          <positions>
+            <point>
+              <x>422.0</x>
+              <y>352.0</y>
+            </point>
+            <point>
+              <x>282.0</x>
+              <y>228.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>434e6fa2-26bc-4e84-9e1f-0aa6946cf920</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="4a0bdf22-a888-41b7-8013-2d01d2be4fd2">
+      <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.4a0bdf22-a888-41b7-8013-2d01d2be4fd2.description</annotation>
+      <name>Display Missing</name>
+      <bounds>
+        <x>369.0</x>
+        <y>288.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="e7f72221-5445-4831-94b8-186ec328a8bf">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>message</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The directory ${source} does not exist.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="9f2dad44-b016-4f1c-bdef-af2d0b912741">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>title</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Status Message</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="547a55bc-15ec-4557-9711-28b97487e264">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>bdf12f41-5f1a-45d7-9522-5d482dead44f</refId>
+          </destination>
+          <source>
+            <refId>4a0bdf22-a888-41b7-8013-2d01d2be4fd2</refId>
+          </source>
+          <positions>
+            <point>
+              <x>496.0</x>
+              <y>342.0</y>
+            </point>
+            <point>
+              <x>196.0</x>
+              <y>416.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>434e6fa2-26bc-4e84-9e1f-0aa6946cf920</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="7f4a96b6-3204-4c71-b854-0861aca55663">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>30.0</x>
+        <y>575.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="c2318c96-c3c8-4f18-8d83-f561157b09bb">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>7f4a96b6-3204-4c71-b854-0861aca55663</refId>
+          </destination>
+          <source>
+            <refId>7f4a96b6-3204-4c71-b854-0861aca55663</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="8ed9a11a-1869-4216-8b59-38abeb75342f">
+      <annotation>53f0bf03-0e47-42c8-8df0-334d8c1c59cd.8ed9a11a-1869-4216-8b59-38abeb75342f.description</annotation>
+      <name>FS Exists</name>
+      <bounds>
+        <x>369.0</x>
+        <y>423.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <resultBinding id="c9c654d3-7641-4781-af4c-17339c5ad2de">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+        </resultBinding>
+      </bindings>
+      <transitions>
+        <transition id="2c5d7773-4bd1-4291-ac9b-2d96fcaf1453">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>4a0bdf22-a888-41b7-8013-2d01d2be4fd2</refId>
+          </destination>
+          <source>
+            <refId>8ed9a11a-1869-4216-8b59-38abeb75342f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>523.0</x>
+              <y>228.0</y>
+            </point>
+            <point>
+              <x>538.0</x>
+              <y>361.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="276833d9-0ce8-4e72-8bdf-db3340c1439a">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>885c8170-b648-45df-8208-e4d3b115d007</refId>
+          </destination>
+          <source>
+            <refId>8ed9a11a-1869-4216-8b59-38abeb75342f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>523.0</x>
+              <y>228.0</y>
+            </point>
+            <point>
+              <x>422.0</x>
+              <y>352.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>16ade97a-2faa-4cb3-ae3d-c297fc570698</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+  </steps>
+  <startSteps>bdf12f41-5f1a-45d7-9522-5d482dead44f</startSteps>
+</flow>

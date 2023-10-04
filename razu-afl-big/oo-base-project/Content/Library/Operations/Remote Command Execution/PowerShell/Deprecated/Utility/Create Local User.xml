@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="5206157c-f0d0-4744-bc3c-07313be5268b">
+  <descriptionCdata>5206157c-f0d0-4744-bc3c-07313be5268b.082c6618-7a59-4a51-9442-6d9a5a89701d.prompt=New Password\:
+5206157c-f0d0-4744-bc3c-07313be5268b.cd7fe7f2-bc64-438e-8a1b-0e04be27d2a2.prompt=New Description\:
+5206157c-f0d0-4744-bc3c-07313be5268b.description=&lt;pre&gt;Creates a local user on a computer.\n\nInputs\:\nnewUsername - Name of the local user;\nnewPassword - Local user password; \nnewDescription - Description for the new user\n\nResponses\:\nsuccess - Operation completed successfully\nfailure - Something went wrong\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception - if something went wrong, the error message\n\nRequires\:\nPowerShell 1.0&lt;/pre&gt;
+5206157c-f0d0-4744-bc3c-07313be5268b.e10293e6-30e9-4d9a-836e-08408e0a4b79.prompt=New Username\:
+</descriptionCdata>
+  <annotation>5206157c-f0d0-4744-bc3c-07313be5268b.description</annotation>
+  <name>Create Local User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="e10293e6-30e9-4d9a-836e-08408e0a4b79">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newUsername</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5206157c-f0d0-4744-bc3c-07313be5268b.e10293e6-30e9-4d9a-836e-08408e0a4b79.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="082c6618-7a59-4a51-9442-6d9a5a89701d">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5206157c-f0d0-4744-bc3c-07313be5268b.082c6618-7a59-4a51-9442-6d9a5a89701d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cd7fe7f2-bc64-438e-8a1b-0e04be27d2a2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newDescription</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5206157c-f0d0-4744-bc3c-07313be5268b.cd7fe7f2-bc64-438e-8a1b-0e04be27d2a2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="70c07f6a-55d4-4ec8-b224-3136d4e0918a">
+    <annotation/>
+    <name>Operation:Create Local User (5206157c-f0d0-4744-bc3c-07313be5268b)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="b98bf2ad-1801-475f-a361-6b772f340364">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="962834f5-45cd-4c00-af93-7c1ffd2c4ada">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="59596e79-668a-428b-8083-1370f4bbd0b2">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="be6a5709-af44-4ef5-a984-986ea911a3dd">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="b42d51e8-fdd1-4357-b9ab-ef20687091fc">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="fec65cd5-b3ae-464a-8720-77e2bda31964">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="811eb9fd-c375-4dc8-b2dc-968920531d98">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="545e8b69-ced2-4af9-827a-9162b000b94e">
+    <baseIcon>user2.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e2b27674-d32a-4a71-b107-8a2eda6cb474">
+        <baseIcon>add.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>a0653649-e2dc-44df-ab53-1d90130ec193</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="e8b33996-762c-4b52-b54c-e42e31c97318">
+  <descriptionCdata>e8b33996-762c-4b52-b54c-e42e31c97318.4d46a3d8-0fea-4e92-a886-dd2b59a7492e.prompt=Hostname\:
+e8b33996-762c-4b52-b54c-e42e31c97318.description=&lt;pre&gt;\nGet the hostname on a IP Address. Looks up a machine's IP Address, pings it, and verifies that the IP address that responds to the ping maps to the hostname given.\n\nInputs\:\n    hostname - The host to verify the IP address of.\n    dnsServer - DNS server to perform lookup against.\n\nResult\:\n    ipaddress - The IP address.\n\nResponses\:\n    success - The host name of the responding IP address maps to the entered host name.\n    failure - The responding hostname was not the same as the hostname pinged, or an error occurred.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>e8b33996-762c-4b52-b54c-e42e31c97318.description</annotation>
+  <name>DNS Ping Compare</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4d46a3d8-0fea-4e92-a886-dd2b59a7492e">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>hostname</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e8b33996-762c-4b52-b54c-e42e31c97318.4d46a3d8-0fea-4e92-a886-dd2b59a7492e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="2dceca82-151b-4751-90e4-7b9c880d5b32">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="ead1a767-f62c-4e68-8190-95ea12bc614b">
+    <annotation/>
+    <name>Operation DNS Ping Compare (e8b33996-762c-4b52-b54c-e42e31c97318)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7e92330e-f057-4b9e-8341-53f6567bba04">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="87517282-d557-4f71-af7a-35cf5e1015e2">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e4445fbb-71f6-475a-b632-14f7d4780d0f">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="65ac5a25-1b04-4507-a076-442700b7c168">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="46d05874-e594-467d-a969-2acf1a4df501">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="49771283-88a9-4fb9-af16-b649a79567ab">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <iconSpec id="ba2f6d17-ccc8-44a3-8387-d64261920c6c">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>DNS Ping Compare</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

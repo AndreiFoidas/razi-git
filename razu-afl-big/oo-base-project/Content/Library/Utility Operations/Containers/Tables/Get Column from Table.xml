@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="fd7f98d5-ed2d-41c7-b670-94b1ec915076">
+  <descriptionCdata>fd7f98d5-ed2d-41c7-b670-94b1ec915076.description=&lt;pre&gt;Retrieves a column from a table.\n\nInputs\:\ntable - A table to get the column from.\nrowDelimiter - the delimiter that separates rows in the table.\ncolumnDelimiter - The delimiter that separates columns in the table.\ncolumn - the index of the column (Starting at 0) to retrieve from the table.\n\nResponses\:\nsuccess - The operation completed successfully.\nfailure - Something went wrong.\n\nReturns\:\nA rowDelimiter delimited list containing the elements that were in the specified column.&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>fd7f98d5-ed2d-41c7-b670-94b1ec915076.description</annotation>
+  <name>Get Column from Table</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="3a08ed4b-99fd-4ab5-93ec-49f447f07c50">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>table</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="66e029be-32e7-4325-946d-c933b2efa0c2">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0e7495d3-4f24-4a63-ba92-2bcdb7b4f272">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3ca3f128-5c58-457e-8f96-71b2f07f82c4">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>column</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="79890a5d-35df-49fe-bdce-fc1bef4aa9c8">
+    <annotation/>
+    <name>Operation:Get Column from Table (fd7f98d5-ed2d-41c7-b670-94b1ec915076)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="4af1e871-2024-4ef8-b9ef-7c502d9635bc">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="a9fc6d94-62da-48d8-808e-6c59ffad16e5">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="f5637c7b-e990-4366-b8e9-1a0231e67837">
+            <annotation/>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8deee084-e563-4a3f-aee3-a2341e354be8">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="6430cb80-6d6f-497c-b933-5bb312852359">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="3974a5ba-a23f-4674-8e79-0b8c0c1b3f32">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="76bd5c63-fbc0-47c2-825c-3fba61174661">
+    <annotation/>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0a95441c-149f-4dc3-93f8-8a80c4255c08">
+    <baseIcon>column.png</baseIcon>
+    <basePath>Databases</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Get Column from Table</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptlet id="84136ad4-5961-4cc5-85d3-fdcd945a2591">
+  <descriptionCdata><![CDATA[84136ad4-5961-4cc5-85d3-fdcd945a2591.description=Analyzes the input as a multiline string.  If a line starts with "--More--" it is omitted from the result otherwise it is included in the result.\nNOTE\: This scriptlet should be considered deprecated. Removing the More prompts from the output of a Cisco router with a scriptlet filter \ncan allow illegal xml characters to pass through to a web browser, plus it's just more efficient to not have the ---More--- prompts in the \noutput to begin with. \n\nAll Cisco commands should be prefixed with the following now\:\n\nexpect (.*\\s*)*>\nsend terminal length 0\n\nThis will prevent the ---More--- prompts from appearing in the output, and remove the need for this scriptlet 
+]]></descriptionCdata>
+  <annotation>84136ad4-5961-4cc5-85d3-fdcd945a2591.description</annotation>
+  <name>Strip Cisco More Prompts</name>
+  <script>var split = scriptletInput.split(&quot;\n&quot;);
+var out = &quot;&quot;;
+for (count = 0;count &lt; split.length;count++){
+	var curr = split[count];
+	var index = curr.indexOf(&quot;--More--&quot;);
+	if (index &lt;0 || index &gt;1)
+		out += &quot;\n&quot;+split[count];
+}
+scriptletResult = out;</script>
+  <type>RHINO</type>
+</scriptlet>

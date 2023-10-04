@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4ddbbeee-f3ee-444f-af5f-facd4d2749be">
+  <descriptionCdata>4ddbbeee-f3ee-444f-af5f-facd4d2749be.description=&lt;pre&gt;\nCompares two double precision floating point numbers.\n\nInputs\:\nvalue1 - The first float.\nvalue2 - The second float.\nerrorMargin - The difference between value1 and value2 that is considered 'equal.'\n\nResponses\:\ngreater than - If value 1 &gt; value 2.\nless than - If value 1 &lt; value 2\nequal - If value 1 \=\= value 2.\nfailure - The two values could not be compared, or could not be parsed.\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>4ddbbeee-f3ee-444f-af5f-facd4d2749be.description</annotation>
+  <name>Double Comparator</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1e173e88-a0a5-4fce-b1cb-3f6849c48b13">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b96e2049-ee77-4d84-bfee-2b017052517c">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5c6f043b-9ddf-4349-b33f-a4e0a6fcebd0">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>errorMargin</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="cdeca12c-7c5c-4070-bedd-f1263ccf33c6">
+    <annotation/>
+    <name>Operation Double Comparator (4ddbbeee-f3ee-444f-af5f-facd4d2749be)</name>
+    <script>scriptletResult = value1;
+try{
+var d1 = java.lang.Double.parseDouble(value1);
+var d2 = java.lang.Double.parseDouble(value2);
+var margin = java.lang.Double.parseDouble(errorMargin);
+if (d1 - margin &gt; d2)
+	scriptletResponse = "greater than"; 
+else if (d1 + margin &lt; d2)
+	scriptletResponse = "less than"; 
+else
+	scriptletResponse = "equal"; 
+}
+catch (e){
+scriptletResponse = "failure"; 
+}	</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="12b1c94c-c713-4b9a-b9ff-385976f5b093">
+      <annotation/>
+      <name>greater than</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="97e992df-d6cb-45b6-b06e-8b1349a49b77">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="f47176b4-34ae-4d7d-818a-d805a3d623f1">
+      <annotation/>
+      <name>less than</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="a996c533-58af-4d0a-b827-15838204ce7f">
+      <annotation/>
+      <name>equal</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="64bfe1d6-10a4-4a34-8625-dec534ab1ed1">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="ef86147d-78ad-4615-ae79-f314344ae4e8">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

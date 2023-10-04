@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="4cffe3a6-b4f3-46af-9bcd-5ba844932d0a">
+  <descriptionCdata>4cffe3a6-b4f3-46af-9bcd-5ba844932d0a.1d32e989-40a4-4cb0-a492-b75e2b9b8671.prompt=Key Name\:
+4cffe3a6-b4f3-46af-9bcd-5ba844932d0a.description=This operation adds "increment" to the value of the context key provided.  If the supplied context key is null, a new global variable is started with a value of increment.\n\nInputs\:\nkeyName - the context key for the number you want to increment\nincrement - the value to increment, defaults to 1\n\nResponses\:\nsuccess - completed task
+</descriptionCdata>
+  <annotation>4cffe3a6-b4f3-46af-9bcd-5ba844932d0a.description</annotation>
+  <name>Addition Operation</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1d32e989-40a4-4cb0-a492-b75e2b9b8671">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4cffe3a6-b4f3-46af-9bcd-5ba844932d0a.1d32e989-40a4-4cb0-a492-b75e2b9b8671.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="53f158d4-c7d6-4814-abcc-a3fbd65b8ebf">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>increment</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>1</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="ad4ed7f8-3eb5-4441-9077-b431e1fb601d">
+    <annotation/>
+    <name>Operation:Addition Operation (4cffe3a6-b4f3-46af-9bcd-5ba844932d0a)</name>
+    <script>
+
+
+aNumber = scriptletContext.get(keyName);
+
+if (aNumber!=null) {
+  aNumber = parseInt(aNumber) + parseInt(increment);
+} else {
+  aNumber = parseInt(increment);
+}
+
+scriptletContext.putGlobal(keyName, aNumber.toString());
+scriptletResult = ""+aNumber.toString();
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="68d89927-93ea-4b63-a7b3-e880b5ac921d">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="347a0dfd-9a2e-48df-a170-27f1bdabb885">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="393c8d75-e9aa-4b81-926f-e475bff1c988">
+        <baseIcon>add.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

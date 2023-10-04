@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="9136aed7-ca72-487a-a878-caa3fab9b413">
+  <descriptionCdata>9136aed7-ca72-487a-a878-caa3fab9b413.2831cf28-cd61-4a71-8986-e3871fa0cbce.prompt=Enter the second server name to compare \:
+9136aed7-ca72-487a-a878-caa3fab9b413.de0d6bbf-ec3b-4d6c-a733-8107a3967ce9.prompt=Enter the first Server to compare \:
+9136aed7-ca72-487a-a878-caa3fab9b413.description=&lt;pre&gt;\nChecks to see if two server names resolve to the same IP address.\n\nInputs\:\n1. serverName1 - the first server name.\n2. serverName2 - the second server name.\n3. dnsServer - (optional) dns server to perform lookup against.\n\nResponses\:\n1. success - if the server names resolve to the same IP address.\n2. failure - if the server names do not resolve to the same IP address, or an error occurs.\n\nResult\:\nThe primary result contains '|' delimited key\:value pairs.\nWhere the key is the servername, and the value is the IP address it resolved to.\nIn the case that a servername(key) does not resolve or an error occurs it's corresponding value will be empty.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>9136aed7-ca72-487a-a878-caa3fab9b413.description</annotation>
+  <name>Compare Server Names</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="de0d6bbf-ec3b-4d6c-a733-8107a3967ce9">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>serverName1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9136aed7-ca72-487a-a878-caa3fab9b413.de0d6bbf-ec3b-4d6c-a733-8107a3967ce9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2831cf28-cd61-4a71-8986-e3871fa0cbce">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>serverName2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9136aed7-ca72-487a-a878-caa3fab9b413.2831cf28-cd61-4a71-8986-e3871fa0cbce.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="0690dd09-cea8-4cb5-b008-ea92c784c2c2">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="ae49706d-13a9-4db0-a8b3-dcae884b0401">
+    <annotation/>
+    <name>Operation Compare Server Names (9136aed7-ca72-487a-a878-caa3fab9b413)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="0f1cec83-e4c1-47be-a454-107555df08da">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="3bf1e5f9-c7f5-4b71-893e-d0f272cf631c">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d96ca0e1-a8ac-4249-b823-fd5d8e486386">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="4a57a374-d297-410e-9f13-8e00aae7619e">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="fb3fc8ec-9211-451f-96fd-4322123fde58">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="083b29dc-cde0-40d7-89ba-a5c3bd9ff12b">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a22bdb59-b7c5-43bb-b8f8-5dd764d890ae">
+    <annotation/>
+    <name>ipaddress</name>
+    <fieldName>ipaddress</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="aede4e92-a46f-49a4-8327-1feec5b38d75">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Compare Server Names</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

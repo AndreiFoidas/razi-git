@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="85f00bf6-d517-48cc-a2ab-ba63cbe28cda">
+  <descriptionCdata>85f00bf6-d517-48cc-a2ab-ba63cbe28cda.description=&lt;pre&gt;Service to retrieve JVM memory usage info (only 1.6 JVMs and 1.5 JVMs). \n\nInput Operators\: \nNone\n\nResponses\:\nsuccess - statistics retrieved successfully\nnon 1.6 jvm - jvm is not version 1.6\nfailure - general failure occurred\n\nExtra Results\:\nheapUsed - contains the amount of memory used (in bytes) in the heap\nheapCommitted - amount of memory in bytes that is committed for the Java virtual machine to use\nheapInit - amount of memory in bytes that the Java virtual machine initially requests from the operating system for memory management\nheapMax - Returns the maximum amount of memory in bytes that can be used for memory management\nnonHeapUsed - contains the amount of memory used (in bytes)\nnonHeapCommitted - amount of memory in bytes that is committed for the Java virtual machine to use\nnonHeapInit - amount of memory in bytes that the Java virtual machine initially requests from the operating system for memory management\nnonHeapMax - Returns the maximum amount of memory in bytes that can be used for memory management\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>85f00bf6-d517-48cc-a2ab-ba63cbe28cda.description</annotation>
+  <name>JVM Memory Usage Statistics</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="42494429-5215-4dcc-979a-5cd15ab0e395">
+    <annotation/>
+    <name>Operation:JVM Memory Usage Statistics (85f00bf6-d517-48cc-a2ab-ba63cbe28cda)</name>
+    <script>
+        	scriptletContext.put("heapUsed", scriptletRawResult['heapUsed']);
+        	scriptletContext.put("heapCommitted", scriptletRawResult['heapCommitted']);
+        	scriptletContext.put("heapInit", scriptletRawResult['heapInit']);
+        	scriptletContext.put("heapMax", scriptletRawResult['heapMax']);
+        	scriptletContext.put("nonHeapUsed", scriptletRawResult['nonHeapUsed']);
+        	scriptletContext.put("nonHeapCommitted", scriptletRawResult['nonHeapCommitted']);
+        	scriptletContext.put("nonHeapInit", scriptletRawResult['nonHeapInit']);
+        	scriptletContext.put("nonHeapMax", scriptletRawResult['nonHeapMax']);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="2fb5d90b-821d-47e0-a6a9-21d6c0d1502d">
+      <annotation/>
+      <name>non 1.6 jvm</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="347550b7-3412-4776-b286-9ab6b36b3e69">
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="4df61207-20c1-4314-8f0e-33a9100273c0">
+            <annotation/>
+            <name>Config Item</name>
+            <text>6</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="71fe4935-b8cd-4f94-bd0a-c2a9c3a72209">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="eef86223-2751-4c87-b9c1-dbfb59a5f4ab">
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="fa7063c1-fce9-479b-a53f-cf5c2bb85d41">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ef785306-f3e4-4a4e-a1cb-0fd89e5ac5b0">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="8d3dc50a-13f0-42f0-9ddf-490edd5413d7">
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0920dd64-75cb-4485-879b-2d19c1a6b49f">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="00ab6c37-aa92-4048-9aa2-b18c3a740b59">
+    <annotation/>
+    <name/>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="576d0f74-234f-41c6-b1e2-bd106a5e3a54">
+    <baseIcon>memory.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="dbfbde65-4068-4f7c-9b35-284de3a9302f">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.jvm.JVMMemoryUsageStatistics</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

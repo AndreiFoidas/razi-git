@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="5b2dcdde-0fa3-4651-8efd-d0de353b38e4">
+  <descriptionCdata>5b2dcdde-0fa3-4651-8efd-d0de353b38e4.41bfb3f2-ecd0-40d5-9df0-28f164f8ed58.prompt=DateTime\:
+5b2dcdde-0fa3-4651-8efd-d0de353b38e4.description=&lt;pre&gt;\nConverts an string date time to an Active Directory Time Stamp (Integer8).\n\nInput Parameters\:\ndate - string representation of the time stamp returned by ad\n\nResponses\:\nsuccess - converted successfully (value is op result)\nfailure - failed to convert\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>5b2dcdde-0fa3-4651-8efd-d0de353b38e4.description</annotation>
+  <name>Date To AD Time Stamp</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="41bfb3f2-ecd0-40d5-9df0-28f164f8ed58">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>date</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5b2dcdde-0fa3-4651-8efd-d0de353b38e4.41bfb3f2-ecd0-40d5-9df0-28f164f8ed58.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="4d82210f-9758-4aab-9b43-37c9c4001bda">
+    <annotation/>
+    <name>Operation:Date To AD Time Stamp (5b2dcdde-0fa3-4651-8efd-d0de353b38e4)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="9d2b0b59-d201-483b-98dc-0d432267cf83">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="51e65959-089f-4f7d-971e-37ee7671d4c1">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression>
+          <annotation/>
+          <name/>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator>
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c4e69ced-e26f-4a8b-a985-239894d90373">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d52e812a-c006-478a-92ed-1079eb28b97c">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.DateToADTimeStamp</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

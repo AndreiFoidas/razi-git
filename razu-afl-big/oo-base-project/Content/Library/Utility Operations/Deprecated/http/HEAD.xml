@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="44a9133a-50b6-4cb4-aca3-9cf69cbd2d95">
+  <descriptionCdata>44a9133a-50b6-4cb4-aca3-9cf69cbd2d95.description=The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response.
+</descriptionCdata>
+  <annotation>44a9133a-50b6-4cb4-aca3-9cf69cbd2d95.description</annotation>
+  <name>HEAD</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="dfdeedaf-f168-4845-80a3-a166d1d8c918">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>requestUrl</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9b1c60b1-fe91-4d49-936d-461b3466db83">
+      <annotation/>
+      <toContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Body</inputSymbol>
+      <listDelimiter/>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="92cdae52-6915-40b4-9d3b-b0fb31b78497">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Url</inputSymbol>
+      <listDelimiter/>
+      <value>${requestUrl}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="54a63b78-7abe-40a4-bfb9-d2e866f92581">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Method</inputSymbol>
+      <listDelimiter/>
+      <value>HEAD</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="65c0c0d0-75bc-4e23-9f3b-9997018bc8f2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Protocol</inputSymbol>
+      <listDelimiter/>
+      <value>HTTP/1.1</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="ccafd27f-8b67-47d3-9936-be9d92e81414">
+    <annotation/>
+    <name>Operation:HEAD (44a9133a-50b6-4cb4-aca3-9cf69cbd2d95)</name>
+    <script>scriptletResponse = "FAILED_TO_CONNECT";
+scriptletResult = scriptletRawResult['headers'];
+code = parseInt(scriptletRawResult['code']);
+if ((code &gt; 99) &amp;&amp; (code &lt; 200)) {
+  scriptletResponse = "INFORMATIONAL";
+}
+else if ((code &gt; 199) &amp;&amp; (code &lt; 300)) {
+  scriptletResponse = "SUCCESS";
+}
+else if ((code &gt; 299) &amp;&amp; (code &lt; 400)) {
+  scriptletResponse = "REDIRECTION";
+}
+else if ((code &gt; 399) &amp;&amp; (code &lt; 500)) {
+  scriptletResponse = "CLIENT_ERROR";
+}
+else if ((code &gt; 499) &amp;&amp; (code &lt; 600)) {
+  scriptletResponse = "SERVER_ERROR";
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="03a73627-e23c-41c2-931c-f9f72196c554">
+      <annotation/>
+      <name>INFORMATIONAL</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="7e9205a9-ca01-4bbb-9f6f-4ebd2a5dc27d">
+      <annotation/>
+      <name>SUCCESS</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="f74d7b43-8c53-4513-bd6e-4e270291cf2e">
+      <annotation/>
+      <name>REDIRECTION</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="689142fe-db38-4c90-80e6-ad95075dd883">
+      <annotation/>
+      <name>CLIENT_ERROR</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="3878cc00-b89b-4be9-a485-da78ff4a858a">
+      <annotation/>
+      <name>SERVER_ERROR</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="88c671f0-3846-437c-8896-d54980971e02">
+      <annotation/>
+      <name>FAILED_TO_CONNECT</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c735cdc8-e1fa-4206-8f50-fefe31923853">
+    <annotation/>
+    <name>code</name>
+    <fieldName>code</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="be267dc6-c15c-41c0-9d66-a7d07b8596e8">
+    <baseIcon>http.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>2a3e3d5e-84b2-4868-9ffc-580d0b6d10ce</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

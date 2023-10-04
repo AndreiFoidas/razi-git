@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="eb6d67ea-ae95-42bc-a355-1e8750f6c490">
+  <descriptionCdata>eb6d67ea-ae95-42bc-a355-1e8750f6c490.description=&lt;pre&gt;Performs a statistical analysis on the given table's columns.\n\nInputs\:\ntable - The tale to analyze.\nrowDelimiter - A delimiter that separates rows in the table.\ncolumnDelimiter - A delimiter that separates columns in the table.\nheader-A columnDelimiter separated list of The names of columns.\nrowNames - The name of each row of data.\n\nReturns\:\nAn html formatted statistical analysis of the table.\n\nExtra Results\:\nmeans - A columnDelimiter separated list of the column means.\nmedians - A columnDelimiter separated list of the column medians.\nstddevs - A columnDelimiter separated list of the column standard deviations.\nzValues - A table containing the Z-scores of every cell relative to column means. A Z-score is a measurement of how many standard deviations away from the mean of the list a specific value is.\n\nResponses\:\nsuccess - The operation completed successfully.\noutliers - There was statistically significant variance in a table column.\nfailure - Failed to process the list or something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>eb6d67ea-ae95-42bc-a355-1e8750f6c490.description</annotation>
+  <name>Analyze Table Columns</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="b9492d59-1a28-4414-9c6c-0786931e97e7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>|</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="431f8cf2-ac46-4089-93cd-54f3c600a7af">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="0187ad44-e8d4-4cbf-ad81-91fea9858f50">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>table</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="dd171c51-6579-4a5e-86fa-6705dd41dfc5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>header</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="662d2538-dfdc-4d1e-880a-c2f8da0f8d55">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="715a4092-5d38-4d38-a1e3-91c98fab4752">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>column_delimiter</inputSymbol>
+      <listDelimiter/>
+      <value>${columnDelimiter}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="fb8562c9-41a3-4c30-9e6f-2d8c540250ca">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>percent_to_trim</inputSymbol>
+      <listDelimiter/>
+      <value>20</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="7ee18b57-a315-4d65-acb5-1e5beb6f4bd7">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>row_names</inputSymbol>
+      <listDelimiter/>
+      <value>${rowNames}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="ae5f4327-cd63-47e4-a24e-bb368595de8a">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>row_delimiter</inputSymbol>
+      <listDelimiter/>
+      <value>${rowDelimiter}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="273084e5-78ee-4980-ace6-2b9a2ec98241">
+    <annotation/>
+    <name>Operation:Analyze Table Columns (eb6d67ea-ae95-42bc-a355-1e8750f6c490)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="34c4c06e-f9ce-4a34-957c-9287ef942abc">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="0943efe2-92f6-4805-b0a0-15d584e4c50d">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="3381034d-2b11-463e-aa61-640e56d63a77">
+            <annotation/>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="75048dbe-cece-4300-8fbe-2b0e1a7ee21f">
+      <annotation/>
+      <name>outliers</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>DIAGNOSED</type>
+      <matchRules>
+        <expression id="e460c841-08de-4391-a8cc-7aa4ae88dec8">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="cda3a30e-0447-4226-be77-3fe74a5ff72b">
+            <annotation/>
+            <name>Config Item</name>
+            <text>outliers</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="d508e40e-d5e3-413f-9d34-511cf5c95cf0">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="605d0f81-128a-470f-99ab-8c3e39c5a93f">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="36b6fdf6-a7b9-456d-95a5-2f86197f637e">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ef5cceb2-93ae-4fcd-9f06-ecd82b1eb002">
+    <annotation/>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="645b1ec4-eae4-43e9-82b1-d41943af3692">
+    <baseIcon>column.png</baseIcon>
+    <basePath>Databases</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="600ec56a-eca5-499f-a64e-628581beb5a4">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>Annotations</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Analyze Table Columns</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

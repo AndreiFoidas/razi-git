@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="9d3a978d-4808-47a5-b03b-0faf5062568e">
+  <descriptionCdata>9d3a978d-4808-47a5-b03b-0faf5062568e.954fb927-ff10-4892-9e1d-36850e19c095.prompt=Distinguished Name\:
+9d3a978d-4808-47a5-b03b-0faf5062568e.description=&lt;pre&gt;\nRetrieves the next value from the collection.  This collection is populated by the LDAPSearch operation.\n\nInput Parameters\:\ndn - the DN parameter used in the LDAPSearch operation.  This becomes the key used to find the result set\n\nResponses\:\nvalue retrieved - the next value in the collection was retrieved and stored in the returnResult result\nno more values - no more values remain in the collection\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>9d3a978d-4808-47a5-b03b-0faf5062568e.description</annotation>
+  <name>LDAP Search Next Result (1)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="954fb927-ff10-4892-9e1d-36850e19c095">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dn</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9d3a978d-4808-47a5-b03b-0faf5062568e.954fb927-ff10-4892-9e1d-36850e19c095.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a3b7b94e-aca9-4b8f-bfb8-ec87cbd94e9c">
+    <annotation/>
+    <name>Operation:LDAP Search Next Result (9d3a978d-4808-47a5-b03b-0faf5062568e)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="b3d80f1b-5a82-4abf-9c96-e1a89b6105a9">
+      <annotation/>
+      <name>no more values</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="e0af695c-785e-43a7-8b5d-77283f36d0f4">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="5767edd3-82ce-4514-9a9a-17ad35ab1243">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="83c8c8f6-c370-4b05-a4fe-3a2f43e9c62e">
+      <annotation/>
+      <name>value retrieved</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="ed41cce9-5704-4e07-934e-9f7e5abc90b1">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="722f63ca-116d-4c74-92ed-cb924c318d5c">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="78938572-de16-4928-af8b-893f81c93ede">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="04a28b26-3639-425b-921e-88a73ce7cc55">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>8f3a11a4-0a2a-4d52-89b6-0bd37fe76f50</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

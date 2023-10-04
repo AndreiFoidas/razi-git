@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="c9d31f8e-a58d-41a4-b258-c920ddd81165">
+  <descriptionCdata>c9d31f8e-a58d-41a4-b258-c920ddd81165.12261d12-e3a4-4dfb-9976-6a7f22ea1631.description=&lt;pre&gt;\nScan opened ports on give host.\n\nInputs\: \n    host - IP address Host name to be scanned.\n    lowestPort - lowest port range.\n    highestPort - highest port range.\n    portType - the type of ports to be scanned (TCP or UDP). If not specified, the TCP ports are scanned.\n\nResponses\:\n    success - the command was executed successfully.\n    failure - the command could not be executed.\n\nReturns\:\n    Information about the ports' statuses on a given machine.\n\nExtra results\:\n    host - the IP of the host for which the ports are scanned.\n    ports - Number of ports scanned.\n    opened - Number of ports open.\n    closed - Number of ports closed.\n    dropped - Number of ports dropped.\n\nNote\:\n    To scan specific port give same port as parameter for both Lowest Port and Highest Port.\n&lt;/pre&gt;\n
+c9d31f8e-a58d-41a4-b258-c920ddd81165.description=&lt;pre&gt;\nDemonstrates use of port scanner to scan opened ports and closed ports on give host.\n\nInputs\: \n    host - IP address Host name to be scanned.\n    lowestPort - lowest port range.\n    highestPort - highest port range.\n    portType - the type of ports to be scanned (TCP or UDP). If not specified, the TCP ports are scanned.\n\nResponses\:\n    success - the command was executed successfully.\n    failure - the command could not be executed.\n\nReturns\:\n   Information about the ports' statuses on a given machine.\n\nExtra results\:\n    host - the IP of the host for which the ports are scanned.\n    ports - Number of ports scanned.\n    opened - Number of ports open.\n    closed - Number of ports closed.\n    dropped - Number of ports dropped.\n\nNote\:\n    To scan specific port give same port as parameter for both Lowest Port and Highest Port.\n&lt;/pre&gt;\n
+c9d31f8e-a58d-41a4-b258-c920ddd81165.e512f2b6-b729-41a5-9c74-521027178a48.callout=Scan opened ports on given host Input Parameters\:                                               \nHost - IP address/Host name   \nLowest Port - lowest port range \nHighest Port - highest port range.        portType - the type of ports to be scanned (UDP or TCP)                       To scan specific ports give same ports parameter for both Lowest Port and Highest Port.                                               
+</descriptionCdata>
+  <annotation>c9d31f8e-a58d-41a4-b258-c920ddd81165.description</annotation>
+  <name>Port Scanner</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9b495e1d-5eb6-4447-8147-7653e837084e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f8f4c39c-4d35-4007-bddd-b5b38ccee42b">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>lowestPort</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bbb219b3-fe04-44f6-a367-a8ec84fde1c8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>highestPort</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="42cf2f9d-6bed-4805-bdd0-c47b728af59d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>portType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>f9a87282-8b86-453c-8bc8-96e71da6095f</refId>
+        <refName>Transport Layer Protocols</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="bccd0eb1-902f-4186-98e2-8c10ff672773">
+    <annotation/>
+    <name>Operation:Port Scanner (c9d31f8e-a58d-41a4-b258-c920ddd81165)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="073b1e66-16d0-495e-baaf-471f14a8fd12">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="2d75ee07-25fb-4f30-b021-a3f165f73366">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="bba3b392-f2a1-49cf-bb3f-43d39fffdc91">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="377e4846-fa1d-4fdf-9e6d-12cfc74c8504">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="e512f2b6-b729-41a5-9c74-521027178a48">
+      <text>c9d31f8e-a58d-41a4-b258-c920ddd81165.e512f2b6-b729-41a5-9c74-521027178a48.callout</text>
+      <bounds>
+        <x>158.0</x>
+        <y>206.0</y>
+        <width>200.0</width>
+        <height>204.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="12261d12-e3a4-4dfb-9976-6a7f22ea1631">
+      <annotation>c9d31f8e-a58d-41a4-b258-c920ddd81165.12261d12-e3a4-4dfb-9976-6a7f22ea1631.description</annotation>
+      <name>Port Scanner</name>
+      <bounds>
+        <x>-32.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="de128fc8-4d56-46f9-bc3c-dbac5b87b86b">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="34d7e348-df35-45cb-8d14-4e8e7b6a817e">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>lowestPort</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="16e794f6-5abf-4860-9bbe-da79ebefdee3">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>highestPort</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="b8460729-ae11-4863-87ff-257405391e63">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>portType</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="bcc47921-d649-4925-8087-f90399bed7cf">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>64f0757a-d399-4f70-8d81-6e1a5f4b6507</refId>
+          </destination>
+          <source>
+            <refId>12261d12-e3a4-4dfb-9976-6a7f22ea1631</refId>
+          </source>
+          <positions>
+            <point>
+              <x>-32.0</x>
+              <y>0.0</y>
+            </point>
+            <point>
+              <x>0.0</x>
+              <y>197.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="74be9e03-d7ba-4edb-8339-f4900e374a8b">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d063d001-7e21-4eb0-8c57-dd868fc3a3da</refId>
+          </destination>
+          <source>
+            <refId>12261d12-e3a4-4dfb-9976-6a7f22ea1631</refId>
+          </source>
+          <positions>
+            <point>
+              <x>-32.0</x>
+              <y>0.0</y>
+            </point>
+            <point>
+              <x>211.0</x>
+              <y>-18.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>05099c46-a561-45cb-9b32-cad229b2489d</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="f449f56b-7d29-4a9c-aa83-96f139707a02">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>dropped</contextKey>
+          <expression id="a5d4f46d-6b84-446e-9e3e-207b8ce94f38">
+            <annotation/>
+            <name>Result Field: dropped</name>
+            <fieldName>dropped</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="90656830-54c1-4340-b2b9-ca97796d358e">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>host</contextKey>
+          <expression id="f9a52e9d-b0ce-4974-91c6-7da32e7cf647">
+            <annotation/>
+            <name>Result Field: host</name>
+            <fieldName>host</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="84d867fd-9d03-4468-9fa9-f5c0e64a04b7">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>opened</contextKey>
+          <expression id="3ab7c42c-aa55-4f33-9647-56f5de875cdd">
+            <annotation/>
+            <name>Result Field: opened</name>
+            <fieldName>opened</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="f53aa0ed-bb95-492a-8f7c-35839881ba74">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>ports</contextKey>
+          <expression id="c66f290b-b16c-4ee3-b9be-09827898716b">
+            <annotation/>
+            <name>Result Field: ports</name>
+            <fieldName>ports</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="ddc7ec19-1ba4-4305-9003-b8c6611a7a61">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>result</contextKey>
+          <expression id="7d5046f0-afb4-42d0-9394-aee282694722">
+            <annotation/>
+            <name>Result Field: finalResult</name>
+            <fieldName>finalResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="e076b497-9681-4856-abf9-d62284fc4311">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>closed</contextKey>
+          <expression id="682d1e81-c6c0-4a11-96f8-c93a4ffacd1c">
+            <annotation/>
+            <name>Result Field: closed</name>
+            <fieldName>closed</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="64f0757a-d399-4f70-8d81-6e1a5f4b6507">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>197.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="556e6808-931d-4313-9226-fc005236f542">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>64f0757a-d399-4f70-8d81-6e1a5f4b6507</refId>
+          </destination>
+          <source>
+            <refId>64f0757a-d399-4f70-8d81-6e1a5f4b6507</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="d063d001-7e21-4eb0-8c57-dd868fc3a3da">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>211.0</x>
+        <y>-18.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="479a1eee-2c33-4e6a-a22f-a97e78db0562">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d063d001-7e21-4eb0-8c57-dd868fc3a3da</refId>
+          </destination>
+          <source>
+            <refId>d063d001-7e21-4eb0-8c57-dd868fc3a3da</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>12261d12-e3a4-4dfb-9976-6a7f22ea1631</startSteps>
+</flow>

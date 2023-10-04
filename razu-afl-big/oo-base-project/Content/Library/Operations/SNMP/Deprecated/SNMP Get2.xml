@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="a48a61a0-2097-456b-b26e-22403f4e3f27">
+  <descriptionCdata>a48a61a0-2097-456b-b26e-22403f4e3f27.5e9a5d69-0321-4e33-a64d-eb5560fa5b5f.prompt=port(default\:161)\:
+a48a61a0-2097-456b-b26e-22403f4e3f27.a457c42f-d55f-4123-9256-5cd427e2fa5e.prompt=Host Name\:
+a48a61a0-2097-456b-b26e-22403f4e3f27.b1f432e9-3a50-4f57-88e3-9a7951b6d36c.prompt=OID\:
+a48a61a0-2097-456b-b26e-22403f4e3f27.b6a28748-c32f-4109-885d-871c46f4d0fc.prompt=Community String\:
+a48a61a0-2097-456b-b26e-22403f4e3f27.description=&lt;pre&gt;Sends an SNMP GET request to obtain value for given OID\n\nInputs\: \n\nhost\:           ip address/host name  \nport\:           port to which SNMP agent is listening default is 161 \ncommunity\: password for contacting managed node, default is public \noid\:           Object description ID for which you want to get value, ex\: 1.3.6.1.2.1.1.6.0  for  managed node location  \n\nResponses\: \nsuccess\:     the value of given OID is retrieved\nfailure\:       value of OID cannot be retrieved\nNoAction\: No action was taken.\n \nResult\:\n\nvalue for given OID is retrieved\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>a48a61a0-2097-456b-b26e-22403f4e3f27.description</annotation>
+  <name>SNMP Get2</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a457c42f-d55f-4123-9256-5cd427e2fa5e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a48a61a0-2097-456b-b26e-22403f4e3f27.a457c42f-d55f-4123-9256-5cd427e2fa5e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5e9a5d69-0321-4e33-a64d-eb5560fa5b5f">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a48a61a0-2097-456b-b26e-22403f4e3f27.5e9a5d69-0321-4e33-a64d-eb5560fa5b5f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b6a28748-c32f-4109-885d-871c46f4d0fc">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>community</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a48a61a0-2097-456b-b26e-22403f4e3f27.b6a28748-c32f-4109-885d-871c46f4d0fc.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b1f432e9-3a50-4f57-88e3-9a7951b6d36c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>oid</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a48a61a0-2097-456b-b26e-22403f4e3f27.b1f432e9-3a50-4f57-88e3-9a7951b6d36c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="f46ea797-9465-471f-90a0-e2cc72da58ec">
+    <annotation/>
+    <name>Operation:SNMP Get2 (a48a61a0-2097-456b-b26e-22403f4e3f27)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="38ec8785-70f7-4bf4-b03b-8c2586314f24">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2d72027c-eb2d-4ebc-9f49-c6ace70df8c5">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="10ad6769-4232-4bb9-afcf-76203682d3f3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="0d199dc5-878d-40ef-82e7-0d8e50057453">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="04228c90-883f-4451-8798-a01637202bcd">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0798b9e8-d079-4886-9985-5fe3c97c0c63">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3b9a7b23-bd07-42dc-af4d-b05a86143a69">
+      <annotation/>
+      <name>NoAction</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="2d49e150-0885-4b40-a728-7fd771b14b2d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="80aff21d-c67e-4e10-8805-599f2f77e1f3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e19448be-741e-472c-b006-dbe3d0bd05e1">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9b707639-4ca2-40f5-b298-cddb1dadad30">
+    <baseIcon>wrench2.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>48ad0089-d8c8-4de3-b8eb-77a002496dbf</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

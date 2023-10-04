@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="52632c96-80d1-421d-9c45-c6c27a49fabc">
+  <descriptionCdata>52632c96-80d1-421d-9c45-c6c27a49fabc.description=&lt;pre&gt;\nExtracts the name-value pair of an &lt;input&gt; tag from a list containing the HTML parameter names and values of the form's &lt;input&gt; tag.\n\nInputs\: \n    htmlParamNames - The parameter names parsed from the form &lt;input&gt; tag. \n    htmlParamValues - The parameter values parsed from the form &lt;input&gt; tag. \n\nResults\:\n    returnCode - This is the primary output. A code used to determine the operation response, specifying whether the operation is successful or not.\n    names - The name field of the &lt;input&gt; tag.\n    values - The value field of the &lt;input&gt; tag.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully. Either the &lt;htmlParamNames&gt; and &lt;htmlParamValues&gt; did not contain a name-value pair, or the numbers of elements provided in the &lt;htmlParamNames&gt; and &lt;htmlParamValues&gt; list inputs are different.\n\nExample\: \nIf the HTML &lt;input&gt; tag is &lt;input type\=text name\=user value\=John&gt;, enter the value of &lt;htmlParamNames&gt; as "type,name,value" and the value of &lt;htmlParamValues&gt; as "text,user,John".\nThe operation output is\: \n    names\: user\n    values\: John\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>52632c96-80d1-421d-9c45-c6c27a49fabc.description</annotation>
+  <name>Form Single Input Extractor</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a71ccb3a-f231-4fae-b3b5-4f79f87e83c2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>htmlParamNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f3e4f21a-47f3-42b2-a3d5-2a5808accff7">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>htmlParamValues</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="10aedd5c-eafd-4dfa-9ca4-e3a09eb86217">
+    <annotation/>
+    <name>Operation:Form Single Input Extractor (52632c96-80d1-421d-9c45-c6c27a49fabc)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="9f70506e-ca65-4032-94bb-f52b23b9503e">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="1d9354aa-d738-4e55-93c9-f41bcb477536">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="891cb3b4-2dcb-43f4-841c-9a6dc5787a39">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8008c6a5-029f-424b-8529-42c0ef63ec0d">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="7270b824-5ebb-47c6-b422-ba2db07ae51d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c901e263-436f-4b7c-bcc2-9aeca86666b0">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="8e62c0a0-d625-4072-9478-106a0a494106">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="146404c1-26c6-41bb-9913-bb5fa5bb7e38">
+    <baseIcon>website.png</baseIcon>
+    <basePath>/Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="67d5bf56-ce38-4a22-b6d3-3aa2f4a2fde2">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.httpclient.FormSingleInputExtractor</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

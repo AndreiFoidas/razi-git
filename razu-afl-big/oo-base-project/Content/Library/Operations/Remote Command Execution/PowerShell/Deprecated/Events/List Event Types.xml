@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="6edbb648-d02e-4d54-8489-941d373059d3">
+  <descriptionCdata>6edbb648-d02e-4d54-8489-941d373059d3.description=&lt;pre&gt;\nLists the types of event logs (Application, System etc) available in the local Windows computer.\n\nResponses\:\nsuccess\t- The operation complete with success.\nfailure\t- Something went wrong.\n\nResult\:\nThe raw result of the operation.\n\nExtra Results\:\nreturnCode\t- The return code of the operation.\nexception\t- The error message if something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>6edbb648-d02e-4d54-8489-941d373059d3.description</annotation>
+  <name>List Event Types</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="b53abe75-a4c9-44eb-94f2-6ac54fac7244">
+    <annotation/>
+    <name>Operation:List Event Types (6edbb648-d02e-4d54-8489-941d373059d3)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="91bb8440-f3be-4af2-b5d4-541838944020">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="60da0ef7-2230-4254-bb6c-1a69cbd6c461">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="17f02fd9-eea8-42a3-96f4-ccbaa216563b">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6ed8274e-d0e5-4fbf-bc66-91ab87856034">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4948421d-9ecb-49c7-b418-2ef144b0fcfd">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="cb66fd44-1f04-453a-a080-37428c83e948">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="7fddcfeb-8628-43ea-a1fa-8041ee50ce3c">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="bcc1e221-82f5-4e4d-8727-f8c7013f9e3c">
+    <baseIcon>windows_event_log.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e1ef6c00-4e54-41ec-9911-78617a212648">
+        <baseIcon>read2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>794888a8-0223-4003-8d5a-f28f9a79dec2</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

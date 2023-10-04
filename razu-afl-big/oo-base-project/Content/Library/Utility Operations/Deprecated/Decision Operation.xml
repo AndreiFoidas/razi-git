@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="12b61974-123f-44c2-bffd-43eaacf7ab69">
+  <descriptionCdata>12b61974-123f-44c2-bffd-43eaacf7ab69.9531d3ba-0a64-4b0d-a997-af101897b8e1.prompt=Yes or No\:
+12b61974-123f-44c2-bffd-43eaacf7ab69.description=&lt;pre&gt;\nSimple operation that returns either "Yes" or "No" based on an input of the literal (e.g. "Yes" or "No", "True" or "False").  Uses include\:  prompting a user to select "Yes" or "No" from a selection list (e.g. "Would you like to check the status of another service?")\n\nDeprecated since 'Evaluate Expression' can be used instead.\n\nInput Parameters\:\ndecisionValue - Question to ask user\nyesValue - value of a yes answer\nnoValue - value of a no answer\n\nResponses\:\nsuccess - the user selected yes\nfailure - the user selected no\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>12b61974-123f-44c2-bffd-43eaacf7ab69.description</annotation>
+  <name>Decision Operation</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9531d3ba-0a64-4b0d-a997-af101897b8e1">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>decisionValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>12b61974-123f-44c2-bffd-43eaacf7ab69.9531d3ba-0a64-4b0d-a997-af101897b8e1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>209c1838-2205-48b1-b47a-a99adccb775b</refId>
+        <refName>Yes No</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="18662ca6-b212-40cf-ae2e-ef76b4567535">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>yesValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>Yes</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="6080246b-ba6c-4f27-81a1-fba2d6b95bc6">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>noValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>No</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="8a2e75e1-2f80-4c13-99e1-4ff6c7e43548">
+    <annotation/>
+    <name>Operation:Decision Operation (12b61974-123f-44c2-bffd-43eaacf7ab69)</name>
+    <script>
+scriptletResponse = "failure";
+
+answerString = decisionValue;
+
+if (answerString.equalsIgnoreCase(yesValue)) {
+	scriptletResponse = "success";
+}
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="fd169221-b30c-488f-932c-216ec73576d2">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ffc253fb-22be-4946-b79c-ad762b3a1ce1">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="99a134e6-067a-437b-bc1c-1fad4033e3c8">
+    <baseIcon>branch_element.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="380054c2-5b27-4d84-ae97-ce4b5cede94c">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

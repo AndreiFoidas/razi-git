@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="f74de5ad-012a-4ca7-8d72-5f67aafd0570">
+  <descriptionCdata>f74de5ad-012a-4ca7-8d72-5f67aafd0570.2a110b38-e9a4-45d6-b3c5-c34f79c74c38.prompt=Type\:
+f74de5ad-012a-4ca7-8d72-5f67aafd0570.5a10e4b1-1303-4b56-9a1f-0fd5349e234a.prompt=Password\:
+f74de5ad-012a-4ca7-8d72-5f67aafd0570.af1f8bd6-dccd-4bcf-855f-b454589fae71.prompt=Username\:
+f74de5ad-012a-4ca7-8d72-5f67aafd0570.description=&lt;pre&gt;List the directory shares available in the host computer.\n\nInputs\:\nhost \t- Hostname or IP address of the target computer.\nusername \t- Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword \t- Password of the user.\ntype \t- Type of the share\:\n\t\tadministrative - This share will be available for users that are included in the local Administrators group.\n\t\tnon-administrative - This share can be accessed by non-administrative users.\n\t  By default the share type is non-administrative.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message.\n&lt;/pre&gt;
+f74de5ad-012a-4ca7-8d72-5f67aafd0570.f6e8feed-643c-4617-9939-ad11519bed8e.prompt=Host\:
+</descriptionCdata>
+  <annotation>f74de5ad-012a-4ca7-8d72-5f67aafd0570.description</annotation>
+  <name>List Shares</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f6e8feed-643c-4617-9939-ad11519bed8e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f74de5ad-012a-4ca7-8d72-5f67aafd0570.f6e8feed-643c-4617-9939-ad11519bed8e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="af1f8bd6-dccd-4bcf-855f-b454589fae71">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f74de5ad-012a-4ca7-8d72-5f67aafd0570.af1f8bd6-dccd-4bcf-855f-b454589fae71.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5a10e4b1-1303-4b56-9a1f-0fd5349e234a">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f74de5ad-012a-4ca7-8d72-5f67aafd0570.5a10e4b1-1303-4b56-9a1f-0fd5349e234a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2a110b38-e9a4-45d6-b3c5-c34f79c74c38">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>type</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>f74de5ad-012a-4ca7-8d72-5f67aafd0570.2a110b38-e9a4-45d6-b3c5-c34f79c74c38.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="5f350667-8d79-4e17-a1bc-15914c5ba2a6">
+    <annotation/>
+    <name>Operation:List Shares (f74de5ad-012a-4ca7-8d72-5f67aafd0570)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d51b9c51-0be5-42a5-85f1-72bc0268df4d">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="37c9ac33-883a-43e5-8791-6b29df854664">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="70e342ec-e29a-4ef9-a831-3c0a40514402">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="614b17e9-437d-455b-a719-58ceae991d0a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="772415a4-40f1-4230-9a62-b3b197253053">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="30abdff8-5e21-4df0-9e38-9dcd47ba2850">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e330413d-440b-4441-9f17-b1dc611b5198">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="57eea9fa-4145-4e3c-b201-51f8eed08b6f">
+    <baseIcon>folder.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="c0c4c3ab-13fd-431a-ab0a-31d6d89910af">
+        <baseIcon>read2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.ListShares</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

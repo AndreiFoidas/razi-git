@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="226cf019-a142-4112-81a7-b4b14fb505b7">
+  <descriptionCdata>226cf019-a142-4112-81a7-b4b14fb505b7.57561083-1e91-40cc-a0d9-b28ba637b81d.description=&lt;pre&gt;\nGet the Host Name of a IP Address\n\nInputs\:\nipaddress - The ip address to perform a reverse lookup on.\ndnsServer - (optional) dns server to perform lookup against.\n\nResponses\:\nSuccess - The operation completed successfully.\nFailed - The operation failed.\n&lt;/pre&gt;
+226cf019-a142-4112-81a7-b4b14fb505b7.78af2cdf-425c-41c2-9fad-928b639fae9d.callout=Will fail if a PTR record cannot be located.
+226cf019-a142-4112-81a7-b4b14fb505b7.dc8b0817-ea46-48aa-be51-197e984a310e.prompt=Enter a value for ipaddress
+226cf019-a142-4112-81a7-b4b14fb505b7.description=&lt;pre&gt;\nThis sample flow demonstrates how to do reverse DNS lookups from Operations Orchestration.\n\nResponses\:\nsuccess - sample completed.\nfailure - something went wrong.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>226cf019-a142-4112-81a7-b4b14fb505b7.description</annotation>
+  <name>Reverse DNS Lookup</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="756a491c-2fb6-4ac0-8b37-11ea5d2a0969">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="25aaa623-e7a2-44dc-bb81-6b82d556c259">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e07d0c2a-9625-4500-9c4c-71063497b9c2">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="33f71660-81c3-4f6e-82b7-105126d879e1">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="78af2cdf-425c-41c2-9fad-928b639fae9d">
+      <text>226cf019-a142-4112-81a7-b4b14fb505b7.78af2cdf-425c-41c2-9fad-928b639fae9d.callout</text>
+      <bounds>
+        <x>275.0</x>
+        <y>157.0</y>
+        <width>181.0</width>
+        <height>51.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="57561083-1e91-40cc-a0d9-b28ba637b81d">
+      <annotation>226cf019-a142-4112-81a7-b4b14fb505b7.57561083-1e91-40cc-a0d9-b28ba637b81d.description</annotation>
+      <name>Reverse DNS Lookup</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="dc8b0817-ea46-48aa-be51-197e984a310e">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>ipaddress</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>226cf019-a142-4112-81a7-b4b14fb505b7.dc8b0817-ea46-48aa-be51-197e984a310e.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="ae876df0-db0b-4978-95a9-0dba8dbfac4e">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>dnsServer</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="03167d47-cd3d-4b08-9894-8422dce6c52b">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5304367d-a66d-4342-92bc-171e356f6a36</refId>
+          </destination>
+          <source>
+            <refId>57561083-1e91-40cc-a0d9-b28ba637b81d</refId>
+          </source>
+          <positions>
+            <point>
+              <x>121.0</x>
+              <y>36.57142857142857</y>
+            </point>
+            <point>
+              <x>341.0</x>
+              <y>36.57142857142857</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>454.54545454545456</x>
+            <y>-7.57142857142857</y>
+          </labelPosition>
+        </transition>
+        <transition id="960d8304-7bab-4a7f-9d4f-eb3364d40d62">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>630a204c-9c8b-45d7-87b0-9e3a98f4a5ba</refId>
+          </destination>
+          <source>
+            <refId>57561083-1e91-40cc-a0d9-b28ba637b81d</refId>
+          </source>
+          <positions>
+            <point>
+              <x>90.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>167.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>450.98039215686276</x>
+            <y>24.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>44f43e04-d12a-40e2-972c-2c894a66f720</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="5304367d-a66d-4342-92bc-171e356f6a36">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>280.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="eecd688a-4867-43f8-8fe7-86b720cd2c7f">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5304367d-a66d-4342-92bc-171e356f6a36</refId>
+          </destination>
+          <source>
+            <refId>5304367d-a66d-4342-92bc-171e356f6a36</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="630a204c-9c8b-45d7-87b0-9e3a98f4a5ba">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>0.0</x>
+        <y>162.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="00d6bcb8-817f-4ec0-9294-7ce7828f4c9e">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>630a204c-9c8b-45d7-87b0-9e3a98f4a5ba</refId>
+          </destination>
+          <source>
+            <refId>630a204c-9c8b-45d7-87b0-9e3a98f4a5ba</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>57561083-1e91-40cc-a0d9-b28ba637b81d</startSteps>
+</flow>

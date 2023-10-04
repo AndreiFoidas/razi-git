@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="e4efc7ee-d43e-4dc8-bafd-8c60aa900109">
+  <descriptionCdata>e4efc7ee-d43e-4dc8-bafd-8c60aa900109.description=&lt;pre&gt;\nFormats a string using html. This string can then be inserted into a webpage. If an input is not specified, or has an invalid input, it will be ignored.\n\nInputs\:\ntoFormat - The string to format.\nstyle - The style to format the string using (italic, bold, underline).\ncolor - The color to format the string using (red, yellow, blue, black, white or a hexidecimal RGB value [Example \#FF00FF for purple]).\nsize - +n or -n where n is the number of points to increase/decrease the font size by relative to the browser default.\n\nResponses\:\nsuccess - The operation completed successfully.\n\nreturns\:\nThe html formatted string.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>e4efc7ee-d43e-4dc8-bafd-8c60aa900109.description</annotation>
+  <name>HTML String Formatter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a13380c2-a42c-4158-9bdd-514b8f0c5c88">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>toFormat</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8f117679-e786-4fef-ba8e-99553aeeeb29">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>style</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7a35b94d-c89e-434e-a5c1-0c1c9258112d">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>color</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="487786be-d8e0-430e-9f90-f679a2076e64">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>size</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="3a855c3e-6266-46a5-a8b7-83fe305c426d">
+    <annotation/>
+    <name>Operation HTML String Formatter (e4efc7ee-d43e-4dc8-bafd-8c60aa900109)</name>
+    <script>var formatted = toFormat;
+if (typeof style != 'undefined' &amp;&amp; style != null &amp;&amp; style !=""){
+	if (style.toLowerCase().indexOf("italic") &gt;=0)
+		formatted = "&lt;I&gt;"+formatted+"&lt;/I&gt;";
+	if (style.toLowerCase().indexOf("bold") &gt;=0)
+		formatted = "&lt;B&gt;"+formatted+"&lt;/B&gt;";
+	if (style.toLowerCase().indexOf("underline") &gt;=0)
+		formatted = "&lt;U&gt;"+formatted+"&lt;/U&gt;";
+}
+var colorFlag = "";
+if (typeof color == 'undefined' || color == null || color =="")
+	colorFlag = "";
+else
+	colorFlag = color;
+var sizeFlag = "";
+if (typeof size == 'undefined' || size == null || size =="")
+	sizeFlag = "";
+else
+	sizeFlag = size;
+
+var fontFlag = "";
+if (sizeFlag != "")
+	fontFlag += "SIZE="+sizeFlag;
+if (colorFlag != "")
+	if (fontFlag != "")
+		fontFlag += " COLOR="+colorFlag;
+	else
+		fontFlag += "COLOR="+colorFlag;
+
+if (fontFlag != "")
+	formatted = "&lt;FONT "+fontFlag+"&gt;"+formatted+"&lt;/FONT&gt;";
+scriptletResult = ""+formatted;
+
+
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="468da070-4762-4c17-b341-32800efac318">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="fab2703d-a54c-47d8-b012-3f299e2e274b">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="692efe53-dae1-4b85-b11d-73965d8dc39c">
+    <baseIcon>website.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="42059154-198c-43d6-bb4c-0a0f7df84d61">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

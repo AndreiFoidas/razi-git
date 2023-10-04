@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="fa7b2094-7cae-48f4-a63d-6ffcb23ec329">
+  <descriptionCdata>fa7b2094-7cae-48f4-a63d-6ffcb23ec329.description=&lt;pre&gt;Restarts the local Windows computer.\n\nResponses\:\nsuccess \t- Operation completed successfully\nfailure \t- Something went wrong\n\nResult\:\nThe operation return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>fa7b2094-7cae-48f4-a63d-6ffcb23ec329.description</annotation>
+  <name>Restart Computer</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="dfe1552c-abb1-4aee-ad4e-fb8184b3dae8">
+    <annotation/>
+    <name>Operation:Restart Computer (fa7b2094-7cae-48f4-a63d-6ffcb23ec329)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="6a63c1ca-088b-446c-896e-a6f235405d90">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="bd6b523e-8ffa-492b-aa34-8a1232212b82">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d06db9c0-a829-41ef-8700-abec987ece02">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="674ab2f0-6ef8-44dd-8c0c-dababfd9122a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="49a73663-8348-413d-8869-1269943ec671">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="6caa815c-21d9-4200-ada7-31e862aef6fa">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f05bd00c-e477-4dec-8fad-4da464b41031">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="2f3dd925-5b06-49f3-9d89-6e7a853235b8">
+    <baseIcon>workstation1.png</baseIcon>
+    <basePath>/Clients/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="c46069b4-038c-47db-8688-be556840af00">
+        <baseIcon>restart_reboot.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>689265ef-4cc6-459e-98d4-0ec893801f46</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

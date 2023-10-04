@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="40581c53-826b-4299-8839-7454f2b1af6c">
+  <descriptionCdata>40581c53-826b-4299-8839-7454f2b1af6c.18c04375-4131-4941-8350-b20b6a83cb71.prompt=Command\:
+40581c53-826b-4299-8839-7454f2b1af6c.1a12656e-f361-4e73-a75e-c4d4504f4986.prompt=Use pty?
+40581c53-826b-4299-8839-7454f2b1af6c.220b4bb3-bde3-4744-8f3a-ddf0f1b0dcfd.prompt=Password\:
+40581c53-826b-4299-8839-7454f2b1af6c.8675130b-0bbd-4f72-809b-c327818d9c73.prompt=UserName\:
+40581c53-826b-4299-8839-7454f2b1af6c.a304bb36-aefb-4c27-a4c4-73511c6e094f.prompt=HostName\:
+40581c53-826b-4299-8839-7454f2b1af6c.dedde759-9d75-4f24-9370-38b07ec37f29.prompt=Close SSH session?
+40581c53-826b-4299-8839-7454f2b1af6c.description=&lt;pre&gt;The operation runs a SSH command on the host.\n\nInputs\:\n    host - Hostname or ip address.\n    port - The port number for running the command. It overwrites the port given inside the host input (in a syntax like host\:port), if this exists.\n    command - The command to execute.\n    arguments - The arguments to pass to the command.\n    pty - Whether to use pty.\nValid values\: true, false. \nDefault value\: false.\n    privateKeyFile - The absolute path to the private key file on the RAS host. The private key file must be in OpenSSH format.\n    username - Username to connect as.\n    password - Password of user. If using a private key file this will be used as the passphrase for the file.\n    timeout - Time in milliseconds to wait for the command to complete.\nDefault value\: 90000 ( 90 seconds ).\n    characterSet - The character encoding used for input stream encoding from the target machine. \nValid values\: SJIS, EUC-JP, UTF-8.  \nDefault value\: UTF-8. \n    closeSession - If "false" the ssh session will be cached for future calls of this operation during the life of the flow (the session might still be visible on the remote server even after the flow finishes due to socket timeouts). If "true" the ssh session used by this operation will be closed.\nValid values\: true, false.\nDefault value\: true.\n\nResults\:\n    returnResult - This is the primary output. It contains the STDERR of the command if something went wrong or STDOUT otherwise.\n    STDERR - The STDERR of the command.\n    STDOUT - The STDOUT of the command.\n    exitStatus - Every command returns an exit status (sometimes referred to as a return status or exit code). A successful command returns a 0, while an unsuccessful one returns a non-zero value that usually can be interpreted as an error code.\n\nResponses\:\n    success - The command was executed successfully.\n    failure - The command could not be executed.\n\nNotes\:\n1. If the SSH session is cached then only the connection is kept and not the context (variables) represented by SSH channel.\n2. In order to use private keys with different encryption types (ex.\: aes256-cbc) needs to be updated the &lt;OO_Home&gt;/java/lib/security/local_policy.jar JAR file with one that accept all security policies (ex.\: http\://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html). After update you must restart the Studio or Central service.\n&lt;/pre&gt;
+40581c53-826b-4299-8839-7454f2b1af6c.fb9cfb80-4881-48d3-bb0d-d9f49eff5aca.prompt=Port Number\:
+</descriptionCdata>
+  <annotation>40581c53-826b-4299-8839-7454f2b1af6c.description</annotation>
+  <name>SSH Command</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a304bb36-aefb-4c27-a4c4-73511c6e094f">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.a304bb36-aefb-4c27-a4c4-73511c6e094f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="fb9cfb80-4881-48d3-bb0d-d9f49eff5aca">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.fb9cfb80-4881-48d3-bb0d-d9f49eff5aca.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="18c04375-4131-4941-8350-b20b6a83cb71">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>command</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.18c04375-4131-4941-8350-b20b6a83cb71.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1a12656e-f361-4e73-a75e-c4d4504f4986">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>pty</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.1a12656e-f361-4e73-a75e-c4d4504f4986.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8675130b-0bbd-4f72-809b-c327818d9c73">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.8675130b-0bbd-4f72-809b-c327818d9c73.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="220b4bb3-bde3-4744-8f3a-ddf0f1b0dcfd">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.220b4bb3-bde3-4744-8f3a-ddf0f1b0dcfd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1350209e-fd11-4ec1-a742-2f0b48a81115">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>arguments</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a5cbbc01-d067-427d-acfa-f40f2f6c8fe6">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>privateKeyFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c697aaa2-9fd8-40dd-b6b3-31501b02746b">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="dccf0bcb-7611-4ca1-bfa6-e9665c48b20b">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="dedde759-9d75-4f24-9370-38b07ec37f29">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>closeSession</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>40581c53-826b-4299-8839-7454f2b1af6c.dedde759-9d75-4f24-9370-38b07ec37f29.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="cbbb32f1-777d-4a57-9c7e-69062437a345">
+    <annotation/>
+    <name>Operation SSH Command (40581c53-826b-4299-8839-7454f2b1af6c)</name>
+    <script>
+        	scriptletContext.put("STDERR", scriptletRawResult['STDERR']);
+        	scriptletContext.put("STDOUT", scriptletRawResult['STDOUT']);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="17ed900e-456b-40ac-b101-a8263bb2ba14">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="75a846fd-7f44-4c67-84ba-e3a1122531f3">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ad2d59f8-92c1-462c-8059-7219f4fa5cbd">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="228aec8d-82c9-4e77-9b2f-c677c35cde51">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="08af946e-5a4f-43e7-ade3-fd2dd99ebdee">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="645545f0-a629-42ef-97e0-b8cb38cfb192">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ecdf6800-0acb-45f4-8fc9-7d106c8fc3cd">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="35b3ac7d-66d0-4ce8-a8ca-4076c595f05b">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="2edffe2c-e62f-42ad-b5df-063e498aadc6">
+        <baseIcon>remote.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ssh.SSHCommand</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

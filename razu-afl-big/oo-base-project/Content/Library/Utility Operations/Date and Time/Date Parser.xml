@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c88d27ac-30cb-4ba9-acc0-404f7e15ec4a">
+  <descriptionCdata>c88d27ac-30cb-4ba9-acc0-404f7e15ec4a.description=&lt;pre&gt;\nThis operation converts the date input value from one date/time format (specified by dateFormat) to another date/time format (specified by outFormat) using locale settings (language and country).\nYou can use the flow "Get Current Date and Time" to check upon the default date/time format from the Java environement.  \n\nInputs\:\n    date - The date to parse/convert.\n    dateFormat - The format of the input date.\nDefault value\: default date/time format from the Java environement (which is dependent on the OS date/time format)\nExamples\: unix, yyyy-MM-dd'T'HH\:mm\:ss.SSSXXX, h\:mm a\n    dateLocaleLang - The locale language for input dateFormat string. It will be ignored if dateFormat is empty. \nDefault value\: default locale language from the Java environement (which is dependent on the OS locale language)\nExamples\: en, ja\n    dateLocaleCountry - The locale country for input dateFormat string. It will be ignored if dateFormat is empty or dateLocaleLang is empty.\nDefault value\: default locale country from the Java environement (which is dependent on the OS locale country)\nExample\: US, FR\n    outFormat - The format of the output date/time.\nDefault value\: default date/time format from the Java environement (which is dependent on the OS date/time format)\nExamples\: unix, yyyy-MM-dd'T'HH\:mm\:ss.SSSXXX, h\:mm a\n    outLocaleLang - The locale language for output string. It will be ignored if outFormat is empty. \nDefault value\: default locale language from the Java environement (which is dependent on the OS locale language)\nExamples\: en, ja\n    outLocaleCountry - The locale country for output string. It will be ignored if outFormat is empty or outLocaleLang is empty.\nDefault value\: default locale country from the Java environement (which is dependent on the OS locale country)\nExample\: US, FR\n\nResults\:\n    returnResult - The date in the new format.\n\nResponses\:\n    success - The date was converted.\n    failure - The date could not be converted.\n\nNotes\:\n    1. If default locale language from the Java environement is English, the input dateFormat is empty and the input outFormat is empty, the input date should be in the format of "July 13, 2006 10\:04\:08 AM". If the user specifies dateFormat as "dd-MM-yyyy HH\:mm\:ss", the input date should be in the format of "13-07-2006 10\:04\:08". If the input outFormat is empty, the result will be "July 13, 2006 10\:04\:08 AM". If the input outFormat is "yyyy-MM-dd", the result will be "2006-07-13". The dateFormat for "July 13, 2006 10\:04\:078 AM" is "MMM dd, yyyy HH\:mm\:ss a".\n    2. Note that the dateFormat and outFormat inputs are case sensitive. 'M' is used for months representation and 'm' for minutes.\n    3. Within date and time pattern strings, unquoted letters from 'A' to 'Z' and from 'a' to 'z' are interpreted as pattern letters representing the components of a date or time string. Text can be quoted using single quotes (') to avoid interpretation. "''" represents a single quote. All other characters are not interpreted; they're simply copied into the output string during formatting or matched against the input string during parsing. The following pattern letters are defined (all other characters from 'A' to 'Z' and from 'a' to 'z' are reserved)\:\n\nLetter\tDate or Time Component\t\t\tPresentation\t\tExamples\nG\tEra designator\t\t\t\tText\t\tAD\ny\tYear\t\t\t\tYear\t\t1996;\u00A096\nY\tWeek year\t\t\t\tYear\t\t2009;\u00A009\nM\tMonth in year\t\t\t\tMonth\t\tJuly;\u00A0Jul;\u00A007\nw\tWeek in year\t\t\t\tNumber\t\t27\nW\tWeek in month\t\t\t\tNumber\t\t2\nD\tDay in year\t\t\t\tNumber\t\t189\nd\tDay in month\t\t\t\tNumber\t\t10\nF\tDay of week in month\t\t\tNumber\t\t2\nE\tDay name in week\t\t\tText\t\tTuesday;\u00A0Tue\nu\tDay number of week (1 \= Monday, ..., 7 \= Sunday)\tNumber\t\t1\na\tAm/pm marker\t\t\t\tText\t\tPM\nH\tHour in day (0-23)\t\t\tNumber\t\t0\nk\tHour in day (1-24)\t\t\tNumber\t\t24\nK\tHour in am/pm (0-11)\t\t\tNumber\t\t0\nh\tHour in am/pm (1-12)\t\t\tNumber\t\t12\nm\tMinute in hour\t\t\t\tNumber\t\t30\ns\tSecond in minute\t\t\tNumber\t\t55\nS\tMillisecond\t\t\t\tNumber\t\t978\nz\tTime zone\t\t\t\tGeneral time zone\tPacific Standard Time;\u00A0PST;\u00A0GMT-08\:00\nZ\tTime zone\t\t\t\tRFC 822 time zone\t-800\nX\tTime zone\t\t\t\tISO 8601 time zone\t-08;\u00A0-0800;\u00A0-08\:00\nSpecial case\:\nunix\tUnix timestamp\t\t\tNumber\t\t1384326000\n\nExamples for the date 2001-07-04 12\:08\:56 in U.S. Pacific Time\:\n\nDate\t\t\tDateFromat\t\t\tDateLocaleLang\tDateLocaleCountry\n2001.07.04 AD at 12\:08\:56 PDT\tyyyy.MM.dd G 'at' HH\:mm\:ss z\t\ten\t\tUS\nWed, Jul 4, '01\t\t\tEEE, MMM d, ''yy\t\ten\t\tUS\n2001-07-04T12\:08\:56.235+0700\tyyyy-MM-dd'T'HH\:mm\:ss.SSSZ\ten\t\tUS\n2001-07-04T12\:08\:56.235-07\:00\tyyyy-MM-dd'T'HH\:mm\:ss.SSSXXX\ten\t\tUS\n1309781336\t\t\tunix\t\t\t-\t\t-\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>c88d27ac-30cb-4ba9-acc0-404f7e15ec4a.description</annotation>
+  <name>Date Parser</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="568932d6-315f-411b-aa16-b49ad411cb34">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>date</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="edd4786f-1d06-4f09-9ecb-51e07917335a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dateFormat</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a76cb44d-90b0-4223-b0cb-d55b611867f4">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dateLocaleLang</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5d11b5ba-ef1b-408c-ab62-e11b0fee0780">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dateLocaleCountry</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="189424ab-cc18-4508-9b20-0498ac64a51a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outFormat</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="59d074d3-bcf4-4e41-b890-0f20e89e77d5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outLocaleLang</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e0624c0f-8a1c-43a1-947c-900a81c84f15">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outLocaleCountry</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="5cc632c1-71d4-4c40-ad6e-490d8ba14e64">
+    <annotation/>
+    <name>Operation Date Parser (c88d27ac-30cb-4ba9-acc0-404f7e15ec4a)</name>
+    <script>try {
+    var dateCalendar;
+    var dateFormat = getValue("dateFormat");
+    var dateLocaleLang = getValue("dateLocaleLang");
+    var dateLocaleCountry = getValue("dateLocaleCountry");
+    var outFormat = getValue("outFormat");
+    var outLocaleLang = getValue("outLocaleLang");
+    var outLocaleCountry = getValue("outLocaleCountry");
+    if (dateFormat != null) {
+        if ("unix" == dateFormat) {
+            dateCalendar = java.util.GregorianCalendar.getInstance();
+            dateCalendar.setTime(new java.util.Date(java.lang.Long.parseLong(date) * 1000)); // Date class needs a timestamp in milliseconds since January 1, 1970, 00:00:00 GMT
+        } else if (dateFormat.equals("S")) {
+            // workaround for the SimpleDateFormat bug in the JDK
+            // since we don't have timezone as input we will take GMT as reference
+            dateCalendar = java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("GMT"));
+            dateCalendar.setTimeInMillis(java.lang.Long.parseLong(date));
+        } else {
+            var reader;
+            if (dateLocaleLang != null) {
+                var dLocale;
+                if (dateLocaleCountry != null) {
+                    dLocale = new java.util.Locale(dateLocaleLang, dateLocaleCountry); //for example US or JP
+                } else {
+                    //only has language, no country
+                    dLocale = new java.util.Locale(dateLocaleLang); //for example en or ja
+                }
+                reader = new java.text.SimpleDateFormat(dateFormat, dLocale);
+            } else {
+                reader = new java.text.SimpleDateFormat(dateFormat);
+            }
+            if (outFormat=="unix")
+                reader.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+
+            dateCalendar = java.util.GregorianCalendar.getInstance();
+            dateCalendar.setTime(reader.parse(date));
+        }
+    } else {
+        var reader;
+        if (dateLocaleLang != null) {
+            var dLocale;
+            if (dateLocaleCountry != null) {
+                dLocale = new java.util.Locale(dateLocaleLang, dateLocaleCountry); //for example US or JP
+            } else {
+                //only has language, no country
+                dLocale = new java.util.Locale(dateLocaleLang); //for example en or ja
+            }
+            reader = new java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.DEFAULT, java.text.DateFormat.DEFAULT, dLocale);
+        } else {
+            reader = new java.text.DateFormat.getDateTimeInstance();
+        }
+        if (outFormat=="unix")
+            reader.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+
+        dateCalendar = java.util.GregorianCalendar.getInstance();
+        dateCalendar.setTime(reader.parse(date));
+    }
+
+    //dealing with output format
+    var result;
+    if (outFormat != null) {
+        if ("unix" == outFormat) {
+            result = Math.floor(dateCalendar.getTimeInMillis() / 1000);
+        } else {
+            var writer;
+            if (outLocaleLang != null) {
+                if (outLocaleCountry != null) {
+                    oLocale = new java.util.Locale(outLocaleLang, outLocaleCountry); //for exsample US or JP
+                } else {
+                    //only has language, no country
+                    oLocale = new java.util.Locale(outLocaleLang); //for example en or ja
+                }
+                writer = new java.text.SimpleDateFormat(outFormat, oLocale);
+            } else {
+                //use whatever default is
+                writer = new java.text.SimpleDateFormat(outFormat);
+            }
+            if ((dateFormat != null) &amp;&amp; (dateFormat=="unix" || dateFormat == "S"))
+                writer.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+            result = writer.format(dateCalendar.getTime());
+        }
+    } else {
+        var writer;
+        if (outLocaleLang != null) {
+            if (outLocaleCountry != null) {
+                oLocale = new java.util.Locale(outLocaleLang, outLocaleCountry); //for exsample US or JP
+            } else {
+                //only has language, no country
+                oLocale = new java.util.Locale(outLocaleLang); //for example en or ja
+            }
+            writer = new java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.DEFAULT, java.text.DateFormat.DEFAULT, oLocale);
+        } else {
+            //use whatever default is
+            writer = new java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.DEFAULT, java.text.DateFormat.DEFAULT);
+        }
+        if ((dateFormat != null) &amp;&amp; (dateFormat=="unix"  || dateFormat == "S"))
+            writer.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+        result = writer.format(dateCalendar.getTime());
+    }
+
+    scriptletResult = "" + result;
+    scriptletResponse = "success";
+} catch (e) {
+    scriptletResult = "" + e;
+    scriptletResponse = "failure";
+}
+
+function getValue(inputName) {
+    var inputValue = scriptletContext.get(inputName);
+    if (inputValue != null &amp;&amp; inputValue.length() &gt; 0) {
+        return inputValue;
+    }
+    return null;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="507f9885-3f7d-465a-81dd-18891bbe6f15">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="aa0bcc3b-73bb-4313-9b30-88b5e94b673f">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b585e050-67b2-466b-9797-40e626101dfc">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="b308d43e-d6bc-41c8-ba4e-da9d42dc7899">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="42059154-198c-43d6-bb4c-0a0f7df84d61">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

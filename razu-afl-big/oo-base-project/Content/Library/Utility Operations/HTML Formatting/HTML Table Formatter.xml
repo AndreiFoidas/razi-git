@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c307773a-2033-45dc-ac90-3feb261be46d">
+  <descriptionCdata>c307773a-2033-45dc-ac90-3feb261be46d.description=&lt;pre&gt;\nGenerates an html table from a list of data.\n\nInputs\:\ntableData - The list to generate the table from.\ncolumnDelimiter - A delimiter that separates columns in the tableData.\nrowDelimiter - A delimiter that separates the rows in tableData.\n\nReturns\:\nAn html formatted table.\n\nResponses\:\nsuccess - The operation was successful.\nfailure - Something went wrong.\n\nBelow are example inputs of how the delimiters work\:\n\ntable\: r1c1,r1c2,r1c3,r1c4|r2c1,r2c2,r2c3,r2c4\ncolumnDelimiter\: ,\nrowDelimiter\: |\n\nResult is \n\n&lt;table&gt;&lt;tr&gt;&lt;td&gt;r1c1&lt;/td&gt;&lt;td&gt;r1c2&lt;/td&gt;&lt;td&gt;r1c3&lt;/td&gt;&lt;td&gt;r1c4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;r2c1&lt;/td&gt;&lt;td&gt;r2c2&lt;/td&gt;&lt;td&gt;r2c3&lt;/td&gt;&lt;td&gt;r2c4&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;\nWhich is the HTML for the following table.\n\nr1c1  r1c2  r1c3  r1c4  \nr2c1  r2c2  r2c3  r2c4 \n \n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>c307773a-2033-45dc-ac90-3feb261be46d.description</annotation>
+  <name>HTML Table Formatter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1160594c-8eef-4b25-b627-fafd6217290d">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>tableData</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="4a38d60e-a9ae-481a-9def-a648511b2be2">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="1d67ff29-b04e-4e49-8142-ac78c926a236">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>
+</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="c82ffc1c-3683-43f1-a4b4-c4c612fbde5a">
+    <annotation/>
+    <name>Operation HTML Table Formatter (c307773a-2033-45dc-ac90-3feb261be46d)</name>
+    <script>try{
+var formatted = "&lt;table&gt;";
+var rows = new java.util.StringTokenizer(tableData, rowDelimiter);
+while (rows.hasMoreTokens()){
+     addRow(rows.nextToken());
+}
+formatted += "&lt;/table&gt;";
+scriptletResponse="success";
+scriptletResult = ""+formatted;
+
+
+}
+catch (e){
+	scriptletResponse="failure";
+	scriptletResult = ""+e;
+}
+
+function addRow(row){
+	formatted += "&lt;tr&gt;";
+	var cols = new java.util.StringTokenizer(row, columnDelimiter);
+	while (cols.hasMoreTokens()){
+		formatted +="&lt;td&gt;"+cols.nextToken()+"&lt;/td&gt;";
+	}
+	formatted += "&lt;/tr&gt;";
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="4cf8adf1-cfb8-4c11-9afd-fc169d245261">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="15ca23a4-08fd-48b3-8235-bbe92f376867">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="43a69612-862e-44c6-9026-83e73b618fc7">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="aba9b6d5-15f4-454a-8b34-15ae2267e93e">
+    <baseIcon>website.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="42059154-198c-43d6-bb4c-0a0f7df84d61">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="ad0d29ff-f687-48d8-9b61-20f081c2adb6">
+  <descriptionCdata>ad0d29ff-f687-48d8-9b61-20f081c2adb6.7bb282a3-f75f-459b-8651-2fefe48cc9c0.prompt=Ignore Case
+ad0d29ff-f687-48d8-9b61-20f081c2adb6.description=&lt;pre&gt;\nCompares two strings lexigraphically.\n\nInputs\:\nString1 - The first string.\nString2 - The string to compare string 1 to.\nignoreCase - If set to 'true' then the compare is not case sensitive.\n\nresponses\:\nbefore - If string 1 is alphabetically before string 2.\nafter - If string 1 is alphabetically after string 2.\nsame - If string 1 is alphabetically equal to string 2.\nfailure - If Something goes wrong.\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>ad0d29ff-f687-48d8-9b61-20f081c2adb6.description</annotation>
+  <name>Alphabetical String Comparator</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f2998abc-4d2d-4c37-b1ca-5a3d325b2fcc">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>String1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2e0bf696-0fc5-49aa-aa81-f41965f7ce4c">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>String2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7bb282a3-f75f-459b-8651-2fefe48cc9c0">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>ignoreCase</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ad0d29ff-f687-48d8-9b61-20f081c2adb6.7bb282a3-f75f-459b-8651-2fefe48cc9c0.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="838bbc0f-8f21-4aa0-8a21-985ecf55da70">
+    <annotation/>
+    <name>Operation Alphabetical String Comparator (ad0d29ff-f687-48d8-9b61-20f081c2adb6)</name>
+    <script>var initial = scriptletContext.get("in1");
+if (initial != null) {
+	scriptletResult = initial;
+} else {
+	scriptletResult = "${in1}";
+}
+scriptletResponse = "failure";
+try{
+var ignore = false;
+var ignoreCase;
+if (ignoreCase != null)
+	ignore = java.lang.Boolean.parseBoolean(ignoreCase);
+var outcome;
+if (ignore)
+	outcome = new java.lang.String(String1).compareToIgnoreCase(String2);
+else
+	outcome = java.lang.String(String1).compareTo(String2);
+if (outcome &gt; 0)
+	scriptletResponse = "after";
+else if (outcome &lt; 0)
+	scriptletResponse = "before";
+else
+	scriptletResponse = "same";
+}
+catch (e){
+scriptletResponse = "failure";
+scriptletResult = ""+e;
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="89a825a5-d7ed-4f6a-8949-0db76b395401">
+      <annotation/>
+      <name>after</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="34366d04-a30d-47cb-97f0-6bc829d72fb8">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="dd137d93-35f6-4ff2-9b69-9794bebb4c0f">
+      <annotation/>
+      <name>before</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="9325e31d-b642-48f6-994e-d4304fb95a65">
+      <annotation/>
+      <name>same</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="4e5e9103-4086-49af-b59f-bdd75bc1d01d">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9af41083-07bf-46b1-b55e-2fef5ca4fe00">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

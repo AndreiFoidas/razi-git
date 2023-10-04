@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="390db689-9e3e-45bb-835c-52c943586158">
+  <descriptionCdata>390db689-9e3e-45bb-835c-52c943586158.description=Merge the contents of 2 JSON arrays. \n\nThis operation does not modify either of the input arrays. The result is the contents of array1 and array2, merged\ninto a single array. \n\nInputs\:\n    array1 - String representation of a JSON array. Arrays in JSON are comma separated lists of objects, enclosed in square brackets ( [ ] ).\nExamples\: [1,2,3] or ["one","two","three"] or [{"one"\:1, "two"\:2}, 3, "four"]\n    array2 - String representation of a JSON array. Arrays in JSON are comma separated lists of objects, enclosed in square brackets ( [ ] ).\nExamples\: [1,2,3] or ["one","two","three"] or [{"one"\:1, "two"\:2}, 3, "four"]\n\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation failed. See the message in returnResult for details\n\n\nResults\:\n    returnResult - String representation of the new JSON array with the contents of array1 and array2.
+</descriptionCdata>
+  <annotation>390db689-9e3e-45bb-835c-52c943586158.description</annotation>
+  <name>Merge Arrays</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="14fc7e6b-2b14-426f-a7dd-0b86cee975e8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c231f033-f978-44a0-a225-fca865192a03">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="20715802-ee8e-4370-a13d-75de2fdcf131">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="09f7d0e9-5f30-4d27-b93a-bfc5257876c9">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="7fe23102-b54b-4390-8bba-fcb1634ab5ea">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="962e1693-e796-4aa4-88f9-88fd25cc5e3c">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="122d0a4f-8fa6-4dc4-86d7-f51b107abe91">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="0a3e2e23-ae4f-4a9b-b9e4-6413805c003c">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="de2deb61-219d-44c2-bb9d-70fddc26f136">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="389721c1-93b9-4237-9e4d-78e30318a342">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Merge Arrays Action</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

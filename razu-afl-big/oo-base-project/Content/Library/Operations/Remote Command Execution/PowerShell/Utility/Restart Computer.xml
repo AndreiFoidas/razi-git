@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="689265ef-4cc6-459e-98d4-0ec893801f46">
+  <descriptionCdata>689265ef-4cc6-459e-98d4-0ec893801f46.31a2f4b0-8d76-4ba0-aeac-d94c0cb59dda.prompt=Host\:
+689265ef-4cc6-459e-98d4-0ec893801f46.description=&lt;pre&gt;\nRestarts the target Windows computer. If the target computer is not present in the list of Trusted Hosts in WS-Management of the RAS host, the operation may fail when using the target computer's system account as user credentials.\n\nRemoting is not required to execute this operation on remote hosts. However, WMI services must be running.\n\nInputs\: \nhost\t- The host name or the IP address of the target Windows computer.\nusername \t- Username to use to connect to the target computer. \npassword \t- Password of the user.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nThe operation's return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message.\n&lt;/pre&gt;
+689265ef-4cc6-459e-98d4-0ec893801f46.ed7b36a7-5df8-45b9-ab09-67074c44f2e2.prompt=Username\:
+689265ef-4cc6-459e-98d4-0ec893801f46.eeb4797d-0713-412a-b683-a07621f81dbc.prompt=Password\:
+</descriptionCdata>
+  <annotation>689265ef-4cc6-459e-98d4-0ec893801f46.description</annotation>
+  <name>Restart Computer</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="31a2f4b0-8d76-4ba0-aeac-d94c0cb59dda">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>689265ef-4cc6-459e-98d4-0ec893801f46.31a2f4b0-8d76-4ba0-aeac-d94c0cb59dda.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ed7b36a7-5df8-45b9-ab09-67074c44f2e2">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>689265ef-4cc6-459e-98d4-0ec893801f46.ed7b36a7-5df8-45b9-ab09-67074c44f2e2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="eeb4797d-0713-412a-b683-a07621f81dbc">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>689265ef-4cc6-459e-98d4-0ec893801f46.eeb4797d-0713-412a-b683-a07621f81dbc.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="3b827eea-01f6-47f6-9e3e-99eda262744f">
+    <annotation/>
+    <name>Operation:Restart Computer (689265ef-4cc6-459e-98d4-0ec893801f46)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="920eff8b-d422-4165-a883-972cf380a5b4">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2753dc9b-37b5-4fba-af8d-85168a4ca145">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="6b9b30ac-5403-4cd2-86c3-b4ff09515f26">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="535b8764-eaa2-4f03-89d1-007209f77765">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="25df3c85-ba29-4db2-939e-76b731f5aa23">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="6aa43fbe-e51f-485d-a18c-7f779025bac5">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c7ca91be-9aad-41b6-b890-96730d01ea7b">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="aaba903a-3cdd-4182-851f-164477d24bda">
+    <baseIcon>workstation1.png</baseIcon>
+    <basePath>/Clients/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="a64a77ea-a00c-4a19-a7aa-a270275544ee">
+        <baseIcon>restart_reboot.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.RestartComputer</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

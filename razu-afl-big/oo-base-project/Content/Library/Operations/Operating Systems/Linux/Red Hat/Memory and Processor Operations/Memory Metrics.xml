@@ -1,0 +1,1589 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="1be6a8fe-c8cd-4530-b508-c6ae00db8333">
+  <descriptionCdata>1be6a8fe-c8cd-4530-b508-c6ae00db8333.03868894-096f-48fb-982e-a8d68662b0c5.prompt=UsernamePrompt\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.09571a85-8621-478f-b189-e9fdf9523e86.description=&lt;pre&gt;Runs a command and allows user to specify that it runs locally (in this case no port should be specified), via ssh, Global Shell, ROSH, Telnet, or RSH.\n\nInput Parameters\:\nhost - hostname or ip address\nport - port number for connecting to the host\nusername - username to connect as\npassword - password\nprotocol - the protocol used to run the command (can be one of ssh, ROSH, GlobalShell, Telnet, RSH, local or WMI)\ntimeout - (optional, default 90 seconds) time in milliseconds to wait for the command to complete\ncommand - the command to execute\narguments - the arguments to pass to the command\nenvironment - specifies environment variables/values that need to be defined when running command\nstartDir - the path to the starting directory\npty - (true, false) whether to use pty\nprivateKeyFile - The absolute path to the private key file for remote host.\nsasHost - the host we want to run the ROSH command on\nsasHostUsername - the username used to run the ROSH command on sasHost\nusernamePrompt - the prompt that when seen should send the username\npasswordPrompt - the prompt that when given should send the password\noutputPath - network accessible path used by the operation to store temporary files. If not specified it points to \\\\host\\admin$\\temp\\'. If this     path is not accessible you should change it to use another share that the host local system account has write access to. By default, the path will have to be  changed on Windows 2000 systems\n\nResponses\:\nsuccess - the command was executed successfully\nfailure - the command could not be executed\n\nExtra Results\:\nstdErr - the STDERR of the command\nstdOut - the STDOUT of the command\n&lt;/pre&gt;
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.4c94495d-1c6b-4d5f-bfbf-bfeffd9db513.prompt=Username\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.7199d75b-6fa2-4109-aaaf-a0972d41584a.prompt=PrivateKeyFile\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.7d8d5801-c039-49c0-9729-9e02abb6275c.prompt=Password\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.874c51aa-8bc3-4d68-ba0a-7c740a393789.prompt=Timeout\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.9acfa8f6-0516-4530-b2f2-45df4b824455.prompt=PasswordPrompt\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.c594c565-97cc-408b-909d-96b0904b6b36.prompt=SasHost\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.ccd1c747-bee0-4954-8b11-6228b21cb5d6.prompt=Host\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.d869838b-fc0e-4b97-82c8-2ab5df5453fd.prompt=Port\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.db3faf0a-d768-4beb-91b8-a87f906bec25.prompt=Protocol\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.description=&lt;pre&gt;This retrieves memory metrics using top.  \n\nInputs\:\n\nhost\:  the system to check\nusername\: the user to log into this system as\npassword\: the password to log in with\nport - port number for connecting to the host\nprotocol - the protocol used to run the command (can be one of ssh, ROSH, GlobalShell, Telnet, RSH, local or WMI)\ntimeout - (optional, default 90 seconds) time in milliseconds to wait for the command to complete\npty - (true, false) whether to use pty\nprivateKeyFile - The absolute path to the private key file for remote host.\nsasHost - the host we want to run the ROSH command on\nsasHostUsername - the username used to run the ROSH command on sasHost\nusernamePrompt - the prompt that when seen should send the username\npasswordPrompt - the prompt that when given should send the password\n\nResponses\:\n\nsuccess\: the data was obtained\nfailure\: the data could not be obtained\n\nResult\:\n\nthe return code from the vmstat command\n\nExtra Results\:\n\nactiveMemory - the number of megabytes of active memory.\nbufferMemory - the number of megabytes of buffer memory.\nfreeMemory - the number of megabytes of unused memory.\nfreeSwap - the number of megabytes of unused swap.\ninactiveMemory - the number of megabytes of inactive memory.\nsharedMemory - the number of megabytes of shared memory.\nswapCache - the number of megabytes of swap cache.\ntotalMemory\t- the number of megabytes of total memory.\ntotalSwap - the number of megabytes of total swap space.\nusedMemory - the number of megabytes of used memory.\nusedSwap - the number of megabytes of used swap.\nerror - if an error occurred, the content of the error\nreturnCode - the operation return code\n&lt;/pre&gt;
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.e0bf7359-08ac-4654-99a3-1ea16dddfe9e.prompt=Pty\:
+1be6a8fe-c8cd-4530-b508-c6ae00db8333.ef2560a3-8b78-4012-92b3-96ef3369bc25.prompt=SasHostUsername\:
+</descriptionCdata>
+  <annotation>1be6a8fe-c8cd-4530-b508-c6ae00db8333.description</annotation>
+  <name>Memory Metrics</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ccd1c747-bee0-4954-8b11-6228b21cb5d6">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.ccd1c747-bee0-4954-8b11-6228b21cb5d6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4c94495d-1c6b-4d5f-bfbf-bfeffd9db513">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.4c94495d-1c6b-4d5f-bfbf-bfeffd9db513.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7d8d5801-c039-49c0-9729-9e02abb6275c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.7d8d5801-c039-49c0-9729-9e02abb6275c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d869838b-fc0e-4b97-82c8-2ab5df5453fd">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.d869838b-fc0e-4b97-82c8-2ab5df5453fd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="db3faf0a-d768-4beb-91b8-a87f906bec25">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>protocol</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.db3faf0a-d768-4beb-91b8-a87f906bec25.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>f5eba44b-b975-4b67-897f-2faabf86d2aa</refId>
+        <refName>Remote Command - Protocols</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="874c51aa-8bc3-4d68-ba0a-7c740a393789">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.874c51aa-8bc3-4d68-ba0a-7c740a393789.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e0bf7359-08ac-4654-99a3-1ea16dddfe9e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>pty</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.e0bf7359-08ac-4654-99a3-1ea16dddfe9e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7199d75b-6fa2-4109-aaaf-a0972d41584a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>privateKeyFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.7199d75b-6fa2-4109-aaaf-a0972d41584a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c594c565-97cc-408b-909d-96b0904b6b36">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sasHost</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.c594c565-97cc-408b-909d-96b0904b6b36.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ef2560a3-8b78-4012-92b3-96ef3369bc25">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sasHostUsername</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.ef2560a3-8b78-4012-92b3-96ef3369bc25.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="03868894-096f-48fb-982e-a8d68662b0c5">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>usernamePrompt</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.03868894-096f-48fb-982e-a8d68662b0c5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9acfa8f6-0516-4530-b2f2-45df4b824455">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>passwordPrompt</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>1be6a8fe-c8cd-4530-b508-c6ae00db8333.9acfa8f6-0516-4530-b2f2-45df4b824455.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="4c0cf67f-429e-42b7-8c3f-bd2ee1020cf5">
+    <annotation/>
+    <name>Operation:Memory Metrics (1be6a8fe-c8cd-4530-b508-c6ae00db8333)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="76853c05-f554-4be1-be35-0b9aa848cbd3">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ef65b205-992a-415c-bd59-eff94a11af83">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="431b0e73-cb8c-4b02-a31e-7d294a12073b">
+      <annotation/>
+      <name>sharedMemory</name>
+      <fieldName>sharedMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="b87e76f6-ca3d-453e-961f-acccf71194f6">
+      <annotation/>
+      <name>returnCode</name>
+      <fieldName>returnCode</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="593decfa-dff1-48d2-8869-72fd7e5cb2ca">
+      <annotation/>
+      <name>totalMemory</name>
+      <fieldName>totalMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="7d0c1dd5-af03-405a-a2c3-b67635041909">
+      <annotation/>
+      <name>bufferMemory</name>
+      <fieldName>bufferMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="3684b296-fa75-4626-ba53-7292bf39034a">
+      <annotation/>
+      <name>swapCache</name>
+      <fieldName>swapCache</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="44255f4b-f426-47b9-9ace-4c70302ef593">
+      <annotation/>
+      <name>error</name>
+      <fieldName>error</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="d470583b-b739-4bd3-8f13-d502435b9be6">
+      <annotation/>
+      <name>freeSwap</name>
+      <fieldName>freeSwap</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="45d65009-91d7-433f-9ca2-aef40e5705e5">
+      <annotation/>
+      <name>totalSwap</name>
+      <fieldName>totalSwap</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="a7fb6bb7-49db-45b1-a7f1-3e914d0277dd">
+      <annotation/>
+      <name>inactiveMemory</name>
+      <fieldName>inactiveMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="195f1516-ff2b-4db4-9d95-2d0e677d2421">
+      <annotation/>
+      <name>activeMemory</name>
+      <fieldName>activeMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="1a316de8-0f99-4724-9c3c-d1ed92b78cf8">
+      <annotation/>
+      <name>usedSwap</name>
+      <fieldName>usedSwap</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="db717e8d-d268-4084-aa0c-a96b2dc20e6f">
+      <annotation/>
+      <name>usedMemory</name>
+      <fieldName>usedMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+    <expression id="768a348b-988f-4a97-a0c8-4bcae82fecb6">
+      <annotation/>
+      <name>freeMemory</name>
+      <fieldName>freeMemory</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="522bf50d-2463-42ea-91cc-d6c11b0c3593">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="5cadd324-74e3-43f0-8b91-f7979bcf7478">
+    <baseIcon>document_plain.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="99ecf799-77cf-4399-b1d1-25e0b9e4e8c9">
+        <baseIcon>memory.png</baseIcon>
+        <basePath>/Operating System/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="09571a85-8621-478f-b189-e9fdf9523e86">
+      <annotation>1be6a8fe-c8cd-4530-b508-c6ae00db8333.09571a85-8621-478f-b189-e9fdf9523e86.description</annotation>
+      <name>Remote Command</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>0</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <staticBinding id="819d3a47-fd95-42c6-a84f-56c2e7d80104">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="9194b0bd-bc58-49ea-a5a2-af7c5becdb62">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>port</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="6d084d3e-d49c-48bc-b078-42fb0d6d4934">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey>username</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>username</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="8850cfbf-0b8d-4b46-8230-a0a9e193a6d5">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey>password</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>false</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="98d3b50c-18ec-4d6f-b811-d0ccd074bd6e">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey>protocol</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>protocol</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="192c6f56-299f-4373-9148-e47d6acd7690">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>timeout</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="cb5cdb7a-5e08-47f0-b26b-05e84f2366d2">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>command</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>top -b -n1</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="30150f50-4b31-48c7-a298-36acb5324b11">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>arguments</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0f068b16-7ac5-4652-8e17-5493e6ace259">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>environment</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="f4455946-e7dc-40cd-8696-0e85be46a0dc">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>startDir</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="adc5c247-8296-4062-bef1-e41031172c80">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>pty</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="ced48e4c-b182-42e8-8e8c-5eb4c345bdc9">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>privateKeyFile</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2eb6fe6a-cbdd-4e45-b337-08700e09acdb">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>sasHost</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="6844f74f-9e9a-4f60-8bab-f52a40f5d43b">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>sasHostUsername</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5ba60a5a-e93c-4dc0-9d92-c9da9a9aa7ec">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>usernamePrompt</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="ab1354b3-e383-4c27-8f1c-8664f273fa24">
+          <annotation/>
+          <toContextKey/>
+          <fromContextKey/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>passwordPrompt</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="3da9570c-b2e4-4622-ae2c-a8b03125fe9b">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>outputPath</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="8b78e90b-2cbb-4b98-9ed1-b103f27742a3">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3afbd8f7-e3d3-41bc-b065-bee41425358f</refId>
+          </destination>
+          <source>
+            <refId>09571a85-8621-478f-b189-e9fdf9523e86</refId>
+          </source>
+          <positions>
+            <point>
+              <x>79.0</x>
+              <y>45.993872367352196</y>
+            </point>
+            <point>
+              <x>280.0</x>
+              <y>51.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="ff2234a6-7c32-4dce-89ce-f0bbd1533d25">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3bb9589b-c13b-403b-86d2-cd26c529a290</refId>
+          </destination>
+          <source>
+            <refId>09571a85-8621-478f-b189-e9fdf9523e86</refId>
+          </source>
+          <positions>
+            <point>
+              <x>19.0</x>
+              <y>33.93121350394073</y>
+            </point>
+            <point>
+              <x>50.0</x>
+              <y>230.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>3c0f1258-b910-4665-b809-753ed5586c08</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="fc86ab08-eff7-4fb7-b85a-ffb383758409">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>totalSwap</contextKey>
+          <expression id="1d08043c-e211-4812-920a-12b66fa8328a">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="3413fe11-72af-4082-b67a-e79ad8ef8df1">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Swap:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="585eb07e-7e41-4027-a28a-805eb88bec58">
+                <annotation/>
+                <name>Strip</name>
+                <strip>,</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="c8542ecc-077b-47f2-ba41-74e2649cd2d9">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="57b333e7-e9b8-4447-8413-98aa57b96143">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="62d11f76-5699-42e8-b4ef-41358c020c99">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="f737bd49-695c-44f3-9805-b39b813df852">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>freeMemoryFV</contextKey>
+          <expression id="1f1cbdf2-750d-43cb-893f-f3c78c808011">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="cbcc72e6-d38f-45ba-ae6d-927c7dd17913">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="ed2a4c4f-ee60-4979-9397-424330bbbf44">
+                <annotation/>
+                <name>Strip</name>
+                <strip>PID</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="763db0dd-f7cb-4111-b21e-ef86f4043155">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k\s+free</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="8b782746-5aec-449c-982c-45b9f0025dce">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="b5da88f7-c0a5-4f26-ac6e-ac2f4349a3fe">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="4f66606f-8e7f-43fd-9e6d-01c9a1c83955">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="e99f1ec7-6692-4214-9828-fa66cc892c42">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>usedSwap</contextKey>
+          <expression id="b5a4296d-f7fe-4efa-838a-443cf2c7b9e0">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="6f01c300-1972-4190-a356-b24f02f8ce75">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Swap:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="8e43d506-b6f3-48b1-9121-73a949a85f97">
+                <annotation/>
+                <name>Strip</name>
+                <strip>
+</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="c975cd78-26c6-4f00-85df-181b20972db4">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k used</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="3e253604-6976-4f92-83aa-260a0aa01111">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="f6feda2e-92a3-436b-8da1-fce3c6998665">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="ab0062df-2fd0-4977-a484-8d5e8009d16f">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="de89b153-96af-47e0-bfc5-ec1104fb42e7">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>error</contextKey>
+          <expression id="77d66650-9bf6-47e9-b557-4dfbea9d68bd">
+            <annotation/>
+            <name>Result Field: stdErr</name>
+            <fieldName>stdErr</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="f24ae7fe-0f09-4d7d-9855-8680844401cb">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>freeSwap</contextKey>
+          <expression id="46e8a278-43b6-468a-bad0-0a2368368aaf">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="1f34d059-4608-4e55-9f7f-66aa61c1cc00">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Swap:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="718ac8c7-921c-440d-b2a7-0bb2e23bb5ee">
+                <annotation/>
+                <name>Strip</name>
+                <strip>
+</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="9ed63690-38f9-45f4-9797-53e0e145fda7">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k free</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="7c0caab9-b66a-4c7e-b6a2-d2c58db15921">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="40bf2a7d-5838-4c3b-83fb-fdb04f04d1c4">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="b1900a5c-bbda-423c-84a3-40e1cf50c8a6">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="408eeaf0-9fc5-4485-b81f-e6bb0ac7bd2c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>bufferMemory</contextKey>
+          <expression id="acd4ffde-c59e-4eb6-919e-8a931e8b5466">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="7c9b1351-3fac-4912-ad00-9c1b5fbff818">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="d1af62a1-f9d7-4a2c-8847-e4f25eefc528">
+                <annotation/>
+                <name>Strip</name>
+                <strip>PID</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="46d3d61e-3511-45d6-8c5b-ef9cd1a031dd">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k\s+buff</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="056c3e67-1017-46e7-a8d3-0e86b554b2a3">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="08f7918d-e589-4c39-b3bc-6b5465b007c6">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="e3812901-5966-43d4-a150-c7b1acd43c92">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="6bfabacd-aadc-470a-871b-83eba9a01991">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>returnResult</contextKey>
+          <expression id="1096a8d6-f306-459c-83cd-6eaf7976e344">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="f3d7f014-4ffd-468a-ab6a-86b443808c67">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>sharedMemory</contextKey>
+          <expression id="a41ca821-8a5f-4117-a6d4-322dfbed3afe">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="a8536ba4-4712-4844-aeed-5177e9a5cc4f">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="a87ee08d-f57e-44ea-87bb-78e714543a34">
+                <annotation/>
+                <name>Strip</name>
+                <strip>
+</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="c06d203c-28b5-4181-aa48-6d8f48bea4ff">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k shrd</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="810b584a-6b77-472d-9c75-b1d69f19b01a">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="46f13bc5-6b6f-48d7-ba4f-551b7ac698b3">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="d882a90d-5082-4243-bac0-3d9bcb39d9b4">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="2d9554c2-ecff-473d-9ddf-eeb57e2a1d8c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>totalMemory</contextKey>
+          <expression id="de550e65-9c2a-4898-8dd8-1889b24f2a0a">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="6aca0867-a261-40f2-9e87-ab6434cdf0bd">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="42d61166-e1cb-46de-a9fe-fb9acd27b1d0">
+                <annotation/>
+                <name>Strip</name>
+                <strip>,</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="408f4dd2-9bce-46c6-bb56-136853bde0da">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="6d73b83c-4304-40f7-9332-2e12469268f7">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="f7cee167-602d-470b-b1d2-fa7e6c4c92d9">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="4c5edf36-c5b1-473a-b794-326abe7e88d9">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>inactiveMemory</contextKey>
+          <expression id="e1bd8509-aed6-4228-b260-df379bd6aa07">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="833db770-3109-4fc0-bc4e-d6781614acc2">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="d9f79423-547c-49e6-b6ef-e3a7e7ee7761">
+                <annotation/>
+                <name>Strip</name>
+                <strip>:</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="a005dbaa-4986-4fe3-a195-9efef7afb16d">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k inactive</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="7bdd3ffa-43b9-49de-a548-2bc31e5d2ffb">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="34a63575-175a-4882-82be-6533602b6ed4">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="cf848a0b-5f9b-4269-8b83-eb1ae8ce8957">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="13e169f4-f8f4-42b2-b9e9-95d9aa9ad185">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>activeMemory</contextKey>
+          <expression id="135f36d1-7cd2-4ec2-bada-ad49b7a19737">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="cc8ee5e2-48c3-42e2-b645-f28e33ab90c3">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="c5c39119-8098-4e74-9f0c-d58b413e44f4">
+                <annotation/>
+                <name>Strip</name>
+                <strip>:</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="2d4b5254-d805-421f-9649-c4fc354d25b3">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k active</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="dec0e35f-3493-4d94-8b8d-9e26e4972680">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="8226653a-81fb-47fc-97df-9481406585c7">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="aa6fa35f-1e83-4ce0-b16b-30edfc1a546e">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="8dc65707-4707-4fe4-a7a6-fa5e5d561dc4">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>returnCode</contextKey>
+          <expression id="091faac3-1b41-436d-82b1-2015d274569b">
+            <annotation/>
+            <name>Result Field: returnCode</name>
+            <fieldName>returnCode</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="d7433d98-a4a8-42d7-a587-e30428d73cf1">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>freeMemory</contextKey>
+          <expression id="e14b2abf-13b0-411d-aa2f-eb49a62f3778">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="5317c72a-d94e-4cdd-93f4-df0d2190b2da">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="0d87fded-82e4-43e6-8af1-67b96798fb69">
+                <annotation/>
+                <name>Strip</name>
+                <strip>PID</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="e89f7f5a-8dfe-4741-be03-6677f4a565a2">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k\s+free</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="7f8b1322-ed65-416c-be37-ad338c9e8099">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>PERL5</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="05d385f7-cd6a-4359-8c94-1132d9b80f4c">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="d963a04c-7cb1-4601-8ce6-1f47906a78ac">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}
+</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="bfcd892e-d421-4861-b0b6-812a5f8d92f5">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>swapCache</contextKey>
+          <expression id="25a27a42-5a0d-452b-aa3c-74c9c16c3b1e">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="6f5268cd-fac7-4055-8ce7-73a819dec127">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Swap:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="db75bd56-9be8-4383-8428-3ce11debc8c6">
+                <annotation/>
+                <name>Strip</name>
+                <strip>
+</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="08d96e54-e39a-4369-876f-0c77a5151522">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k cached</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="94d9fb5c-5132-4975-9959-f61bb3a33848">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="49e63cd5-fef7-4dfc-b519-e9c56e599736">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="99c926b7-6a1a-4bdd-ac98-e243cead48f2">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="9c4558f8-c361-4d5d-b89d-fdc58b5fc682">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>usedMemory</contextKey>
+          <expression id="9c82ecbb-3fb9-4d05-b5fc-14f0c3e73882">
+            <annotation/>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters>
+              <stripTrailingFilter id="1def4281-9946-410a-a7e4-730ee57372cb">
+                <annotation/>
+                <name>Strip</name>
+                <strip>Mem:</strip>
+                <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <stripTrailingFilter id="ed4853ac-0ae5-41d8-8405-892e8a22ee2e">
+                <annotation/>
+                <name>Strip</name>
+                <strip>
+</strip>
+                <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+              </stripTrailingFilter>
+              <regexFilter id="f1bcd211-eb1e-49fc-a64d-b02c03df9c81">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+k used</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <regexFilter id="3a5d00e9-4988-46c8-92d2-68f9ebcb3676">
+                <annotation/>
+                <name>RegularExpression</name>
+                <expression>\d+</expression>
+                <ignoreCase>false</ignoreCase>
+                <regType>JAVA</regType>
+                <entireString>true</entireString>
+                <multiLine>false</multiLine>
+              </regexFilter>
+              <scriptletFilter id="b578aff8-fb4d-43d0-8ad2-907356cf79f2">
+                <annotation/>
+                <name>Scriptlet</name>
+                <scriptlet id="75206bed-a681-4a86-9a24-b4061e730291">
+                  <annotation/>
+                  <name>default</name>
+                  <script>try{
+  if (scriptletInput.length == 0) scriptletResult = 0
+  else scriptletResult = java.lang.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+}
+catch(err){
+  scriptletResult = '';
+}</script>
+                  <type>RHINO</type>
+                  <scriptRef>
+                    <refId>61805418-9def-44b6-bf49-2ce17bbb7524</refId>
+                    <refName>divide by 1k</refName>
+                  </scriptRef>
+                </scriptlet>
+              </scriptletFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="3bb9589b-c13b-403b-86d2-cd26c529a290">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>180.0</y>
+      </bounds>
+      <layer>3</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="c10f31e3-2ef7-4a9f-8900-4617fabf831c">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3bb9589b-c13b-403b-86d2-cd26c529a290</refId>
+          </destination>
+          <source>
+            <refId>3bb9589b-c13b-403b-86d2-cd26c529a290</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="3afbd8f7-e3d3-41bc-b065-bee41425358f">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>230.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="4cc18b1a-e640-40bf-88f4-135c0b71bd74">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3afbd8f7-e3d3-41bc-b065-bee41425358f</refId>
+          </destination>
+          <source>
+            <refId>3afbd8f7-e3d3-41bc-b065-bee41425358f</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>09571a85-8621-478f-b189-e9fdf9523e86</startSteps>
+</flow>

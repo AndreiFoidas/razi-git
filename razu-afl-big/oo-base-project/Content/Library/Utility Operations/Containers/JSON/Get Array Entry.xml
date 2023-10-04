@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="d9796c94-7b90-441a-925a-8aab2cbb7ad0">
+  <descriptionCdata>d9796c94-7b90-441a-925a-8aab2cbb7ad0.description=Get the value of an element in a JSON array. If the value of the element is a simple type, i.e. a string or a number, it will be \nreturned as-is. If it is a complex JSON object, i.e. '{"one"\:1}' it will be returned in JSON format. \n\nWhen specifying the index to an array element it is possible to use the standard notation, where the 1st \nelement from the left is index 0, and the right-most element is (n-1), in an array with n elements. However, \nit is also possible to specify elements starting from the right side of the array using negative numbers, in which case\nthe right-most element is referred to by index -1 and the left-most element is at position (-1 * n), again for an array with n elements.\n\nThe description of the enclosing folder describes the JSON format with examples,\nand the JSON format is described completely at http\://www.json.org.\n\nInputs\:\n    array - String representation of a JSON array. Arrays in JSON are comma separated lists of objects, enclosed in square brackets ( [ ] ).\n                Examples\: [1,2,3] or ["one","two","three"] or [{"one"\:1, "two"\:2}, 3, "four"]\n    index - The index of the element to retrieve from the array. \n                See the notes above for more information on using negative numbers to specify array elements.\n                Valid values\: Integer between (-1*n) and (n-1) for an array with n elements.\n\nResults\:\n    returnResult - The new JSON array with the inserted element. If the operation failed, this field will contain an error message.\n    returnCode - The return code of the operation\: 0 for success, -1 for failure.\n    exception - The exception message if the operation goes to failure.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation failed. See the message in returnResult for details
+</descriptionCdata>
+  <annotation>d9796c94-7b90-441a-925a-8aab2cbb7ad0.description</annotation>
+  <name>Get Array Entry</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ecd4d3a6-d820-424d-904f-7f8327871524">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1dba8ee8-6a47-4f54-ad3f-9dd9a0eac6d3">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>index</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="539fde27-858a-48e1-9f2c-ffb49e284014">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="31efe002-4283-483d-a4a5-bd8654c78424">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="fa0f538f-2068-4cd8-ab15-16fc1e25cc9c">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="25775fc1-3244-432a-9da2-74bf36165963">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="689877df-1140-4a7c-94a9-9932a2c12acc">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="4c676d97-4324-40c0-9f89-d1138bc988f3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c9ba486e-213b-4dcf-8156-545c546ff136">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="1d59dc52-08c6-4dac-8686-f01325b081b6">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Get Array Entry</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

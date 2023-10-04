@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="2afb85ac-1db5-49f7-9bb5-d9ce91db5a52">
+  <descriptionCdata>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.0bd252eb-8d72-422d-8627-f706e66a6e24.prompt=Input host\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.1307ab18-e2a1-4308-bc02-a257ba257bb3.prompt=Input method name\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.2704df1a-12b2-480f-b180-6f4840bac164.prompt=Input password\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.32ec120b-b52f-4bc3-83d1-e55c546253d3.prompt=Input username\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.be50d932-bfc8-426e-ac00-21ca956341af.prompt=Input class name\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.c681bb9a-e803-42dd-a763-4dd671470fef.prompt=Input namespace\:
+2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.description=&lt;pre&gt;\nInvokes a method on a WMI class. To add arguments to the method, add a new input to the step that has the name of your argument, and provide it with a value.\n\nInputs\:\nhost - Host name or ip address of the system on which the WMI query will be run.\nusername - Username to use for WMI impersonation on the host for this operation. Allowed formats\: userName or domain\\userName. Example\: myuser or mydomain\\myuser.\npassword - Password for the given username.\nnamespace - The namespace to run the query against. Example\: root\\cimv2. If not provided, the root\\cimv2 namespace is used by default.\nclass - The name of the class to invoke the method on. Example\: StdRegProv.\nmethod - The name of the method to invoke. Example\: GetStringValue.\n\nReturns\:\nThe raw XML result of the invocation or an error message if the operation fails.\n\nResponses\:\nsuccess - The method was invoked successfully with the given parameters. The operation goes to success even if the method execution returned an error code; the error will appear in the result xml.\nfailure - The given method could not be invoked with the given parameters or the connection to the indicated host with the indicated credentials failed.\n\nNotes\:\nUse WMIQueryFormat on the returned XML to convert to some other format.\nThis operation can be used on a Linux RAS to query WMI objects on a remote Windows machine.\nThe response xml has the following format, where the result of invoking the method on each instance is enclosed between a pair of "result" tags\:\n&lt;results&gt;\n  &lt;result&gt;\n    &lt;property&gt;\n      &lt;Name&gt;...&lt;/Name&gt;\n      &lt;Type&gt;...&lt;/Type&gt;\n      &lt;Value&gt;...&lt;/Value&gt;\n    &lt;/property&gt;\n  &lt;/result&gt;\n  &lt;result&gt;\n    &lt;Error&gt;...&lt;/Error&gt;\n  &lt;/result&gt;\n  &lt;result&gt;\n    ...\n  &lt;/result&gt;\n&lt;results&gt;\nThis operation should be used for calling static methods. For calling methods on specific instances of the class, use the Invoke WMI Instance Method. More details about static methods can be found at\: http\://msdn.microsoft.com/en-us/library/aa384833(v\=VS.85).aspx\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.description</annotation>
+  <name>Invoke WMI Class Method</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="0bd252eb-8d72-422d-8627-f706e66a6e24">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.0bd252eb-8d72-422d-8627-f706e66a6e24.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="32ec120b-b52f-4bc3-83d1-e55c546253d3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.32ec120b-b52f-4bc3-83d1-e55c546253d3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2704df1a-12b2-480f-b180-6f4840bac164">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.2704df1a-12b2-480f-b180-6f4840bac164.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c681bb9a-e803-42dd-a763-4dd671470fef">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>namespace</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.c681bb9a-e803-42dd-a763-4dd671470fef.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="be50d932-bfc8-426e-ac00-21ca956341af">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>class</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.be50d932-bfc8-426e-ac00-21ca956341af.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1307ab18-e2a1-4308-bc02-a257ba257bb3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>method</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2afb85ac-1db5-49f7-9bb5-d9ce91db5a52.1307ab18-e2a1-4308-bc02-a257ba257bb3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="b0c19cde-5545-4ce8-8186-44f9beba3e3d">
+    <annotation/>
+    <name>Operation:Invoke WMI Class Method (2afb85ac-1db5-49f7-9bb5-d9ce91db5a52)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="9d5b084a-dfa2-4a39-89d6-ca36d52acaf2">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c8f3d8b0-b2c2-4a0b-96c9-62f23b3bd957">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="87ecd9d3-09d6-4543-b80e-0ec63eee9309">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="d05507cf-f9d0-4175-a0a4-de8432b225b8">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="96a0c287-1670-442e-a0c3-58606838a79c">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="cd97a19b-0959-4eec-8ffd-147050f828af">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ba0b7464-72e7-46e8-8dd8-45fd2f604d96">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="fea7a16b-d796-48c3-bc4d-61939c556ffb">
+    <baseIcon>windows_server.png</baseIcon>
+    <basePath>/Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="734d7946-f6ed-498b-8eb8-2c7f5f6e234e">
+        <baseIcon>start.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-java-wmi-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.JavaWMI.operations.WMIInvokeClass</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

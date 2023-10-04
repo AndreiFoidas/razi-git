@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="37c16732-1c50-4b63-b8b8-ca3e77868bee">
+  <descriptionCdata>37c16732-1c50-4b63-b8b8-ca3e77868bee.45c62d1e-c3bd-4b6a-bd9b-b8240a58f3a9.prompt=Enter password\:
+37c16732-1c50-4b63-b8b8-ca3e77868bee.description=&lt;pre&gt;\nChecks if a user is enabled in Active Directory.\n\nInputs\:\n    host - The domain controller to connect to.\n    username - The Windows username to connect to Active Directory as.\n    password - The password to connect to Active Directory for this username.\n    OU - The organizational unit that the user that should be checked is part of. \nExample\: OU\=OUTest1\n    userFullName - The common name of the user that should be checked. \nExample\: testUser1\n\nResults\:\n    returnCode - The exit code of the operation.   \n\nResponses\:\n    success - The user is enabled.\n    failure - The user is disabled or something went wrong.\n&lt;/pre&gt;
+37c16732-1c50-4b63-b8b8-ca3e77868bee.f388426c-35ba-455e-a2b2-dbfd03be784a.prompt=Enter username\:
+</descriptionCdata>
+  <annotation>37c16732-1c50-4b63-b8b8-ca3e77868bee.description</annotation>
+  <name>Is User Enabled</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="361bd1fa-5ec5-4c21-bba7-7139062aac81">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f388426c-35ba-455e-a2b2-dbfd03be784a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>37c16732-1c50-4b63-b8b8-ca3e77868bee.f388426c-35ba-455e-a2b2-dbfd03be784a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="45c62d1e-c3bd-4b6a-bd9b-b8240a58f3a9">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>37c16732-1c50-4b63-b8b8-ca3e77868bee.45c62d1e-c3bd-4b6a-bd9b-b8240a58f3a9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="90034d09-c919-44d3-88fe-7297475449f7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="676a0bed-d604-4d67-9969-d099c5ebfb78">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userFullName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="1f26ab84-1974-428a-8772-b15277fbdfbf">
+    <annotation/>
+    <name>Operation Is User Enabled (37c16732-1c50-4b63-b8b8-ca3e77868bee)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="76014c88-b2a0-4433-9d25-2565bae1a210">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="70a68760-9673-4391-abe8-322d8822d4c5">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="47cd3347-7844-4ef4-b5fd-4d7bc198e0f9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="d41534c7-325b-4f6d-8337-ad5ed652c85b">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="74500a0f-dacf-471a-93b2-ed1059f79791">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="aa4c0f21-ebfb-467a-9eee-0ef99c076d95">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="4ea3c8b0-f006-466a-8dcc-65ebaf8b494e">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0f2d9e1c-44fc-47b5-854a-0b283d6e9506">
+    <baseIcon>user.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="7af013d1-9c80-45f7-95d2-261cca4c367b">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADIsUserEnabled</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

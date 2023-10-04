@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="ded8c09f-8c53-4c78-bc31-2c1256bd382f">
+  <descriptionCdata>ded8c09f-8c53-4c78-bc31-2c1256bd382f.0eefa3b8-452c-43f0-94d5-3c0c38190959.prompt=Password\:
+ded8c09f-8c53-4c78-bc31-2c1256bd382f.3153fa2c-c5e9-435f-b62a-7f8e100bac60.prompt=Username\:
+ded8c09f-8c53-4c78-bc31-2c1256bd382f.aaa6185d-9261-4b5c-bc2e-6a52d91e2c3d.prompt=Service\:
+ded8c09f-8c53-4c78-bc31-2c1256bd382f.d8f44ec1-c9b5-4bb5-bdc7-5ff22377b757.prompt=Host\:
+ded8c09f-8c53-4c78-bc31-2c1256bd382f.description=&lt;pre&gt;Stops the service specified by name.\n\nInputs\:\nhost - Hostname or ip address of the target machine\nusername - Name of the account to use to login into the machine\npassword - Password to use to login into the machine\nserviceName - Name of the service to stop\n\nResponses\:\nsuccess - Operation completed successfully\nfailure - Something went wrong\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception - if something went wrong, the error message\n\nRequires\:\nPowerShell 1.0&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>ded8c09f-8c53-4c78-bc31-2c1256bd382f.description</annotation>
+  <name>Stop Service</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d8f44ec1-c9b5-4bb5-bdc7-5ff22377b757">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ded8c09f-8c53-4c78-bc31-2c1256bd382f.d8f44ec1-c9b5-4bb5-bdc7-5ff22377b757.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3153fa2c-c5e9-435f-b62a-7f8e100bac60">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ded8c09f-8c53-4c78-bc31-2c1256bd382f.3153fa2c-c5e9-435f-b62a-7f8e100bac60.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0eefa3b8-452c-43f0-94d5-3c0c38190959">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ded8c09f-8c53-4c78-bc31-2c1256bd382f.0eefa3b8-452c-43f0-94d5-3c0c38190959.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aaa6185d-9261-4b5c-bc2e-6a52d91e2c3d">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>serviceName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ded8c09f-8c53-4c78-bc31-2c1256bd382f.aaa6185d-9261-4b5c-bc2e-6a52d91e2c3d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="29343e10-879c-4a37-9739-8c7d054df0db">
+    <annotation/>
+    <name>Operation:Stop Service (ded8c09f-8c53-4c78-bc31-2c1256bd382f)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d1097b53-f801-4608-8238-6eabd576c655">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="95f63a25-367e-4844-a19e-07a9d2bfc3cd">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="6678a8ef-4a16-49b9-b217-f0bb32eab5bd">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="dd90b37d-5c44-4fc3-8b62-5f929ad02e87">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="2d8f68ed-7f2a-4d47-b54c-d31d54d6fa19">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c1eecd51-88eb-446c-bf44-44bfdcc0d9e2">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="62747d93-70d4-4e01-8161-897a20febf0d">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="35be0848-f52b-486e-9f2b-d10e663a29c6">
+    <baseIcon>windows_service.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="f45a04a1-b0c9-4a7e-b6df-92e0a70cab70">
+        <baseIcon>shutdown.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>313cc07d-08b7-4c7f-9ebe-850a53438062</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

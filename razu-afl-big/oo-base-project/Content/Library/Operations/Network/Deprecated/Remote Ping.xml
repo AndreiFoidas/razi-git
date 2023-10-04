@@ -1,0 +1,2143 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="2c5348f0-c3b2-4b13-be43-0af939bb78de">
+  <descriptionCdata>2c5348f0-c3b2-4b13-be43-0af939bb78de.08ecc105-b7b8-4594-ab1e-ae5567b606cd.prompt=HostName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.0a763235-4727-48ca-a875-e947ff5b281f.prompt=UserName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.10df93ea-bb65-4a55-ad49-f03bb7d95c88.prompt=UserName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.225d18a4-6990-4917-b97a-bc2611ebccc7.prompt=Enter a value for target
+2c5348f0-c3b2-4b13-be43-0af939bb78de.32e1f542-3dae-4b1b-972f-5d5efa9b1ab2.prompt=Enter a value for target
+2c5348f0-c3b2-4b13-be43-0af939bb78de.3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a.description=&lt;pre&gt;Pings a host from a Solaris system.\n\nInputs\:\nhost - the host to perform the ping from.\npty - (true, false) whether to use pty (may mangle stdout and stderr if set to true)\nusername - username to connect as\npassword - password\nprivateKeyFile - The absolute path to the private key file for remote host.\ncommand - DO NOT CHANGE\ntarget - the host to ping.\npackets - the number of packets to send to target.\npacketSize - the size of packets to send to target.\n\nReturns\:\nthe raw output of the ping command.\n\nExtra Results\:\naddress - actual IP address pinged\n% Packet Loss - The percentage of packets that ping replies were received for.\naverage latency - The average ping response time in milliseconds.\nmax latency - The maximum response time of all the pings (in milliseconds).\nmin latency - the minimum number of milliseconds it took to receive a ping response.\n\nResponses\:\nsuccess - ping completed successfully.\ndiagnosed - target did not respond to ping.\nfailure - target could not be pinged.\n&lt;pre&gt;
+2c5348f0-c3b2-4b13-be43-0af939bb78de.3e92875c-4820-4032-a30f-b96a6e656de1.prompt=Enter a value for target
+2c5348f0-c3b2-4b13-be43-0af939bb78de.44136f60-397e-4465-898c-94ccaf659be9.prompt=HostName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.4522cbdc-9b53-4c38-91cc-ff4452fa0e7f.prompt=Password\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.4710f420-a68d-45b9-8a22-36dd7c33da3b.prompt=Password\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.52b5fd5c-488c-4f87-b942-fe7b9f88efdd.prompt=Enter a value for target
+2c5348f0-c3b2-4b13-be43-0af939bb78de.6fca8d04-3080-44f4-8900-406a3223d63b.description=&lt;pre&gt;Uses WMI to attempt to create a remote process on a machine.  The command passed should be formatted as though it was run on the command line.\n\nCAUTION\: internally 'cmd /c' gets prepended to the command passed.  Also '2&gt;tempfile 1&gt;tempfile' get appended to the command so that we can attempt to capture stdout and stderr.\nSo your command will look like this when executed\:\n\t'cmd /c [your command] 2&gt;temperr 1&gt;tempout'\n\nInput Parameters\:\nhost - hostname or ip address of the target machine\ncommand - the command you want executed\nuser - alternate credentials username\npassword - alternate credentials password\n\nResponses\:\nsuccess - remote process successfully launched and has completed executing\nfailure - unable to start remote process\n\nExtra Results\:\nReturnValue - return value from WMI for starting the process (not the exit value of the process)\nProcessID - the process id of the remote process\nStdOut - standard output from the remote process\nStdErr - standard error from the remote process\n\nScriptlet Example\: (populates the Return Results with the output of the command)\n$sErr \= %scriptletRawResult["StdErr"];\n$sOut \= %scriptletRawResult["StdOut"];\n\nif (strlen($sErr) gt 0)\n{\n   $scriptletResult \= $sErr;\n   if ($sErr \!\= $sOut)\n   {\n      $scriptletResult \= $scriptletResult.$sOut;\n   }\n}\nelse\n{\n   $scriptletResult \= $sOut;\n}\n&lt;/pre&gt;
+2c5348f0-c3b2-4b13-be43-0af939bb78de.734ed108-80b7-45e6-b6e9-553f31c31b0f.prompt=UserName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.8bc0c0c5-3a32-4f25-8f44-650164e98ba9.prompt=HostName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.8ef16773-4368-4fd3-8a5a-bd40d8a94cab.prompt=Enter a value for host
+2c5348f0-c3b2-4b13-be43-0af939bb78de.914163c2-2911-4d71-88d8-8530c8868791.prompt=HostName\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.93c7385f-6a80-49ab-ac19-356ec15ab1f3.prompt=Enter the Target \:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.a9b3ef60-83e8-4145-a104-8b88e5d9aab5.description=\n\n&lt;pre&gt;\nOS Detector Connects to a specified host, and determines what operating system the host is running.\n\nIt is important to note that the NRAS will try to impersonate the username/password provided rather then login to the remote\nmachine using that username/password.  If both the NRAS server and the server being rebooted are in the same domain then it\nwill work.  If, however, the NRAS server and the server to be restarted are in different domains then you must specify a local\naccount/password on the NRAS server which matches a local account on the target server.  If username/passwords match then\nWindows uses "shadow" authentication to perform the operation.  The other option is to deploy another NRAS in the same domain\nas the target server and use this NRAS instead.\n\nInput Parameters\:\nhost - hostname to connect to.\nusername - username to use when connecting.\npassword - password to use when connecting.\n\nResponses\:\nfailure - System could not determine remote hosts operating system.\nlinux - Remote host is running linux.\nsolaris - Remote host is running solaris.\nunknown unix - Remote host appears to be unix based, but is an unknown variant.\nwindows xp - Remote host is a windows xp system.\nwindows 2003 server - Remote host is a windows 2003 server.\nwindows 2003 enterprise - remote host is running windows 2003 enterprise edition.\nwindows 2000 - remote host is running windows 2000.\nunknown windows - Remote host is running an unknown version of windows.\n\nExtra Results\:\n\t\tosName - the completely returned string of the OS name.\n\t\tversion - the operating systems version.\n\t\thostName - The host name the remote computer reports for itself.\n\nThe following results give more refined results about what version of windows is detected.\nIf a unix is being run, the following results are always set to 'false'\n\t\tenterprise - 'true' if the operating system is an enterprise edition\n\t\tserver - 'true' if the operating system is a server edition\n\t\tprofessional - 'true' if the operating system is a professional edition.\n\t\tstandard - 'true' if the operating system is a standard edition.\n\n\nreturns the output of a uname -a for unix based hosts, and the results of osName and version WMI queries for a windows host.\n\n\n\n&lt;/pre&gt;\n
+2c5348f0-c3b2-4b13-be43-0af939bb78de.d974bc31-734d-46a1-b36d-7ef074c22a68.prompt=Password\:
+2c5348f0-c3b2-4b13-be43-0af939bb78de.description=&lt;pre&gt;Pings the requested machine from a remote host\n\nInput Parameters\:\nhost - hostname or IP address of the host to ping from.\nusername - The username to use to authenticate to host.\npassword - The password to use to authenticate to host.\ntarget - The target server to ping.\npackets - The number of packets to send to target.\npacketSize - The size of packets to send to target.\noutputPath - network accessible path used by the operation to store temporary files. If not specified it points to \\\\host\\admin$\\temp\\'. If this     path is not accessible you should change it to use another share that the host local system account has write access to. By default, the path will have to be  changed on Windows 2000 systems\n\nResponses\:\npassed - a successful connection was made\nfailure - something went wrong\ndiagnosed - A problem was detected (ping not responded to, or dns lookup failed).\n\nExtra Results\:\noutput - raw output of the results\naddress - actual IP address pinged\n% Packet Loss - The percentage of packets that ping replies were received for.\naverage latency - The average ping response time in milliseconds.\nmax latency - The maximum response time of all the pings (in milliseconds).\nmin latency - the minimum number of milliseconds it took to receive a ping response.\n&lt;/pre&gt;
+2c5348f0-c3b2-4b13-be43-0af939bb78de.e18f0d6b-3288-40de-b2a8-63c2dcf3da07.description=&lt;pre&gt;Pings a host from a Red Hat linux system.\n\nInputs\:\nhost - the host to perform the ping from.\npty - (true, false) whether to use pty (may mangle stdout and stderr if set to true)\nusername - username to connect as\npassword - password\nprivateKeyFile - The absolute path to the private key file for remote host.\ncommand - DO NOT CHANGE\ntarget - the host to ping.\npackets - the number of packets to send to target.\npacketSize - the size of packets to send to target.\n\nReturns\:\nthe raw output of the ping command.\n\nExtra Results\:\naddress - actual IP address pinged\n% Packet Loss - The percentage of packets that ping replies were received for.\naverage latency - The average ping response time in milliseconds.\nmax latency - The maximum response time of all the pings (in milliseconds).\nmin latency - the minimum number of milliseconds it took to receive a ping response.\n\nResponses\:\nsuccess - ping completed successfully.\ndiagnosed - target did not respond to ping.\nfailure - target could not be pinged.\n&lt;pre&gt;
+2c5348f0-c3b2-4b13-be43-0af939bb78de.e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5.description=&lt;pre&gt;Pings a host from a Red Hat linux system.\n\nInputs\:\nhost - the host to perform the ping from.\npty - (true, false) whether to use pty (may mangle stdout and stderr if set to true)\nusername - username to connect as\npassword - password\nprivateKeyFile - The absolute path to the private key file for remote host.\ncommand - DO NOT CHANGE\ntarget - the host to ping.\npackets - the number of packets to send to target.\npacketSize - the size of packets to send to target.\n\nReturns\:\nthe raw output of the ping command.\n\nExtra Results\:\naddress - actual IP address pinged\n% Packet Loss - The percentage of packets that ping replies were received for.\naverage latency - The average ping response time in milliseconds.\nmax latency - The maximum response time of all the pings (in milliseconds).\nmin latency - the minimum number of milliseconds it took to receive a ping response.\n\nResponses\:\nsuccess - ping completed successfully.\ndiagnosed - target did not respond to ping.\nfailure - target could not be pinged.\n&lt;pre&gt;
+</descriptionCdata>
+  <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.description</annotation>
+  <name>Remote Ping</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ce43a44f-8cdf-498d-8aab-daaf179c9f28">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7035e075-496f-4191-a590-07b6e8e5e76d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="71f4cf9b-8e0e-413e-93c1-3428ddc5c137">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="93c7385f-6a80-49ab-ac19-356ec15ab1f3">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>target</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.93c7385f-6a80-49ab-ac19-356ec15ab1f3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="027b473d-4e78-47d1-b064-a2bd92ec2d31">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>packets</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>3</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="46743a13-075e-45e8-8d43-6387c3d8e264">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>packetSize</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>64</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="db4921db-d4d0-426c-b45b-6f5ea7131fc2">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outputPath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="527f14a4-c756-4b9a-9b91-07a7fbba5d8b">
+    <annotation/>
+    <name>Operation:Remote Ping (2c5348f0-c3b2-4b13-be43-0af939bb78de)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="04e8448c-9d85-4a09-be3f-a6db2a0527ab">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="942306d0-873c-4129-8877-84a52833703b">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="2bca81eb-de68-46cc-9667-488b66c7c7fb">
+      <annotation/>
+      <name>diagnosed</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>DIAGNOSED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b90c3975-61e6-42e9-9945-ca1275d487d7">
+    <annotation/>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="f2aad859-7653-43a1-85a7-81dbd61ad961">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="a9b3ef60-83e8-4145-a104-8b88e5d9aab5">
+      <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.a9b3ef60-83e8-4145-a104-8b88e5d9aab5.description</annotation>
+      <name>OSDetector</name>
+      <bounds>
+        <x>131.0</x>
+        <y>132.0</y>
+      </bounds>
+      <layer>4</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="8ef16773-4368-4fd3-8a5a-bd40d8a94cab">
+          <annotation/>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.8ef16773-4368-4fd3-8a5a-bd40d8a94cab.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="81c6d7b2-5fcf-4333-8413-a4ac4c903248">
+          <annotation/>
+          <fromContextKey>username</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>username</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="31b28469-3253-4424-b79b-ac16572edd12">
+          <annotation/>
+          <fromContextKey>password</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="d2f74f3b-fba5-4841-9f44-71b53b566053">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>246.30269010295177</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>221.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>414.2857142857143</x>
+            <y>18.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="61338ba9-20bb-4afa-a610-0c9c90a5f2dc">
+          <annotation/>
+          <name>linux</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>linux</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>252.0</x>
+              <y>142.49756392414213</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>190.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>490.0</x>
+            <y>-7.5</y>
+          </labelPosition>
+        </transition>
+        <transition id="73f0c1ff-e03c-4f85-a76c-7f4aa3f02687">
+          <annotation/>
+          <name>solaris</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>solaris</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>211.71428571428572</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>141.09756097560975</x>
+              <y>407.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>525.0</x>
+            <y>8.142857142857157</y>
+          </labelPosition>
+        </transition>
+        <transition id="cb0648f8-a52f-4700-8594-4a19619bb130">
+          <annotation/>
+          <name>unknown unix</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>unknown unix</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e18f0d6b-3288-40de-b2a8-63c2dcf3da07</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>221.29126213592232</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>221.0</x>
+              <y>325.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>657.1428571428571</x>
+            <y>-31.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="3e3365c7-e4ed-49e7-9210-e79a8e37bd52">
+          <annotation/>
+          <name>windows 2003</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>windows 2003</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>252.0</x>
+              <y>170.28571428571428</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>619.9058823529411</x>
+            <y>22.2162632533281</y>
+          </labelPosition>
+        </transition>
+        <transition id="f10c208a-c02e-4b5f-8668-7e29887d4a30">
+          <annotation/>
+          <name>windows 2000</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>windows 2000</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>192.0</x>
+              <y>141.74716219077402</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>509.6</x>
+            <y>22.264770378335367</y>
+          </labelPosition>
+        </transition>
+        <transition id="166ff3d6-db81-4e00-b48d-a9f734960386">
+          <annotation/>
+          <name>unknown windows</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>unknown windows</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>221.3896103896104</x>
+              <y>137.0</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>755.435294117647</x>
+            <y>26.09683325390943</y>
+          </labelPosition>
+        </transition>
+        <transition id="4df08a69-2266-4432-8a89-37c548d96d7d">
+          <annotation/>
+          <name>windows xp</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>windows xp</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </destination>
+          <source>
+            <refId>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>196.48019487988955</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>374.0705882352941</x>
+            <y>18.38420037775404</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>92f1824d-1631-4d05-8f60-e057b6d1519f</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="3bee7b5e-2361-423a-8445-f6c0e1fdee12">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>291.0</x>
+        <y>267.0</y>
+      </bounds>
+      <layer>3</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="1f7c419f-b0d6-40e2-92fd-3ee437e826ba">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3bee7b5e-2361-423a-8445-f6c0e1fdee12</refId>
+          </destination>
+          <source>
+            <refId>3bee7b5e-2361-423a-8445-f6c0e1fdee12</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5">
+      <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5.description</annotation>
+      <name>Linux Ping</name>
+      <bounds>
+        <x>291.0</x>
+        <y>132.0</y>
+      </bounds>
+      <layer>0</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="08ecc105-b7b8-4594-ab1e-ae5567b606cd">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.08ecc105-b7b8-4594-ab1e-ae5567b606cd.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="2d2141b3-79c4-4f5e-9201-bd5258889837">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>pty</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="0a763235-4727-48ca-a875-e947ff5b281f">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>username</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.0a763235-4727-48ca-a875-e947ff5b281f.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="4522cbdc-9b53-4c38-91cc-ff4452fa0e7f">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.4522cbdc-9b53-4c38-91cc-ff4452fa0e7f.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="29205a68-c5f3-4048-b393-7768395a49dd">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>privateKeyFile</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="225d18a4-6990-4917-b97a-bc2611ebccc7">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>target</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.225d18a4-6990-4917-b97a-bc2611ebccc7.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="457a9ef5-ff86-4eda-9346-ff462aaf2a9b">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packetSize</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>64</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="c51c22cb-5250-4b8e-b4d8-80184a268bbf">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packets</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>3</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="7fcedc29-0217-4ffd-933f-890f29084d60">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>command</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>ping ${target} -s ${packetSize} -c ${packets}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="23f6425d-2cd1-4853-bac8-298beb4788de">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>fd3c77dd-8714-4740-9566-2cd9c74ae363</refId>
+          </destination>
+          <source>
+            <refId>e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>407.4150943396226</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>492.0</x>
+              <y>277.2142857142857</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>643.7091193011966</x>
+            <y>-13.2781205167909</y>
+          </labelPosition>
+        </transition>
+        <transition id="c05bc212-1c94-45f9-b595-cc14ace4867b">
+          <annotation/>
+          <name>diagnosed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>50c5364c-24dc-4ebf-89bc-b579521e2984</refId>
+          </destination>
+          <source>
+            <refId>e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>360.674260418288</x>
+              <y>137.0</y>
+            </point>
+            <point>
+              <x>521.0</x>
+              <y>190.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>475.0</x>
+            <y>-8.142857142857157</y>
+          </labelPosition>
+        </transition>
+        <transition id="38474d6e-3920-436d-b042-81402fa335e2">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3bee7b5e-2361-423a-8445-f6c0e1fdee12</refId>
+          </destination>
+          <source>
+            <refId>e5e62f46-a45d-4ad5-8fa8-2e15e88ba7f5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>412.0</x>
+              <y>170.28571428571428</y>
+            </point>
+            <point>
+              <x>381.0</x>
+              <y>325.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>546.6666666666666</x>
+            <y>-20.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>3dd316bd-ef01-4953-ab08-7430f2d6c75a</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="0a4b64d0-8b6e-457b-89ee-2e0a91e46abc">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>% Packet Loss</contextKey>
+          <expression id="441b43e9-d348-46fd-ac1d-a72d32d2ab7f">
+            <annotation/>
+            <name>Result: % Packet Loss</name>
+            <fieldName>% Packet Loss</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="9a7a317b-8f27-4b9c-ab74-cf2fc55da9bf">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>stddev latency</contextKey>
+          <expression id="33c14026-fd06-4e04-9586-6d318101f797">
+            <annotation/>
+            <name>Result: stddev latency</name>
+            <fieldName>stddev latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="389cfec0-a1e1-4261-b4b0-8bc7b7c2d6f7">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>max latency</contextKey>
+          <expression id="4c4e1112-6fc9-4efb-89e7-06a277d3ceb6">
+            <annotation/>
+            <name>Result: max latency</name>
+            <fieldName>max latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="299122d8-f26b-4548-822f-1525c0376ec7">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>min latency</contextKey>
+          <expression id="bbef105d-7d41-4210-816c-71f24b0abce9">
+            <annotation/>
+            <name>Result: min latency</name>
+            <fieldName>min latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="19c18cd3-d872-4027-94e7-289faed0ee3c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>address</contextKey>
+          <expression id="8f0065eb-615c-47e2-922f-147ac522ce8b">
+            <annotation/>
+            <name>Result: address</name>
+            <fieldName>address</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="870bdf8d-c983-4ba7-ad5a-5fd41fc6f8ee">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>average latency</contextKey>
+          <expression id="98428cdb-31f1-49d7-8795-0a6329c78edd">
+            <annotation/>
+            <name>Result: average latency</name>
+            <fieldName>average latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="e18f0d6b-3288-40de-b2a8-63c2dcf3da07">
+      <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.e18f0d6b-3288-40de-b2a8-63c2dcf3da07.description</annotation>
+      <name>Linux Ping</name>
+      <bounds>
+        <x>131.0</x>
+        <y>267.0</y>
+      </bounds>
+      <layer>9</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="914163c2-2911-4d71-88d8-8530c8868791">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.914163c2-2911-4d71-88d8-8530c8868791.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="d930464c-b9fd-40de-bc91-a148eb359cd5">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>pty</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="10df93ea-bb65-4a55-ad49-f03bb7d95c88">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>username</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.10df93ea-bb65-4a55-ad49-f03bb7d95c88.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="4710f420-a68d-45b9-8a22-36dd7c33da3b">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.4710f420-a68d-45b9-8a22-36dd7c33da3b.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="b4ec4cb3-47b5-47db-86b5-37a600625530">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>privateKeyFile</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="32e1f542-3dae-4b1b-972f-5d5efa9b1ab2">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>target</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.32e1f542-3dae-4b1b-972f-5d5efa9b1ab2.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="c00f361e-7ac2-4a0b-ba6d-f35598ba0881">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packetSize</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>64</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="fe4ff049-c8ea-4b8f-ac36-bd45f9938fdc">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packets</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>3</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="b3bf9e27-4255-43c1-b27e-c666b4252f9e">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>command</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>ping ${target} -s ${packetSize} -c ${packets}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="3c340ae7-6ade-4614-b19e-616753d5aca8">
+          <annotation/>
+          <name>diagnosed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b2f3a69a-8de4-4dcf-b7d6-e3ee5fb4fe10</refId>
+          </destination>
+          <source>
+            <refId>e18f0d6b-3288-40de-b2a8-63c2dcf3da07</refId>
+          </source>
+          <positions>
+            <point>
+              <x>200.674260418288</x>
+              <y>272.0</y>
+            </point>
+            <point>
+              <x>87.0</x>
+              <y>325.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>486.4864864864865</x>
+            <y>10.373134328358237</y>
+          </labelPosition>
+        </transition>
+        <transition id="6c9658e7-4042-4251-91e6-4b743b1226df">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a</refId>
+          </destination>
+          <source>
+            <refId>e18f0d6b-3288-40de-b2a8-63c2dcf3da07</refId>
+          </source>
+          <positions>
+            <point>
+              <x>192.0</x>
+              <y>276.14925373134326</y>
+            </point>
+            <point>
+              <x>112.28301886792453</x>
+              <y>197.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>245.99514517467222</x>
+            <y>13.639407509223743</y>
+          </labelPosition>
+        </transition>
+        <transition id="5a17359f-e769-4546-8b9b-35ec729a6a57">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3bee7b5e-2361-423a-8445-f6c0e1fdee12</refId>
+          </destination>
+          <source>
+            <refId>e18f0d6b-3288-40de-b2a8-63c2dcf3da07</refId>
+          </source>
+          <positions>
+            <point>
+              <x>252.0</x>
+              <y>305.5</y>
+            </point>
+            <point>
+              <x>352.0</x>
+              <y>305.5</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>500.0</x>
+            <y>-7.5</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>3dd316bd-ef01-4953-ab08-7430f2d6c75a</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="c960f8e8-6710-41b1-a474-62e2f17d8610">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>address</contextKey>
+          <expression id="be6d41c6-75c4-4847-b76a-58a9cbc1e496">
+            <annotation/>
+            <name>Result: address</name>
+            <fieldName>address</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="efb9213e-a408-43ea-9c3f-b132d64a2fc6">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>% Packet Loss</contextKey>
+          <expression id="2d4e7345-4585-445c-9268-f706acf1a0fa">
+            <annotation/>
+            <name>Result: % Packet Loss</name>
+            <fieldName>% Packet Loss</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="7df9b2b7-a297-46a3-b253-fab2b165991c">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>max latency</contextKey>
+          <expression id="a752ef0f-a55f-4e38-af58-593eca2afddc">
+            <annotation/>
+            <name>Result: max latency</name>
+            <fieldName>max latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="5b36e4e6-ef1b-4e70-ac26-7b7f14d12dcb">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>stddev latency</contextKey>
+          <expression id="405bbaf2-628e-415c-b3d0-284bde9d38f3">
+            <annotation/>
+            <name>Result: stddev latency</name>
+            <fieldName>stddev latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="3578e4e2-e4a4-4676-b9a5-e3c07b954ccb">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>average latency</contextKey>
+          <expression id="dcd8a79d-0593-477d-bd3d-496c4d4a97ee">
+            <annotation/>
+            <name>Result: average latency</name>
+            <fieldName>average latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="3f01c0fd-55f2-4344-8671-2c8501e7ac5a">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>min latency</contextKey>
+          <expression id="cefbecf7-d84e-4d04-94fa-d981fc7aa2c1">
+            <annotation/>
+            <name>Result: min latency</name>
+            <fieldName>min latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="19b06bc1-ef25-4251-8678-daa89696bf61">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>431.0</x>
+        <y>2.0</y>
+      </bounds>
+      <layer>11</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="1b554fd4-f9bc-4112-8d2e-d040d4bd81eb">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>19b06bc1-ef25-4251-8678-daa89696bf61</refId>
+          </destination>
+          <source>
+            <refId>19b06bc1-ef25-4251-8678-daa89696bf61</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a">
+      <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a.description</annotation>
+      <name>Solaris Ping</name>
+      <bounds>
+        <x>-3.0</x>
+        <y>132.0</y>
+      </bounds>
+      <layer>6</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="8bc0c0c5-3a32-4f25-8f44-650164e98ba9">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.8bc0c0c5-3a32-4f25-8f44-650164e98ba9.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="51512186-3d71-484a-9766-1752842b4319">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>pty</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="734ed108-80b7-45e6-b6e9-553f31c31b0f">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>username</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.734ed108-80b7-45e6-b6e9-553f31c31b0f.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="d974bc31-734d-46a1-b36d-7ef074c22a68">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.d974bc31-734d-46a1-b36d-7ef074c22a68.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="93285284-d8fd-41a2-9a8b-f51bc8f7f9b0">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>privateKeyFile</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="52b5fd5c-488c-4f87-b942-fe7b9f88efdd">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>target</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.52b5fd5c-488c-4f87-b942-fe7b9f88efdd.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="ed1e36dc-ae7b-43ec-a483-5b06dd5b1e3e">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packetSize</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>64</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="de8187a8-c924-4162-b3c1-ed0f5b54c91e">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packets</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>3</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="c3033837-af1c-484d-bf98-beb9655b2355">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>command</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>/usr/sbin/ping -s ${target} ${packetSize} ${packets}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="d2772b8d-bd76-4b82-b869-fe36448e014b">
+          <annotation/>
+          <name>diagnosed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b2f3a69a-8de4-4dcf-b7d6-e3ee5fb4fe10</refId>
+          </destination>
+          <source>
+            <refId>3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>87.0</x>
+              <y>197.0</y>
+            </point>
+            <point>
+              <x>87.0</x>
+              <y>272.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>600.0</x>
+            <y>25.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="1ba154fd-d79c-499a-bd1c-7cb6eadcd412">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>79a7dce2-78e0-419b-a7a2-402326a280d2</refId>
+          </destination>
+          <source>
+            <refId>3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>87.0</x>
+              <y>137.0</y>
+            </point>
+            <point>
+              <x>87.0</x>
+              <y>67.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>385.7142857142857</x>
+            <y>-23.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="dad54458-da0d-4be2-9b71-e9c5bbdc4cb5">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </destination>
+          <source>
+            <refId>3d9e86fc-47b2-4cdf-a4d3-63bb4cd5492a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>118.0</x>
+              <y>142.26865671641792</y>
+            </point>
+            <point>
+              <x>194.89610389610388</x>
+              <y>67.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>289.468065819418</x>
+            <y>-14.666057111222015</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>8e7fa549-8272-402e-afe0-00e9f48a200d</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="d7092a98-c5a7-4aee-ae7e-141994b1ebc3">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>% Packet Loss</contextKey>
+          <expression id="a53f9c6e-e05a-4338-b322-341a2cc81b9b">
+            <annotation/>
+            <name>Result: % Packet Loss</name>
+            <fieldName>% Packet Loss</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="31797dbd-1de2-4deb-a9fe-2ca3026b0ca6">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>stddev latency</contextKey>
+          <expression id="1b45b808-eef6-4490-ad88-e2d518f4b5b2">
+            <annotation/>
+            <name>Result: stddev latency</name>
+            <fieldName>stddev latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="e93bf26b-55a1-4b56-961f-f61d1b2001ea">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>average latency</contextKey>
+          <expression id="b8156a92-9053-426f-92b1-333258383ba7">
+            <annotation/>
+            <name>Result: average latency</name>
+            <fieldName>average latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="9f6289b9-4041-4b6b-81b3-70944298f15d">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>address</contextKey>
+          <expression id="d3e84285-7d9e-46c5-9c6f-8055026ed853">
+            <annotation/>
+            <name>Result: address</name>
+            <fieldName>address</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="324d04f6-08b6-46bf-905e-bd0a7cf8e057">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>min latency</contextKey>
+          <expression id="40135a70-175c-4f0c-9c8d-fee8519880ed">
+            <annotation/>
+            <name>Result: min latency</name>
+            <fieldName>min latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="ab256dd4-453e-4aae-b6cc-d37d0026fc2a">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>max latency</contextKey>
+          <expression id="d803b39a-689b-4d59-b9ad-dd0628c5b465">
+            <annotation/>
+            <name>Result: max latency</name>
+            <fieldName>max latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="2be94abb-7dc8-492c-a957-e83652575d15">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>131.0</x>
+        <y>2.0</y>
+      </bounds>
+      <layer>5</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="3a8dbfa5-b4f8-4b49-b226-486aa2840e19">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </destination>
+          <source>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="b2f3a69a-8de4-4dcf-b7d6-e3ee5fb4fe10">
+      <annotation/>
+      <name>Diagnosed : diagnosed</name>
+      <bounds>
+        <x>-3.0</x>
+        <y>267.0</y>
+      </bounds>
+      <layer>7</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="914f0d6d-d4d8-4aca-840a-1c87964d23dd">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b2f3a69a-8de4-4dcf-b7d6-e3ee5fb4fe10</refId>
+          </destination>
+          <source>
+            <refId>b2f3a69a-8de4-4dcf-b7d6-e3ee5fb4fe10</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>DIAGNOSED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="6fca8d04-3080-44f4-8900-406a3223d63b">
+      <annotation>2c5348f0-c3b2-4b13-be43-0af939bb78de.6fca8d04-3080-44f4-8900-406a3223d63b.description</annotation>
+      <name>Windows Ping</name>
+      <bounds>
+        <x>291.0</x>
+        <y>2.0</y>
+      </bounds>
+      <layer>10</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings>
+        <userInputBinding id="44136f60-397e-4465-898c-94ccaf659be9">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.44136f60-397e-4465-898c-94ccaf659be9.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="0f38bbbe-f9f8-443b-a818-8fbb27fde517">
+          <annotation/>
+          <fromContextKey>username</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>user</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2fdccbe8-33b8-401a-b48c-6846945ade0f">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="3e92875c-4820-4032-a30f-b96a6e656de1">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>target</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>2c5348f0-c3b2-4b13-be43-0af939bb78de.3e92875c-4820-4032-a30f-b96a6e656de1.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="f999db73-eca5-4137-b131-19e5a1ff2ba1">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packets</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>3</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="c4e04e6d-a504-4492-9e27-72a30e60b489">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>packetSize</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>64</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2492c466-50c5-4023-ac06-7068093dd462">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>command</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>ping ${target} -n ${packets} -l ${packetSize}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="66bd5557-481c-4d38-8ade-61e2757354cf">
+          <annotation/>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>outputPath</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value/>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="f64bb6b0-52ff-4626-8ae0-9ab5fc5f0982">
+          <annotation/>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </destination>
+          <source>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </source>
+          <positions>
+            <point>
+              <x>352.0</x>
+              <y>40.5</y>
+            </point>
+            <point>
+              <x>252.0</x>
+              <y>40.5</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>550.0</x>
+            <y>16.5</y>
+          </labelPosition>
+        </transition>
+        <transition id="d7178257-6a0d-49d5-a408-c1a9a61c4b28">
+          <annotation/>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>19b06bc1-ef25-4251-8678-daa89696bf61</refId>
+          </destination>
+          <source>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </source>
+          <positions>
+            <point>
+              <x>352.0</x>
+              <y>40.38202247191011</y>
+            </point>
+            <point>
+              <x>521.0</x>
+              <y>60.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>462.5</x>
+            <y>-7.1428571428571335</y>
+          </labelPosition>
+        </transition>
+        <transition id="a75b8472-97d6-4e2d-831b-e1bd50c989bb">
+          <annotation/>
+          <name>Unknown Target</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>Unknown Target</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>50c5364c-24dc-4ebf-89bc-b579521e2984</refId>
+          </destination>
+          <source>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </source>
+          <positions>
+            <point>
+              <x>408.27272727272725</x>
+              <y>67.0</y>
+            </point>
+            <point>
+              <x>492.0</x>
+              <y>143.28571428571428</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>641.6872683847309</x>
+            <y>-29.696690199597224</y>
+          </labelPosition>
+        </transition>
+        <transition id="97cfa7ce-c32b-4a2c-9a21-b9d063ba2e65">
+          <annotation/>
+          <name>Connection Error</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>Connection Error</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2be94abb-7dc8-492c-a957-e83652575d15</refId>
+          </destination>
+          <source>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </source>
+          <positions>
+            <point>
+              <x>352.0</x>
+              <y>40.5</y>
+            </point>
+            <point>
+              <x>252.0</x>
+              <y>40.5</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>500.0</x>
+            <y>6.5</y>
+          </labelPosition>
+        </transition>
+        <transition id="07529f0d-0e8e-475f-915b-a55f3e43d82f">
+          <annotation/>
+          <name>diagnosed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>50c5364c-24dc-4ebf-89bc-b579521e2984</refId>
+          </destination>
+          <source>
+            <refId>6fca8d04-3080-44f4-8900-406a3223d63b</refId>
+          </source>
+          <positions>
+            <point>
+              <x>408.27272727272725</x>
+              <y>67.0</y>
+            </point>
+            <point>
+              <x>492.0</x>
+              <y>143.28571428571428</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>692.8811229104739</x>
+            <y>-17.39321059399817</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>402950fb-cd2e-49ac-ab27-808df41f0537</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="42ef783d-f4e9-4543-acc0-ad9993911ad5">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>min latency</contextKey>
+          <expression id="2df182c7-5961-49c6-a68a-5fd5bf1ea0d6">
+            <annotation/>
+            <name>Result: min latency</name>
+            <fieldName>min latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="9eea275e-a18a-4646-8f95-c9088d6778d4">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>max latency</contextKey>
+          <expression id="0c871002-b325-4cb7-867b-6b5db06f9c12">
+            <annotation/>
+            <name>Result: max latency</name>
+            <fieldName>max latency</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="01c737ef-65ef-4215-84a4-1185353bfed7">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>% Packet Loss</contextKey>
+          <expression id="5a276e9a-eba0-421f-bc51-6b3e604630a7">
+            <annotation/>
+            <name>Result: % Packet Loss</name>
+            <fieldName>% Packet Loss</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="fd3f36ca-98ba-47eb-bff8-1abf7b622184">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>average latency</contextKey>
+          <expression id="40e9beab-a498-4f58-bb0f-24bf64d02134">
+            <annotation/>
+            <name>Result: average lateny</name>
+            <fieldName>average lateny</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="8a8159dc-d51b-4e82-a626-963ece891b30">
+          <annotation/>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>address</contextKey>
+          <expression id="2b57d549-844e-4f92-8260-93e268421838">
+            <annotation/>
+            <name>Result: address</name>
+            <fieldName>address</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="fd3c77dd-8714-4740-9566-2cd9c74ae363">
+      <annotation/>
+      <name>Error : failure</name>
+      <bounds>
+        <x>431.0</x>
+        <y>267.0</y>
+      </bounds>
+      <layer>1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="d14bee52-99a6-4c63-bf0c-844c5331a2a8">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>fd3c77dd-8714-4740-9566-2cd9c74ae363</refId>
+          </destination>
+          <source>
+            <refId>fd3c77dd-8714-4740-9566-2cd9c74ae363</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="79a7dce2-78e0-419b-a7a2-402326a280d2">
+      <annotation/>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>-3.0</x>
+        <y>2.0</y>
+      </bounds>
+      <layer>8</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="53cc8ba4-0b0c-41ff-bd2c-1d60aa19e19b">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>79a7dce2-78e0-419b-a7a2-402326a280d2</refId>
+          </destination>
+          <source>
+            <refId>79a7dce2-78e0-419b-a7a2-402326a280d2</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="50c5364c-24dc-4ebf-89bc-b579521e2984">
+      <annotation/>
+      <name>Diagnosed : diagnosed</name>
+      <bounds>
+        <x>431.0</x>
+        <y>132.0</y>
+      </bounds>
+      <layer>2</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <bindings/>
+      <transitions>
+        <transition id="67059374-96d9-4bf4-9eb2-1f445ebf2232">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>diagnosed</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>50c5364c-24dc-4ebf-89bc-b579521e2984</refId>
+          </destination>
+          <source>
+            <refId>50c5364c-24dc-4ebf-89bc-b579521e2984</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>DIAGNOSED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>a9b3ef60-83e8-4145-a104-8b88e5d9aab5</startSteps>
+</flow>

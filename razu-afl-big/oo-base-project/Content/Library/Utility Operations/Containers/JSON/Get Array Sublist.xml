@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="6ed84643-949e-45ce-ad37-164162397f09">
+  <descriptionCdata>6ed84643-949e-45ce-ad37-164162397f09.description=Get a JSON array which is the subset of an array. The subset can be defined by a start index (fromIndex) alone, in which\ncase the resulting array will contain elements from the input 'array' from the 'fromIndex' to the end of the input array.\n\nThe optional 'toIndex' parameter can be supplied, in which case the sublist returned by this operation will contain the\n elements in array starting with 'fromIndex', and include everything up to, but not including, the element at 'toIndex'.\n\nIt is also possible to specify 'fromIndex' and 'toIndex' in either the "from the left" positive format or in the "from the\nright" negative format, and even specify them each in a different format in the same call to this * operation. \nHowever, sublist is always create from left to right from the original array, and therefore * 'fromIndex' must allayws\nbe to the left of 'toIndex' in the parent array. Any combination of 'fromIndex' and * 'toIndex' which violates this rule\n(including the case where fromIndex\=toIndex) will return an error.\n\nInputs\:\n    array - String representation of a JSON array. Arrays in JSON are comma seperated lists of objects, enclosed in square brackets ( [ ] ).\nExamples\: [1,2,3] or ["one","two","three"] or [{"one"\:1, "two"\:2}, 3, "four"]\n    fromIndex - The index of the element in 'array' which will be the 1st element in the sublist array.\nValid values\: Integer between (-1*n) and (n-1) for an array with n elements.\n    toIndex - Optional. If this input is supplied, the sub-list will contain the elements from the parent array, starting at the position startIndex, up to, \n                    but not including, the element at toIndex. In other words, the element in the parent array at toIndex is one past the last element \n                    of the sub-list returned by this operation. \n                    If this input is not supplied, the sub-array will contain the elements of 'array' beginning with fromIndex to the end of the array.\nValid values\: Integer between (-1*n) and (n-1) for an array with n elements.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation failed. See the message in returnResult for details\n\nResults\:\n    returnResult - The new JSON array which is a subset of the input array.\n\n Example\:\n    With the input array\: [{"one"\:1,"two"\:2}, "3", "four"]\n\n    fromIndex\=0  and toIndex\=1                  returns [{"one"\:1,"two"\:2}]\n    fromIndex\=0  and toIndex\=3                  returns [{"one"\:1,"two"\:2}, "3", "four"]\n
+</descriptionCdata>
+  <annotation>6ed84643-949e-45ce-ad37-164162397f09.description</annotation>
+  <name>Get Array Sublist</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="01f39636-3a36-45c0-8385-542e80dfd7e7">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>array</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a420f7e9-9424-4035-837e-0093eeeb6d36">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>fromIndex</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3721be51-e2d3-4166-b187-be7eaa31d92d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>toIndex</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="11cfa928-b29d-4460-9b47-8241360903d6">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="38add839-20fe-459b-a3bf-dcab100f77c5">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="41758ff0-2a1d-469a-94c0-6815aa2e60a1">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ec3822d9-211f-4127-8795-92d13200ee8a">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="76ad6d0c-761f-44a1-aaa3-0f4e5056c0fa">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="6523a353-2864-45bf-af1e-4caad2f994bf">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="74d000eb-ff83-4c09-8bba-2631e1f8b734">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0617a0f3-ac60-45eb-96b7-91f7c5c522ba">
+    <baseIcon>text_msg.png</baseIcon>
+    <basePath>/E-mail/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Get Array Sublist</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

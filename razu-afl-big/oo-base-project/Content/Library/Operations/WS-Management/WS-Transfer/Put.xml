@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="479438e1-7467-4696-bb2c-ca64057f982f">
+  <descriptionCdata>479438e1-7467-4696-bb2c-ca64057f982f.1159d28d-3b18-4684-a600-1c00457de7c4.prompt=Input the list of property names used to select the resource\:
+479438e1-7467-4696-bb2c-ca64057f982f.46292784-87a4-40f2-ac54-7dbf5f3e5642.prompt=Input the resource URI to be used\:
+479438e1-7467-4696-bb2c-ca64057f982f.4d766b86-ce29-470a-b036-0acbb9899c00.prompt=Input the web service URL\:
+479438e1-7467-4696-bb2c-ca64057f982f.677f5429-564e-446b-a28c-3d46b06b253f.prompt=Input the list of property values used to select the resource\:
+479438e1-7467-4696-bb2c-ca64057f982f.8218a488-854c-4c31-b1f6-620c68f53edd.prompt=Input delimiter\:
+479438e1-7467-4696-bb2c-ca64057f982f.9ce72f04-19f6-4cce-bdb5-85497fe3c6ae.prompt=Input an XML with the resource content to be updated\:
+479438e1-7467-4696-bb2c-ca64057f982f.a0ce79fa-0a11-4fa6-a482-d992f96dc3ad.prompt=Input username\:
+479438e1-7467-4696-bb2c-ca64057f982f.ddeb30bd-4a3d-4699-8293-bd60adfb9a47.prompt=Input password\:
+479438e1-7467-4696-bb2c-ca64057f982f.description=&lt;pre&gt;\n    Calls the Put method of a WS-Management compliant web service, method used to update properties of a single resource instance. The pairs selector name and value should uniquely identify a resource, otherwise the operation will fail.\n \nInputs\: \n    webServiceURL - The URL of the web service where the  request message will be sent. If input webServiceURL does not contain https, the https related inputs are ignored.\nExamples\: http\://localhost\:8080/myservice/, http\://192.168.1.2\:5985/wsman/, https\://192.168.1.2\:5986/wsman .\n    keystore - The path to the repository of security certificates. If left empty, the operation will use the default 'cacerts' file found in OO installation directory 'OO_HOME\\java\\lib\\security\\cacerts'.\nExamples\: c\:\\mycerts\\keystore.jks, c\:\\Program Files\\Java\\jdk1.7.0_60\\jre\\lib\\security\\cacerts\n    keystorePassword - The password for the keystore file.\n    trustAllRoots - States whether the client will validate the server's certificate in the local keystore or will trust any received certificate. Default value is false.\nExamples\: true, false.\n    resourceURI - The resource URI used to identify the type of resource that will be retrieved. This is usually provided in the web service WSDL.\nExamples\: urn\:resources.wiseman.dev.java.net/traffic/1/light or http\://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Service.\n    username - The username used to authenticate to the web service. If necessary, this should be supplied by the web service provider.\n    password - The password used to authenticate to the web service. If necessary, this should be supplied by the web service provider.\n    selectorNames- A list of properties of the requested resource, separated by delimiter, used to uniquely identify the resource. The existing whitespaces from the input value will not be skipped.\nExamples\: id,name,color.\n    selectorValues - A list of values for the properties specified in the selectorNames list, separated by delimiter. The existing whitespaces from the input value will not be skipped.\nExamples\: 2742,john doe,black.\n    delimiter - Delimiter used to separate values in the selectorNames and selectorValues lists. Default value is , . Do not choose a delimiter present in the list items, otherwise the lists will not be split according to your expectation.\n    resourceContent - The content of the resource that will be updated, in XML format. The XML should not include encoding or xml version information, but must include a namespace reference. The structure of the XML should be according to the resource XML Schema supplied by the web service provider or the request message format specified in the web service WSDL. You should clarify with the web service provider which resource properties can be changed and which are read-only, and how the service responds in case you try to update a read-only property. \nExamples\: &lt;ns11\:trafficlight xmlns\:ns11\="http\://schemas.wiseman.dev.java.net/traffic/1/light.xsd"&gt;\t\t\n\t\t&lt;ns11\:color&gt;red&lt;/ns11\:color&gt;\n\t\t&lt;ns11\:x&gt;100&lt;/ns11\:x&gt;\n\t               &lt;/ns11\:trafficlight&gt;\n\nResponses\:\n    success - The put operation was called successfully and the returned result did not contain a fault.\n    failure - The web service method could not be called or returned an error.\n\nReturns\:\n    returnResult - The new content of the updated  resource, in XML format, according to the resource XML Schema supplied by the web service provider.  If the operation fails this result will contain the exception message.\n\nNote\:\n    1. Usually when given access to a web service you will receive a web service WSDL which contains details about the web service . In the WSDL you will find the webServiceURL and resourceURI. For example, in the following WSDL fragment  the "wsa\:Address" tag specifies the webServiceURL and the "wsman\:ResourceURI" tag the resourceURI\:\n&lt;wsa\:EndpointReference&gt;\n\t&lt;wsa\:Address&gt;http\://localhost\:8080/myservice/&lt;/wsa\:Address&gt;\n\t&lt;wsa\:ReferenceParameters&gt;\n\t\t&lt;wsman\:ResourceURI&gt;urn\:resources.wiseman.dev.java.net/traffic/1/light&lt;/wsman\:ResourceURI&gt;\n\t&lt;/wsa\:ReferenceParameters&gt;\n&lt;/wsa\:EndpointReference&gt;\n    2. Check the 'WS-Management' folder description for instructions on server and client SSL configuration.\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>479438e1-7467-4696-bb2c-ca64057f982f.description</annotation>
+  <name>Put</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4d766b86-ce29-470a-b036-0acbb9899c00">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>webServiceURL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.4d766b86-ce29-470a-b036-0acbb9899c00.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="2f55a5f4-2e39-4243-98ae-19a86eebf4b2">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="6ae16bc6-3b6c-4946-97c4-aeb7e63ea9a9">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="a981a5cc-cdeb-4d4f-b657-9eb18fd8c697">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="46292784-87a4-40f2-ac54-7dbf5f3e5642">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resourceURI</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.46292784-87a4-40f2-ac54-7dbf5f3e5642.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a0ce79fa-0a11-4fa6-a482-d992f96dc3ad">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.a0ce79fa-0a11-4fa6-a482-d992f96dc3ad.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ddeb30bd-4a3d-4699-8293-bd60adfb9a47">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.ddeb30bd-4a3d-4699-8293-bd60adfb9a47.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1159d28d-3b18-4684-a600-1c00457de7c4">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>selectorNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.1159d28d-3b18-4684-a600-1c00457de7c4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="677f5429-564e-446b-a28c-3d46b06b253f">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>selectorValues</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.677f5429-564e-446b-a28c-3d46b06b253f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8218a488-854c-4c31-b1f6-620c68f53edd">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.8218a488-854c-4c31-b1f6-620c68f53edd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9ce72f04-19f6-4cce-bdb5-85497fe3c6ae">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resourceContent</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>479438e1-7467-4696-bb2c-ca64057f982f.9ce72f04-19f6-4cce-bdb5-85497fe3c6ae.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="577b3199-c9dc-4b4f-8dd0-8fe2589ba7c7">
+    <annotation/>
+    <name>Operation Put (479438e1-7467-4696-bb2c-ca64057f982f)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7fc5498c-9e81-4358-aedd-14dcc786f6c1">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c3503428-1045-440d-8c68-a65d4eaf3024">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0b4d4c7b-ef94-4afa-95eb-31ba18c2cc87">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3687e468-0342-4176-bd43-175b7e1705cb">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="6640dcfa-0c71-416e-95bd-ca282aa05b90">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="1fe4eecd-edfc-40f6-b136-ac9e40cdc4f9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a0afe8f5-52b2-4375-9b6b-0ff06e9297d2">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6574679d-0d49-4b94-9b11-e43c364ff7b5">
+    <baseIcon>component_yellow.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="4d9a70b9-d5bf-415a-9948-8c5e60acde2d">
+        <baseIcon>write1.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-wsmanagement-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.WSManagement.operations.Put</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

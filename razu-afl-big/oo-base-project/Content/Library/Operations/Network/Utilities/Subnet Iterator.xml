@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="39e15c83-14a5-4d20-9a20-6dd7cf1eb800">
+  <descriptionCdata>39e15c83-14a5-4d20-9a20-6dd7cf1eb800.description=&lt;pre&gt;Iterates over a subnet.\n\nInputs\:\nstartAddress - Address to start iterating from.\nnetmask - The netmask (in either x.x.x.x or prefix form) of the subnet.\n\nResponses\:\nhas more - More IP Addresses are available\nno more - The specified IP Range has already been returned.\nfailure - Something went wrong. This is usually caused by incorrect inputs.\n\nReturns\:\nThe next IP address in the range. The first address is the address given as start address. The iteration will go from this address to the end of the range.&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>39e15c83-14a5-4d20-9a20-6dd7cf1eb800.description</annotation>
+  <name>Subnet Iterator</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="43e1ac45-7333-41f6-886c-94fff29f07ce">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>startAddress</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="44e7813c-089e-41c7-97ef-9b1cf1ca92e0">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>netmask</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="98c085b6-3125-4552-b5a5-827cffb74f73">
+    <annotation/>
+    <name>Operation:Subnet Iterator (2acbbde2-1a92-4531-b7e6-4cf0fe413979)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="100e1639-1543-4710-8a71-9eb99561f266">
+      <annotation/>
+      <name>has more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="7563bba8-11fe-42cb-b613-1f012e80a607">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="7937f021-99ff-4ad0-a77a-f6eea3b8ca79">
+            <annotation/>
+            <name>Config Item</name>
+            <text>has more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="e59bd287-a4b0-48b2-8347-2dffc94a8872">
+      <annotation/>
+      <name>no more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="06d8cd87-fb14-45ca-b038-26baf80d0387">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="b2d4c451-e760-44ca-b39f-bc37dcdf3209">
+            <annotation/>
+            <name>Config Item</name>
+            <text>no more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="89c4a8fd-2bb6-4873-990c-229688ace4fa">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="7c8c9bba-343c-4f5b-9956-90a8d0633b42">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="93b0b107-8e07-4a96-ba5c-936bd76fba37">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="857dd212-449d-4be5-937d-a9282c12d1c2">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="eac85f3d-9a84-4ce6-b230-005be6806824">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d42a2ad4-ae03-4100-8e70-5e80661ebf3b">
+        <baseIcon>iterate.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>subnetIterator</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

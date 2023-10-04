@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="5e2a874c-8276-49bb-861a-12dd5c4cbdc9">
+  <descriptionCdata>5e2a874c-8276-49bb-861a-12dd5c4cbdc9.description=&lt;pre&gt;\nGets the Host Name of an IP Address.\n\nInputs\:\n    ipAddress - The ip address to perform a reverse lookup on.\n    dnsServer - The dns server to perform lookup against. If a server is not specified, the default DNS server will be used.\n    timeout - The timeout in seconds.\n\nResult\:\n    hostname - The host name.\n\nResponses\:\n    success - The operation completed successfully.\n    failure - The operation failed.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>5e2a874c-8276-49bb-861a-12dd5c4cbdc9.description</annotation>
+  <name>Reverse DNS Lookup</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="27ce7c11-88dc-4c46-97e8-b29dc4a4523f">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>ipAddress</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="dd885baa-62e9-4c89-a309-c1679b910fd6">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="41ddc71a-8832-4dab-a2e7-57618fd47184">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="42a91599-4f33-41c1-b290-e6faff2600d5">
+    <annotation/>
+    <name>Operation Reverse DNS Lookup (5e2a874c-8276-49bb-861a-12dd5c4cbdc9)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="9c189b9a-e3fb-4540-9b30-2c087f3cdad8">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="3503473d-0ea7-4c21-97a4-8e389902ab6c">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="bccf3cfe-2a10-4937-9771-4fb225f3bdb2">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="9d3e2561-e081-410b-ad5d-23dced23a600">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="cb2152f2-ce4a-4a75-a5e3-0c57dfd31020">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c73b2e20-f396-4a63-b631-1e407964d7e9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="7305c8f1-6545-43ea-83f7-d462e542843f">
+    <annotation/>
+    <name>hostname</name>
+    <fieldName>hostname</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6513e941-8409-4115-8f3d-45d9550f8d7f">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Reverse DNS Lookup</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

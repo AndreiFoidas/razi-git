@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="32c08412-223c-4e2f-8e56-8da356229069">
+  <descriptionCdata>32c08412-223c-4e2f-8e56-8da356229069.161c024f-eeeb-4e94-a25d-c352e73280d1.prompt=Input namespace\:
+32c08412-223c-4e2f-8e56-8da356229069.7492a4b5-af00-4833-8eef-96155375a88e.prompt=Input password\:
+32c08412-223c-4e2f-8e56-8da356229069.d327f276-dc85-402b-8006-96a7bcdf6931.prompt=Input method name\:
+32c08412-223c-4e2f-8e56-8da356229069.d3b7cae0-272a-43b8-92ac-e1a694335950.prompt=Input username\:
+32c08412-223c-4e2f-8e56-8da356229069.description=&lt;pre&gt;\nInvokes a method on a set of WMI instances retrieved by executing the given query. To add arguments to the method, add a new input to the step that has the name of your argument, and provide it with a value.\n\nInputs\:\nhost - Host name or ip address of the system on which the WMI query will be run.\nusername - Username to use for WMI impersonation on the host for this operation. Allowed formats\: userName or domain\\userName. Example\: myuser or mydomain\\myuser.\npassword - Password for the given username.\nnamespace - The namespace to run the query against. Example\: root\\cimv2. If not provided, the root\\cimv2 namespace is used by default.\nquery - A WMI query that returns instances that the method should be invoked on. Example\: Select *  from win32_Service where Name like 'App%'.\nmethod - The name of the method to invoke. Example\: ChangeStartMode.\n\nReturns\:\nreturnResult - The raw XML result of the invocation or an error message if the operation fails.\n\nResponses\:\nsuccess - A set of instances was retrieved and the method was invoked with the given parameters. The operation goes to success evan if the method execution on one or more of the instances returned an error code; the error will appear in the result xml.\nfailure - The query could not be executed or the given method could not be invoked with the given parameters.\n\nNote\:\nUse WMIQueryFormat on the returned XML to convert to some other format.\nThis operation can be used on a Linux RAS to query WMI objects on a remote Windows machine. \nThe response xml has the following format, where the result of invoking the method on each instance is enclosed between a pair of "result" tags\:\n&lt;results&gt;\n  &lt;result&gt;\n    &lt;property&gt;\n      &lt;Name&gt;...&lt;/Name&gt;\n      &lt;Type&gt;...&lt;/Type&gt;\n      &lt;Value&gt;...&lt;/Value&gt;\n    &lt;/property&gt;\n  &lt;/result&gt;\n  &lt;result&gt;\n    &lt;Error&gt;...&lt;/Error&gt;\t\n  &lt;/result&gt;\n  &lt;result&gt;\n    ...\n  &lt;/result&gt;\n&lt;results&gt;\nThis operation should be used for calling methods on specific instances of the class. For calling static methods, use the Invoke WMI Class Method. More details about static methods can be found at\: http\://msdn.microsoft.com/en-us/library/aa384833(v\=VS.85).aspx\n&lt;/pre&gt;
+32c08412-223c-4e2f-8e56-8da356229069.f5cf4960-a9cf-4c90-a1e6-ab25069bb357.prompt=Input WMI query\:
+32c08412-223c-4e2f-8e56-8da356229069.f9522198-4238-4e79-80e1-580cc4fb0f23.prompt=Input host\:
+</descriptionCdata>
+  <annotation>32c08412-223c-4e2f-8e56-8da356229069.description</annotation>
+  <name>Invoke WMI Instance Method</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f9522198-4238-4e79-80e1-580cc4fb0f23">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.f9522198-4238-4e79-80e1-580cc4fb0f23.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d3b7cae0-272a-43b8-92ac-e1a694335950">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.d3b7cae0-272a-43b8-92ac-e1a694335950.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7492a4b5-af00-4833-8eef-96155375a88e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.7492a4b5-af00-4833-8eef-96155375a88e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="161c024f-eeeb-4e94-a25d-c352e73280d1">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>namespace</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.161c024f-eeeb-4e94-a25d-c352e73280d1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f5cf4960-a9cf-4c90-a1e6-ab25069bb357">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>query</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.f5cf4960-a9cf-4c90-a1e6-ab25069bb357.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d327f276-dc85-402b-8006-96a7bcdf6931">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>method</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>32c08412-223c-4e2f-8e56-8da356229069.d327f276-dc85-402b-8006-96a7bcdf6931.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="f628187d-969b-4aa2-b7ca-dea224412d5e">
+    <annotation/>
+    <name>Operation:Invoke WMI Instance Method (32c08412-223c-4e2f-8e56-8da356229069)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7568a9f0-35f1-4fd0-9aa4-1778e9ccd33f">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="ffb7806e-0021-4a92-8e36-cb42c8e9ca87">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="237efa7c-96df-44ed-ad86-520ac1ae8d34">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="2ce90097-96bc-4369-9b4e-fd464a88e71b">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="13bb4a86-aa71-4e59-a953-f50397fef362">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="60bafda3-0114-4652-aa0e-5c99e1998d6a">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="65972f7e-9c90-432d-a65a-fb4e826548bc">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="adcfba5f-cf2f-4dbf-95f2-9f80f472828b">
+    <baseIcon>windows_server.png</baseIcon>
+    <basePath>/Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3b28873f-969f-4892-b00a-eabae47166d3">
+        <baseIcon>start.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-java-wmi-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.JavaWMI.operations.WMIInvokeInstance</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

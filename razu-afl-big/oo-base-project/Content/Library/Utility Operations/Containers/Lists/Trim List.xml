@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="65845bc2-b478-4ad1-bd4b-0fc7cd8adc9a">
+  <descriptionCdata>65845bc2-b478-4ad1-bd4b-0fc7cd8adc9a.description=&lt;pre&gt;This trims values from a list. The values trimmed are equally distributed from the high and low ends of the list. The list is sorted before trimming. The number of elements trimmed is dictated by the percentage that is passed in.  If the percentage would indicate an odd number of elements the number trimmed is lowered by one so that the same number are taken from both ends.\n\nInputs\:\n\nlist\: a sorted list of numbers\ndelimiter\: the list delimiter\npct\: the percentage of elements to trim\n\nResult\:\n\nThe trimmed list separated by the same delimiter\n\nResponses\:\nsuccess - if we trimmed the list\nfailure - if the list was empty or something went wrong&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>65845bc2-b478-4ad1-bd4b-0fc7cd8adc9a.description</annotation>
+  <name>Trim List</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="75d68130-4cc7-4d83-8b2f-63580510ef16">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="e08c49e4-099e-45f7-9b89-179bd39e2a1f">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="1e347db2-46b7-4ae5-b8dc-00ac7ea3136e">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>pct</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="5868663b-6832-4ba0-bb5c-5a1dc1e2afbb">
+    <annotation/>
+    <name>Operation:Trim List (65845bc2-b478-4ad1-bd4b-0fc7cd8adc9a)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="644146c5-7fd0-4485-bc0f-08468941ed98">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="49cc2aa6-45e9-4bf9-bcaa-dd00f90b0804">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="c5580152-27fd-483f-9f25-236f6a5f44a8">
+            <annotation/>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="0375faf8-db86-40a9-bd00-ce5fed2f138c">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="3cc4375c-a8c5-4add-8aeb-df69a5bd461c">
+          <annotation/>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="5b99e051-3ced-485c-929d-6434be7a7173">
+            <annotation/>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="420174f8-bf65-4c40-80df-66e2a403cd6c">
+    <annotation/>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e3171300-bbfe-4c47-853a-21b49ddc7840">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="5487301f-50b0-46dc-9b10-e6c7837f2502">
+        <baseIcon>cut.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Trim List</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

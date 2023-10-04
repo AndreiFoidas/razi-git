@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="c115ac36-0c6a-49ae-a6ef-2366d089e9d2">
+  <descriptionCdata>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.191689a4-94b6-4c58-bd80-60e2d0917b75.prompt=Enter username\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.1b3886ff-fa6a-4012-9b37-721a77c13c5e.prompt=Enter host\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.30c55927-c1c6-41a6-89e6-520be5d94c25.prompt=Enter trustAllRoots\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.351ff458-5ec1-42cb-9896-928a54fed930.prompt=Enter OU's Distinguished Name(DN)\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6356b6a6-598b-45d8-b963-dff49eebdb75.prompt=Enter keyStorePassword\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6619afbb-2b67-4e49-8fc5-b29e0b42f826.prompt=Enter keyStore\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6ab6e33b-ee1f-4c11-b8e4-a047be1914ef.prompt=Enter useSSL\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.77cd0b8c-6809-425a-8ae4-9654aa253c76.prompt=Enter trustPassword\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.9ccbfbf0-c654-4542-a041-062e69695ae7.prompt=Enter password\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.de4d322e-f242-4544-9dc5-6ee5fe2ee298.prompt=Enter user Common Name(CN)\:
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.description=&lt;pre&gt;\nThis operation deletes a user from Active Directory.\n\nInputs\:\n    host - The IP or host name of the domain controller. The port number can be mentioned as well, along with the host (hostNameOrIP\:PortNumber).\nExamples\: test.example.com,  test.example.com\:636, &lt;IPv4Address&gt;, &lt;IPv6Address&gt;, [&lt;IPv6Address&gt;]\:&lt;PortNumber&gt; etc.\nValue format\: The format of an IPv4 address is\: [0-225].[0-225].[0-225].[0-225]. The format of an IPv6 address is \#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#/\#\#\# (with a prefix), where each \#\#\#\# is a hexadecimal value between 0 to FFFF and the prefix /\#\#\# is a decimal value between 0 to 128. The prefix length is optional.\n    username - The windows username to connect to Active Directory as.\n    password - Password for username.\n    OU - The Organizational Unit DN or Common Name DN the user that should be deleted is in.\nExample\: OU\=OUTest1,DC\=battleground,DC\=ad\n    userCommonName - The CN, generally the full name of user \nExample\: Bob Smith\n    useSSL - If true, the operation uses the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol to establish a connection to the remote computer. By default, the operation tries to establish a secure connection over TLSv1.2. Default port for SSL/TLS is 636.\nDefault value\: false.\nValid values\: true, false.\n    trustAllRoots - Specifies whether to enable weak security over SSL. A SSL certificate is trusted even if no trusted certification authority issued it.\nDefault value\: true.\nValid values\: true, false.\n    keyStore - The location of the KeyStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    keyStorePassword - The password associated with the KeyStore file.\n    trustKeystore - The location of the TrustStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    trustPassword - The password associated with the TrustStore file.\n    escapeChars - Add this input and set to true if you want the operation to escape the special AD chars.\n\nResults\:\n    returnCode - This is the primary output. It contains the value 0 if the operation successfully completes and the value -1 otherwise.\n    userDN - The distinguished name of the user that was deleted.\n\nResponses\:\n    success - User was successfully deleted.\n    failure - Failed to delete user.\n\nNotes\:\n1. If the inputs contain special characters make sure you enter these inputs either with no special character escaped and set escapeChars to true, either with all the special characters escaped. The special AD characters are '\#','\=','"','&lt;','&gt;',',','+',';','\\','"''.\n2. If the input value for useSSL is set to true then the connection will be made using LDAPS, otherwise the connection will be made using LDAP.\n3. If the port number is not specified in the host input the default ports will be used to make the connection (port 636 for LDAPS and 389 for LDAP).\n&lt;/pre&gt;
+c115ac36-0c6a-49ae-a6ef-2366d089e9d2.f3b78aac-3df4-4ab6-bd0f-28eac407adf6.prompt=Enter trustKeystore\:
+</descriptionCdata>
+  <annotation>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.description</annotation>
+  <name>Delete User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="1b3886ff-fa6a-4012-9b37-721a77c13c5e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.1b3886ff-fa6a-4012-9b37-721a77c13c5e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="351ff458-5ec1-42cb-9896-928a54fed930">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.351ff458-5ec1-42cb-9896-928a54fed930.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="de4d322e-f242-4544-9dc5-6ee5fe2ee298">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userCommonName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.de4d322e-f242-4544-9dc5-6ee5fe2ee298.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="191689a4-94b6-4c58-bd80-60e2d0917b75">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.191689a4-94b6-4c58-bd80-60e2d0917b75.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9ccbfbf0-c654-4542-a041-062e69695ae7">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.9ccbfbf0-c654-4542-a041-062e69695ae7.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6ab6e33b-ee1f-4c11-b8e4-a047be1914ef">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>useSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6ab6e33b-ee1f-4c11-b8e4-a047be1914ef.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="30c55927-c1c6-41a6-89e6-520be5d94c25">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.30c55927-c1c6-41a6-89e6-520be5d94c25.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>362bc113-e130-45d5-be90-832d5de87730</refId>
+        <refName>Boolean</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6619afbb-2b67-4e49-8fc5-b29e0b42f826">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6619afbb-2b67-4e49-8fc5-b29e0b42f826.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6356b6a6-598b-45d8-b963-dff49eebdb75">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.6356b6a6-598b-45d8-b963-dff49eebdb75.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f3b78aac-3df4-4ab6-bd0f-28eac407adf6">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.f3b78aac-3df4-4ab6-bd0f-28eac407adf6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="77cd0b8c-6809-425a-8ae4-9654aa253c76">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c115ac36-0c6a-49ae-a6ef-2366d089e9d2.77cd0b8c-6809-425a-8ae4-9654aa253c76.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="52c6bb80-2ed8-4977-8240-886f2dc1fb90">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c937a265-4caa-4135-9b4c-50c3ca8baccb">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d934097b-161e-4c01-b2ce-0746c141c444">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="05bf6b0e-ed56-410d-94fc-321b921575d3">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="f8ccf92c-bb98-4d5e-a3ed-c4f586f8bc9a">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="5bf86c8e-c4c6-43a7-9f8e-368d4fdda8c9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="0ca621f5-1631-40ea-ba01-bf47b6ae5d66">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="99af1c0a-90ff-4242-b5d3-2dee91b50fea">
+    <baseIcon>user.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="98825f14-0af9-44d8-85d4-a3e10109842a">
+        <baseIcon>delete.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ldap.ADDeleteUser</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

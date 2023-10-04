@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="6eb83483-f79b-40b9-bc56-81d60e15debf">
+  <descriptionCdata>6eb83483-f79b-40b9-bc56-81d60e15debf.description=&lt;pre&gt;Sets WinRM (Windows Remote Management) client policies. Each policy setting is defined by a list of registry keys and values which enable or disable some functionalities for the WinRM client. PowerShell remoting is based on the WinRM service, therefore any of these policies apply also to PowerShell. In this case, HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WinRM\\Client is the registry key which stores WinRM client policies. In the policy editor (gpedit.msc or gpmc.msc) you can find the WinRM client policies at Computer Configuration &gt; Policies &gt; Administrative Templates &gt; Windows Components &gt; Windows Remote Management (WinRM) &gt; WinRM Client.\n\nThe status of a policy can be one of the following\:\nNotConfigured - The operation will ignore the policy;\nEnabled - The operation will enable the policy;\nDisabled - The operation will disable the policy (i.e. delete the registry entries).\n\nThe policies can be applied for a single target host or they can be applied for a GPO (Group Policy Object) which can be linked to an organizational unit (OU) from Active Directory. In the first case, the operation writes directly the registry entries from the target host. Please note that these policies and settings will be overwritten in the following order, each time the system reboots or refreshes the policies\:\n1. Local Computer Policy. These policies are available on a localhost using the Local Group Policy Editor (gpedit.msc).\n2. Domain Policy. These policies are available using the Group Policy Management Editor (gpmc.msc).\n3. Site Policy.\n4. OU Policy. \nAs you can see, the strongest policy is the one applied at OU level. Therefore, our recommandation is to use this operation to set the policies on a GPO which is linked to an OU containing the list of servers which should be enabled for PowerShell remoting.\n\nInputs\:\n    host - The hostname or ip address of the target PowerShell host where the policies should be applied. If empty, the operation will apply the policies for the domain GPO defined by gpoName.\n    gpoName - The name of the group policy object where the policies should be applied. The operation will create a new GPO if one with the same name can't be found on the domain controller. \n    allowBasicAuthentication - This policy setting allows you to manage whether the Windows Remote Management (WinRM) client uses Basic authentication. If you enable this policy setting, the WinRM client will use Basic authentication. If WinRM is configured to use HTTP transport, then the user name and password are sent over the network as clear text. If you disable or do not configure this policy setting, then the WinRM client will not use Basic authentication.\nValid values\: NotConfigured, Enabled, Disabled.\n    allowCredSSPAuthentication - This policy setting allows you to manage whether the Windows Remote Management (WinRM) client uses CredSSP authentication. If you enable this policy setting, the WinRM client will use CredSSP authentication. If you disable or do not configure this policy setting, then the WinRM client will not use CredSSP authentication.\nValid values\: NotConfigured, Enabled, Disabled.\n    allowUnencryptedTraffic - This policy setting allows you to manage whether the Windows Remote Management (WinRM) client sends and receives unencrypted messages over the network. If you enable this policy setting, the WinRM client sends and receives unencrypted messages over the network. If you disable or do not configure this policy setting, the WinRM client sends or receives only encrypted messages over the network.\nValid values\: NotConfigured, Enabled, Disabled.\n    trustedHosts - This policy setting allows you to manage whether Windows Remote Management (WinRM) client uses the list specified in TrustedHostsList to determine if the destination host is a trusted entity. If you enable this policy setting, the WinRM client uses the list specified in TrustedHostsList to determine if the destination host is a trusted entity. The WinRM client uses this list when neither HTTPS nor Kerberos are used to authenticate the identity of the host. If you disable or do not configure this policy setting and the WinRM client needs to use the list of trusted hosts, you must configure the list of trusted hosts locally on each computer.\nValid values\: NotConfigured, Enabled, Disabled.\n    trustedHostsList - Configure the trusted hosts by a comma separated list of host names. You can use wildcards (*), but only one wildcard is allowed in a host name pattern. Use "&lt;local&gt;" (case insensitive) to indicate all host names that do not contain a perios (.). The list can be emtpy to indicate that no host is trusted. Use asterisk (*) to indicate that all hosts are trusted. If you use *, then no other pattern can appear in the list.\nExamples\:*.mydomain.com,2.0.*\n\t\nResponses\:\n    Success - The policies were successfully applied.\n    Failure - Invalid policy values. RAS and target host are not members of the same domain. The RSJRAS user account doesn't have enough privileges to perform this operation.\n\nNotes\:\n1. The operation requires PowerShell v2 on the target host.\n2. The RAS and target host should be members of the same domain.\n3. The RSJRAS service should run under an user account which has enough privileges to perform this operation (e.g. domain admin).\n4. Host and gpoName inputs are mutual exclusive. The operation fails if the user doesn't provide a value for at least one of these inputs.\n5. To see the available GPOs go to Start &gt; Run &gt; gpmc.msc and open Group Policy Management &gt; Domain &gt; domain_name &gt; Group Policy Objects.\n6. For a single target host, the policies should be available once you restart the WinRM service. Otherwise, for a domain GPO, you could try to run the command "gpupdate /force". If this doesn't work, a reboot is required.\n7. Make sure "Group Policy Management Console" (gpmc.msc) is available on the RAS machine if you want to set domain group policies. This feature should be available on the domain controller, but it is not enabled by default on the terminal servers.\n8. If trustedHostsList is not empty and trustedHosts is NotConfigured then the operation will enable the trustedHosts policy.\n9. Supported OS version for domain policies\: 2008 or higher.\n&lt;/pre&gt;\n
+</descriptionCdata>
+  <annotation>6eb83483-f79b-40b9-bc56-81d60e15debf.description</annotation>
+  <name>Set WinRM Client Policies</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9d3dcb7b-92d4-48ec-998e-0b18ed9583e3">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b8db1812-8ea7-4b46-a973-feb610484d1c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>gpoName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a9d3d733-e0bf-4185-86d6-b1f6358245e8">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>allowBasicAuthentication</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>8a4be23a-9305-4291-a72c-5bdde67410eb</refId>
+        <refName>Group Policy Status</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c8268752-6574-46c4-9aae-07568a88839a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>allowCredSSPAuthentication</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>8a4be23a-9305-4291-a72c-5bdde67410eb</refId>
+        <refName>Group Policy Status</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="77b10673-17fa-4fb7-a441-fdced5fd084a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>allowUnencryptedTraffic</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>8a4be23a-9305-4291-a72c-5bdde67410eb</refId>
+        <refName>Group Policy Status</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8e1382c2-97d9-44f2-9ca6-01edcf273695">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustedHosts</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>8a4be23a-9305-4291-a72c-5bdde67410eb</refId>
+        <refName>Group Policy Status</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0c0248c0-d6f3-4938-be05-3b88a5ced070">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustedHostsList</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="924782b6-9eb8-4daf-87d1-03a976977ee7">
+    <annotation/>
+    <name>Operation:Set WinRM Client Policies (6eb83483-f79b-40b9-bc56-81d60e15debf)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="bb67154b-5325-4d87-9579-88e7d4c272a1">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="f4193cab-3b65-4ef3-b0e1-cfbb913669bb">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="b3774083-9f74-484f-bfb9-d101928c22d1">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="69076753-52fe-4adb-9a2b-1df6dc2c5331">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="30f3ff49-9c50-4fd9-bf22-2ef4b5cf8c42">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="27bd507f-bca8-421b-8fe9-18589a360342">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c7e5d0fd-08f7-453a-83eb-771b172779a9">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6b435f03-10c1-4225-a852-1d3d721ba50e">
+    <baseIcon>PowerShell.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-powershellv2-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.IActions.SetWinRMClientPolicies</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

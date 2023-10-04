@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?><flow id="ac050dfa-6839-4c34-8262-8028858ecb33">
+  <descriptionCdata>ac050dfa-6839-4c34-8262-8028858ecb33.10fb27e0-0c29-4923-b706-fa4ce053616d.transition.description=pinged ${host}
+ac050dfa-6839-4c34-8262-8028858ecb33.22a4891c-4d12-4da1-9cb9-6caaa2055572.callout=This  step will check connectivity with the host
+ac050dfa-6839-4c34-8262-8028858ecb33.262a5b05-5766-4f35-8541-c369004700ee.prompt=community(default\:public)
+ac050dfa-6839-4c34-8262-8028858ecb33.308f0f09-f676-4614-9632-de06dd3c4f02.transition.description=SNMP get succeeded.
+ac050dfa-6839-4c34-8262-8028858ecb33.5d47ba34-8f47-446a-916a-d5597ee28b0f.callout=This step will try to retrieve value for specified OID (ex\: 1.3.6.1.2.1.1.6.0 for host location)
+ac050dfa-6839-4c34-8262-8028858ecb33.69cbb8cc-0e61-4918-85f1-3c042e0d8754.prompt=Enter a value for routerIP
+ac050dfa-6839-4c34-8262-8028858ecb33.760e73b6-7611-4b87-b225-eb13455d792a.transition.description=SNMP get failed.
+ac050dfa-6839-4c34-8262-8028858ecb33.91f347ee-5838-45f2-88c5-3dd3b8fd5168.prompt=port(default\: 161)
+ac050dfa-6839-4c34-8262-8028858ecb33.98caca4f-255a-460e-89d8-4f156c19424f.description=&lt;pre&gt;Pings the requested machine from the Web Services machine\n\nInput Parameters\:\nhost - hostname or IP address of the target host\n\nResponses\:\npassed - a successful connection was made\nfailure - unable to make a connection\nhost not found - could not resolve hostname to a valid IP address\n\nExtra Results\:\noutput - raw output of the results\naddresses - list of addresses returned from DNS\naliases - list of aliases returned from DNS\naddresspinged - actual IP address pinged&lt;/pre&gt;
+ac050dfa-6839-4c34-8262-8028858ecb33.bd12861a-d0c5-468d-b614-8f745fc62383.transition.description=Unable to resolve ${host} to an IP address.
+ac050dfa-6839-4c34-8262-8028858ecb33.bda972ab-475c-4709-bd62-f59070984288.prompt=HostName\:
+ac050dfa-6839-4c34-8262-8028858ecb33.c20759dd-d6ef-4ff5-9e77-e87766dcae46.description=&lt;pre&gt;Sends an SNMP Get to Managed Node\n \n Input Parameters\:\n host - ip address/host name \n  port - (Optional)port to which SNMP agent is listening default will be 161\n oid \= Object description ID for which you want to get value, ex\: 1.3.6.1.2.1.1.6.0 for managed node location \n community -(optional )password for contacting managed node, default is public &lt;/pre&gt;
+ac050dfa-6839-4c34-8262-8028858ecb33.d90c1561-5fde-4df4-8b26-25e3be059139.prompt=Host
+ac050dfa-6839-4c34-8262-8028858ecb33.description=&lt;pre&gt;Demonstrates how to send a SNMP Get to Managed Node\n \n Inputs\:\n routerIP - ip address of Router\n port - (Optional)port to which Router is listening default will be 161\n oid \= Object description ID for which you want to get value, ex\: 1.3.6.1.2.1.1.6.0 for managed node location \n community -(optional )password for contacting managed node, default is public \n\nResponses\:\nsuccess - the operation completed successfully.\nfailure - an unknown error occurred.\n&lt;/pre&gt;
+ac050dfa-6839-4c34-8262-8028858ecb33.e06fb62d-a04f-4925-aaf0-79827c88b234.transition.description=${host} did not respond to ping.
+ac050dfa-6839-4c34-8262-8028858ecb33.fbb50aea-efef-44de-8dfe-33f03a1768dd.prompt=OID
+</descriptionCdata>
+  <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.description</annotation>
+  <name>testSNMPGet</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="29cea60b-f37f-4af4-9daa-661f9e15c25e">
+    <annotation/>
+    <name>Operation:testSNMPGet (ac050dfa-6839-4c34-8262-8028858ecb33)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="ffb65e3f-512c-4f03-99db-e8ddde55d3d0">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="3feaf13b-addd-4ddf-acb8-b4d6b7ede84e">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression>
+    <annotation/>
+    <name/>
+    <fieldName>Value</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="b7b1f1af-8976-4d80-8e61-63b76fc2703d">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="22a4891c-4d12-4da1-9cb9-6caaa2055572">
+      <text>ac050dfa-6839-4c34-8262-8028858ecb33.22a4891c-4d12-4da1-9cb9-6caaa2055572.callout</text>
+      <bounds>
+        <x>315.0</x>
+        <y>5.0</y>
+        <width>210.0</width>
+        <height>81.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="5d47ba34-8f47-446a-916a-d5597ee28b0f">
+      <text>ac050dfa-6839-4c34-8262-8028858ecb33.5d47ba34-8f47-446a-916a-d5597ee28b0f.callout</text>
+      <bounds>
+        <x>315.0</x>
+        <y>135.0</y>
+        <width>210.0</width>
+        <height>110.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="98caca4f-255a-460e-89d8-4f156c19424f">
+      <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.98caca4f-255a-460e-89d8-4f156c19424f.description</annotation>
+      <name>Ping</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="02849ac4-0b13-4fc7-9230-46aa8d8257e3">
+        <annotation/>
+        <name>Step:Ping Flow:testSNMPGet (98caca4f-255a-460e-89d8-4f156c19424f)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="bda972ab-475c-4709-bd62-f59070984288">
+          <annotation/>
+          <toContextKey>host</toContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.bda972ab-475c-4709-bd62-f59070984288.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="e06fb62d-a04f-4925-aaf0-79827c88b234">
+          <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.e06fb62d-a04f-4925-aaf0-79827c88b234.transition.description</annotation>
+          <name>host not found</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>host not found</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a80c3e99-848c-441a-abb5-d33397cce591</refId>
+          </destination>
+          <source>
+            <refId>98caca4f-255a-460e-89d8-4f156c19424f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>121.0</x>
+              <y>62.8</y>
+            </point>
+            <point>
+              <x>211.0</x>
+              <y>134.8</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>144.71544715447166</x>
+            <y>-52.78673151834886</y>
+          </labelPosition>
+        </transition>
+        <transition id="10fb27e0-0c29-4923-b706-fa4ce053616d">
+          <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.10fb27e0-0c29-4923-b706-fa4ce053616d.transition.description</annotation>
+          <name>ping action success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>c20759dd-d6ef-4ff5-9e77-e87766dcae46</refId>
+          </destination>
+          <source>
+            <refId>98caca4f-255a-460e-89d8-4f156c19424f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>90.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>125.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>550.0</x>
+            <y>44.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="bd12861a-d0c5-468d-b614-8f745fc62383">
+          <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.bd12861a-d0c5-468d-b614-8f745fc62383.transition.description</annotation>
+          <name>ping action failed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d7700de7-d7b4-4b2d-8831-a68e3bab4dfb</refId>
+          </destination>
+          <source>
+            <refId>98caca4f-255a-460e-89d8-4f156c19424f</refId>
+          </source>
+          <positions>
+            <point>
+              <x>121.0</x>
+              <y>38.8</y>
+            </point>
+            <point>
+              <x>211.0</x>
+              <y>38.800000000000004</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>1055.5555555555557</x>
+            <y>65.19999999999999</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>4b893eba-c149-4576-ac0f-857320c666a6</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="c20759dd-d6ef-4ff5-9e77-e87766dcae46">
+      <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.c20759dd-d6ef-4ff5-9e77-e87766dcae46.description</annotation>
+      <name>SNMPGet</name>
+      <bounds>
+        <x>0.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="880a6eaf-bf3c-44d4-8202-c3aa133d7e90">
+        <annotation/>
+        <name>Step:SNMPGet Flow:testSNMPGet (c20759dd-d6ef-4ff5-9e77-e87766dcae46)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="fbb50aea-efef-44de-8dfe-33f03a1768dd">
+          <annotation/>
+          <toContextKey>OID</toContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>oid</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.fbb50aea-efef-44de-8dfe-33f03a1768dd.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="d90c1561-5fde-4df4-8b26-25e3be059139">
+          <annotation/>
+          <toContextKey>host</toContextKey>
+          <fromContextKey>host</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.d90c1561-5fde-4df4-8b26-25e3be059139.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="91f347ee-5838-45f2-88c5-3dd3b8fd5168">
+          <annotation/>
+          <toContextKey>port</toContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>port</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.91f347ee-5838-45f2-88c5-3dd3b8fd5168.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="262a5b05-5766-4f35-8541-c369004700ee">
+          <annotation/>
+          <toContextKey>community</toContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>community</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.262a5b05-5766-4f35-8541-c369004700ee.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="69cbb8cc-0e61-4918-85f1-3c042e0d8754">
+          <annotation/>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>routerIP</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>ac050dfa-6839-4c34-8262-8028858ecb33.69cbb8cc-0e61-4918-85f1-3c042e0d8754.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="308f0f09-f676-4614-9632-de06dd3c4f02">
+          <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.308f0f09-f676-4614-9632-de06dd3c4f02.transition.description</annotation>
+          <name>SNMP Get action success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>0de53730-7449-4d4a-9685-18bf8a6868ad</refId>
+          </destination>
+          <source>
+            <refId>c20759dd-d6ef-4ff5-9e77-e87766dcae46</refId>
+          </source>
+          <positions>
+            <point>
+              <x>90.0</x>
+              <y>185.0</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>235.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>640.0</x>
+            <y>18.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="760e73b6-7611-4b87-b225-eb13455d792a">
+          <annotation>ac050dfa-6839-4c34-8262-8028858ecb33.760e73b6-7611-4b87-b225-eb13455d792a.transition.description</annotation>
+          <name>SNMP Get action failed</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e4f7534a-6b95-4511-b2d5-5c84f7b4124c</refId>
+          </destination>
+          <source>
+            <refId>c20759dd-d6ef-4ff5-9e77-e87766dcae46</refId>
+          </source>
+          <positions>
+            <point>
+              <x>121.0</x>
+              <y>180.8</y>
+            </point>
+            <point>
+              <x>211.0</x>
+              <y>246.79999999999998</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>1090.655105973025</x>
+            <y>-36.933348810191305</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>d6012fa6-5394-49b1-aa7b-f0a5607de728</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="a80c3e99-848c-441a-abb5-d33397cce591">
+      <annotation/>
+      <name>Error : host not responding</name>
+      <bounds>
+        <x>150.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="9245f9e2-13ad-4556-80c1-b3565f55a164">
+        <annotation/>
+        <name>Step:Error : host not responding Flow:testSNMPGet (a80c3e99-848c-441a-abb5-d33397cce591)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="c0342d0c-37cc-4269-87e7-82e4c2dc3a5c">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a80c3e99-848c-441a-abb5-d33397cce591</refId>
+          </destination>
+          <source>
+            <refId>a80c3e99-848c-441a-abb5-d33397cce591</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="d7700de7-d7b4-4b2d-8831-a68e3bab4dfb">
+      <annotation/>
+      <name>Error : ping host failure</name>
+      <bounds>
+        <x>150.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="dd3e7da4-b386-4ae2-98c1-6833d192f880">
+        <annotation/>
+        <name>Step:Error : ping host failure Flow:testSNMPGet (d7700de7-d7b4-4b2d-8831-a68e3bab4dfb)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="c37020a7-b3ba-4974-9259-5202a9a4a52a">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d7700de7-d7b4-4b2d-8831-a68e3bab4dfb</refId>
+          </destination>
+          <source>
+            <refId>d7700de7-d7b4-4b2d-8831-a68e3bab4dfb</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="0de53730-7449-4d4a-9685-18bf8a6868ad">
+      <annotation/>
+      <name>Resolved : SNMP Get Success</name>
+      <bounds>
+        <x>0.0</x>
+        <y>230.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="318afc55-2e8a-4e1d-bb84-f52d94cd250d">
+        <annotation/>
+        <name>Step:Resolved : SNMP Get Success Flow:testSNMPGet (0de53730-7449-4d4a-9685-18bf8a6868ad)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="1ee78b41-2975-43a7-971a-0d513974feca">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>0de53730-7449-4d4a-9685-18bf8a6868ad</refId>
+          </destination>
+          <source>
+            <refId>0de53730-7449-4d4a-9685-18bf8a6868ad</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="e4f7534a-6b95-4511-b2d5-5c84f7b4124c">
+      <annotation/>
+      <name>Error : SNMP Get action failure</name>
+      <bounds>
+        <x>150.0</x>
+        <y>230.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt/>
+      <scriptlet id="156cc08c-c42d-4edb-915b-7ceb1ed5d41a">
+        <annotation/>
+        <name>Step:Error : SNMP Get action failure Flow:testSNMPGet (e4f7534a-6b95-4511-b2d5-5c84f7b4124c)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="53eaed3f-83ce-49cf-9dec-e4b7e0733dc1">
+          <annotation/>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e4f7534a-6b95-4511-b2d5-5c84f7b4124c</refId>
+          </destination>
+          <source>
+            <refId>e4f7534a-6b95-4511-b2d5-5c84f7b4124c</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>98caca4f-255a-460e-89d8-4f156c19424f</startSteps>
+</flow>

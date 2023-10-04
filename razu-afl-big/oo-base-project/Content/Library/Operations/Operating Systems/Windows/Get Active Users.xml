@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="850aa453-51a4-4ac2-ad64-30bf11d3c889">
+  <descriptionCdata>850aa453-51a4-4ac2-ad64-30bf11d3c889.24a65d53-35b0-42ab-8d1f-13af03adc32b.prompt=Username\:
+850aa453-51a4-4ac2-ad64-30bf11d3c889.55b68d50-9ce6-4178-9b55-0f201827a94c.prompt=Password\:
+850aa453-51a4-4ac2-ad64-30bf11d3c889.ad6463fc-4cd8-47b2-8ad9-0d8cde52c639.prompt=Hostname\:
+850aa453-51a4-4ac2-ad64-30bf11d3c889.description=&lt;pre&gt;\nThis operation gets the number of active users logged in to a Windows host, and their account names.\n\nInputs\:\nhost - The host to get the users on.\nusername - Username to use for thread impersonation on the RAS host for this operation (can be left blank for localhost). If you try to impersonate a user from another domain use the following format\: username@domain.\npassword - Password of the user.\ndelimiter - A delimiter to put between users that are active in the result.\n\nResponses\:\nsuccess - the operation succeeded\nfailure - the operation failed for an unknown reason\n\nResult\:\nThe raw result of the machine, containing all the infos returned about sessions.\n\nExtraResults\:\ncount - The number of users logged into host currently or in the past.\nusers - The usernames of all users logged into host currently or in the past.\nterminalUsers - The usernames of all users logged into the host via terminal services.\ninactiveUsers - The usernames of all users logged into the host but not currently connected.\nlocalUsers - The usernames of all users logged into host locally.\nstdOut - The entire response for the command.\nstdErr - The error executing the command, if that is the case.\n\nNote\: \nThe username and password inputs should be empty if the operation is used against localhost.\nThis operation runs the windows command qwinsta on the Central machine. Thus, this operation requires a Windows Central. Also, Terminal Services Windows service should be running.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>850aa453-51a4-4ac2-ad64-30bf11d3c889.description</annotation>
+  <name>Get Active Users</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ad6463fc-4cd8-47b2-8ad9-0d8cde52c639">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>850aa453-51a4-4ac2-ad64-30bf11d3c889.ad6463fc-4cd8-47b2-8ad9-0d8cde52c639.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="24a65d53-35b0-42ab-8d1f-13af03adc32b">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>850aa453-51a4-4ac2-ad64-30bf11d3c889.24a65d53-35b0-42ab-8d1f-13af03adc32b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="55b68d50-9ce6-4178-9b55-0f201827a94c">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>850aa453-51a4-4ac2-ad64-30bf11d3c889.55b68d50-9ce6-4178-9b55-0f201827a94c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a01f6ccc-4976-4043-832f-9b3adb312b17">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="038d400f-fa46-4ea9-9493-65c24ad894da">
+    <annotation/>
+    <name>Operation:Get Active Users (850aa453-51a4-4ac2-ad64-30bf11d3c889)</name>
+    <script>// get the command output data
+data = scriptletRawResult['stdOut'];
+
+// get the return code
+code = parseInt(scriptletRawResult['returnCode']);
+var localUsers = "";
+var terminalUsers = "";
+var inactiveUsers = "";
+
+// verify the command worked
+if (code == 0 &amp;&amp; data.toLowerCase().indexOf("no session exists for " + host.toLowerCase())) {				
+	data = data.split("\r\n");	
+	for (count = 1; count &lt; data.length;count++)
+		processLine(data[count]);
+	var users = ""+localUsers;
+	if (users != "" &amp;&amp; terminalUsers != "")
+		users += delimiter;
+	users += terminalUsers
+	if (users != "" &amp;&amp; inactiveUsers != "")
+		users += delimiter;
+	users += inactiveUsers;
+	st = new java.util.StringTokenizer(users, delimiter);
+	var total = ""+st.countTokens();
+	scriptletContext.put("count",total);
+	scriptletContext.put("users",users);
+	scriptletContext.put("terminalUsers",terminalUsers);
+	scriptletContext.put("inactiveUsers",inactiveUsers);
+	scriptletContext.put("localUsers",localUsers);
+	scriptletResponse = "success";
+}
+else
+{
+	scriptletResponse = "failure";
+}
+
+function processLine(line){
+	var matchdata = line.match(/^(\s|&gt;)([\w#\-]*)\s+(\w*)\s+(\d+)\s+(\w+)\s+(\w*).+/);
+	if (matchdata != null) {
+		var session_name = matchdata[2];
+		var username = matchdata[3];
+		var state = matchdata[5];
+		if (state.toLowerCase() =="listen" || state.toLowerCase() == "conn")
+			return;//remove terminal service and consoles that are not in use.
+			
+		if (session_name.toLowerCase().substr(0,7) == "console" &amp;&amp; username != ""){
+			if (localUsers != "")
+				localUsers += delimiter;
+			localUsers += username;
+		}
+		else if (session_name.toLowerCase().substr(0,7) == "rdp-tcp" &amp;&amp; username != ""){
+			if (terminalUsers != "")
+				terminalUsers += delimiter;
+			terminalUsers += username;
+		}
+		else if (state.toLowerCase().substr(0,4) == "disc" &amp;&amp; username != ""){
+			if (inactiveUsers != "")
+				inactiveUsers += delimiter;
+			inactiveUsers += username;
+		}
+	}
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="38c4dcea-0c9e-4b42-afd4-b3886714b5ef">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="0c1d5c53-f7c8-4f5f-b0b0-9a5d09abdc3c">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e6f72726-8ed6-4735-8312-d201458f82ba">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="43233d38-8455-49cf-bcad-b52d5cda7612">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="92bf7514-4b52-4fe2-82e0-54cf987c27de">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e2cb3456-d582-4782-830b-01dbb79ae688">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e4b3fb60-5a2b-47a2-952c-293f6f6114c0">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9eaaedf7-1985-4634-a394-18993b1a248d">
+    <baseIcon>user.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Windows.GetActiveUsers</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

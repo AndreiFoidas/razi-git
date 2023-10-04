@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="2179e041-5607-4cca-b70b-5476b3f1c429">
+  <descriptionCdata>2179e041-5607-4cca-b70b-5476b3f1c429.0257abb5-2231-4cad-9bd8-c0f3149c1790.prompt=Character Set\:
+2179e041-5607-4cca-b70b-5476b3f1c429.7f8cf876-341c-4aa7-a977-089eadfcd1a2.prompt=Filename\:
+2179e041-5607-4cca-b70b-5476b3f1c429.description=&lt;pre&gt;This operation reads all contents of a file into the Result variable.\n\nInput Parameters\:\nfilename \t- The name of the file to read.\ncharacterSet - Character set encoding of the file. Defaults to UTF-8.\n\nResult\:\nContents of the file.\n\nResponses\:\nsuccess\t - Successfully read the file.\nfailure\t - Could not read the file.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>2179e041-5607-4cca-b70b-5476b3f1c429.description</annotation>
+  <name>Temp File Reader</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="7f8cf876-341c-4aa7-a977-089eadfcd1a2">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>filename</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2179e041-5607-4cca-b70b-5476b3f1c429.7f8cf876-341c-4aa7-a977-089eadfcd1a2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0257abb5-2231-4cad-9bd8-c0f3149c1790">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2179e041-5607-4cca-b70b-5476b3f1c429.0257abb5-2231-4cad-9bd8-c0f3149c1790.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>3ad6a21d-fc94-4603-aa1e-c5a63f894549</refId>
+        <refName>Character Sets</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a06495de-1ed7-4574-bd2b-e31564f91757">
+    <annotation/>
+    <name>Operation Temp File Reader (2179e041-5607-4cca-b70b-5476b3f1c429)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="73da9399-1855-4930-a1bc-aeb9e88afc74">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="5a1631d3-9cb9-48c3-8520-22eb016ec85d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7d3d9505-1e24-4569-94b7-8b655b29103c">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3204bdcc-d3d5-44b4-9297-97eb546f3e87">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="de6983ec-b71f-4e42-a62e-dd62300dbece">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="84d803a3-e79b-471d-bb98-7f35eeae9fd6">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="453f0c9f-928d-49d1-a855-cb8c40eecad1">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="dd3d8434-41c6-4674-beda-920bbe92ae01">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="5922f6ca-e9a0-4025-95e4-602bf29b623f">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-fs-legacy-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.filesystem.TempFileReader</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

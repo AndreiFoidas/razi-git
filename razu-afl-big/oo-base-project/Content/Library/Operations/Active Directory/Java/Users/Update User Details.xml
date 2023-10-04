@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="17326dde-7dbc-4483-b89b-9a974e1702c0">
+  <descriptionCdata>17326dde-7dbc-4483-b89b-9a974e1702c0.1290833c-bd8b-4937-b700-ee7e3877701f.prompt=Enter password\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.3d0687fb-fd4a-45d7-8dac-1f17f3af7b7e.prompt=Enter Country\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.49c1fe03-58e2-4a75-95b6-47efb349c87d.prompt=Enter trustAllRoots\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.4ac060fd-d598-4e98-9605-e93a1647de22.prompt=Enter host\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.526e378e-c246-4b7c-b825-665116f83cef.prompt=Enter OU's Distinguished Name(DN)\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.62e2e103-c76f-4b30-a97c-5909e7530e81.prompt=Enter username\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.b36cb6f9-b687-4603-8684-c8c538c88460.prompt=Enter useSSL\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.c5d7ef16-afe9-458e-a9b5-7598a1517e59.prompt=Enter user Common Name(CN)\:
+17326dde-7dbc-4483-b89b-9a974e1702c0.description=Adds attributes to a new user in Active Directory.\nCan be used to edit the provided inputs of a new user or to add custom attributes to a user, by providing a list of attributes and values, separated by new line in this format\: attribute\:value.\nMake sure to provide valid Active Directory attributes. \n\nInput Parameters\:\n    host - name or IP address of LDAP server to query. Can also be used in the form " host\:port"\n    OU - The Organizational Unit DN of the user to set attributes to\nExample\: OU\=OUTest1,DC\=battleground,DC\=ad\n    userCommonName - The CN, generally the full name of user \nExample\: Bob Smith    \n    username - name of user to connect to LDAP as\n    password - password of user\n    port - specify the port in case it is not the default one, or it is not specified in the host path\n    useSSL - If true, the operation uses the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol to establish a connection to the remote computer. By default, the operation tries to establish a secure connection over TLSv1.2. Default port for SSL/TLS is 636.\nDefalut value\: false\nValid values\: true, false\n    firstName - user first name to change\n    lastName - user last name to change\n    displayName - user display name to change\n    street - user street\n    city - city of the user\n    stateOrProvince - state or province option\n    zipOrPostalCode - zip or postal code\n    countryOrRegion - country or region. The format for this input should be countryName,countryAbbreviation,countryCode. countryName sets the value for the "co" property, countryAbbreviation sets the "c" property using the two-letter country code, countryCode sets the "countryCode" property using the numeric value of the country.\n    attributesList - the list of the attributes to set to the user. Should be provided in the following format\: attribute\:value, separated by new line. Make sure that the attributes are valid Active Directory attributes.\nExample\: \nstreetAddress\:My Address\npostalCode\:123456\n    trustAllRoots - Specifies whether to enable weak security over SSL. A SSL certificate is trusted even if no trusted certification authority issued it.\nValid values\: true, false\nDefault value\: false\n    keyStore - The location of the KeyStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    keyStorePassword - The password associated with the KeyStore file.\n    trustKeystore - The location of the TrustStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    trustPassword - The password associated with the TrustStore file.\n\nOutputs\:\n     returnCode -  This is the primary output. It contains the value 0 if the operation successfully completes and the value -1 otherwise.\n     returnResult - This will contain the response entity. In case of an error this output will contain the error message.\n     exception - In case of success response, this result is empty. In case of failure response, this result contains the java stack trace of the runtime exception.\n\nResponses\:\nsuccess - The attributes were successfully updated\nfailure - There was a problem to update the attribute\n\nNotes\: \n1. attributesList input should be provided in the following format\:\nstreetAddress\:My Address\npostalCode\:123456\nattribute3\:value3\nattribute4\:value4\n
+</descriptionCdata>
+  <annotation>17326dde-7dbc-4483-b89b-9a974e1702c0.description</annotation>
+  <name>Update User Details</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4ac060fd-d598-4e98-9605-e93a1647de22">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.4ac060fd-d598-4e98-9605-e93a1647de22.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="526e378e-c246-4b7c-b825-665116f83cef">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.526e378e-c246-4b7c-b825-665116f83cef.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c5d7ef16-afe9-458e-a9b5-7598a1517e59">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userCommonName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.c5d7ef16-afe9-458e-a9b5-7598a1517e59.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="62e2e103-c76f-4b30-a97c-5909e7530e81">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.62e2e103-c76f-4b30-a97c-5909e7530e81.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1290833c-bd8b-4937-b700-ee7e3877701f">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.1290833c-bd8b-4937-b700-ee7e3877701f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b36cb6f9-b687-4603-8684-c8c538c88460">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>useSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.b36cb6f9-b687-4603-8684-c8c538c88460.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3fcdce0e-df53-442e-8355-1bd0fb40ab32">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>firstName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4dde083d-bb0b-433e-a4e1-16b0419c727c">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>lastName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="3fb52750-e602-4586-afa5-6821217ef0c3">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>displayName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4cc22dfa-215e-4086-ba2c-2efe6aaf0024">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>street</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="8831ca29-6910-4604-adc1-5fedd173155d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>city</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="0adc69b3-a2d7-4f57-b790-c1afa0a5c654">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>stateOrProvince</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="1a132dbd-4f7f-4dd5-a759-e832b551cc4a">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>zipOrPostalCode</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="3d0687fb-fd4a-45d7-8dac-1f17f3af7b7e">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>countryOrRegion</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.3d0687fb-fd4a-45d7-8dac-1f17f3af7b7e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>893d18d4-2c2a-483a-a68d-d13b251df83e</refId>
+        <refName>Active Directory - Countries And Regions</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="d63260eb-21ee-4277-9493-f9293b53c360">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>attributesList</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="49c1fe03-58e2-4a75-95b6-47efb349c87d">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>17326dde-7dbc-4483-b89b-9a974e1702c0.49c1fe03-58e2-4a75-95b6-47efb349c87d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="9daff071-a978-47ad-97e3-3f572c35e2ed">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="0bd82d07-de7d-4c44-886e-4a5288f65801">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}tFQ2pnWYKQCGLnn/5LPzoA==</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e755ec85-0174-4cd1-b7cb-ce18cc8a6138">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value/>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="987e1215-1ead-4b5e-827c-c717656a91d1">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}tFQ2pnWYKQCGLnn/5LPzoA==</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="441acdaf-a7a4-46c4-ab83-b41aa91f729f">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="5d595be0-6407-4390-8bb7-0c0e3894f7d4">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="4d6475d9-87e2-4428-adec-b3d98e522648">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="5cf3ec2f-eb25-4dc2-aeee-6d1c43bc3ea3">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="eb0cb6f2-e865-4d86-952e-4b0218898a4d">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="b98a7725-fe20-4cba-9e45-a44f520748f9">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <iconSpec id="76c9356f-232d-4a06-ac9c-726fa8d63f07">
+    <baseIcon>user.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-ldap-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>Update User Details</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

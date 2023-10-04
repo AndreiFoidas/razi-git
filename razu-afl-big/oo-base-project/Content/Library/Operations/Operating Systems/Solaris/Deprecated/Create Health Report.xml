@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="df2142dd-4d35-4760-8467-e2d9a0769679">
+  <descriptionCdata>df2142dd-4d35-4760-8467-e2d9a0769679.description=\n      This operation is used by the Solaris health check flow to generate a human-readable message summarizing a computers condition. It is very specialized, and should not be used elsewhere.\n\nResponses\:\nsuccess - This is always  the response.\n      
+</descriptionCdata>
+  <annotation>df2142dd-4d35-4760-8467-e2d9a0769679.description</annotation>
+  <name>Create Health Report</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="91878a60-ee44-41d3-8cb5-30ab5cc9c34e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter/>
+      <value>${in1}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="8fa084c8-15ff-48ed-b9f2-f3f7d8db1199">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter/>
+      <value>${in2}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="8dc2be59-94ab-4938-b92d-d4a4e5be025d">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter/>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="355384d4-820f-46aa-b436-665c4ed8b449">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey/>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter/>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="f01525fd-cec2-4b3b-b119-8d2176ea133b">
+    <annotation/>
+    <name>Operation:Create Health Report (df2142dd-4d35-4760-8467-e2d9a0769679)</name>
+    <script>// get all the data that we acquired
+hostname = scriptletContext.get("ic_hostname");
+
+warning = "";
+header = "Server Health Report for server " + hostname + ":\n\n";
+report = "\nSystem Check Information:\n";
+
+// run through all the data we gathered and add it to the report
+checkPing();
+checkUptime();
+showOSInfo();
+showLogInfo();
+showProcInfo();
+showMemInfo();
+checkProcessList();
+showFSData();
+showIOStatInfo();
+showNICInfo();
+
+// did we have any warnings?
+warnstring = "";
+if (warning != "") warnstring = "Warning conditions:\n";
+
+// format the final output information
+scriptletResult = header + warnstring + warning + report;
+
+// functions for checking all data
+
+// -----------------------------------------------------------------------------------
+//  checkPing ()   - check the data returned from Ping
+// -----------------------------------------------------------------------------------
+function checkPing() {
+
+   pingOutput = scriptletContext.get("output");
+
+   if (pingOutput != null) {
+      // get the max latency
+      pingLatency = -1;
+      max = pingOutput.match(/Maximum = \d*/);
+      if (max[0] != null)   {
+         pingLatency = max[0].match(/\d+/);
+      }
+      if (pingLatency == -1) {
+         report += "Unable to obtain ping data\n";
+         warning += "Unable to obtain ping data\n";
+      } 
+      else {
+         report += "Maximum latency pinging " + hostname + " was " + pingLatency + " ms\n";
+         if (pingLatency &gt; 200) warning += "Ping took longer than 200ms\n";
+      }
+
+      // check the packet loss
+      loss = pingOutput.match(/(\d*)(% loss)/);
+      if (loss != null) {
+         pct = parseInt(loss[1]);
+         report += "Packet loss was " + pct + " %\n";
+         if (pct != 0) { 
+            warning += "Ping had " + pct + "% packet loss\n";
+         }
+      }
+      else {
+         report += "Unable to determine packet loss\n";
+         warning += "Unable to determine packet loss\n";     
+      }
+   }
+   else {
+      report += "Unable to ping server\n";
+      warning += "Unable to ping server\n";
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  checkUptime ()   - check the data returned from uptime
+// -----------------------------------------------------------------------------------
+
+function checkUptime() {
+
+   uptime = scriptletContext.get("ic_uptime");
+
+   // add uptime info
+   if (uptime != null &amp;&amp; uptime &gt; 0) {
+      mins = parseInt(uptime);
+      hrs = mins /60;
+      days = hrs / 24;
+      hours = hrs % 24;
+      minutes = mins % 60;
+      report += "System has been up for ";
+      if (days &gt; 0) report += java.lang.Math.floor(days).toString() + " day";
+      if (days &gt; 1) report += "s";
+      if (hours &gt; 0) report += ", " + java.lang.Math.floor(hours).toString() + " hour";
+      if (hours &gt; 1) report += "s";
+      report += " " + minutes.toString() + " minute";
+      if (minutes != 1) report += "s";
+      report += "\n";
+      if (mins &lt;= 15) warning += "System was rebooted in the last 15 minutes\n";
+   }
+   else {
+      report += "Unable to obtain uptime\n"
+      warning += "Unable to obtain uptime\n"
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  showOSInfo ()   - process the data about the OS and patch levels
+// -----------------------------------------------------------------------------------
+
+function showOSInfo() {
+
+   OS = scriptletContext.get("ic_OS");
+   patchList = scriptletContext.get("ic_patchlist");
+   report += "\nOperating System information:\n";
+
+   // add the OS info
+   if (OS != null) {
+      report += "Operating System is " + OS + "\n";
+   }
+   else {
+      report += "Unable to obtain OS\n";
+      warning += "Unable to obtain OS\n";
+   }
+
+   // add patch information
+   if (patchList != null) {
+      report += "\nInstalled Patches:\n" + patchList + "\n";
+   } 
+   else {
+      report += "Unable to obtain patch list\n";
+      warning += "Unable to obtain patch list\n";
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  showLogInfo ()   - show recent log data if there is any
+// -----------------------------------------------------------------------------------
+
+
+function showLogInfo() {
+
+   logMinutes = scriptletContext.get("ic_logminutes");
+
+   // any recent log messages?
+   if (logMinutes != null) {
+      duration = parseInt(logMinutes);
+      if (duration &lt;= 15) {
+         report += "New log messages in the last 15 minutes. Most recent:\n";
+         warning += "New log messages in the last 15 minutes\n";
+
+         // get the log messages
+         messages = scriptletContext.get("ic_logMessages") + "\n";
+         report += messages;
+      }
+      else {
+         report += "No new log messages in the last 15 minutes\n";
+      }
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  showProcInfo ()   - show key processor information
+// -----------------------------------------------------------------------------------
+
+function showProcInfo() {
+
+   procCount = scriptletContext.get("ic_numProcs");
+   procStatus = scriptletContext.get("ic_online");
+   loadOneMinute = scriptletContext.get("ic_oneMinute");
+   loadFiveMinute = scriptletContext.get("ic_fiveMinute");
+   loadFifteenMinute = scriptletContext.get("ic_fifteenMinute");
+   blockedThreads = scriptletContext.get("ic_blockedThreads");
+
+   // Add a heading
+   report += "\nProcessor Information:\n";
+
+   // add processor information
+   if (procCount != null) {
+      num = parseInt(procCount);
+      if (num != 1) {
+         report += "System has " + procCount + " processors\n";
+      }
+      else {
+         report += "System has 1 processor\n";
+      }
+   }
+   else {
+      report += "Unable to get processor count\n";
+      warning += "Unable to get processor count\n";
+   }
+
+   if (procStatus != null) {
+      report += procStatus + "\n";
+   } 
+   else {
+      report += "Unable to obtain processor status\n";
+      warning += "Unable to obtain processor status\n";
+   }
+
+   if (loadOneMinute != null) {
+      report += "Load Average is " + loadOneMinute + "  " + loadFiveMinute + "  " +  loadFifteenMinute + "\n";
+
+      // is the load average near the number of procs?
+      oneMin = parseInt(loadOneMinute);
+      numProcs = parseInt(procCount);
+      threshold = numProcs * .8;
+      if (oneMin &gt; threshold) {
+         // has it been high for a while?
+         fiveMin = parseInt(fiveMinutes);
+         if (fiveMin &gt; threshold) {
+            report += "System is heavily loaded\n";
+            warning += "System is heavily loaded\n";
+         }
+         else {
+            report += "System appears to have a CPU spike\n";
+         }
+      }
+      else {
+         // is the system underutilized?
+         threshold = threshold = numProcs * .2;
+         if (oneMin &lt;= threshold) {
+            report += "CPU usage is low: System may be under-utilized\n";
+            warning += "CPU usage is low: System may be under-utilized\n";
+         } 
+         else {
+            report += "System is operating at normal load\n";
+         }
+      }
+   }
+
+   // check blocked threads
+   if (blockedThreads != null) {
+      threads = parseInt(blockedThreads);
+      if (threads == 0) {
+         report += "No blocked threads found\n";
+      }
+      else if (threads &lt; 10) {
+         report += "Some blocked threads detected\n";
+         warning += "Some blocked threads detected\n";
+      } 
+      else {
+         report += "Many blocked threads detected.  System may be CPU bound\n";
+         warning += "Many blocked threads detected.  System may be CPU bound\n";
+      }
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  showMemInfo ()   - show key memory info
+// -----------------------------------------------------------------------------------
+
+
+function showMemInfo() {
+
+   freeMemory = scriptletContext.get("ic_freeMemory");
+
+   if (freeMemory != null) {
+      report += "System has " + freeMemory + " bytes of free memory\n";
+      if (freeMemory &lt; 100000) warning += "System has less than 100MB of free memory\n";
+   }
+   else {
+      report += "Unable to obtain memory statistics\n";
+      warning += "Unable to obtain memory statistics\n";
+   }
+
+   // get the vmstat info
+   vmstat = "";
+   vminfo = scriptletContext.get("ic_vmstat");
+   if (vminfo != null) {
+      // move to a string so we can parse
+      vmstat += vminfo;
+      lines = vmstat.split(/\n/);
+      line3val = parseInt((lines[3].split(/\s/))[12]);
+      line4val = parseInt((lines[4].split(/\s/))[12]);
+      line5val = parseInt((lines[5].split(/\s/))[12]);
+      total = line3val + line4val + line5val;
+      if (total &gt; 600 || line3val &gt; 200 || line4val &gt; 200 || line5val &gt; 200) {
+         // we may have a problem, make sure it is consistent
+         if (line3val &gt;= 125 &amp;&amp; line4val &gt;= 125 &amp;&amp; line5val &gt;= 125) {
+            report += "Significant memory swapping occuring.  System may need more RAM\n";
+            warning += "Significant memory swapping occuring.  System may need more RAM\n";
+         }
+         else {
+            report += "Some memory swapping occuring.\n";
+            warning += "Some memory swapping occuring.\n";
+        }
+      }
+      else {
+         report += "Little or no swapping occuring\n\n";
+      }
+   }
+   else {
+      report += "Unable to obtain vmstat info\n";
+      warning += "Unable to obtain vmstat info\n";
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  checkProcessList ()   - verify key processes are running
+// -----------------------------------------------------------------------------------
+
+
+function checkProcessList() {
+
+   //verify that key processes are running
+   necessary = processList = "";
+   procList = scriptletContext.get("ic_processList");
+   if (procList != null) {
+      processList += procList;
+      necessary += scriptletContext.get("ic_vital");
+      output = "";
+
+      // assume list is delimited by comma, pipe, space or newline
+      processes = necessary.split(/[,\\\|\n]/);
+      proc_output = "";
+      for (i = 0; i &lt; 10000; i++) {
+         if (processes[i] == null) break;
+         if (processList.match(processes[i]) == null) {
+            proc_output += processes[i] + " is not running\n";
+         }
+       }
+
+      // are any processes missing?
+      if (proc_output == "") {
+         report += "All vital processes are running\n\n";
+      } 
+      else {
+         report += proc_output;
+         warning += proc_output;
+      }
+   }
+   else {
+      report += "Unable to obtain process list\n";
+      warning += "Unable to obtain process list\n";
+   }
+}
+
+// -----------------------------------------------------------------------------------
+//  showFSData ()   - show File System data
+// -----------------------------------------------------------------------------------
+
+function showFSData() {
+
+   fileList = scriptletContext.get("ic_filesystem");
+
+   if (fileList != null) {
+      // data is formatted in two columns: % mountname
+      // the first row is a header
+      // to split data from context it must be turned back into a native Javascript string
+      // to do this we initialize a blank string and then append the variable
+      fileData = "";
+      fileData += fileList;
+      lines = fileData.split(/\s+/);
+
+      for (i = 2; i &lt; 1000; i += 2) {
+         if (lines[i] != null &amp;&amp; lines[i + 1] != null)   {
+            diskreport = "File System " + lines[i + 1] + " is at " + lines[i] + " capacity\n";
+            if (parseInt(lines[i]) &gt;= 90) {
+               report += "WARNING: ";
+               warning += diskreport;
+            }
+            report += diskreport;
+         }
+         else {
+            break;
+         }
+      }
+   }
+   else {
+      report += "Unable to obtain file system list information\n";
+      warning += "Unable to obtain file system list information\n";
+   }
+}
+// -----------------------------------------------------------------------------------
+//  showIOStatInfo ()   - show key disk info from iostat
+// -----------------------------------------------------------------------------------
+
+function showIOStatInfo() {
+
+   iostat = scriptletContext.get("ic_iostat");
+
+   // deal with the iostat information
+   // this assume we are getting extended IO stat information and looks for anomolies
+   // there should be two readings, the first is the average since boot,
+   // the second one is the current 
+
+   output = "\nDevice IO checks:\n";
+   if (iostat != null) {
+
+      // first, split it all into lines
+      data = "";
+      data += iostat;
+      lines = data.split(/\n/);
+
+      // we know the first two lines are header, go find the header for the second set
+      for (i = 2; i &lt; 1000; i++) {
+         second_set = 0;
+         if (lines[i].match(/extended device/) != null) {
+            second_set = i + 2;
+            break;
+         }
+      }
+
+      // how many lines are there?
+      line_count = i - 2;
+      if (line_count &gt; 0) {
+         for (i = 0; i &lt; line_count; i++) {
+            // split the average line and current line into columns
+            average = lines[i + 2].split(/\s+/);
+            current = lines[line_count + i + 4].split(/\s+/);
+            this_output = "";
+
+            // compare key stats of each lines average versus now
+            creads = parseInt(current[1]);
+            areads = parseInt(average[1]);
+            cwrites = parseInt(current[2]);
+            awrites = parseInt(average[2]);
+            cwsvc = parseInt(current[7]);
+            casvc = parseInt(current[8]);
+            cwait = parseInt(current[9]);
+            await = parseInt(average[9]);
+            cbusy = parseInt(current[10]);
+            cerrors = parseInt(current[14]);
+            name = current[15];
+
+            // look for some anomolies
+            if (cwait &gt; (await * 1.25)) this_output += "Current disk wait on " + name + " is more than 25% above average\n";
+            if (cwait &gt; 5 &amp;&amp; cbusy &gt;= 10) this_output += "Disk wait on " + name + " is above 5%\n";
+            if (cwsvc + casvc &gt; 30 &amp;&amp; cbusy &gt; 5) this_output += "Current disk wait time exceeds 30 ms on " + name + "\n";
+            if (cbusy &gt;= 60) this_output += name + " is over 60% busy\n";
+            if (creads &gt; (areads * 3)) this_output += "Current reads on " + name + " are more than 300% of average\n";
+            if (cwrites &gt; (awrites * 3)) this_output += "Current writes on " + name + " are more than 300% of average\n";
+            if (cerrors &gt; 3) this_output += "More than 3 errors encountered on" + name + "\n";
+      
+            // check to see if we found anything
+            if (this_output == "") {
+               this_output = name + " looks normal\n";
+            }
+            else {
+               warning += this_output;
+            }
+            output += this_output;
+         }
+      }  // end for
+   
+      // add in the current raw data
+      output += "\nDetailed iostat information:\n";
+      for (i = line_count + 2; i &lt; 10000; i++) {
+         if (lines[i] == null) break;
+         output += lines[i] + "\n";
+      }  // end for 
+      report += output;
+   } // end if (iostat != null)
+   else
+   {
+      report += "Unable to obtain iostat information\n";
+      warning += "Unable to obtain iostat information\n";
+   }
+}
+
+function showNICInfo()
+{
+   data = "";
+   nicinfo = scriptletContext.get("ic_nicinfo");
+   if (nicinfo != null) {
+      data += nicinfo;
+      report += nicinfo;
+
+      // check each line and see if we need to add a warning
+      lines = data.split(/\n/);
+      for (i = 0; i &lt; 100; i++) {
+         if (lines[i] == null) break;
+         if (lines[i] == "") continue;
+         if (lines[i].match("No errors") != null) continue;
+         warning += lines[i] + "\n";
+      }  // end for
+   }  // end if (nicinfo != null)
+   else {
+      report += "Unable to get NIC card info\n";
+      warning += "Unable to get NIC card info\n";
+   }
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="98c588c1-e402-4bbe-85e0-cfe6d5b0e438">
+      <annotation/>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="05d75711-dab9-413d-bfe4-2cca46082ce4">
+    <annotation/>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="17582e8b-8aaf-4014-b514-1b7164c469e6">
+    <baseIcon>document.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="0cf91a3f-74b7-44f3-a8e6-a4029ad88ea3">
+        <baseIcon>edit.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+    </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

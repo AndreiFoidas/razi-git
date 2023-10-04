@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="6ba051f4-4aae-4875-b684-ef70a304c05c">
+  <descriptionCdata>6ba051f4-4aae-4875-b684-ef70a304c05c.description=&lt;pre&gt;\nThis operator determines whether or not a given ping and packet loss are below a set of specified thresholds.\n\nInputs\:\npercentLoss - The measured % loss.\nlossThreshold - The maximum % loss that is acceptable.\naverageLatency - The milliseconds of latency measured.\nlatencyThreshold - The maximum milliseconds of latency that is acceptable.\n\nResponses\:\nconnection passed - both percentLoss and averageLatency were below thresholds.\nno response - There was 100% packet loss.\npacket loss too high - percentLoss was greater than lossThreshold.\naverage latency too high - averageLatency was greater than latencyThreshold.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>6ba051f4-4aae-4875-b684-ef70a304c05c.description</annotation>
+  <name>Connection Tester</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="2e6aae8c-cb52-4d09-aa78-5172470fb2af">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>percentLoss</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="daaa4088-cf72-4035-80d6-2fbb32c56384">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>lossThreshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ca70ba3a-1d80-4a21-9b00-9b0445c55e95">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>latencyThreshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="63840418-e460-48ae-aa93-9021bfd694d5">
+      <annotation/>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>averageLatency</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="d84b4cf8-1b0c-43d2-b8a0-960c2b492233">
+    <annotation/>
+    <name>Operation Connection Tester (6ba051f4-4aae-4875-b684-ef70a304c05c)</name>
+    <script>try{
+if (java.lang.Integer.parseInt(percentLoss) &gt;= 100)
+	scriptletResponse = "no response";
+else if (java.lang.Integer.parseInt(percentLoss) &gt; java.lang.Integer.parseInt(lossThreshold))
+	scriptletResponse = "packet loss too high"; 
+else if (java.lang.Integer.parseInt(averageLatency) &gt; java.lang.Integer.parseInt(latencyThreshold))
+	scriptletResponse = "average latency too high";
+else
+	scriptletResponse = "connection passed";
+}
+catch (e){
+	scriptletResponse = "no response";
+}
+scripletResult="";</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="2bcb848e-7a60-4ebe-906e-5ce7278402c3">
+      <annotation/>
+      <name>connection passed</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="e98691de-92e8-4c32-954e-3da0be26538d">
+      <annotation/>
+      <name>no response</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="d5cc03aa-fd01-4691-90a3-a9d69938836a">
+      <annotation/>
+      <name>packet loss too high</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="52c7712b-abb9-4628-b72a-e824bbf24f0e">
+      <annotation/>
+      <name>average latency too high</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a7b357b2-0fea-445b-ba04-08a87d702a1e">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="021d1770-bb78-4ed6-b032-25f50c214b69">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e74cb3e6-d19e-4e34-bebb-39a6a880d830">
+        <baseIcon>diagnose.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="2408f139-32a6-4d73-af0a-6226bf69d1ae">
+  <descriptionCdata>2408f139-32a6-4d73-af0a-6226bf69d1ae.description=&lt;pre&gt;Show firewall configuration configured in the local Windows computer.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nThe firewall configuration.\n\nExtra Results\:\nreturnCode - the operation return code\nexception - if something went wrong, the error message\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>2408f139-32a6-4d73-af0a-6226bf69d1ae.description</annotation>
+  <name>Report Firewall Configuration</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="da84e991-fb9a-4167-9bd8-fad57b0f3715">
+    <annotation/>
+    <name>Operation:Report Firewall Configuration (2408f139-32a6-4d73-af0a-6226bf69d1ae)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="e30d3770-2624-4d2d-a1d6-1af32275c2ba">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="94f496d3-8e3a-4d03-89bd-06d0213b8596">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e0b69f88-2f51-46a6-975e-2d70c50bd08e">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="e942e55d-3fef-4b65-84e3-a72a9b1f3bd2">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="f926b6dd-9d6b-4e39-a8d0-6c5573301dfa">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="92307bad-ba91-44be-8211-87432813f474">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="fcd52e3f-34bd-4525-b148-26d79d003222">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="8f34396c-e865-4c81-a3a6-5fbb7a68f4bc">
+    <baseIcon>firewall.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="a9a129ba-ee94-4260-8330-d0e9b8e6055a">
+        <baseIcon>read2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.ReportFirewallConfiguration</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

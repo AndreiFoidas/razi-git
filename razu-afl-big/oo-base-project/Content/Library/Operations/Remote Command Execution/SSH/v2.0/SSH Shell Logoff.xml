@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="58479078-2c3f-4ea9-a8d7-f38dfea5b0e6">
+  <descriptionCdata>58479078-2c3f-4ea9-a8d7-f38dfea5b0e6.description=&lt;pre&gt;\nCloses a SSH Shell session created by SSH Shell Logon.\n\nInputs\:\n    sessionId - The identifier of the SSH shell session to close.\n\nResults\:\n    TimedOut - Is set to "true" if the value set in the "timeout" input has elapsed and the command timed out.\n\nResponses\:\n    success - The ssh shell session was closed successfully.\n    failure - Something went wrong.  Could not close the ssh shell session or the ssh shell session could not be found.\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>58479078-2c3f-4ea9-a8d7-f38dfea5b0e6.description</annotation>
+  <name>SSH Shell Logoff</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="71fd2011-2498-4a34-a162-69cd7c5a8b89">
+      <annotation/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sessionId</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="80ed63f7-17dc-4aa4-ba93-92a0fc8feee0">
+    <annotation/>
+    <name>Operation SSH Shell Logoff (58479078-2c3f-4ea9-a8d7-f38dfea5b0e6)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="a0b389be-948b-412d-b875-42488d08d140">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="843f01ef-6add-4ab5-8de8-84acd636b184">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="0080a251-1151-4f0a-855f-1bb3b0732676">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="d03e3d4d-4b25-45d5-8dd9-928a729f426f">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="771c0910-6d28-476b-9958-0533300e6908">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="989f5ec0-e64f-4b8b-926a-14d12fa590a8">
+            <annotation/>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d4de48fb-8d3e-4624-ac1c-93cca4552074">
+    <annotation/>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="87d95c54-872a-4dcf-b068-708a209449ce">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-ssh-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>SSH Shell Logoff</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

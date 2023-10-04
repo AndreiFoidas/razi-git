@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><operation id="1efefe51-322a-48ae-aefe-a229c41441a5">
+  <descriptionCdata>1efefe51-322a-48ae-aefe-a229c41441a5.description=&lt;pre&gt;\nCreates a new user in Active Directory based on a template user. A template user is actualy a disabled user account that has all the settings already in place. Creating a user from a \ntemplate user means copying this account, adding a new name and a password.\n\nInputs\:\n    host - Domain controller.\n    templateOU - Template user organization unit.\nExamples\: OU\=EMEAOU.\n    templateCN - Template user common name.\nExamples\: John Smith.\n    userOU - New user organization unit.\nExamples\: OU\=EMEAOU.\n    userCN - New user common name.\nExamples\: Bob Smith.\n    userPassword - New user password. (Should respect the password restrictions imposed by AD)\n    sAMAccountName - New user sAMAAccount name. This is the user logon name (pre-Windows 2000).\nExamples\: bsmith. \nThe complete user account name will look like this "DOMAINNAME\\bsmith".\n    altuser - Username used to login on domain controller.\n    altpass - Password for altuser.\n\nResponses\:\n    success - Operation created new user in AD.\n    failure - operation failed to create user.\n\nResults\:\n    Operation return code.\n\nExtra Results\:\n    userDN - The distinguished name of the newly created user.\n    exception - If something went wrong, the error message. \n    sessionId - The ID of the session used to connect.\n\nNotes\:\nPrerequisites\:\n1. If the RAS machine operating system is a 32-bit version of Windows XP SP2, the Windows Server 2003 Administration Tool Pack needs to be installed. \n  Download link\: http\://www.microsoft.com/downloads/details.aspx?FamilyID\=c16ae515-c8f4-47ef-a1e4-a8dcbacff8e3&amp;displaylang\=en \n\n  If the RAS machine operating system is a 64-bit version of Windows XP SP2, the Windows Server 2003 Service Pack 2 Administration Tools Pack for x64 editions needs to be installed.\n  Download link\: http\://www.microsoft.com/downloads/details.aspx?FamilyID\=514bd06e-f3bc-4054-8429-c49f51e2190b&amp;DisplayLang\=en\n\n  If the RAS machine operating system is a 32-bit version of Windows Vista (SP1 or higher), the Remote Server Administration Tools (RSAT) needs to be installed and enabled.\n  Download link\: http\://www.microsoft.com/downloads/details.aspx?FamilyId\=9FF6E897-23CE-4A36-B7FC-D52065DE9960&amp;displaylang\=en\n\n  If the RAS machine operating system is a 64-bit version of Windows Vista (SP1 or higher), the Remote Server Administration Tools (RSAT) needs to be installed and enabled.\n  Download link\: http\://www.microsoft.com/downloads/details.aspx?FamilyID\=d647a60b-63fd-4ac5-9243-bd3c497d2bc5&amp;displaylang\=en\n\n  If the RAS machine operating system is Windows 7, the Remote Server Administration Tools (RSAT) needs to be installed and enabled.\n  Download link for 32-bit and 64-bit\: http\://www.microsoft.com/en-gb/download/details.aspx?id\=7887\n\n  If the RAS machine operating system is Windows 8, the Remote Server Administration Tools (RSAT) needs to be installed and enabled.\n  Download link for 32-bit and 64-bit\: http\://www.microsoft.com/en-gb/download/details.aspx?id\=28972\n\n2. In order to enable RSAT, go to 'Control Panel' click on 'Programs' and then in 'Programs and Features' click 'Turn Windows Features on or off'. \nIn the 'Windows Features' dialog box, make sure 'Remote Server Administration Tools' are checked.\n\nOthers\:\n1. The user used to login on domain controller (altuser) must have sufficient permissions in order for the attributes for the created user to be set.\n2. Only the attributes from the following list are copied for the newly created user (the list contains the Ldap-Display-Names)\: co, l, streetAddress, c, st, postOfficeBox, postalCode, title, department, manager, company, physicalDeliveryOfficeName, description, userAccountControl, accountExpires, profilePath, scriptPath, homeDirectory, homeDrive, telephoneNumber, otherTelephone, wWWHomePage,  homePhone, otherHomePhone, pager, otherPager, mobile, otherMobile, facsimileTelephoneNumber, otherFacsimileTelephoneNumber, ipPhone, otherIpPhone, info, url, mail, msNPAllowDialin, msNPSavedCallingStationID, msNPCallingStationID, msRADIUSServiceType, msRADIUSCallbackNumber, msRASSavedFramedIPAddress, msRADIUSFramedIPAddress, msRASSavedFramedRoute, msRADIUSFramedRoute, logonHours, userWorkstations, userCertificate, userSharedFolder, userSharedFolderOther, maxStorage.\n3. In addition to these, the following TS attributes are also copied\: msTSAllowLogon, msTSBrokenConnectionAction, msTSConnectClientDrives, msTSConnectPrinterDrives, \tmsTSDefaultToMainPrinter, msTSRemoteControl, msTSMaxConnectionTime, msTSMaxDisconnectionTime, msTSMaxIdleTime, msTSReconnectionAction, msTSHomeDirectory, msTSHomeDrive, msTSInitialProgram, msTSProfilePath, msTSWorkDirectory.\n\n&lt;/pre&gt;
+</descriptionCdata>
+  <annotation>1efefe51-322a-48ae-aefe-a229c41441a5.description</annotation>
+  <name>Create User From Template</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="169d5ad9-5198-4d41-b34d-1d93c76a7e85">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ae7b1570-cb98-425c-9b0d-52279c7f39f3">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>templateOU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="febe1d6f-d500-4174-8ce2-1acc1f67da81">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>templateCN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="565f3976-181e-47cd-8144-2fa6f41c8be0">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userOU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="813b5024-a602-413e-aa11-c79d9633ffd1">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userCN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4e9c2dbd-2b1c-4654-90a2-9c0bb0e01e1e">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4becd7f1-628a-4ccc-bcd3-940babfa6542">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sAMAccountName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d3a7456d-cbe8-46cd-99a0-d51588bbbcc9">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altuser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4bc9226e-9a7f-4884-982f-7a30ee5c999a">
+      <annotation/>
+      <toContextKey/>
+      <fromContextKey/>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altpass</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt/>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="5f62b220-5c35-4708-9008-248672b428e8">
+    <annotation/>
+    <name>Operation Create User From Template (1efefe51-322a-48ae-aefe-a229c41441a5)</name>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="33edcaa4-53af-405f-b518-63c9869f9e54">
+      <annotation/>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="9004890c-4f66-4fd5-983c-37e48c60874e">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="fca906e8-8386-4ba9-afd4-f62cac2ae6cd">
+            <annotation/>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="5fad56e3-9a9c-4a11-86f4-71722e585dbd">
+      <annotation/>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="c4d2e10d-ea7d-4b2e-9e91-8c064e99bcd1">
+          <annotation/>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="5c3524f3-f60d-4284-9fdb-963fed917bd3">
+            <annotation/>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d5bae11f-c5eb-4858-a5dd-482fcc06faf4">
+    <annotation/>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="048f1742-afa8-489b-abe6-504d44e1e50b">
+    <baseIcon>user.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="677b9bb6-733c-46ac-bd4c-9770addaa3eb">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.23.2-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADCreateUserFromTemplate</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>
